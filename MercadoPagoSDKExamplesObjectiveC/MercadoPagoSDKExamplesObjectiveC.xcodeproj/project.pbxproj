@@ -44,6 +44,7 @@
 		76EF7F5A1D26FDB80087C785 /* MainExamplesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76EF7F591D26FDB80087C785 /* MainExamplesViewController.m */; };
 		76EF7F5D1D27027A0087C785 /* StepsExamplesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76EF7F5C1D27027A0087C785 /* StepsExamplesViewController.m */; };
 		76EF7F601D2706720087C785 /* ServicesExamplesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76EF7F5F1D2706720087C785 /* ServicesExamplesViewController.m */; };
+		8102F9B2205B6B42006730E6 /* IdentificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8102F9B1205B6B42006730E6 /* IdentificationScreen.swift */; };
 		811223D12056AC2A00293353 /* PXFlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811223D02056AC2A00293353 /* PXFlowUITests.swift */; };
 		811223DC2056B04D00293353 /* Pods_MercadoPagoSDKExamplesObjectiveC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 811223DD2056B04D00293353 /* Pods_MercadoPagoSDKExamplesObjectiveC.framework */; };
 		811223E02056B52700293353 /* MainPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811223DF2056B52700293353 /* MainPage.swift */; };
@@ -52,6 +53,8 @@
 		811223EB2058483F00293353 /* CardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811223EA2058483F00293353 /* CardScreen.swift */; };
 		81488CC11FE93E0C003C35B1 /* TestComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81488CC01FE93E0C003C35B1 /* TestComponent.swift */; };
 		81488CC21FE94196003C35B1 /* TestComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81488CC01FE93E0C003C35B1 /* TestComponent.swift */; };
+		81BD13E7205BEEA70022EB95 /* PayerCostScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BD13E6205BEEA70022EB95 /* PayerCostScreen.swift */; };
+		81BD13EA205BF0890022EB95 /* ReviewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BD13E9205BF0890022EB95 /* ReviewScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -170,6 +173,7 @@
 		76EF7F5F1D2706720087C785 /* ServicesExamplesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServicesExamplesViewController.m; sourceTree = "<group>"; };
 		79454058DF14964C486F6C88 /* Pods-MercadoPagoSDKExamplesObjectiveCTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MercadoPagoSDKExamplesObjectiveCTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MercadoPagoSDKExamplesObjectiveCTests/Pods-MercadoPagoSDKExamplesObjectiveCTests.release.xcconfig"; sourceTree = "<group>"; };
 		799109047C41B3FCF574FB67 /* Pods-MercadoPagoSDKExamplesObjectiveC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MercadoPagoSDKExamplesObjectiveC.release.xcconfig"; path = "Pods/Target Support Files/Pods-MercadoPagoSDKExamplesObjectiveC/Pods-MercadoPagoSDKExamplesObjectiveC.release.xcconfig"; sourceTree = "<group>"; };
+		8102F9B1205B6B42006730E6 /* IdentificationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentificationScreen.swift; sourceTree = "<group>"; };
 		811223CE2056AC2A00293353 /* PXFlowUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PXFlowUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		811223D02056AC2A00293353 /* PXFlowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXFlowUITests.swift; sourceTree = "<group>"; };
 		811223D22056AC2A00293353 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -180,6 +184,8 @@
 		811223EA2058483F00293353 /* CardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardScreen.swift; sourceTree = "<group>"; };
 		81488CC01FE93E0C003C35B1 /* TestComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestComponent.swift; sourceTree = "<group>"; };
 		81760F3A1FD5981B00237A81 /* MercadoPagoPXTracking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MercadoPagoPXTracking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		81BD13E6205BEEA70022EB95 /* PayerCostScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayerCostScreen.swift; sourceTree = "<group>"; };
+		81BD13E9205BF0890022EB95 /* ReviewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewScreen.swift; sourceTree = "<group>"; };
 		AFB8064091A41458964FD08D /* Pods-MercadoPagoSDKExamplesObjectiveCTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MercadoPagoSDKExamplesObjectiveCTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MercadoPagoSDKExamplesObjectiveCTests/Pods-MercadoPagoSDKExamplesObjectiveCTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FCF0721E201782C400A6E2D6 /* Pods_MercadoPagoSDKExamplesObjectiveC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_MercadoPagoSDKExamplesObjectiveC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -397,10 +403,13 @@
 		811223DE2056B4C800293353 /* Page Objects */ = {
 			isa = PBXGroup;
 			children = (
-				811223E32056B74800293353 /* Example App Pages */,
 				811223E72056CA3B00293353 /* BaseScreen.swift */,
+				811223E32056B74800293353 /* Example App Pages */,
 				811223E42056B77D00293353 /* MainGroupScreen.swift */,
 				811223EA2058483F00293353 /* CardScreen.swift */,
+				8102F9B1205B6B42006730E6 /* IdentificationScreen.swift */,
+				81BD13E6205BEEA70022EB95 /* PayerCostScreen.swift */,
+				81BD13E9205BF0890022EB95 /* ReviewScreen.swift */,
 			);
 			path = "Page Objects";
 			sourceTree = "<group>";
@@ -731,10 +740,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				811223E02056B52700293353 /* MainPage.swift in Sources */,
+				81BD13E7205BEEA70022EB95 /* PayerCostScreen.swift in Sources */,
+				8102F9B2205B6B42006730E6 /* IdentificationScreen.swift in Sources */,
 				811223D12056AC2A00293353 /* PXFlowUITests.swift in Sources */,
 				811223EB2058483F00293353 /* CardScreen.swift in Sources */,
 				811223E52056B77D00293353 /* MainGroupScreen.swift in Sources */,
 				811223E82056CA3B00293353 /* BaseScreen.swift in Sources */,
+				81BD13EA205BF0890022EB95 /* ReviewScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

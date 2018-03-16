@@ -19,9 +19,18 @@ class PXFlowUITests: XCTestCase {
     override func tearDown() {
         super.tearDown()
     }
-    
+  
     func testCreditCardFlow() {
-        MainScreen().tapCheckoutOption().tapCardOption().tapCreditCardOption()
+        MainScreen()
+            .tapCheckoutOption()
+            .tapCardOption()
+            .tapCreditCardOption()
+            .completeNumberAndContinue("4242 4242 4242 4242")
+            .completeNameAndContinue("Juan Sanzone")
+            .completeExpirationDateAndContinue("1122")
+            .completeCVVAndContinue("123")
+            .completeNumberAndContinue("30666777")
+           // .selectFirstOption()
     }
     
 }

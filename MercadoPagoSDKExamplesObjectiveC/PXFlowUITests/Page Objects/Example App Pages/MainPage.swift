@@ -10,7 +10,8 @@ import XCTest
 
 class MainScreen: BaseScreen {
 
-    private lazy var checkoutButton = findAll(.cell).containing(.staticText, identifier: "Checkout").element
+    private lazy var checkoutButton = cell("Checkout")
+    
 
     func tapCheckoutOption() -> MainGroupScreen {
         checkoutButton.tap()

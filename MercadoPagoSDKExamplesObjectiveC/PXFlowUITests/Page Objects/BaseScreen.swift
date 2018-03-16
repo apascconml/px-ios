@@ -13,17 +13,17 @@ protocol BaseScreenProtocol {
 }
 
 class BaseScreen : BaseScreenProtocol {
-    
+    let TIME_OUT : Double = 5 // Seconds
     init() {
         waitForElements()
     }
-    
-    func waitForElements() {
-        
+    internal func waitForElements() {
+         fatalError("All Screens Must Override this Method")
     }
-    func findAll(_ type: XCUIElement.ElementType) -> XCUIElementQuery {
-        return XCUIApplication().descendants(matching: type)
-    }
+}
+
+// MARK: Loading screen helpers
+extension BaseScreen {
     func waitForExpectation(expectation:XCTestExpectation,
                             time: Double,
                             safe: Bool = false) {
@@ -31,17 +31,35 @@ class BaseScreen : BaseScreenProtocol {
             XCTWaiter().wait(for: [expectation],
                              timeout: time)
         if !safe && result != .completed {
-            // if expectation is strict and was not fulfilled
             XCTFail("Condition was not satisfied during \(time) seconds")
         }
     }
     
     func waitFor(element : XCUIElement){
         let exists = NSPredicate(format: "exists = 1")
-         self.waitForExpectation(expectation: XCTNSPredicateExpectation(predicate: exists, object: element), time: 5)
+        self.waitForExpectation(expectation: XCTNSPredicateExpectation(predicate: exists, object: element), time: TIME_OUT)
     }
-    
-    func cellWith(text: String) -> XCUIElement {
+}
+
+// MARK: Take elements from screen
+extension BaseScreen {
+    func findAll(_ type: XCUIElement.ElementType) -> XCUIElementQuery {
+        return XCUIApplication().descendants(matching: type)
+    }
+    func cell(_ text: String) -> XCUIElement {
         return findAll(.cell).containing(.staticText, identifier: text).element
+    }
+    func textField(_ text: String) -> XCUIElement {
+        return  XCUIApplication().textFields[text]
+    }
+    func toolbarButton(_ text: String) -> XCUIElement {
+        return XCUIApplication().toolbars.buttons[text]
+    }
+    func cellNumber(_ row : Int)  -> XCUIElement{
+        return  XCUIApplication().cells.element(boundBy: row)
+        
+    }
+    func cellButton(_ text: String) -> XCUIElement {
+        return XCUIApplication().tables.cells.buttons[text]
     }
 }

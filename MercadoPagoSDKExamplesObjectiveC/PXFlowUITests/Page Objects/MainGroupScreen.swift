@@ -10,7 +10,7 @@ import XCTest
 
 class MainGroupScreen: BaseScreen {
 
-    lazy var cardButton = cellWith(text: "Tarjetas")
+    lazy var cardButton = cell("Tarjetas")
     
     override func waitForElements() {
         waitFor(element: cardButton)
@@ -22,10 +22,11 @@ class MainGroupScreen: BaseScreen {
 }
 
 class CardsOptionsScreen: BaseScreen {
-    private lazy var creditCardButton = cellWith(text: "Tarjeta de crédito")
+    private lazy var creditCardButton = cell("Tarjeta de crédito")
 
     func tapCreditCardOption() -> CardScreen{
         creditCardButton.tap()
+        return CardScreen()
     }
     override func waitForElements() {
         waitFor(element: creditCardButton)
