@@ -12,6 +12,6 @@ class CongratsScreen: BaseScreen {
     private lazy var payButton = cellButton("Pagar")
     
     override func waitForElements() {
-        waitFor(element: payButton)
+    //    waitFor(element: payButton)
     }
 }

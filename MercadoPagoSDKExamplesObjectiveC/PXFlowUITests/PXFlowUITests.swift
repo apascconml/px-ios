@@ -34,4 +34,14 @@ class PXFlowUITests: XCTestCase {
             .tapPayButton()
     }
     
+    func testPaymentMethodOff() {
+        MainScreen()
+            .tapCheckoutOption()
+            .tapCashOption()
+            .tapRapipagoOption()
+            .tapPayButton()
+        
+    }
+    
+    
 }

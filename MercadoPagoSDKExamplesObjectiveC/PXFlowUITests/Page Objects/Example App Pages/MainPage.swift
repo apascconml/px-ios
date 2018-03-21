@@ -12,7 +12,6 @@ class MainScreen: BaseScreen {
 
     private lazy var checkoutButton = cell("Checkout")
     
-
     func tapCheckoutOption() -> MainGroupScreen {
         checkoutButton.tap()
         let mainGroupScreen = MainGroupScreen()
