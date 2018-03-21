@@ -56,10 +56,10 @@ extension BaseScreen {
         return XCUIApplication().toolbars.buttons[text]
     }
     func cellNumber(_ row : Int)  -> XCUIElement{
-        return  XCUIApplication().cells.element(boundBy: row)
+        return  XCUIApplication().cells.allElementsBoundByIndex[row]
         
     }
     func cellButton(_ text: String) -> XCUIElement {
-        return XCUIApplication().tables.cells.buttons[text]
+        return XCUIApplication().buttons[text].firstMatch
     }
 }

@@ -55,6 +55,7 @@
 		81488CC21FE94196003C35B1 /* TestComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81488CC01FE93E0C003C35B1 /* TestComponent.swift */; };
 		81BD13E7205BEEA70022EB95 /* PayerCostScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BD13E6205BEEA70022EB95 /* PayerCostScreen.swift */; };
 		81BD13EA205BF0890022EB95 /* ReviewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BD13E9205BF0890022EB95 /* ReviewScreen.swift */; };
+		81F15F3A20629E9B0095B42B /* CongratsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F15F3920629E9B0095B42B /* CongratsScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -186,6 +187,7 @@
 		81760F3A1FD5981B00237A81 /* MercadoPagoPXTracking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MercadoPagoPXTracking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81BD13E6205BEEA70022EB95 /* PayerCostScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayerCostScreen.swift; sourceTree = "<group>"; };
 		81BD13E9205BF0890022EB95 /* ReviewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewScreen.swift; sourceTree = "<group>"; };
+		81F15F3920629E9B0095B42B /* CongratsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CongratsScreen.swift; sourceTree = "<group>"; };
 		AFB8064091A41458964FD08D /* Pods-MercadoPagoSDKExamplesObjectiveCTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MercadoPagoSDKExamplesObjectiveCTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MercadoPagoSDKExamplesObjectiveCTests/Pods-MercadoPagoSDKExamplesObjectiveCTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FCF0721E201782C400A6E2D6 /* Pods_MercadoPagoSDKExamplesObjectiveC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_MercadoPagoSDKExamplesObjectiveC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -410,6 +412,7 @@
 				8102F9B1205B6B42006730E6 /* IdentificationScreen.swift */,
 				81BD13E6205BEEA70022EB95 /* PayerCostScreen.swift */,
 				81BD13E9205BF0890022EB95 /* ReviewScreen.swift */,
+				81F15F3920629E9B0095B42B /* CongratsScreen.swift */,
 			);
 			path = "Page Objects";
 			sourceTree = "<group>";
@@ -740,6 +743,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				811223E02056B52700293353 /* MainPage.swift in Sources */,
+				81F15F3A20629E9B0095B42B /* CongratsScreen.swift in Sources */,
 				81BD13E7205BEEA70022EB95 /* PayerCostScreen.swift in Sources */,
 				8102F9B2205B6B42006730E6 /* IdentificationScreen.swift in Sources */,
 				811223D12056AC2A00293353 /* PXFlowUITests.swift in Sources */,

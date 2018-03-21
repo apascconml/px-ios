@@ -10,7 +10,7 @@ import UIKit
 
 class PayerCostScreen: BaseScreen {
 
-     private lazy var payerCost1 = cellNumber(1)
+     private lazy var payerCost1 = cellNumber(5)
     
     override func waitForElements() {
         waitFor(element: payerCost1)
