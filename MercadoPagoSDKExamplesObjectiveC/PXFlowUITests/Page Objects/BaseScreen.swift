@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import UIKit
 
 protocol BaseScreenProtocol {
     func waitForElements()
@@ -16,6 +17,10 @@ class BaseScreen : BaseScreenProtocol {
     let TIME_OUT : Double = 5 // Seconds
     init() {
         waitForElements()
+    }
+    func validate(validationAssets:((BaseScreen)->Void)) -> Self {
+        validationAssets(self)
+        return self
     }
     internal func waitForElements() {
          fatalError("All Screens Must Override this Method")

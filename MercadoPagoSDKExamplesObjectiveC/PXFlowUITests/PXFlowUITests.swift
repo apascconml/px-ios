@@ -22,7 +22,10 @@ class PXFlowUITests: XCTestCase {
   
     func testCreditCardFlow() {
         MainScreen()
-            .tapCheckoutOption()
+            .tapCheckoutOption().validate(validationAssets: {
+                (groupsScreen) in
+                    groupsScreen.waitFor(element: groupsScreen.cell("Pago en efectivo"))
+            })
             .tapCardOption()
             .tapCreditCardOption()
             .completeNumberAndContinue("4242 4242 4242 4242")
