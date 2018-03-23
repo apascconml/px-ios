@@ -90,7 +90,7 @@ class PXBodyComponentTest: BaseTest {
 
         // Then:
         XCTAssertNotNil(errorView.titleLabel)
-        XCTAssertEqual(errorView.titleLabel?.text, "¿Qué puedo hacer?".localized_temp)
+        XCTAssertEqual(errorView.titleLabel?.text, PXStrings.error_body_title_.localized_beta)
         XCTAssertNotNil(errorView.descriptionLabel)
         XCTAssertEqual(errorView.descriptionLabel?.text, PXResourceProvider.getDescriptionForErrorBodyForREJECTED_INSUFFICIENT_AMOUNT())
         XCTAssertNil(errorView.actionButton)
@@ -127,7 +127,7 @@ class PXBodyComponentTest: BaseTest {
 
         // Then:
         XCTAssertNotNil(errorView.titleLabel)
-        XCTAssertEqual(errorView.titleLabel?.text, "¿Qué puedo hacer?".localized_temp)
+        XCTAssertEqual(errorView.titleLabel?.text, PXStrings.error_body_title_.localized_beta)
         XCTAssertNotNil(errorView.descriptionLabel)
         XCTAssertEqual(errorView.descriptionLabel?.text, PXResourceProvider.getDescriptionForErrorBodyForREJECTED_CARD_DISABLED("visa"))
         XCTAssertNil(errorView.actionButton)
@@ -158,7 +158,7 @@ class PXBodyComponentTest: BaseTest {
 
         // Then:
         XCTAssertNotNil(errorView.titleLabel)
-        XCTAssertEqual(errorView.titleLabel?.text, "¿Qué puedo hacer?".localized_temp)
+        XCTAssertEqual(errorView.titleLabel?.text, PXStrings.error_body_title_.localized_beta)
         XCTAssertNotNil(errorView.descriptionLabel)
         XCTAssertEqual(errorView.descriptionLabel?.text, PXResourceProvider.getDescriptionForErrorBodyForPENDING_CONTINGENCY())
         XCTAssertNil(errorView.actionButton)
@@ -177,7 +177,7 @@ class PXBodyComponentTest: BaseTest {
 
         // Then:
         XCTAssertNotNil(errorView.titleLabel)
-        XCTAssertEqual(errorView.titleLabel?.text, "¿Qué puedo hacer?".localized_temp)
+        XCTAssertEqual(errorView.titleLabel?.text, PXStrings.error_body_title_.localized_beta)
         XCTAssertNotNil(errorView.descriptionLabel)
         XCTAssertEqual(errorView.descriptionLabel?.text, PXResourceProvider.getDescriptionForErrorBodyForPENDING_REVIEW_MANUAL())
         XCTAssertNil(errorView.actionButton)

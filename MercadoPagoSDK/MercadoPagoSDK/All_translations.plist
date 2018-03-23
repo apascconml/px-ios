@@ -2,24 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Si</key>
-	<dict>
-		<key>es</key>
-		<string>Si</string>
-		<key>en</key>
-		<string>Yes</string>
-		<key>pt</key>
-		<string>Sim</string>
-	</dict>
-	<key>No</key>
-	<dict>
-		<key>es</key>
-		<string>No</string>
-		<key>en</key>
-		<string>No</string>
-		<key>pt</key>
-		<string>Não</string>
-	</dict>
 	<key>invalid_cvv_length</key>
 	<dict>
 		<key>es</key>
@@ -81,24 +63,6 @@
 		<key>en</key>
 		<string>Payment methods could not be obtained with this preference</string>
 	</dict>
-	<key>Salir</key>
-	<dict>
-		<key>es</key>
-		<string>Salir</string>
-		<key>en</key>
-		<string>Leave</string>
-		<key>pt</key>
-		<string>Sair</string>
-	</dict>
-	<key>Reintentar</key>
-	<dict>
-		<key>es</key>
-		<string>Reintentar</string>
-		<key>en</key>
-		<string>Retry</string>
-		<key>pt</key>
-		<string>Tentar novamente</string>
-	</dict>
 	<key>Hubo un error</key>
 	<dict>
 		<key>es</key>
@@ -107,15 +71,6 @@
 		<string>There was an error</string>
 		<key>pt</key>
 		<string>Ocorreu um erro</string>
-	</dict>
-	<key>¿Qué puedo hacer?</key>
-	<dict>
-		<key>es</key>
-		<string>¿Qué puedo hacer?</string>
-		<key>en</key>
-		<string>What can I do?</string>
-		<key>pt</key>
-		<string>Que posso fazer?</string>
 	</dict>
 	<key>Pagar con otro medio</key>
 	<dict>
@@ -530,15 +485,6 @@
 		<string>With account money</string>
 		<key>pt</key>
 		<string>Com dinheiro em conta</string>
-	</dict>
-	<key>ryc_title_default</key>
-	<dict>
-		<key>es</key>
-		<string> en un </string>
-		<key>en</key>
-		<string> in a </string>
-		<key>pt</key>
-		<string> no </string>
 	</dict>
 	<key>Código de descuento</key>
 	<dict>

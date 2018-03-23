@@ -10,8 +10,8 @@ import Foundation
 
 open class PaymentResultScreenPreference: NSObject {
 
-    static let PENDING_CONTENT_TITLE = "¿Qué puedo hacer?"
-    static let REJECTED_CONTENT_TITLE = "¿Qué puedo hacer?"
+    static let PENDING_CONTENT_TITLE = PXStrings.error_body_title_
+    static let REJECTED_CONTENT_TITLE = PXStrings.error_body_title_
 
     public enum ApprovedBadge {
         case pending

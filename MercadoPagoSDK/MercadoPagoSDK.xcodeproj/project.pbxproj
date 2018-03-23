@@ -725,6 +725,7 @@
 		FCBF13551E720A6E0092B756 /* EntityTypeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBF13511E720A6E0092B756 /* EntityTypeTableViewCell.xib */; };
 		FCCACD7B20448F4A0008CF32 /* All_translations.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCCACD7A20448F4A0008CF32 /* All_translations.plist */; };
 		FCCC11F71FCF2D5A0001A591 /* PXResultViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCC11F61FCF2D590001A591 /* PXResultViewModelTest.swift */; };
+		FCCC492720657D5600A89E68 /* PXStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC49666020656E01005471B4 /* PXStrings.swift */; };
 		FCD089081F7E8F45002F3F22 /* SecondaryInfoTableViewCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = FCD089061F7E8F44002F3F22 /* SecondaryInfoTableViewCell.xib */; };
 		FCD089091F7E8F45002F3F22 /* SecondaryInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD089071F7E8F44002F3F22 /* SecondaryInfoTableViewCell.swift */; };
 		FCD0890A1F7E8FB0002F3F22 /* SecondaryInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD089071F7E8F44002F3F22 /* SecondaryInfoTableViewCell.swift */; };
@@ -3394,6 +3395,7 @@
 				15E19C7D1D6F281700D49D7B /* MaskElementTest.swift in Sources */,
 				8138737D1FA8DE6E002095D6 /* PXHeaderRenderer.swift in Sources */,
 				76EC47E81C8612C40086FA53 /* PayerCostTest.swift in Sources */,
+				FCCC492720657D5600A89E68 /* PXStrings.swift in Sources */,
 				76062BC81C4D1F220067A14B /* PaymentMethodSearchItem.swift in Sources */,
 				153AEB2D1D382983008A3338 /* PaymentVaultViewController.swift in Sources */,
 				FC3FC8691FBE118100CF29E1 /* PXInstructionsReferencesRenderer.swift in Sources */,

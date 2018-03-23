@@ -294,7 +294,7 @@ Se preferir, você pode escolher outro meio de pagamento.</string>
 		<key>pt</key>
 		<string>Alterar meio de pagamento</string>
 	</dict>
-	<key>px_confirm_action</key>
+	<key>confirm_action</key>
 	<dict>
 		<key>comment</key>
 		<string></string>
@@ -305,7 +305,7 @@ Se preferir, você pode escolher outro meio de pagamento.</string>
 		<key>pt</key>
 		<string>Confirmar</string>
 	</dict>
-	<key>px_cancel_action</key>
+	<key>cancel_action</key>
 	<dict>
 		<key>comment</key>
 		<string></string>
@@ -315,6 +315,50 @@ Se preferir, você pode escolher outro meio de pagamento.</string>
 		<string>Cancel</string>
 		<key>pt</key>
 		<string>Cancelar</string>
+	</dict>
+	<key>exit_action</key>
+	<dict>
+		<key>comment</key>
+		<string></string>
+		<key>es</key>
+		<string>Salir</string>
+		<key>en</key>
+		<string>Leave</string>
+		<key>pt</key>
+		<string>Sair</string>
+	</dict>
+	<key>retry_action</key>
+	<dict>
+		<key>comment</key>
+		<string></string>
+		<key>es</key>
+		<string>Reintentar</string>
+		<key>en</key>
+		<string>Retry</string>
+		<key>pt</key>
+		<string>Tentar novamente</string>
+	</dict>
+	<key>yes_string</key>
+	<dict>
+		<key>comment</key>
+		<string></string>
+		<key>es</key>
+		<string>Si</string>
+		<key>en</key>
+		<string>Yes</string>
+		<key>pt</key>
+		<string>Sim</string>
+	</dict>
+	<key>no_string</key>
+	<dict>
+		<key>comment</key>
+		<string></string>
+		<key>es</key>
+		<string>No</string>
+		<key>en</key>
+		<string>No</string>
+		<key>pt</key>
+		<string>Não</string>
 	</dict>
 </dict>
 </plist>

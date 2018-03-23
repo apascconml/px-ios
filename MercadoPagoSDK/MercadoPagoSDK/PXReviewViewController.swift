@@ -213,7 +213,7 @@ extension PXReviewViewController {
     }
 
     fileprivate func getFloatingButtonView() -> PXContainedActionButtonView {
-        let component = PXContainedActionButtonComponent(props: PXContainedActionButtonProps(title: PXStrings.px_confirm_action.localized_beta, action: { [weak self] in
+        let component = PXContainedActionButtonComponent(props: PXContainedActionButtonProps(title: PXStrings.confirm_action.localized_beta, action: { [weak self] in
             guard let strongSelf = self else {
                 return
             }
@@ -224,13 +224,13 @@ extension PXReviewViewController {
     }
     
     fileprivate func getFooterView() -> UIView {
-        let payAction = PXComponentAction(label: PXStrings.px_confirm_action.localized_beta) { [weak self] in
+        let payAction = PXComponentAction(label: PXStrings.confirm_action.localized_beta) { [weak self] in
             guard let strongSelf = self else {
                 return
             }
             strongSelf.confirmPayment()
         }
-        let cancelAction = PXComponentAction(label: PXStrings.px_cancel_action.localized_beta) {
+        let cancelAction = PXComponentAction(label: PXStrings.cancel_action.localized_beta) {
             [weak self] in
             guard let strongSelf = self else {
                 return
