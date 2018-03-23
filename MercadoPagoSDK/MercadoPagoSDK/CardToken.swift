@@ -97,9 +97,9 @@ open class CardToken: NSObject, CardInformationForm {
                         userInfo = [String: String]()
                     }
                     if cardSettings.count>1 {
-                        return "invalid_card_length_general".localized_temp
+                        return PXStrings.card_form_invalid_card_length_general.localized_beta
                     } else {
-                        return ("invalid_card_length".localized_temp as NSString).replacingOccurrences(of: "%1$s", with: "\(cardSettings[0].cardNumber.length)")
+                        return (PXStrings.card_form_invalid_card_length.localized_beta as NSString).replacingOccurrences(of: "%1$s", with: "\(cardSettings[0].cardNumber.length)")
                     }
                 }
                 // Validate luhn
@@ -154,8 +154,7 @@ open class CardToken: NSObject, CardInformationForm {
         if let settings = setting {
                 let cvvLength = settings[0].securityCode.length
                 if (cvvLength != 0) && (securityCode.count != cvvLength) {
-                    return ("invalid_cvv_length".localized_temp as NSString).replacingOccurrences(of: "%1$s", with: "\(cvvLength)")
-                    // return NSError(domain: "mercadopago.sdk.card.error", code: 1, userInfo: ["securityCode" : ("invalid_cvv_length".localized_temp as NSString).replacingOccurrences(of: "%1$s", with: "\(cvvLength)")])
+                    return (PXStrings.card_form_invalid_cvv_length.localized_beta as NSString).replacingOccurrences(of: "%1$s", with: "\(cvvLength)")
                 } else {
                     return nil
                 }

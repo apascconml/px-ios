@@ -2,33 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>invalid_cvv_length</key>
-	<dict>
-		<key>es</key>
-		<string>Ingresa los %1$s números del código de seguridad</string>
-		<key>en</key>
-		<string>Ingresa los %1$s números del código de seguridad</string>
-		<key>pt</key>
-		<string>Digite os %1$s números do código de segurança</string>
-	</dict>
-	<key>invalid_card_length</key>
-	<dict>
-		<key>es</key>
-		<string>Ingresa los %1$s números de la tarjeta</string>
-		<key>en</key>
-		<string>Enter the %1$s card numbers</string>
-		<key>pt</key>
-		<string>Digite os %1$s números do cartão de crédito</string>
-	</dict>
-	<key>invalid_card_length_general</key>
-	<dict>
-		<key>es</key>
-		<string>Ingresa todos los números de la tarjeta</string>
-		<key>en</key>
-		<string>Enter all card numbers</string>
-		<key>pt</key>
-		<string>Entre todos os números de cartão</string>
-	</dict>
 	<key>PAYMENT_ERROR</key>
 	<dict>
 		<key>es</key>
