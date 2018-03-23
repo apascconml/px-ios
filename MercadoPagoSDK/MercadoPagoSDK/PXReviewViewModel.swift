@@ -190,7 +190,7 @@ extension PXReviewViewModel {
         
         if pm.isCard {
             if let lastFourDigits = (paymentData.token?.lastFourDigits) {
-                let text = paymentMethodName + " " + "terminada en ".localized + lastFourDigits
+                let text = paymentMethodName + " " + "terminada en ".localized_temp + lastFourDigits
                 title = text.toAttributedString()
             }
         } else {
@@ -215,7 +215,7 @@ extension PXReviewViewModel {
 
     func buildSummaryComponent(width: CGFloat) -> PXSummaryComponent {
 
-        var customTitle = "Productos".localized
+        var customTitle = "Productos".localized_temp
         var totalAmount: Double = self.preference.getAmount()
 
         if let prefDetail = reviewScreenPreference.details[SummaryType.PRODUCT], !prefDetail.title.isEmpty {

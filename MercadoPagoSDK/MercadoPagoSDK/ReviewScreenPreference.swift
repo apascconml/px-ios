@@ -2,11 +2,11 @@ import UIKit
 
 open class ReviewScreenPreference: NSObject {
 
-    fileprivate static let DEFAULT_AMOUNT_TITLE = "Precio Unitario: ".localized
-    fileprivate static let DEFAULT_QUANTITY_TITLE = "Cantidad: ".localized
+    fileprivate static let DEFAULT_AMOUNT_TITLE = "Precio Unitario: ".localized_temp
+    fileprivate static let DEFAULT_QUANTITY_TITLE = "Cantidad: ".localized_temp
     
-    let summaryTitles: [SummaryType: String] = [SummaryType.PRODUCT: "Producto".localized, SummaryType.ARREARS: "Mora".localized, SummaryType.CHARGE: "Cargos".localized,
-                                                SummaryType.DISCOUNT: "Descuentos".localized, SummaryType.TAXES: "Impuestos".localized, SummaryType.SHIPPING: "Envío".localized]
+    let summaryTitles: [SummaryType: String] = [SummaryType.PRODUCT: "Producto".localized_temp, SummaryType.ARREARS: "Mora".localized_temp, SummaryType.CHARGE: "Cargos".localized_temp,
+                                                SummaryType.DISCOUNT: "Descuentos".localized_temp, SummaryType.TAXES: "Impuestos".localized_temp, SummaryType.SHIPPING: "Envío".localized_temp]
     
     var details: [SummaryType: SummaryDetail] = [SummaryType: SummaryDetail]()
     

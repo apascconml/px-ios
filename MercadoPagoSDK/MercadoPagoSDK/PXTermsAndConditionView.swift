@@ -69,11 +69,11 @@ extension PXTermsAndConditionView {
     
     fileprivate func getTyCText() -> NSMutableAttributedString {
         
-        let termsAndConditionsText = "Al pagar, afirmo que soy mayor de edad y acepto los Términos y Condiciones de Mercado Pago".localized
+        let termsAndConditionsText = "Al pagar, afirmo que soy mayor de edad y acepto los Términos y Condiciones de Mercado Pago".localized_temp
         let normalAttributes: [String: AnyObject] = [NSFontAttributeName: Utils.getFont(size: 12), NSForegroundColorAttributeName: ThemeManager.shared.getTheme().labelTintColor()]
         
         let mutableAttributedString = NSMutableAttributedString(string: termsAndConditionsText, attributes: normalAttributes)
-        let tycLinkRange = (termsAndConditionsText as NSString).range(of: SCREEN_TITLE.localized)
+        let tycLinkRange = (termsAndConditionsText as NSString).range(of: SCREEN_TITLE.localized_temp)
         
         mutableAttributedString.addAttribute(NSLinkAttributeName, value: MercadoPagoContext.getTermsAndConditionsSite(), range: tycLinkRange)
         
@@ -91,7 +91,7 @@ extension PXTermsAndConditionView: UITextViewDelegate, UIGestureRecognizerDelega
     
     func handleTap(_ sender: UITapGestureRecognizer) {
         if let url = URL(string: MercadoPagoContext.getTermsAndConditionsSite()) {
-            delegate?.shouldOpenTermsCondition(SCREEN_TITLE.localized, screenName: SCREEN_NAME, url: url)
+            delegate?.shouldOpenTermsCondition(SCREEN_TITLE.localized_temp, screenName: SCREEN_NAME, url: url)
         }
     }
         
