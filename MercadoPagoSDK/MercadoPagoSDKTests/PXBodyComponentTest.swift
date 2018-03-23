@@ -22,11 +22,11 @@ class PXBodyComponentTest: BaseTest {
 
         // Then:
         XCTAssertNotNil(paymentMethodView.paymentMethodIcon)
-        XCTAssertEqual(paymentMethodView.amountTitle?.text, "$ 1.000")
-        XCTAssertEqual(paymentMethodView.amountDetail?.text, nil)
-        XCTAssertEqual(paymentMethodView.paymentMethodDescription?.text?.localized_temp, "visa " + "terminada en ".localized_temp + "1234")
-        XCTAssertEqual(paymentMethodView.paymentMethodDetail?.text, "name")
-        XCTAssertEqual(paymentMethodView.disclaimerLabel?.text?.localized_temp, "En tu estado de cuenta verás el cargo como %0".localized_temp.replacingOccurrences(of: "%0", with: "description"))
+        XCTAssertEqual(paymentMethodView.titleLabel?.text, "$ 1.000")
+        XCTAssertEqual(paymentMethodView.subtitleLabel?.text, nil)
+        XCTAssertEqual(paymentMethodView.descriptionTitleLabel?.text?.localized, "visa " + "terminada en ".localized + "1234")
+        XCTAssertEqual(paymentMethodView.descriptionDetailLabel?.text, "name")
+        XCTAssertEqual(paymentMethodView.disclaimerLabel?.text?.localized, "En tu estado de cuenta verás el cargo como %0".localized.replacingOccurrences(of: "%0", with: "description"))
     }
 
     // MARK: APPROVED - ACCOUNT MONEY
@@ -40,11 +40,11 @@ class PXBodyComponentTest: BaseTest {
 
         // Then:
         XCTAssertNotNil(paymentMethodView.paymentMethodIcon)
-        XCTAssertEqual(paymentMethodView.amountTitle?.text, "$ 1.000")
-        XCTAssertNil(paymentMethodView.amountDetail?.text)
-        XCTAssertEqual(paymentMethodView.paymentMethodDescription?.text, "account_money")
-        XCTAssertNil(paymentMethodView.paymentMethodDetail?.text)
-        XCTAssertEqual(paymentMethodView.disclaimerLabel?.text?.localized_temp, "En tu estado de cuenta verás el cargo como %0".localized_temp.replacingOccurrences(of: "%0", with: "description"))
+        XCTAssertEqual(paymentMethodView.titleLabel?.text, "$ 1.000")
+        XCTAssertNil(paymentMethodView.subtitleLabel?.text)
+        XCTAssertEqual(paymentMethodView.descriptionTitleLabel?.text, "account_money")
+        XCTAssertNil(paymentMethodView.descriptionDetailLabel?.text)
+        XCTAssertEqual(paymentMethodView.disclaimerLabel?.text?.localized, "En tu estado de cuenta verás el cargo como %0".localized.replacingOccurrences(of: "%0", with: "description"))
     }
 
     // MARK: REJECTED - CARD
@@ -56,7 +56,7 @@ class PXBodyComponentTest: BaseTest {
         let bodyView = ResultMockComponentHelper.buildBodyView(resultViewModel: resultViewModel)
 
         // Then:
-        XCTAssertEqual(bodyView.frame.height, 0)
+        XCTAssertEqual(bodyView?.frame.height, 0)
     }
 
     func testBodyView_rejectedC4AuthCardPayment_render() throws {
@@ -145,7 +145,7 @@ class PXBodyComponentTest: BaseTest {
         let bodyView = ResultMockComponentHelper.buildBodyView(resultViewModel: resultViewModel)
 
         // Then:
-        XCTAssertEqual(bodyView.frame.height, 0)
+        XCTAssertEqual(bodyView?.frame.height, 0)
     }
 
     func testBodyView_pendingContingencyCardPayment_render() throws {

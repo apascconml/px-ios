@@ -294,5 +294,12 @@ Se preferir, você pode escolher outro meio de pagamento.</string>
 		<key>pt</key>
 		<string>Alterar meio de pagamento</string>
 	</dict>
+	<key>review_change_payment_method_action</key>
+	<dict>
+		<key>comment</key>
+		<string></string>
+		<key>value</key>
+		<string>Change payment method</string>
+	</dict>
 </dict>
 </plist>

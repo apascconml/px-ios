@@ -55,7 +55,10 @@ extension ThemeManager {
     func getLightFontName() -> String {
         return fontLightName
     }
-
+    
+    func getPlaceHolderColor() -> UIColor {
+        return UIColor(red:0.80, green:0.80, blue:0.80, alpha:1.0)
+    }
 }
 
 //MARK: - UI design exceptions
@@ -77,9 +80,9 @@ extension ThemeManager {
         return nil
     }
     
-    func getTintColorForReviewConfirmNavigation() -> UIColor {
+    func getTitleColorForReviewConfirmNavigation() -> UIColor {
         if currentTheme is PXDefaultTheme {
-            return currentTheme.boldLabelTintColor()
+            return currentTheme.navigationBar().backgroundColor
         }
         return ThemeManager.shared.getTheme().navigationBar().tintColor
     }

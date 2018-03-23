@@ -10,7 +10,7 @@ import UIKit
 
 class DiscountBodyCell: UIView {
 
-    let DISCOUNT_COLOR = ThemeManager.shared.getTheme().highlightedLabelTintColor()
+    let DISCOUNT_COLOR = ThemeManager.shared.getTheme().noTaxAndDiscountLabelTintColor()
     let LABEL_COLOR = ThemeManager.shared.getTheme().boldLabelTintColor()
     let ACCENT_LINK = ThemeManager.shared.getTheme().secondaryButton().tintColor
     let PRIMARY_BUTTON_TEXT_COLOR = ThemeManager.shared.getTheme().primaryButton().tintColor

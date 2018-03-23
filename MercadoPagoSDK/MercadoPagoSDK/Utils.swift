@@ -137,6 +137,20 @@ class Utils {
         }
         return amountFotmated
     }
+    
+    class func getAccreditationTimeAttributedString(from text: String, fontSize: CGFloat? = nil) -> NSAttributedString {
+        let clockImage = NSTextAttachment()
+        var attributes: [String:Any]? = nil
+        if let fontSize = fontSize {
+            attributes = [NSFontAttributeName: Utils.getFont(size: fontSize)]
+        }
+        clockImage.image = MercadoPago.getImage("iconTime")
+        let clockAttributedString = NSAttributedString(attachment: clockImage)
+        let labelAttributedString = NSMutableAttributedString(string: String(describing: " " + text), attributes: attributes)
+        labelAttributedString.insert(clockAttributedString, at: 0)
+        let labelTitle = labelAttributedString
+        return labelTitle
+    }
 
     class func getTransactionInstallmentsDescription(_ installments: String, currency: Currency, installmentAmount: Double, additionalString: NSAttributedString? = nil, color: UIColor? = nil, fontSize: CGFloat = 22, centsFontSize: CGFloat = 10, baselineOffset: Int = 7) -> NSAttributedString {
         let color = color ?? UIColor.lightBlue()
@@ -428,7 +442,7 @@ class Utils {
     }
     
     
-    func loadImageWithCache(withUrl urlStr: String?, targetImage: UIImageView, placeHolderImage: UIImage?) {
+    func loadImageWithCache(withUrl urlStr: String?, targetImage: UIImageView, placeHolderImage: UIImage?, fallbackImage: UIImage?) {
         
         guard let urlString = urlStr else {return}
         
@@ -450,6 +464,9 @@ class Utils {
             URLSession.shared.dataTask(with: targetUrl, completionHandler: { (data, response, error) in
                 
                 if error != nil {
+                    DispatchQueue.main.async {
+                        targetImage.image = fallbackImage
+                    }
                     return
                 }
                 
@@ -457,9 +474,16 @@ class Utils {
                     if let remoteData = data, let image = UIImage(data: remoteData) {
                         imageCache.setObject(image, forKey: urlString as NSString)
                         targetImage.image = image
+
+                    } else if let fallbackImage = fallbackImage {
+                        targetImage.image = fallbackImage
                     }
                 }
             }).resume()
+        }
+
+        else if let fallbackImage = fallbackImage {
+            targetImage.image = fallbackImage
         }
         
         return

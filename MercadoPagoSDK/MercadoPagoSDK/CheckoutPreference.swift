@@ -196,6 +196,10 @@ open class CheckoutPreference: NSObject {
         return true
     }
 
+    func hasMultipleItems() -> Bool {
+        return items.count > 1
+    }
+
     open class func fromJSON(_ json: NSDictionary) -> CheckoutPreference {
         let preference: CheckoutPreference = CheckoutPreference()
 

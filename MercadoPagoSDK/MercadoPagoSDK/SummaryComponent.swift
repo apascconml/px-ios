@@ -9,6 +9,7 @@
 import UIKit
 
 class SummaryComponent: UIView, PXComponent {
+    
     let SMALL_MARGIN_HEIGHT: CGFloat = 8.0
     let MEDIUM_MARGIN_HEIGHT: CGFloat = 12.0
     let LARGE_MARGIN_HEIGHT: CGFloat = 28.0

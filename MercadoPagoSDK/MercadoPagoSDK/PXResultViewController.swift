@@ -35,11 +35,10 @@ class PXResultViewController: PXComponentContainerViewController {
     }
     
     override func trackInfo() {
-        
         var metadata = [TrackingUtil.METADATA_PAYMENT_IS_EXPRESS: TrackingUtil.IS_EXPRESS_DEFAULT_VALUE,
                         TrackingUtil.METADATA_PAYMENT_STATUS: self.viewModel.getPaymentStatus(),
                         TrackingUtil.METADATA_PAYMENT_STATUS_DETAIL: self.viewModel.getPaymentStatusDetail(),
-                        TrackingUtil.METADATA_PAYMENT_ID: self.viewModel.getPaymentId()]
+                        TrackingUtil.METADATA_PAYMENT_ID: self.viewModel.getPaymentId() ?? ""]
         if let pm = self.viewModel.getPaymentData().getPaymentMethod() {
             metadata[TrackingUtil.METADATA_PAYMENT_METHOD_ID] = pm._id
         }
@@ -54,12 +53,12 @@ class PXResultViewController: PXComponentContainerViewController {
             name = TrackingUtil.SCREEN_NAME_PAYMENT_RESULT_CALL_FOR_AUTH
         }
         
-        MPXTracker.trackScreen(screenId: finalId, screenName: name, metadata: metadata)
+        MPXTracker.sharedInstance.trackScreen(screenId: finalId, screenName: name, properties: metadata)
     }
     
     func renderViews() {
         
-        self.contentView.prepareforRender()
+        self.contentView.prepareForRender()
         
         //Add Header
         self.headerView = self.buildHeaderView()
@@ -73,7 +72,7 @@ class PXResultViewController: PXComponentContainerViewController {
         self.receiptView = self.buildReceiptView()
         if let receiptView = self.receiptView {
             receiptView.addSeparatorLineToBottom(height: 1)
-            contentView.addSubviewToButtom(receiptView)
+            contentView.addSubviewToBottom(receiptView)
             PXLayout.matchWidth(ofView: receiptView).isActive = true
             self.view.layoutIfNeeded()
             PXLayout.setHeight(owner: receiptView, height: receiptView.frame.height).isActive = true
@@ -83,37 +82,35 @@ class PXResultViewController: PXComponentContainerViewController {
         self.topCustomView = buildTopCustomView()
         if let topCustomView = self.topCustomView {
             topCustomView.clipsToBounds = true
-            contentView.addSubviewToButtom(topCustomView)
+            contentView.addSubviewToBottom(topCustomView)
             PXLayout.matchWidth(ofView: topCustomView).isActive = true
             self.view.layoutIfNeeded()
             PXLayout.setHeight(owner: topCustomView, height: topCustomView.frame.height).isActive = true
         }
-        
+      
         //Add Body
         self.bodyView = self.buildBodyView()
         if let bodyView = self.bodyView {
-            contentView.addSubviewToButtom(bodyView)
+            contentView.addSubviewToBottom(bodyView)
             PXLayout.matchWidth(ofView: bodyView).isActive = true
             PXLayout.centerHorizontally(view: bodyView).isActive = true
             bodyView.addSeparatorLineToBottom(height: 1)
         }
         
-        
         //Add Bottom Custom Component
         self.bottomCustomView = buildBottomCustomView()
         if let bottomCustomView = self.bottomCustomView{
             bottomCustomView.clipsToBounds = true
-            contentView.addSubviewToButtom(bottomCustomView)
+            contentView.addSubviewToBottom(bottomCustomView)
             PXLayout.matchWidth(ofView: bottomCustomView).isActive = true
             self.view.layoutIfNeeded()
             PXLayout.setHeight(owner: bottomCustomView, height: bottomCustomView.frame.height).isActive = true
-
         }
    
         //Add Footer
         self.footerView = self.buildFooterView()
         if let footerView = self.footerView {
-            contentView.addSubviewToButtom(footerView)
+            contentView.addSubviewToBottom(footerView)
             PXLayout.matchWidth(ofView: footerView).isActive = true
             PXLayout.centerHorizontally(view: footerView, to: contentView).isActive = true
             self.view.layoutIfNeeded()
@@ -129,6 +126,7 @@ class PXResultViewController: PXComponentContainerViewController {
                 expandBody()
             }
         }
+      
         self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width, height: self.contentView.frame.height)
         super.refreshContentViewSize()
     }
@@ -177,6 +175,8 @@ class PXResultViewController: PXComponentContainerViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         ViewUtils.addStatusBar(self.view, color: viewModel.primaryResultColor())
+        self.scrollView.showsVerticalScrollIndicator = false
+        self.scrollView.showsHorizontalScrollIndicator = false
         self.view.layoutIfNeeded()
         renderViews()
     }

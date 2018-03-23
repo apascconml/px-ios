@@ -147,6 +147,13 @@ public class PaymentData: NSObject {
     public func getPayerCost() -> PayerCost? {
         return payerCost
     }
+    
+    public func getNumberOfInstallments() -> Int {
+        guard let installments = payerCost?.installments else {
+            return 0
+        }
+        return installments
+    }
 
     public func getIssuer() -> Issuer? {
         return issuer

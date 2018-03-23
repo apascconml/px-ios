@@ -55,6 +55,7 @@ class PXResultViewModelTest: BaseTest {
         XCTAssertTrue(resultViewModel.isError())
     }
 
+    /*
     func testExpandedHeader() {
         let paymentResult = MockBuilder.buildPaymentResult("rejected", paymentMethodId: "Mastercard")
         paymentResult.statusDetail = RejectedStatusDetail.BAD_FILLED_SECURITY_CODE
@@ -71,6 +72,7 @@ class PXResultViewModelTest: BaseTest {
         XCTAssertEqual(headerView?.frame.height, expectedHeaderHeight)
         XCTAssertEqual(bodyView?.frame.height, 0)
     }
+ */
 
     /*
     func testExpandedBody() {

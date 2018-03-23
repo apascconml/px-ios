@@ -12,15 +12,15 @@ import MercadoPagoSDK
 @objc class MeliTheme: NSObject, PXTheme {
 
     public func navigationBar() -> PXThemeProperty {
-        return PXThemeProperty(backgroundColor: #colorLiteral(red: 1, green: 0.9176470588, blue: 0.4705882353, alpha: 1), tintColor: #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1))
+        return PXThemeProperty(backgroundColor: #colorLiteral(red: 1, green: 0.9176470588, blue: 0.4705882353, alpha: 1), tintColor: #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1), selectedColor: .clear)
     }
 
     public func primaryButton() -> PXThemeProperty {
-        return PXThemeProperty(backgroundColor: #colorLiteral(red: 0.2039215686, green: 0.5137254902, blue: 0.9803921569, alpha: 1), tintColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
+        return PXThemeProperty(backgroundColor: #colorLiteral(red: 0.2039215686, green: 0.5137254902, blue: 0.9803921569, alpha: 1), tintColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), selectedColor: #colorLiteral(red: 0.1628948748, green: 0.4370952249, blue: 0.8369542956, alpha: 1))
     }
 
     public func secondaryButton() -> PXThemeProperty {
-        return PXThemeProperty(backgroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), tintColor: #colorLiteral(red: 0.2039215686, green: 0.5137254902, blue: 0.9803921569, alpha: 1))
+        return PXThemeProperty(backgroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), tintColor: #colorLiteral(red: 0.2039215686, green: 0.5137254902, blue: 0.9803921569, alpha: 1), selectedColor: .clear)
     }
 
     public func labelTintColor() -> UIColor {
@@ -35,7 +35,7 @@ import MercadoPagoSDK
         return #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
     }
     
-    public func highlightedLabelTintColor() -> UIColor {
+    public func noTaxAndDiscountLabelTintColor() -> UIColor {
         return #colorLiteral(red: 0.2235294118, green: 0.7098039216, blue: 0.2901960784, alpha: 1)
     }
 
@@ -52,11 +52,11 @@ import MercadoPagoSDK
     }
 
     public func loadingComponent() -> PXThemeProperty {
-        return  PXThemeProperty(backgroundColor:#colorLiteral(red: 1, green: 0.9176470588, blue: 0.4705882353, alpha: 1), tintColor: #colorLiteral(red: 0.2039215686, green: 0.5137254902, blue: 0.9803921569, alpha: 1))
+        return PXThemeProperty(backgroundColor:#colorLiteral(red: 1, green: 0.9176470588, blue: 0.4705882353, alpha: 1), tintColor: #colorLiteral(red: 0.2039215686, green: 0.5137254902, blue: 0.9803921569, alpha: 1), selectedColor: .clear)
     }
 
     public func modalComponent() -> PXThemeProperty {
-        return PXThemeProperty(backgroundColor: #colorLiteral(red: 1, green: 0.8588235294, blue: 0.08235294118, alpha: 1), tintColor: #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1))
+        return PXThemeProperty(backgroundColor: #colorLiteral(red: 1, green: 0.8588235294, blue: 0.08235294118, alpha: 1), tintColor: #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1), selectedColor: .clear)
     }
 
     public func highlightBackgroundColor() -> UIColor {

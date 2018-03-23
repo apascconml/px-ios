@@ -18,7 +18,7 @@ public class PXComponentView: UIView {
         super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         initComponent()
     }
-    
+
     func initComponent() {
         self.translatesAutoresizingMaskIntoConstraints = false
         topGuideView.translatesAutoresizingMaskIntoConstraints = false
@@ -39,19 +39,17 @@ public class PXComponentView: UIView {
         PXLayout.matchWidth(ofView: topGuideView).isActive = true
         PXLayout.matchWidth(ofView: bottomGuideView).isActive = true
     }
-    
-    func prepareforRender() {
+
+    func prepareForRender() {
         for view in self.subviews {
             view.removeFromSuperview()
         }
-        
         for constraint in self.constraints {
             constraint.isActive = false
         }
-        
         initComponent()
     }
-    
+  
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -60,11 +58,11 @@ public class PXComponentView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(view)
     }
-    
-    public func addSubviewToButtom(_ view: UIView, withMargin margin: CGFloat = 0) {
+
+    public func addSubviewToBottom(_ view: UIView, withMargin margin: CGFloat = 0) {
         view.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(view)
-        putOnBottomOfLastView(view: view, withMargin: margin)
+        putOnBottomOfLastView(view: view, withMargin: margin)?.isActive = true
     }
     
     override func addSeparatorLineToTop(height: CGFloat, horizontalMarginPercentage: CGFloat, color: UIColor = .pxMediumLightGray) {
@@ -111,11 +109,12 @@ public class PXComponentView: UIView {
     func getSubviews() -> [UIView] {
         return self.contentView.subviews
     }
+  
     var heightConstraint : NSLayoutConstraint?
     func fixHeight(height : CGFloat){
         if let heightConstraint = self.heightConstraint {
             heightConstraint.constant = height
-        }else {
+        } else {
             self.heightConstraint = PXLayout.setHeight(owner: self, height: height)
             self.heightConstraint?.isActive = true
         }

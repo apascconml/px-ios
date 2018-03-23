@@ -31,17 +31,20 @@
     
     double delay = 3.0;
     dispatch_time_t tm = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC));
-    dispatch_after(tm, dispatch_get_main_queue(), ^(void){
+    dispatch_after(tm, dispatch_get_main_queue(), ^(void) {
+        
         [self.pluginNavigationHandler hideLoading];
-        PXAction* popeame = [[PXAction alloc] initWithLabel:@"Cancelar" action:^{
+        
+        PXComponentAction* popeame = [[PXComponentAction alloc] initWithLabel:@"Cancelar" action:^{
             [self.pluginNavigationHandler cancel];
        }];
-        PXAction* printeaEnConsola = [[PXAction alloc] initWithLabel:@"Intentar nuevamente" action:^{
+        PXComponentAction* printeaEnConsola = [[PXComponentAction alloc] initWithLabel:@"Intentar nuevamente" action:^{
             NSLog(@"print !!! action!!");
         }];
         
         PXBusinessResult* businessResult = [[PXBusinessResult alloc] initWithReceiptId:@"12345" status:PXBusinessResultStatusREJECTED title:@"Claro no pudo procesar tu recarga" subtitle:@"Falló la recarga" icon:[UIImage imageNamed:@"claro_logo"] mainAction:printeaEnConsola secondaryAction:popeame helpMessage:@"Intenta mas tarde"];
         [self.pluginNavigationHandler didFinishPaymentWithBusinessResult:businessResult];
+
        // [self.pluginNavigationHandler didFinishPaymentWithPaymentStatus:RemotePaymentStatusAPPROVED statusDetails:@"" receiptId:nil];
     });
 }

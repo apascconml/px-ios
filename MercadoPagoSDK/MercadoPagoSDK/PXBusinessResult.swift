@@ -34,8 +34,8 @@ open class PXBusinessResult: NSObject {
     var title: String // Titluo de Congrats
     var subtitle: String? // Sub Titluo de Congrats
     var icon: UIImage  // Icono de Congrats
-    var mainAction: PXAction? // Boton principal (Azul)
-    var secondaryAction: PXAction // Boton secundario (link) - Obligatoria
+    var mainAction: PXComponentAction? // Boton principal (Azul)
+    var secondaryAction: PXComponentAction // Boton secundario (link) - Obligatoria
     var helpMessage: String? // Texto
     /* De momento es inaccesible */private var showPaymentMethod: Bool = false // Si quiere que muestre la celda de PM
     
@@ -43,7 +43,7 @@ open class PXBusinessResult: NSObject {
     var receiptId: String? = nil
     //------
     
-    public init(receiptId: String? = nil, status: PXBusinessResultStatus, title: String, subtitle: String? = nil, icon: UIImage, mainAction: PXAction? = nil, secondaryAction: PXAction, helpMessage: String? = nil /*, showPaymentMethod : Bool = false*/ ) { // De momento no dejamos configurar el showPaymentMethod
+    public init(receiptId: String? = nil, status: PXBusinessResultStatus, title: String, subtitle: String? = nil, icon: UIImage, mainAction: PXComponentAction? = nil, secondaryAction: PXComponentAction, helpMessage: String? = nil /*, showPaymentMethod : Bool = false*/ ) { // De momento no dejamos configurar el showPaymentMethod
         self.receiptId = receiptId
         self.status = status
         self.title = title

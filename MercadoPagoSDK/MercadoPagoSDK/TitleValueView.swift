@@ -8,18 +8,18 @@
 
 import UIKit
 
-class TitleValueView: UIView, PXComponent {
+final class TitleValueView: UIView, PXComponent {
 
-    private let VERTICAL_MARGIN: CGFloat = 2.0
-    private let HORIZONTAL_MARGIN: CGFloat = 24.0
-    private let TITLE_WIDTH_PERCENT: CGFloat = 0.5
-    private let VALUE_WIDTH_PERCENT: CGFloat = 0.5
-    static private let FONT_SIZE: CGFloat = PXLayout.S_FONT
+    fileprivate let VERTICAL_MARGIN: CGFloat = 2.0
+    fileprivate let HORIZONTAL_MARGIN: CGFloat = 24.0
+    fileprivate let TITLE_WIDTH_PERCENT: CGFloat = 0.5
+    fileprivate let VALUE_WIDTH_PERCENT: CGFloat = 0.5
+    static fileprivate let FONT_SIZE: CGFloat = PXLayout.S_FONT
 
-    private var titleFontSize: CGFloat!
-    private var valueFontSize: CGFloat!
-    private var titleLabel: UILabel!
-    private var valueLabel: UILabel?
+    fileprivate var titleFontSize: CGFloat!
+    fileprivate var valueFontSize: CGFloat!
+    fileprivate var titleLabel: UILabel!
+    fileprivate var valueLabel: UILabel?
 
     public init(frame: CGRect, titleText: String, valueDouble: Double, colorTitle: UIColor =  ThemeManager.shared.getTheme().boldLabelTintColor(), colorValue: UIColor =  ThemeManager.shared.getTheme().boldLabelTintColor(), upperSeparatorLine: Bool = false, valueEnable: Bool = true, titleFontSize: CGFloat = FONT_SIZE, valueFontSize: CGFloat = FONT_SIZE) {
         super.init(frame: frame)
@@ -51,23 +51,30 @@ class TitleValueView: UIView, PXComponent {
         }
         self.adjustViewFrames()
     }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+extension TitleValueView {
+    
     func getHeight() -> CGFloat {
         return self.titleLabel.requiredHeight(numberOfLines: 1) + 2 * VERTICAL_MARGIN
     }
+    
     func getWeight() -> CGFloat {
         return self.frame.size.width
     }
-
+    
     func getTitleFrame() -> CGRect {
         return CGRect(x: HORIZONTAL_MARGIN, y: VERTICAL_MARGIN, width: (self.frame.size.width - 3 * HORIZONTAL_MARGIN) * VALUE_WIDTH_PERCENT, height: self.frame.size.height - 2 * VERTICAL_MARGIN)
     }
+    
     func getValueFrame() -> CGRect {
         return CGRect(x: HORIZONTAL_MARGIN +  ((self.frame.size.width - 3 * HORIZONTAL_MARGIN) * VALUE_WIDTH_PERCENT) + HORIZONTAL_MARGIN, y: VERTICAL_MARGIN, width: (self.frame.size.width - 3 * HORIZONTAL_MARGIN) * VALUE_WIDTH_PERCENT, height: self.frame.size.height - 2 * VERTICAL_MARGIN)
     }
-
+    
     func adjustViewFrames() {
         let frameTitle = self.titleLabel.frame
         self.titleLabel.frame = CGRect(x: frameTitle.origin.x, y: frameTitle.origin.y, width: frameTitle.size.width, height: self.titleLabel.requiredHeight(numberOfLines: 1))

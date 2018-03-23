@@ -90,8 +90,8 @@ open class MockBuilder: NSObject {
         return preference
     }
 
-    class func buildItem(_ id: String, quantity: Int, unitPrice: Double) -> Item {
-        return Item(_id: id, title : "item title", quantity: quantity, unitPrice: unitPrice)
+    class func buildItem(_ id: String, quantity: Int, unitPrice: Double, description: String? = "Description") -> Item {
+        return Item(_id: id, title : "item title", quantity: quantity, unitPrice: unitPrice, description: description)
     }
 
     class func buildPayer(_ id: String) -> Payer {

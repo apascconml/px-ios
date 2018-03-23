@@ -9,6 +9,7 @@
 import UIKit
 
 public class PXPaymentMethodComponent: NSObject, PXComponentizable {
+    
     var props: PXPaymentMethodProps
 
     init(props: PXPaymentMethodProps) {
@@ -27,20 +28,28 @@ public class PXPaymentMethodComponent: NSObject, PXComponentizable {
 }
 
 class PXPaymentMethodProps: NSObject {
-    var paymentMethodIcon: UIImage?
-    var amountTitle: String
-    var amountDetail: String?
-    var paymentMethodDescription: String?
-    var paymentMethodDetail: String?
-    var disclaimer: String?
+    
+    let paymentMethodIcon: UIImage?
+    let title: NSAttributedString
+    let subtitle: NSAttributedString?
+    let descriptionTitle: NSAttributedString?
+    let descriptionDetail: NSAttributedString?
+    let disclaimer: NSAttributedString?
+    let action: PXComponentAction?
+    let backgroundColor: UIColor
+    let lightLabelColor: UIColor
+    let boldLabelColor: UIColor
 
-    init(paymentMethodIcon: UIImage?, amountTitle: String, amountDetail: String?, paymentMethodDescription: String?, paymentMethodDetail: String?, disclaimer: String?) {
+    public init(paymentMethodIcon: UIImage?, title: NSAttributedString, subtitle: NSAttributedString?, descriptionTitle: NSAttributedString?, descriptionDetail: NSAttributedString?, disclaimer: NSAttributedString?, action: PXComponentAction? = nil, backgroundColor: UIColor, lightLabelColor: UIColor, boldLabelColor: UIColor) {
         self.paymentMethodIcon = paymentMethodIcon
-        self.amountTitle = amountTitle
-        self.amountDetail = amountDetail
-        self.paymentMethodDescription = paymentMethodDescription
-        self.paymentMethodDetail = paymentMethodDetail
+        self.title = title
+        self.subtitle = subtitle
+        self.descriptionTitle = descriptionTitle
+        self.descriptionDetail = descriptionDetail
         self.disclaimer = disclaimer
+        self.action = action
+        self.backgroundColor = backgroundColor
+        self.lightLabelColor = lightLabelColor
+        self.boldLabelColor = boldLabelColor
     }
-
 }

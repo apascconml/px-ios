@@ -43,6 +43,7 @@ class PXLayout: NSObject {
 
     //Altura fija
     static func setHeight(owner: UIView, height: CGFloat ) -> NSLayoutConstraint {
+        owner.translatesAutoresizingMaskIntoConstraints = false
         return checkContraintActivation(NSLayoutConstraint(item: owner, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: height))
     }
 

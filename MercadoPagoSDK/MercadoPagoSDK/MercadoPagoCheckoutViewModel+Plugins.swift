@@ -49,6 +49,7 @@ extension MercadoPagoCheckoutViewModel {
         paymentMethod._id = plugin.getId()
         paymentMethod.name = plugin.getTitle()
         paymentMethod.paymentTypeId = PXPaymentMethodPlugin.PAYMENT_METHOD_TYPE_ID
+        paymentMethod.setExternalPaymentMethodImage(externalImage: plugin.getImage())
         self.paymentData.paymentMethod = paymentMethod
     }
 }

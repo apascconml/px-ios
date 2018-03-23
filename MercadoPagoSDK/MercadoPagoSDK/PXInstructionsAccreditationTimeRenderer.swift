@@ -36,26 +36,19 @@ class PXInstructionsAccreditationTimeRenderer: NSObject {
 
     func buildTitleLabel(with text: String, in superView: UIView) -> UILabel {
         let textSize: CGFloat = ACCREDITATION_LABEL_FONT_SIZE
-        let attributes = [ NSFontAttributeName: Utils.getFont(size: textSize) ]
-        let clockImage = NSTextAttachment()
-        clockImage.image = MercadoPago.getImage("iconTime")
-        let clockAttributedString = NSAttributedString(attachment: clockImage)
-        let labelAttributedString = NSMutableAttributedString(string: String(describing: " "+text), attributes: attributes)
-        labelAttributedString.insert(clockAttributedString, at: 0)
-        let labelTitle = labelAttributedString
-
         let titleLabel = UILabel()
+        let attributedText = Utils.getAccreditationTimeAttributedString(from: text, fontSize: textSize)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 0
-        titleLabel.attributedText = labelTitle
+        titleLabel.attributedText = attributedText
         titleLabel.lineBreakMode = .byWordWrapping
         superView.addSubview(titleLabel)
         titleLabel.textColor = ACCREDITATION_LABEL_FONT_COLOR
 
         let screenWidth = PXLayout.getScreenWidth(applyingMarginFactor: CONTENT_WIDTH_PERCENT)
 
-        let height = UILabel.requiredHeight(forAttributedText: labelTitle, withFont: Utils.getFont(size: textSize), inWidth: screenWidth)
+        let height = UILabel.requiredHeight(forAttributedText: attributedText, withFont: Utils.getFont(size: textSize), inWidth: screenWidth)
         PXLayout.setHeight(owner: titleLabel, height: height).isActive = true
         PXLayout.matchWidth(ofView: titleLabel, withPercentage: CONTENT_WIDTH_PERCENT).isActive = true
         PXLayout.centerHorizontally(view: titleLabel).isActive = true

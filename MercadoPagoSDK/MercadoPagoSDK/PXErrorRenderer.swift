@@ -97,7 +97,7 @@ class PXErrorRenderer: NSObject {
         return label
     }
     
-    func buildActionButton(with action: PXAction, in superView: UIView, onBottomOf upperView: UIView?) -> UIButton {
+    func buildActionButton(with action: PXComponentAction, in superView: UIView, onBottomOf upperView: UIView?) -> UIButton {
         let title = action.label
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false

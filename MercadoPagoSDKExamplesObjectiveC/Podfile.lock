@@ -1,16 +1,16 @@
 PODS:
-  - MercadoPagoPXTracking (2.0.2)
-  - MercadoPagoServices (1.0.5):
-    - MercadoPagoPXTracking (= 2.0.2)
+  - MercadoPagoPXTracking (2.1.0)
+  - MercadoPagoServices (1.0.6):
+    - MercadoPagoPXTracking (= 2.1.0)
 
 DEPENDENCIES:
-  - MercadoPagoPXTracking (= 2.0.2)
-  - MercadoPagoServices (= 1.0.5)
+  - MercadoPagoPXTracking (= 2.1.0)
+  - MercadoPagoServices (= 1.0.6)
 
 SPEC CHECKSUMS:
-  MercadoPagoPXTracking: c53421f2bbcd22c18b27fd0e44e4bc6370fc9644
-  MercadoPagoServices: b4022091b085a9109b7444df8b7799f2e65f066b
+  MercadoPagoPXTracking: 85dd47c3e7079d6c27a9fc5b196c8f74c09819f7
+  MercadoPagoServices: 46ef6c77c9d431805a5b193b1ccdf7d08ccceb4f
 
-PODFILE CHECKSUM: 88a6ff693787abb35403c216c049a9351cc68f33
+PODFILE CHECKSUM: ef522467619f6e1c3a6f9f7730538136c7b6912d
 
 COCOAPODS: 1.4.0

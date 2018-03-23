@@ -9,6 +9,7 @@
 import UIKit
 
 class SummaryDetail: NSObject {
+    
     var title: String
     var details: [SummaryItemDetail]
     var titleColor = ThemeManager.shared.getTheme().boldLabelTintColor()

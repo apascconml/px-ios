@@ -125,47 +125,43 @@ extension MercadoPagoCheckout {
     }
 
     func showReviewAndConfirmScreen() {
-        let checkoutVC = ReviewScreenViewController(viewModel: self.viewModel.checkoutViewModel(), callbackPaymentData: { [weak self] (paymentData : PaymentData) -> Void in
+        
+        let reviewVC = PXReviewViewController(viewModel: self.viewModel.reviewConfirmViewModel(), callbackPaymentData: { [weak self] (paymentData: PaymentData) in
             guard let strongSelf = self else {
                 return
             }
 
             strongSelf.viewModel.updateCheckoutModel(paymentData: paymentData)
+        
             if !paymentData.hasPaymentMethod() && MercadoPagoCheckoutViewModel.changePaymentMethodCallback != nil {
                 MercadoPagoCheckoutViewModel.changePaymentMethodCallback!()
             }
             strongSelf.executeNextStep()
-
-            }, callbackExit : { [weak self] () -> Void in
-                guard let strongSelf = self else {
-                    return
-                }
-
-                strongSelf.cancel()
-
-            }, callbackConfirm : {[weak self] (paymentData: PaymentData) -> Void in
-                guard let strongSelf = self else {
-                    return
-                }
-
-                strongSelf.viewModel.updateCheckoutModel(paymentData: paymentData)
-                if MercadoPagoCheckoutViewModel.paymentDataConfirmCallback != nil {
-                    MercadoPagoCheckoutViewModel.paymentDataCallback = MercadoPagoCheckoutViewModel.paymentDataConfirmCallback
-                    strongSelf.finish()
-                } else {
-                    strongSelf.executeNextStep()
-                }
-        })
-
-        checkoutVC.callbackCancel = { [weak self] in
+            
+        }, callbackConfirm: { [weak self] (paymentData: PaymentData) in
+            
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.viewModel.readyToPay = false
-            strongSelf.navigationController.popViewController(animated: true)
-        }
 
-        self.pushViewController(viewController: checkoutVC, animated: true)
+            strongSelf.viewModel.updateCheckoutModel(paymentData: paymentData)
+            
+            if MercadoPagoCheckoutViewModel.paymentDataConfirmCallback != nil {
+                MercadoPagoCheckoutViewModel.paymentDataCallback = MercadoPagoCheckoutViewModel.paymentDataConfirmCallback
+                strongSelf.finish()
+            } else {
+                strongSelf.executeNextStep()
+            }
+            
+        }, callbackExit: { [weak self] () -> Void in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.cancel()
+        })
+        
+        self.pushViewController(viewController: reviewVC, animated: true)
     }
 
     func showSecurityCodeScreen() {

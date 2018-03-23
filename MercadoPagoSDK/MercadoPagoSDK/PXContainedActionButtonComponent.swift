@@ -29,7 +29,7 @@ open class PXContainedActionButtonProps : NSObject {
     init(title: String, action:  @escaping (() -> Void)) {
         self.title = title
         self.action = action
-        self.backgroundColor = ThemeManager.shared.getTheme().detailedBackgroundColor()
+        self.backgroundColor = .white
         self.buttonColor = ThemeManager.shared.getTheme().primaryButton().backgroundColor
         self.textColor = ThemeManager.shared.getTheme().primaryButton().tintColor
     }
