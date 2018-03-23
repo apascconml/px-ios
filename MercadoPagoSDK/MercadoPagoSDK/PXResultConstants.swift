@@ -12,7 +12,7 @@ import Foundation
 struct PXHeaderResutlConstants {
 
     // Header titles
-    static let APPROVED_HEADER_TITLE = "¡Listo! Se acreditó tu pago"
+    static let APPROVED_HEADER_TITLE = PXStrings.success_payment_title
     static let PENDING_HEADER_TITLE = "Estamos procesando el pago"
     static let REJECTED_HEADER_TITLE = "Uy, no pudimos procesar el pago"
 

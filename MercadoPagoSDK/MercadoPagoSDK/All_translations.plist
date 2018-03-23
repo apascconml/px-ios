@@ -11,15 +11,6 @@
 		<key>pt</key>
 		<string>Digite os %1$s números do código de segurança</string>
 	</dict>
-	<key>invalid_field</key>
-	<dict>
-		<key>es</key>
-		<string>Revisa este dato</string>
-		<key>en</key>
-		<string>Check this information</string>
-		<key>pt</key>
-		<string>Verifique este dado</string>
-	</dict>
 	<key>invalid_card_length</key>
 	<dict>
 		<key>es</key>
@@ -38,15 +29,6 @@
 		<key>pt</key>
 		<string>Entre todos os números de cartão</string>
 	</dict>
-	<key>security_code</key>
-	<dict>
-		<key>es</key>
-		<string>Código de seguridad</string>
-		<key>en</key>
-		<string>Security Code</string>
-		<key>pt</key>
-		<string>Código de segurança</string>
-	</dict>
 	<key>PAYMENT_ERROR</key>
 	<dict>
 		<key>es</key>
@@ -63,15 +45,6 @@
 		<key>en</key>
 		<string>Payment methods could not be obtained with this preference</string>
 	</dict>
-	<key>Hubo un error</key>
-	<dict>
-		<key>es</key>
-		<string>Hubo un error</string>
-		<key>en</key>
-		<string>There was an error</string>
-		<key>pt</key>
-		<string>Ocorreu um erro</string>
-	</dict>
 	<key>Pagar con otro medio</key>
 	<dict>
 		<key>es</key>
@@ -80,15 +53,6 @@
 		<string>Choose another payment method</string>
 		<key>pt</key>
 		<string>Escolha outro meio de pagamento</string>
-	</dict>
-	<key>¡Listo! Se acreditó tu pago</key>
-	<dict>
-		<key>es</key>
-		<string>¡Listo! Se acreditó tu pago</string>
-		<key>en</key>
-		<string>Done! Your payment was accredited</string>
-		<key>pt</key>
-		<string>Pronto! O seu pagamento foi aprovado</string>
 	</dict>
 	<key>Te enviaremos este comprobante a %0</key>
 	<dict>
@@ -117,60 +81,6 @@
 		<key>pt</key>
 		<string>O número de identificação é inválido</string>
 	</dict>
-	<key>Ver promociones</key>
-	<dict>
-		<key>es</key>
-		<string>Ver promociones</string>
-		<key>en</key>
-		<string>Show Promotions</string>
-		<key>pt</key>
-		<string></string>
-	</dict>
-	<key>Número de tarjeta</key>
-	<dict>
-		<key>es</key>
-		<string>Número de tarjeta</string>
-		<key>en</key>
-		<string>Card number</string>
-		<key>pt</key>
-		<string>Número do cartão</string>
-	</dict>
-	<key>NOMBRE APELLIDO</key>
-	<dict>
-		<key>es</key>
-		<string>NOMBRE APELLIDO</string>
-		<key>en</key>
-		<string>NAME SURNAME</string>
-		<key>pt</key>
-		<string>NOME SOBRENOME</string>
-	</dict>
-	<key>MM/AA</key>
-	<dict>
-		<key>es</key>
-		<string>MM/AA</string>
-		<key>en</key>
-		<string>MM/AA</string>
-		<key>pt</key>
-		<string>MM/AA</string>
-	</dict>
-	<key>Fecha de expiración</key>
-	<dict>
-		<key>es</key>
-		<string>Fecha de expiración</string>
-		<key>en</key>
-		<string>Expiration date</string>
-		<key>pt</key>
-		<string>Data de expiração</string>
-	</dict>
-	<key>Código de seguridad</key>
-	<dict>
-		<key>es</key>
-		<string>Código de seguridad</string>
-		<key>en</key>
-		<string>Security code</string>
-		<key>pt</key>
-		<string>Código de segurança</string>
-	</dict>
 	<key>Continuar</key>
 	<dict>
 		<key>es</key>
@@ -188,15 +98,6 @@
 		<string>Enter all the numbers of the card</string>
 		<key>pt</key>
 		<string>Digite todos os números do cartão</string>
-	</dict>
-	<key>Revisa este dato</key>
-	<dict>
-		<key>es</key>
-		<string>Revisa este dato</string>
-		<key>en</key>
-		<string>Check this information</string>
-		<key>pt</key>
-		<string>Revise este dado</string>
 	</dict>
 	<key>Ingresa el nombre y apellido impreso en la tarjeta</key>
 	<dict>
@@ -269,15 +170,6 @@
 		<string>Don’t worry, you can still pay with:</string>
 		<key>pt</key>
 		<string>Não se preocupe, você ainda pode terminar o seu pagamento com:</string>
-	</dict>
-	<key>Nombre y apellido</key>
-	<dict>
-		<key>es</key>
-		<string>Nombre y apellido</string>
-		<key>en</key>
-		<string>Name and surname</string>
-		<key>pt</key>
-		<string>Nome e sobrenome</string>
 	</dict>
 	<key>OK</key>
 	<dict>

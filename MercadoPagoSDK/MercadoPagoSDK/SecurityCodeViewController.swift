@@ -45,7 +45,7 @@ open class SecurityCodeViewController: MercadoPagoUIViewController, UITextFieldD
          NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
          self.hideNavBar()
         loadMPStyles()
-        self.securityCodeTextField.placeholder = "security_code".localized_temp
+        self.securityCodeTextField.placeholder = PXStrings.card_form_security_code.localized_beta
         setupInputAccessoryView()
         self.view.backgroundColor = ThemeManager.shared.getMainColor()
         self.cardFront = CardFrontView.init(frame: viewModel.getCardBounds())

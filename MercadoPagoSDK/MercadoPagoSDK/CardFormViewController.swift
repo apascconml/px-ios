@@ -118,7 +118,7 @@ open class CardFormViewController: MercadoPagoUIViewController, UITextFieldDeleg
                 self.cardBackground.backgroundColor = NAVIGATION_BAR_COLOR
 
                 if viewModel.showBankDeals() {
-                    let promocionesButton: UIBarButtonItem = UIBarButtonItem(title: "Ver promociones".localized_temp, style: UIBarButtonItemStyle.plain, target: self, action: #selector(CardFormViewController.verPromociones))
+                    let promocionesButton: UIBarButtonItem = UIBarButtonItem(title: PXStrings.card_form_show_promotions.localized_beta, style: UIBarButtonItemStyle.plain, target: self, action: #selector(CardFormViewController.verPromociones))
                     promocionesButton.tintColor = NAVIGATION_BAR_TEXT_COLOR
                     self.navigationItem.rightBarButtonItem = promocionesButton
                 }
@@ -168,7 +168,7 @@ open class CardFormViewController: MercadoPagoUIViewController, UITextFieldDeleg
 
         if self.navigationController != nil {
             if viewModel.showBankDeals() {
-                let promocionesButton: UIBarButtonItem = UIBarButtonItem(title: "Ver promociones".localized_temp, style: UIBarButtonItemStyle.plain, target: self, action: #selector(CardFormViewController.verPromociones))
+                let promocionesButton: UIBarButtonItem = UIBarButtonItem(title: PXStrings.card_form_show_promotions.localized_beta, style: UIBarButtonItemStyle.plain, target: self, action: #selector(CardFormViewController.verPromociones))
                 promocionesButton.tintColor = NAVIGATION_BAR_TEXT_COLOR
                 self.navigationItem.rightBarButtonItem = promocionesButton
             }
@@ -233,8 +233,8 @@ open class CardFormViewController: MercadoPagoUIViewController, UITextFieldDeleg
         cvvLabel = cardBack?.cardCVV
 
         cardNumberLabel?.text = textMaskFormater.textMasked("")
-        nameLabel?.text = "NOMBRE APELLIDO".localized_temp
-        expirationDateLabel?.text = "MM/AA".localized_temp
+        nameLabel?.text = PXStrings.card_form_name_surname.localized_beta
+        expirationDateLabel?.text = PXStrings.card_form_month_year.localized_beta
         cvvLabel?.text = "•••"
         editingLabel = cardNumberLabel
 
@@ -347,7 +347,7 @@ open class CardFormViewController: MercadoPagoUIViewController, UITextFieldDeleg
     fileprivate func formatName(_ name: String) -> String {
         if name.count == 0 {
             self.viewModel.cardholderNameEmpty = true
-            return "NOMBRE APELLIDO".localized_temp
+            return PXStrings.card_form_name_surname.localized_beta
         }
         self.viewModel.cardholderNameEmpty = false
         return name.uppercased()
@@ -359,7 +359,7 @@ open class CardFormViewController: MercadoPagoUIViewController, UITextFieldDeleg
     fileprivate func formatExpirationDate(_ expirationDate: String) -> String {
         if expirationDate.count == 0 {
             expirationLabelEmpty = true
-            return "MM/AA".localized_temp
+            return PXStrings.card_form_month_year.localized_beta
         }
         expirationLabelEmpty = false
         return expirationDate
@@ -623,7 +623,7 @@ open class CardFormViewController: MercadoPagoUIViewController, UITextFieldDeleg
                     if cardNumberLabel?.text?.count == 0 {
                         showMessage("Ingresa el número de la tarjeta de crédito".localized_temp)
                     } else {
-                        showMessage("Revisa este dato".localized_temp)
+                        showMessage(PXStrings.card_form_invalid_field.localized_beta)
                     }
 
                 }
@@ -806,13 +806,13 @@ open class CardFormViewController: MercadoPagoUIViewController, UITextFieldDeleg
     
     fileprivate func getTextboxPlaceholder() -> String {
         if editingLabel == cardNumberLabel {
-            return "Número de tarjeta".localized_temp
+            return PXStrings.card_form_card_number.localized_beta
         } else if editingLabel == nameLabel {
-            return "Nombre y apellido".localized_temp
+            return PXStrings.card_form_name_and_surname.localized_beta
         } else if editingLabel == expirationDateLabel {
-            return "Fecha de expiración".localized_temp
+            return PXStrings.card_form_expiration_date.localized_beta
         } else if editingLabel == cvvLabel {
-            return "Código de seguridad".localized_temp
+            return PXStrings.card_form_security_code.localized_beta
         }
         return ""
     }
