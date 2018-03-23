@@ -182,7 +182,7 @@ extension PXReviewViewController {
     }
 
     fileprivate func getPaymentMethodComponentView() -> UIView? {
-        let action = PXComponentAction(label: "review_change_payment_method_action".localized_beta) {
+        let action = PXComponentAction(label: PXStrings.review_change_payment_method_action.localized_beta) {
             self.callbackPaymentData(self.viewModel.getClearPaymentData())
         }
         
@@ -213,7 +213,7 @@ extension PXReviewViewController {
     }
 
     fileprivate func getFloatingButtonView() -> PXContainedActionButtonView {
-        let component = PXContainedActionButtonComponent(props: PXContainedActionButtonProps(title: "Confirmar".localized_temp, action: { [weak self] in
+        let component = PXContainedActionButtonComponent(props: PXContainedActionButtonProps(title: PXStrings.px_confirm_action.localized_beta, action: { [weak self] in
             guard let strongSelf = self else {
                 return
             }
@@ -224,13 +224,13 @@ extension PXReviewViewController {
     }
     
     fileprivate func getFooterView() -> UIView {
-        let payAction = PXComponentAction(label: "Confirmar".localized_temp) { [weak self] in
+        let payAction = PXComponentAction(label: PXStrings.px_confirm_action.localized_beta) { [weak self] in
             guard let strongSelf = self else {
                 return
             }
             strongSelf.confirmPayment()
         }
-        let cancelAction = PXComponentAction(label: "Cancelar".localized_temp) {
+        let cancelAction = PXComponentAction(label: PXStrings.px_cancel_action.localized_beta) {
             [weak self] in
             guard let strongSelf = self else {
                 return
@@ -275,7 +275,7 @@ extension PXReviewViewController {
 extension PXReviewViewController: PXTermsAndConditionViewDelegate {
     
     fileprivate func trackConfirmActionEvent() {
-        var properties: [String: String] = [TrackingUtil.METADATA_PAYMENT_METHOD_ID: viewModel.paymentData.paymentMethod?._id ?? "", TrackingUtil.METADATA_PAYMENT_TYPE_ID: viewModel.paymentData.paymentMethod?.paymentTypeId ?? "", TrackingUtil.METADATA_AMOUNT_ID: viewModel.preference?.getAmount().stringValue ?? ""]
+        var properties: [String: String] = [TrackingUtil.METADATA_PAYMENT_METHOD_ID: viewModel.paymentData.paymentMethod?._id ?? "", TrackingUtil.METADATA_PAYMENT_TYPE_ID: viewModel.paymentData.paymentMethod?.paymentTypeId ?? "", TrackingUtil.METADATA_AMOUNT_ID: viewModel.preference.getAmount().stringValue ?? ""]
 
         if let customerCard = viewModel.paymentOptionSelected as? CustomerPaymentMethod {
             properties[TrackingUtil.METADATA_CARD_ID] = customerCard._id

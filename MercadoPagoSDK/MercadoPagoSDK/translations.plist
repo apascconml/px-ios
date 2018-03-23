@@ -294,12 +294,27 @@ Se preferir, você pode escolher outro meio de pagamento.</string>
 		<key>pt</key>
 		<string>Alterar meio de pagamento</string>
 	</dict>
-	<key>review_change_payment_method_action</key>
+	<key>px_confirm_action</key>
 	<dict>
 		<key>comment</key>
 		<string></string>
-		<key>value</key>
-		<string>Change payment method</string>
+		<key>es</key>
+		<string>Confirmar</string>
+		<key>en</key>
+		<string>Confirm</string>
+		<key>pt</key>
+		<string>Confirmar</string>
+	</dict>
+	<key>px_cancel_action</key>
+	<dict>
+		<key>comment</key>
+		<string></string>
+		<key>es</key>
+		<string>Cancelar</string>
+		<key>en</key>
+		<string>Cancel</string>
+		<key>pt</key>
+		<string>Cancelar</string>
 	</dict>
 </dict>
 </plist>

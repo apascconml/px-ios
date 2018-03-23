@@ -31,4 +31,6 @@ enum PXStrings {
     static let payer_info_number = "payer_info_number"
     static let payer_info_type = "payer_info_type"
     static let review_change_payment_method_action = "review_change_payment_method_action"
+    static let px_confirm_action = "px_confirm_action"
+    static let px_cancel_action = "px_cancel_action"
 }

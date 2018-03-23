@@ -63,7 +63,7 @@ open class AddCouponViewController: MercadoPagoUIViewController, UITextFieldDele
 
         buttonNext = UIBarButtonItem(title: "Canejar".localized_temp, style: .plain, target: self, action: #selector(AddCouponViewController.rightArrowKeyTapped))
 
-        buttonPrev = UIBarButtonItem(title: "Cancelar".localized_temp, style: .plain, target: self, action: #selector(AddCouponViewController.leftArrowKeyTapped))
+        buttonPrev = UIBarButtonItem(title: PXStrings.px_cancel_action.localized_beta, style: .plain, target: self, action: #selector(AddCouponViewController.leftArrowKeyTapped))
 
         buttonNext.setTitlePositionAdjustment(UIOffset(horizontal: UIScreen.main.bounds.size.width / 8, vertical: 0), for: UIBarMetrics.default)
         buttonPrev.setTitlePositionAdjustment(UIOffset(horizontal: -UIScreen.main.bounds.size.width / 8, vertical: 0), for: UIBarMetrics.default)
