@@ -65,7 +65,7 @@ open class CardToken: NSObject, CardInformationForm {
         if String.isNullOrEmpty(cardNumber) {
             return "Ingresa el número de la tarjeta de crédito".localized_temp
         } else if self.cardNumber!.count < MIN_LENGTH_NUMBER || self.cardNumber!.count > MAX_LENGTH_NUMBER {
-            return PXStrings.card_form_invalid_field.pxLocalized
+            return PXStrings.card_form_invalid_field.PXLocalized
         } else {
             return nil
         }
@@ -97,9 +97,9 @@ open class CardToken: NSObject, CardInformationForm {
                         userInfo = [String: String]()
                     }
                     if cardSettings.count>1 {
-                        return PXStrings.card_form_invalid_card_length_general.pxLocalized
+                        return PXStrings.card_form_invalid_card_length_general.PXLocalized
                     } else {
-                        return (PXStrings.card_form_invalid_card_length.pxLocalized as NSString).replacingOccurrences(of: "%1$s", with: "\(cardSettings[0].cardNumber.length)")
+                        return (PXStrings.card_form_invalid_card_length.PXLocalized as NSString).replacingOccurrences(of: "%1$s", with: "\(cardSettings[0].cardNumber.length)")
                     }
                 }
                 // Validate luhn
@@ -126,7 +126,7 @@ open class CardToken: NSObject, CardInformationForm {
 
     open func validateSecurityCode(_ securityCode: String?) -> String? {
         if String.isNullOrEmpty(self.securityCode) || self.securityCode!.count < 3 || self.securityCode!.count > 4 {
-            return PXStrings.card_form_invalid_field.pxLocalized
+            return PXStrings.card_form_invalid_field.PXLocalized
         } else {
             return nil
         }
@@ -154,7 +154,7 @@ open class CardToken: NSObject, CardInformationForm {
         if let settings = setting {
                 let cvvLength = settings[0].securityCode.length
                 if (cvvLength != 0) && (securityCode.count != cvvLength) {
-                    return (PXStrings.card_form_invalid_cvv_length.pxLocalized as NSString).replacingOccurrences(of: "%1$s", with: "\(cvvLength)")
+                    return (PXStrings.card_form_invalid_cvv_length.PXLocalized as NSString).replacingOccurrences(of: "%1$s", with: "\(cvvLength)")
                 } else {
                     return nil
                 }
@@ -168,14 +168,14 @@ open class CardToken: NSObject, CardInformationForm {
 
     open func validateExpiryDate(_ month: Int, year: Int) -> String? {
         if !validateExpMonth(month) {
-            return PXStrings.card_form_invalid_field.pxLocalized
+            return PXStrings.card_form_invalid_field.PXLocalized
         }
         if !validateExpYear(year) {
-            return PXStrings.card_form_invalid_field.pxLocalized
+            return PXStrings.card_form_invalid_field.PXLocalized
         }
 
         if hasMonthPassed(self.expirationYear, month: self.expirationMonth) {
-            return PXStrings.card_form_invalid_field.pxLocalized
+            return PXStrings.card_form_invalid_field.PXLocalized
         }
 
         return nil
@@ -206,7 +206,7 @@ open class CardToken: NSObject, CardInformationForm {
     open func validateIdentificationType() -> String? {
 
         if String.isNullOrEmpty(cardholder!.identification!.type) {
-            return PXStrings.card_form_invalid_field.pxLocalized
+            return PXStrings.card_form_invalid_field.PXLocalized
         } else {
             return nil
         }
@@ -215,7 +215,7 @@ open class CardToken: NSObject, CardInformationForm {
     open func validateIdentificationNumber() -> String? {
 
         if String.isNullOrEmpty(cardholder!.identification!.number) {
-            return PXStrings.card_form_invalid_field.pxLocalized
+            return PXStrings.card_form_invalid_field.PXLocalized
         } else {
             return nil
         }
@@ -229,7 +229,7 @@ open class CardToken: NSObject, CardInformationForm {
                 let max = identificationType!.maxLength
                 if min != 0 && max != 0 {
                     if len > max || len < min {
-                        return PXStrings.card_form_invalid_field.pxLocalized
+                        return PXStrings.card_form_invalid_field.PXLocalized
                     } else {
                         return nil
                     }
@@ -237,7 +237,7 @@ open class CardToken: NSObject, CardInformationForm {
                     return validateIdentificationNumber()
                 }
             } else {
-                return PXStrings.card_form_invalid_field.pxLocalized
+                return PXStrings.card_form_invalid_field.PXLocalized
             }
         } else {
             return validateIdentificationNumber()
@@ -246,7 +246,7 @@ open class CardToken: NSObject, CardInformationForm {
 
     open func validateCardholderName() -> String? {
         if String.isNullOrEmpty(self.cardholder?.name) {
-            return PXStrings.card_form_invalid_field.pxLocalized
+            return PXStrings.card_form_invalid_field.PXLocalized
         } else {
             return nil
         }

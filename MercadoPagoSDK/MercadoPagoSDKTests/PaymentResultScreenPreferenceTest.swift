@@ -25,7 +25,7 @@ class PaymentResultScreenPreferenceTest: BaseTest {
     }
 
     func testSetTitle() {
-        XCTAssertEqual(self.mpCheckout.viewModel.paymentResultScreenPreference.getApprovedTitle(), PXStrings.success_payment_title.pxLocalized)
+        XCTAssertEqual(self.mpCheckout.viewModel.paymentResultScreenPreference.getApprovedTitle(), PXStrings.success_payment_title.PXLocalized)
         XCTAssertEqual(self.mpCheckout.viewModel.paymentResultScreenPreference.getPendingTitle(), "Estamos procesando el pago".localized_temp)
         XCTAssertEqual(self.mpCheckout.viewModel.paymentResultScreenPreference.getRejectedTitle(), "Uy, no pudimos procesar el pago".localized_temp)
 
@@ -57,8 +57,8 @@ class PaymentResultScreenPreferenceTest: BaseTest {
     }
 
     func testSetContentTitle() {
-        XCTAssertEqual(self.mpCheckout.viewModel.paymentResultScreenPreference.getPendingContetTitle(), PXStrings.error_body_title_.pxLocalized)
-        XCTAssertEqual(self.mpCheckout.viewModel.paymentResultScreenPreference.getRejectedContetTitle(), PXStrings.error_body_title_.pxLocalized)
+        XCTAssertEqual(self.mpCheckout.viewModel.paymentResultScreenPreference.getPendingContetTitle(), PXStrings.error_body_title_.PXLocalized)
+        XCTAssertEqual(self.mpCheckout.viewModel.paymentResultScreenPreference.getRejectedContetTitle(), PXStrings.error_body_title_.PXLocalized)
 
         paymentResultScreenPreference.setPendingContentTitle(title: "1")
         paymentResultScreenPreference.setRejectedContentTitle(title: "2")

@@ -77,7 +77,7 @@ extension PXResultViewModel {
             return label
         }
         if self.isAccepted() {
-           return PXFooterResultConstants.APPROVED_LINK_TEXT.pxLocalized
+           return PXFooterResultConstants.APPROVED_LINK_TEXT.PXLocalized
         } else if self.isError() {
             return PXFooterResultConstants.ERROR_LINK_TEXT.localized_temp
         } else if self.isWarning() {

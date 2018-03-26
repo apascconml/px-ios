@@ -157,7 +157,7 @@ open class IdentificationViewController: MercadoPagoUIViewController, UITextFiel
         tipoDeDocumentoLabel = identificationCard?.tipoDeDocumentoLabel
         numberDocLabel = identificationCard?.numberDocLabel
 
-        self.tipoDeDocumentoLabel.text =  PXStrings.identification_form_id_number.pxLocalized
+        self.tipoDeDocumentoLabel.text =  PXStrings.identification_form_id_number.PXLocalized
         self.tipoDeDocumentoLabel.font = Utils.getIdentificationFont(size: 10)
         self.numberTextField.placeholder = "Número".localized_temp
         self.numberTextField.borderActiveColor = ThemeManager.shared.getTheme().secondaryButton().tintColor
@@ -244,8 +244,8 @@ open class IdentificationViewController: MercadoPagoUIViewController, UITextFiel
             toolbar.barStyle = UIBarStyle.default
             toolbar.isUserInteractionEnabled = true
 
-            let buttonNext = UIBarButtonItem(title: PXStrings.card_form_next_button.pxLocalized, style: .plain, target: self, action: #selector(CardFormViewController.rightArrowKeyTapped))
-            let buttonPrev = UIBarButtonItem(title: PXStrings.card_form_previous_button.pxLocalized, style: .plain, target: self, action: #selector(CardFormViewController.leftArrowKeyTapped))
+            let buttonNext = UIBarButtonItem(title: PXStrings.card_form_next_button.PXLocalized, style: .plain, target: self, action: #selector(CardFormViewController.rightArrowKeyTapped))
+            let buttonPrev = UIBarButtonItem(title: PXStrings.card_form_previous_button.PXLocalized, style: .plain, target: self, action: #selector(CardFormViewController.leftArrowKeyTapped))
 
             buttonNext.setTitlePositionAdjustment(UIOffset(horizontal: UIScreen.main.bounds.size.width / 8, vertical: 0), for: UIBarMetrics.default)
             buttonPrev.setTitlePositionAdjustment(UIOffset(horizontal: -UIScreen.main.bounds.size.width / 8, vertical: 0), for: UIBarMetrics.default)

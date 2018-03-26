@@ -69,9 +69,9 @@ class PXBodyComponentTest: BaseTest {
 
         // Then:
         XCTAssertNotNil(errorView.titleLabel)
-        XCTAssertEqual(errorView.titleLabel?.text, PXStrings.error_body_title_.pxLocalized)
+        XCTAssertEqual(errorView.titleLabel?.text, PXStrings.error_body_title_.PXLocalized)
         XCTAssertNotNil(errorView.descriptionLabel)
-        XCTAssertEqual(errorView.descriptionLabel?.text, PXStrings.error_body_description_cc_rejected_call_for_authorize.pxLocalized)
+        XCTAssertEqual(errorView.descriptionLabel?.text, PXStrings.error_body_description_cc_rejected_call_for_authorize.PXLocalized)
         XCTAssertNotNil(errorView.actionButton)
         XCTAssertEqual(errorView.actionButton?.titleLabel?.text, PXResourceProvider.getActionTextForErrorBodyForREJECTED_CALL_FOR_AUTHORIZE("visa"))
         XCTAssertNotNil(errorView.middleDivider)
@@ -90,7 +90,7 @@ class PXBodyComponentTest: BaseTest {
 
         // Then:
         XCTAssertNotNil(errorView.titleLabel)
-        XCTAssertEqual(errorView.titleLabel?.text, PXStrings.error_body_title_.pxLocalized)
+        XCTAssertEqual(errorView.titleLabel?.text, PXStrings.error_body_title_.PXLocalized)
         XCTAssertNotNil(errorView.descriptionLabel)
         XCTAssertEqual(errorView.descriptionLabel?.text, PXResourceProvider.getDescriptionForErrorBodyForREJECTED_INSUFFICIENT_AMOUNT())
         XCTAssertNil(errorView.actionButton)
@@ -127,7 +127,7 @@ class PXBodyComponentTest: BaseTest {
 
         // Then:
         XCTAssertNotNil(errorView.titleLabel)
-        XCTAssertEqual(errorView.titleLabel?.text, PXStrings.error_body_title_.pxLocalized)
+        XCTAssertEqual(errorView.titleLabel?.text, PXStrings.error_body_title_.PXLocalized)
         XCTAssertNotNil(errorView.descriptionLabel)
         XCTAssertEqual(errorView.descriptionLabel?.text, PXResourceProvider.getDescriptionForErrorBodyForREJECTED_CARD_DISABLED("visa"))
         XCTAssertNil(errorView.actionButton)
@@ -158,7 +158,7 @@ class PXBodyComponentTest: BaseTest {
 
         // Then:
         XCTAssertNotNil(errorView.titleLabel)
-        XCTAssertEqual(errorView.titleLabel?.text, PXStrings.error_body_title_.pxLocalized)
+        XCTAssertEqual(errorView.titleLabel?.text, PXStrings.error_body_title_.PXLocalized)
         XCTAssertNotNil(errorView.descriptionLabel)
         XCTAssertEqual(errorView.descriptionLabel?.text, PXResourceProvider.getDescriptionForErrorBodyForPENDING_CONTINGENCY())
         XCTAssertNil(errorView.actionButton)
@@ -177,7 +177,7 @@ class PXBodyComponentTest: BaseTest {
 
         // Then:
         XCTAssertNotNil(errorView.titleLabel)
-        XCTAssertEqual(errorView.titleLabel?.text, PXStrings.error_body_title_.pxLocalized)
+        XCTAssertEqual(errorView.titleLabel?.text, PXStrings.error_body_title_.PXLocalized)
         XCTAssertNotNil(errorView.descriptionLabel)
         XCTAssertEqual(errorView.descriptionLabel?.text, PXResourceProvider.getDescriptionForErrorBodyForPENDING_REVIEW_MANUAL())
         XCTAssertNil(errorView.actionButton)

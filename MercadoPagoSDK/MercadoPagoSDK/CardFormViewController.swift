@@ -118,7 +118,7 @@ open class CardFormViewController: MercadoPagoUIViewController, UITextFieldDeleg
                 self.cardBackground.backgroundColor = NAVIGATION_BAR_COLOR
 
                 if viewModel.showBankDeals() {
-                    let promocionesButton: UIBarButtonItem = UIBarButtonItem(title: PXStrings.card_form_show_promotions.pxLocalized, style: UIBarButtonItemStyle.plain, target: self, action: #selector(CardFormViewController.verPromociones))
+                    let promocionesButton: UIBarButtonItem = UIBarButtonItem(title: PXStrings.card_form_show_promotions.PXLocalized, style: UIBarButtonItemStyle.plain, target: self, action: #selector(CardFormViewController.verPromociones))
                     promocionesButton.tintColor = NAVIGATION_BAR_TEXT_COLOR
                     self.navigationItem.rightBarButtonItem = promocionesButton
                 }
@@ -168,7 +168,7 @@ open class CardFormViewController: MercadoPagoUIViewController, UITextFieldDeleg
 
         if self.navigationController != nil {
             if viewModel.showBankDeals() {
-                let promocionesButton: UIBarButtonItem = UIBarButtonItem(title: PXStrings.card_form_show_promotions.pxLocalized, style: UIBarButtonItemStyle.plain, target: self, action: #selector(CardFormViewController.verPromociones))
+                let promocionesButton: UIBarButtonItem = UIBarButtonItem(title: PXStrings.card_form_show_promotions.PXLocalized, style: UIBarButtonItemStyle.plain, target: self, action: #selector(CardFormViewController.verPromociones))
                 promocionesButton.tintColor = NAVIGATION_BAR_TEXT_COLOR
                 self.navigationItem.rightBarButtonItem = promocionesButton
             }
@@ -233,8 +233,8 @@ open class CardFormViewController: MercadoPagoUIViewController, UITextFieldDeleg
         cvvLabel = cardBack?.cardCVV
 
         cardNumberLabel?.text = textMaskFormater.textMasked("")
-        nameLabel?.text = PXStrings.card_form_name_surname.pxLocalized
-        expirationDateLabel?.text = PXStrings.card_form_month_year.pxLocalized
+        nameLabel?.text = PXStrings.card_form_name_surname.PXLocalized
+        expirationDateLabel?.text = PXStrings.card_form_month_year.PXLocalized
         cvvLabel?.text = "•••"
         editingLabel = cardNumberLabel
 
@@ -347,7 +347,7 @@ open class CardFormViewController: MercadoPagoUIViewController, UITextFieldDeleg
     fileprivate func formatName(_ name: String) -> String {
         if name.count == 0 {
             self.viewModel.cardholderNameEmpty = true
-            return PXStrings.card_form_name_surname.pxLocalized
+            return PXStrings.card_form_name_surname.PXLocalized
         }
         self.viewModel.cardholderNameEmpty = false
         return name.uppercased()
@@ -359,7 +359,7 @@ open class CardFormViewController: MercadoPagoUIViewController, UITextFieldDeleg
     fileprivate func formatExpirationDate(_ expirationDate: String) -> String {
         if expirationDate.count == 0 {
             expirationLabelEmpty = true
-            return PXStrings.card_form_month_year.pxLocalized
+            return PXStrings.card_form_month_year.PXLocalized
         }
         expirationLabelEmpty = false
         return expirationDate
@@ -509,8 +509,8 @@ open class CardFormViewController: MercadoPagoUIViewController, UITextFieldDeleg
             toolbar.barStyle = UIBarStyle.default
             toolbar.isUserInteractionEnabled = true
 
-            let buttonNext = UIBarButtonItem(title: PXStrings.card_form_next_button.pxLocalized, style: .plain, target: self, action: #selector(CardFormViewController.rightArrowKeyTapped))
-            let buttonPrev = UIBarButtonItem(title: PXStrings.card_form_previous_button.pxLocalized, style: .plain, target: self, action: #selector(CardFormViewController.leftArrowKeyTapped))
+            let buttonNext = UIBarButtonItem(title: PXStrings.card_form_next_button.PXLocalized, style: .plain, target: self, action: #selector(CardFormViewController.rightArrowKeyTapped))
+            let buttonPrev = UIBarButtonItem(title: PXStrings.card_form_previous_button.PXLocalized, style: .plain, target: self, action: #selector(CardFormViewController.leftArrowKeyTapped))
 
             buttonNext.setTitlePositionAdjustment(UIOffset(horizontal: UIScreen.main.bounds.size.width / 8, vertical: 0), for: UIBarMetrics.default)
             buttonPrev.setTitlePositionAdjustment(UIOffset(horizontal: -UIScreen.main.bounds.size.width / 8, vertical: 0), for: UIBarMetrics.default)
@@ -623,7 +623,7 @@ open class CardFormViewController: MercadoPagoUIViewController, UITextFieldDeleg
                     if cardNumberLabel?.text?.count == 0 {
                         showMessage("Ingresa el número de la tarjeta de crédito".localized_temp)
                     } else {
-                        showMessage(PXStrings.card_form_invalid_field.pxLocalized)
+                        showMessage(PXStrings.card_form_invalid_field.PXLocalized)
                     }
 
                 }
@@ -806,13 +806,13 @@ open class CardFormViewController: MercadoPagoUIViewController, UITextFieldDeleg
     
     fileprivate func getTextboxPlaceholder() -> String {
         if editingLabel == cardNumberLabel {
-            return PXStrings.card_form_card_number.pxLocalized
+            return PXStrings.card_form_card_number.PXLocalized
         } else if editingLabel == nameLabel {
-            return PXStrings.card_form_name_and_surname.pxLocalized
+            return PXStrings.card_form_name_and_surname.PXLocalized
         } else if editingLabel == expirationDateLabel {
-            return PXStrings.card_form_expiration_date.pxLocalized
+            return PXStrings.card_form_expiration_date.PXLocalized
         } else if editingLabel == cvvLabel {
-            return PXStrings.card_form_security_code.pxLocalized
+            return PXStrings.card_form_security_code.PXLocalized
         }
         return ""
     }

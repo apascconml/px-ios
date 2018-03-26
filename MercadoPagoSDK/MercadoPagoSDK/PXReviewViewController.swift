@@ -182,7 +182,7 @@ extension PXReviewViewController {
     }
 
     fileprivate func getPaymentMethodComponentView() -> UIView? {
-        let action = PXComponentAction(label: PXStrings.review_change_payment_method_action.pxLocalized) {
+        let action = PXComponentAction(label: PXStrings.review_change_payment_method_action.PXLocalized) {
             self.callbackPaymentData(self.viewModel.getClearPaymentData())
         }
         
@@ -213,7 +213,7 @@ extension PXReviewViewController {
     }
 
     fileprivate func getFloatingButtonView() -> PXContainedActionButtonView {
-        let component = PXContainedActionButtonComponent(props: PXContainedActionButtonProps(title: PXStrings.confirm_action.pxLocalized, action: { [weak self] in
+        let component = PXContainedActionButtonComponent(props: PXContainedActionButtonProps(title: PXStrings.confirm_action.PXLocalized, action: { [weak self] in
             guard let strongSelf = self else {
                 return
             }
@@ -224,13 +224,13 @@ extension PXReviewViewController {
     }
     
     fileprivate func getFooterView() -> UIView {
-        let payAction = PXComponentAction(label: PXStrings.confirm_action.pxLocalized) { [weak self] in
+        let payAction = PXComponentAction(label: PXStrings.confirm_action.PXLocalized) { [weak self] in
             guard let strongSelf = self else {
                 return
             }
             strongSelf.confirmPayment()
         }
-        let cancelAction = PXComponentAction(label: PXStrings.cancel_action.pxLocalized) {
+        let cancelAction = PXComponentAction(label: PXStrings.cancel_action.PXLocalized) {
             [weak self] in
             guard let strongSelf = self else {
                 return

@@ -569,7 +569,7 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
         let totalPaymentMethodsToShow =  totalPaymentMethodSearchCount + paymentMethodPluginsToShow.count
         
         if totalPaymentMethodsToShow == 0 {
-            self.errorInputs(error: MPSDKError(message: PXStrings.error_title.pxLocalized, errorDetail: "No se ha podido obtener los métodos de pago con esta preferencia".localized_temp, retry: false), errorCallback: { (_) in
+            self.errorInputs(error: MPSDKError(message: PXStrings.error_title.PXLocalized, errorDetail: "No se ha podido obtener los métodos de pago con esta preferencia".localized_temp, retry: false), errorCallback: { (_) in
             })
         } else if totalPaymentMethodsToShow == 1 {
             autoselectOnlyPaymentMethod()
