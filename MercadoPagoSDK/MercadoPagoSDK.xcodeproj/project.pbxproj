@@ -688,7 +688,7 @@
 		FC6283F31FE1AC4A0002E93C /* PXComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6283F21FE1AC4A0002E93C /* PXComponentView.swift */; };
 		FC6283F41FE1AC4A0002E93C /* PXComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6283F21FE1AC4A0002E93C /* PXComponentView.swift */; };
 		FC7202DB1EA4FF6000A923A6 /* DiscountCouponTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7202DA1EA4FF6000A923A6 /* DiscountCouponTest.swift */; };
-		FC756B1D203F2C17009F436D /* Localizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC756B1C203F2C17009F436D /* Localizator.swift */; };
+		FC756B1D203F2C17009F436D /* PXLocalizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC756B1C203F2C17009F436D /* PXLocalizator.swift */; };
 		FC756B1F203F39BA009F436D /* translations.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC756B1E203F39BA009F436D /* translations.plist */; };
 		FC7BD8AA1FD5898700D5B2C7 /* PXErrorComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7BD8A91FD5898700D5B2C7 /* PXErrorComponent.swift */; };
 		FC7BD8AB1FD5898700D5B2C7 /* PXErrorComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7BD8A91FD5898700D5B2C7 /* PXErrorComponent.swift */; };
@@ -1172,7 +1172,7 @@
 		FC49666020656E01005471B4 /* PXStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PXStrings.swift; sourceTree = "<group>"; };
 		FC6283F21FE1AC4A0002E93C /* PXComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXComponentView.swift; sourceTree = "<group>"; };
 		FC7202DA1EA4FF6000A923A6 /* DiscountCouponTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscountCouponTest.swift; sourceTree = "<group>"; };
-		FC756B1C203F2C17009F436D /* Localizator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizator.swift; sourceTree = "<group>"; };
+		FC756B1C203F2C17009F436D /* PXLocalizator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXLocalizator.swift; sourceTree = "<group>"; };
 		FC756B1E203F39BA009F436D /* translations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = translations.plist; sourceTree = "<group>"; };
 		FC7BD8A91FD5898700D5B2C7 /* PXErrorComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXErrorComponent.swift; sourceTree = "<group>"; };
 		FC7BD8AC1FD5899000D5B2C7 /* PXErrorRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXErrorRenderer.swift; sourceTree = "<group>"; };
@@ -2513,7 +2513,7 @@
 				FCCACD7A20448F4A0008CF32 /* All_translations.plist */,
 				FC49666020656E01005471B4 /* PXStrings.swift */,
 				FC756B1E203F39BA009F436D /* translations.plist */,
-				FC756B1C203F2C17009F436D /* Localizator.swift */,
+				FC756B1C203F2C17009F436D /* PXLocalizator.swift */,
 			);
 			name = Translations;
 			sourceTree = "<group>";
@@ -3153,7 +3153,7 @@
 				4B8D73511E780F8F009C1209 /* SummaryRow.swift in Sources */,
 				76AA2E341CBD8BCA006D0678 /* MPTextView.swift in Sources */,
 				76445ADB1CC921B5008EE68E /* ViewUtils.swift in Sources */,
-				FC756B1D203F2C17009F436D /* Localizator.swift in Sources */,
+				FC756B1D203F2C17009F436D /* PXLocalizator.swift in Sources */,
 				1575E7141FBCD34700E0756D /* PXHeaderViewModelHelper.swift in Sources */,
 				76FD24891C5BFEA1008C5DC0 /* TextFieldsEffects.swift in Sources */,
 				76C834411D510CD4003C4717 /* AmountInfo.swift in Sources */,
