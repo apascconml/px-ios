@@ -157,7 +157,7 @@ open class IdentificationViewController: MercadoPagoUIViewController, UITextFiel
         tipoDeDocumentoLabel = identificationCard?.tipoDeDocumentoLabel
         numberDocLabel = identificationCard?.numberDocLabel
 
-        self.tipoDeDocumentoLabel.text =  "DOCUMENTO DEL TITULAR DE LA TARJETA".localized_temp
+        self.tipoDeDocumentoLabel.text =  PXStrings.identification_form_id_number.localized_beta
         self.tipoDeDocumentoLabel.font = Utils.getIdentificationFont(size: 10)
         self.numberTextField.placeholder = "Número".localized_temp
         self.numberTextField.borderActiveColor = ThemeManager.shared.getTheme().secondaryButton().tintColor

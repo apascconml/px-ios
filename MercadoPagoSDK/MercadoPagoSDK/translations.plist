@@ -360,6 +360,15 @@ Se preferir, você pode escolher outro meio de pagamento.</string>
 		<key>pt</key>
 		<string>Entre todos os números de cartão</string>
 	</dict>
+	<key>identification_form_id_number</key>
+	<dict>
+		<key>es</key>
+		<string>DOCUMENTO DEL TITULAR DE LA TARJETA</string>
+		<key>en</key>
+		<string>CARD HOLDER DOCUMENT</string>
+		<key>pt</key>
+		<string>DOCUMENTO DO TITULAR</string>
+	</dict>
 	<key>payer_info_name</key>
 	<dict>
 		<key>comment</key>
@@ -414,6 +423,17 @@ Se preferir, você pode escolher outro meio de pagamento.</string>
 		<string>Change payment method</string>
 		<key>pt</key>
 		<string>Alterar meio de pagamento</string>
+	</dict>
+	<key>review_title</key>
+	<dict>
+		<key>comment</key>
+		<string></string>
+		<key>es</key>
+		<string>Revisa si está todo bien</string>
+		<key>en</key>
+		<string>Check your payment</string>
+		<key>pt</key>
+		<string>Revise se está tudo correto</string>
 	</dict>
 	<key>confirm_action</key>
 	<dict>
@@ -502,6 +522,48 @@ Se preferir, você pode escolher outro meio de pagamento.</string>
 		<string>Done! Your payment was accredited</string>
 		<key>pt</key>
 		<string>Pronto! O seu pagamento foi aprovado</string>
+	</dict>
+	<key>cancel_payment_action</key>
+	<dict>
+		<key>comment</key>
+		<string></string>
+		<key>es</key>
+		<string>Cancelar Pago</string>
+		<key>en</key>
+		<string>Cancel Payment</string>
+		<key>pt</key>
+		<string>Cancelar pagamento</string>
+	</dict>
+	<key>unit_price_string</key>
+	<dict>
+		<key>comment</key>
+		<string></string>
+		<key>es</key>
+		<string>Precio Unitario: </string>
+		<key>en</key>
+		<string>Unit price: </string>
+		<key>pt</key>
+		<string>Preço unitário: </string>
+	</dict>
+	<key>quantity_string</key>
+	<dict>
+		<key>comment</key>
+		<string></string>
+		<key>es</key>
+		<string>Cantidad: </string>
+		<key>en</key>
+		<string>Quantity: </string>
+		<key>pt</key>
+		<string>Quantidade: </string>
+	</dict>
+	<key>payment_method_not_supported</key>
+	<dict>
+		<key>es</key>
+		<string>Método de pago no soportado</string>
+		<key>en</key>
+		<string>Payment Method no supported</string>
+		<key>pt</key>
+		<string>Você não pode pagar com este método de pagamento</string>
 	</dict>
 </dict>
 </plist>

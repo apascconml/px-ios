@@ -10,7 +10,7 @@ import Foundation
 
 final class PXReviewTitleComponentProps : NSObject {
     
-    static let DEFAULT_TITLE: String = "Revisa si está todo bien"
+    static let DEFAULT_TITLE: String = PXStrings.review_title
     
     let reviewTitle: String
     let titleColor: UIColor

@@ -257,7 +257,7 @@ open class CardFormViewModel: NSObject {
     }
 
     func getOnlyOneCardAvailableMessage() -> String {
-        let defaultMessage = "Método de pago no soportado".localized_temp
+        let defaultMessage = PXStrings.payment_method_not_supported.localized_beta
         if Array.isNullOrEmpty(paymentMethods) {
             return defaultMessage
         }
