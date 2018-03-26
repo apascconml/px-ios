@@ -192,7 +192,7 @@ extension MercadoPagoCheckout {
 
             if error.apiException?.containsCause(code: ApiUtil.ErrorCauseCodes.INVALID_IDENTIFICATION_NUMBER.rawValue) == true {
                 if let identificationViewController = strongSelf.navigationController.viewControllers.last as? IdentificationViewController {
-                    identificationViewController.showErrorMessage(PXStrings.card_form_invalid_field.localized_beta)
+                    identificationViewController.showErrorMessage(PXStrings.card_form_invalid_field.pxLocalized)
                 }
             } else {
                 strongSelf.dismissLoading()

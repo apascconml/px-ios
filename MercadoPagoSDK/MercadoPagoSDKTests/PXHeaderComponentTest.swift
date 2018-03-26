@@ -23,7 +23,7 @@ class PXHeaderComponentTest: BaseTest {
         XCTAssertEqual(headerView.circleImage?.image, MercadoPago.getImage("default_item_icon", bundle: MercadoPago.getBundle()!))
         XCTAssertEqual(headerView.badgeImage?.image, MercadoPago.getImage("ok_badge"))
         XCTAssertNil(headerView.statusLabel?.attributedText)
-        XCTAssertEqual(headerView.messageLabel?.attributedText?.string, PXHeaderResutlConstants.APPROVED_HEADER_TITLE.localized_beta)
+        XCTAssertEqual(headerView.messageLabel?.attributedText?.string, PXHeaderResutlConstants.APPROVED_HEADER_TITLE.pxLocalized)
         XCTAssertEqual(headerView.backgroundColor, PXDefaultTheme().successColor())
     }
 
@@ -54,7 +54,7 @@ class PXHeaderComponentTest: BaseTest {
         XCTAssertEqual(headerView.circleImage?.image, MercadoPago.getImage("default_item_icon", bundle: MercadoPago.getBundle()!))
         XCTAssertEqual(headerView.badgeImage?.image, MercadoPago.getImage("ok_badge"))
         XCTAssertNil(headerView.statusLabel?.attributedText)
-        XCTAssertEqual(headerView.messageLabel?.attributedText?.string, PXHeaderResutlConstants.APPROVED_HEADER_TITLE.localized_beta)
+        XCTAssertEqual(headerView.messageLabel?.attributedText?.string, PXHeaderResutlConstants.APPROVED_HEADER_TITLE.pxLocalized)
         XCTAssertEqual(headerView.backgroundColor, PXDefaultTheme().successColor())
     }
 

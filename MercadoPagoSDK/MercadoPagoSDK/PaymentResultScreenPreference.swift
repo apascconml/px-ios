@@ -51,7 +51,7 @@ open class PaymentResultScreenPreference: NSObject {
     //HEADER
     // MARK: Approved
     var approvedBadge: ApprovedBadge? = ApprovedBadge.check
-    var approvedTitle = PXHeaderResutlConstants.APPROVED_HEADER_TITLE.localized_beta
+    var approvedTitle = PXHeaderResutlConstants.APPROVED_HEADER_TITLE.pxLocalized
     var approvedSubtitle = ""
     private var _approvedLabelText = ""
     private var _disableApprovedLabelText = true

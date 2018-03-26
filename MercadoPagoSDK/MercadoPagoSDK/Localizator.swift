@@ -81,7 +81,7 @@ private class Localizator_temp {
 }
 
 extension String {
-    var localized_beta: String {
+    var pxLocalized: String {
         return Localizator.sharedInstance.localize(string: self)
     }
     
