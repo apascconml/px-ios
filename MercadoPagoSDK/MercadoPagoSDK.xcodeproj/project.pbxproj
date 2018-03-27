@@ -688,7 +688,6 @@
 		FC6283F31FE1AC4A0002E93C /* PXComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6283F21FE1AC4A0002E93C /* PXComponentView.swift */; };
 		FC6283F41FE1AC4A0002E93C /* PXComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6283F21FE1AC4A0002E93C /* PXComponentView.swift */; };
 		FC7202DB1EA4FF6000A923A6 /* DiscountCouponTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7202DA1EA4FF6000A923A6 /* DiscountCouponTest.swift */; };
-		FC756B1D203F2C17009F436D /* PXLocalizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC756B1C203F2C17009F436D /* PXLocalizator.swift */; };
 		FC756B1F203F39BA009F436D /* translations.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC756B1E203F39BA009F436D /* translations.plist */; };
 		FC7BD8AA1FD5898700D5B2C7 /* PXErrorComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7BD8A91FD5898700D5B2C7 /* PXErrorComponent.swift */; };
 		FC7BD8AB1FD5898700D5B2C7 /* PXErrorComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7BD8A91FD5898700D5B2C7 /* PXErrorComponent.swift */; };
@@ -739,6 +738,7 @@
 		FCF0EEBB1FA111F9007D878C /* MercadoPagoServicesModelAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF0EEBA1FA111F9007D878C /* MercadoPagoServicesModelAdapter.swift */; };
 		FCF24596201A2C1400CAF717 /* PXContainedLabelRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0F6CBD20179A08006E3EA1 /* PXContainedLabelRenderer.swift */; };
 		FCF24597201A2C2100CAF717 /* PXContainedLabelComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0F6CBB20179A01006E3EA1 /* PXContainedLabelComponent.swift */; };
+		FCFE69CA206A713A000AFA43 /* PXLocalizator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE69C9206A7139000AFA43 /* PXLocalizator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1172,7 +1172,6 @@
 		FC49666020656E01005471B4 /* PXStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PXStrings.swift; sourceTree = "<group>"; };
 		FC6283F21FE1AC4A0002E93C /* PXComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXComponentView.swift; sourceTree = "<group>"; };
 		FC7202DA1EA4FF6000A923A6 /* DiscountCouponTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscountCouponTest.swift; sourceTree = "<group>"; };
-		FC756B1C203F2C17009F436D /* PXLocalizator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXLocalizator.swift; sourceTree = "<group>"; };
 		FC756B1E203F39BA009F436D /* translations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = translations.plist; sourceTree = "<group>"; };
 		FC7BD8A91FD5898700D5B2C7 /* PXErrorComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXErrorComponent.swift; sourceTree = "<group>"; };
 		FC7BD8AC1FD5899000D5B2C7 /* PXErrorRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXErrorRenderer.swift; sourceTree = "<group>"; };
@@ -1202,6 +1201,7 @@
 		FCEB90821EB8F3FA0096B1A2 /* UnlockCardLinks.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UnlockCardLinks.plist; sourceTree = "<group>"; };
 		FCEB90861EB8F7F00096B1A2 /* RevampImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = RevampImages.xcassets; sourceTree = "<group>"; };
 		FCF0EEBA1FA111F9007D878C /* MercadoPagoServicesModelAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MercadoPagoServicesModelAdapter.swift; sourceTree = "<group>"; };
+		FCFE69C9206A7139000AFA43 /* PXLocalizator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PXLocalizator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2513,7 +2513,7 @@
 				FCCACD7A20448F4A0008CF32 /* All_translations.plist */,
 				FC49666020656E01005471B4 /* PXStrings.swift */,
 				FC756B1E203F39BA009F436D /* translations.plist */,
-				FC756B1C203F2C17009F436D /* PXLocalizator.swift */,
+				FCFE69C9206A7139000AFA43 /* PXLocalizator.swift */,
 			);
 			name = Translations;
 			sourceTree = "<group>";
@@ -3025,6 +3025,7 @@
 				76943ED91D51405E00358442 /* InstructionsInfo.swift in Sources */,
 				0F98835B1AD2AB6000F750F0 /* Bin.swift in Sources */,
 				81ACC81F1F9A88F700206F7B /* PXFooterComponent.swift in Sources */,
+				FCFE69CA206A713A000AFA43 /* PXLocalizator.swift in Sources */,
 				0F98838D1AD2AB6000F750F0 /* Phone.swift in Sources */,
 				554BD3642062BEC700F6C631 /* MPCustomRowDelegate.swift in Sources */,
 				4BE3C55220581048005BE20C /* PXTrackingStore.swift in Sources */,
@@ -3153,7 +3154,6 @@
 				4B8D73511E780F8F009C1209 /* SummaryRow.swift in Sources */,
 				76AA2E341CBD8BCA006D0678 /* MPTextView.swift in Sources */,
 				76445ADB1CC921B5008EE68E /* ViewUtils.swift in Sources */,
-				FC756B1D203F2C17009F436D /* PXLocalizator.swift in Sources */,
 				1575E7141FBCD34700E0756D /* PXHeaderViewModelHelper.swift in Sources */,
 				76FD24891C5BFEA1008C5DC0 /* TextFieldsEffects.swift in Sources */,
 				76C834411D510CD4003C4717 /* AmountInfo.swift in Sources */,
