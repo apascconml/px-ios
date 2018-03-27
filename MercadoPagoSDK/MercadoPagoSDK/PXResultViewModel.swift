@@ -8,7 +8,30 @@
 
 import UIKit
 
-public class PXResultViewModel: NSObject {
+public class PXResultViewModel: PXResultViewModelInterface {
+
+    func getPaymentData() -> PaymentData {
+        return self.paymentResult.paymentData!
+    }
+
+    func setCallback(callback: @escaping ((PaymentResult.CongratsState) -> Void)) {
+        self.callback = callback
+    }
+
+    func getPaymentStatus() -> String {
+        return self.paymentResult.status
+    }
+
+    func getPaymentStatusDetail() -> String {
+        return self.paymentResult.statusDetail
+    }
+
+    func getPaymentId() -> String? {
+        return self.paymentResult.paymentId
+    }
+    func isCallForAuth() -> Bool {
+        return self.paymentResult.isCallForAuth()
+    }
 
     open var paymentResult: PaymentResult
     open var instructionsInfo: InstructionsInfo?
@@ -56,7 +79,7 @@ public class PXResultViewModel: NSObject {
 
         return false
     }
-    
+
     func isError() -> Bool {
         if !self.paymentResult.isRejected() {
             return false

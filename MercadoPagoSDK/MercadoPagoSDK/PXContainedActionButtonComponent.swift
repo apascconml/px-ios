@@ -12,15 +12,15 @@ class PXContainedActionButtonComponent: PXComponentizable {
     public func render() -> UIView {
         return PXContainedActionButtonRenderer().render(self)
     }
-    
+
     var props: PXContainedActionButtonProps
-    
+
     init(props: PXContainedActionButtonProps) {
         self.props = props
     }
 }
 
-open class PXContainedActionButtonProps : NSObject {
+open class PXContainedActionButtonProps: NSObject {
     let title: String
     let action : (() -> Void)
     let backgroundColor: UIColor
@@ -29,7 +29,7 @@ open class PXContainedActionButtonProps : NSObject {
     init(title: String, action:  @escaping (() -> Void)) {
         self.title = title
         self.action = action
-        self.backgroundColor = ThemeManager.shared.getTheme().detailedBackgroundColor()
+        self.backgroundColor = .white
         self.buttonColor = ThemeManager.shared.getTheme().primaryButton().backgroundColor
         self.textColor = ThemeManager.shared.getTheme().primaryButton().tintColor
     }

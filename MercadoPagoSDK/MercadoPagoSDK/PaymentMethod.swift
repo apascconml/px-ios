@@ -12,8 +12,7 @@ import UIKit
 open class PaymentMethod: NSObject, Cellable {
 
     public var objectType: ObjectTypes = ObjectTypes.paymentMethod
-    open var _id: String!
-
+    open var paymentMethodId: String!
     open var name: String!
     open var paymentTypeId: String!
     open var settings: [Setting]!
@@ -33,8 +32,8 @@ open class PaymentMethod: NSObject, Cellable {
         super.init()
     }
 
-    public init(_id: String, name: String, paymentTypeId: String) {
-        self._id = _id
+    public init(id: String, name: String, paymentTypeId: String) {
+        self.paymentMethodId = id
         self.name = name
         self.paymentTypeId = paymentTypeId
     }
@@ -122,7 +121,7 @@ open class PaymentMethod: NSObject, Cellable {
     }
 
     open func toJSON() -> [String: Any] {
-        let id: Any = String.isNullOrEmpty(self._id) ?  JSONHandler.null : self._id!
+        let id: Any = String.isNullOrEmpty(self.paymentMethodId) ?  JSONHandler.null : self.paymentMethodId!
         let name: Any = self.name == nil ?  JSONHandler.null : self.name
         let payment_type_id: Any = self.paymentTypeId == nil ? JSONHandler.null : self.paymentTypeId
         let status: Any = self.status == nil ? JSONHandler.null : self.status
@@ -183,7 +182,7 @@ open class PaymentMethod: NSObject, Cellable {
 
     open class func fromJSON(_ json: NSDictionary) -> PaymentMethod {
         let paymentMethod: PaymentMethod = PaymentMethod()
-        paymentMethod._id = json["id"] as? String
+        paymentMethod.paymentMethodId = json["id"] as? String
         paymentMethod.name = json["name"] as? String
 
         if json["payment_type_id"] != nil && !(json["payment_type_id"]! is NSNull) {
@@ -266,7 +265,7 @@ open class PaymentMethod: NSObject, Cellable {
     }
     open func cloneWithBIN(_ bin: String) -> PaymentMethod? {
         let paymentMethod: PaymentMethod = PaymentMethod()
-        paymentMethod._id = self._id
+        paymentMethod.paymentMethodId = self.paymentMethodId
         paymentMethod.name = self.name
         paymentMethod.paymentTypeId = self.paymentTypeId
         paymentMethod.additionalInfoNeeded = self.additionalInfoNeeded
@@ -279,11 +278,11 @@ open class PaymentMethod: NSObject, Cellable {
     }
 
    open var isAmex: Bool {
-        return self._id == "amex"
+        return self.paymentMethodId == "amex"
     }
 
    open var isAccountMoney: Bool {
-        return self._id == PaymentTypeId.ACCOUNT_MONEY.rawValue
+        return self.paymentMethodId == PaymentTypeId.ACCOUNT_MONEY.rawValue
     }
 
     open func secCodeMandatory() -> Bool {
@@ -342,10 +341,10 @@ open class PaymentMethod: NSObject, Cellable {
     }
 
     open var isVISA: Bool {
-        return ((self._id == "visa") && (self._id == "debvisa"))
+        return ((self.paymentMethodId == "visa") && (self.paymentMethodId == "debvisa"))
     }
     open var isMASTERCARD: Bool {
-        return ((self._id == "master") && (self._id == "debmaster"))
+        return ((self.paymentMethodId == "master") && (self.paymentMethodId == "debmaster"))
     }
 
     open func conformsPaymentPreferences(_ paymentPreference: PaymentPreference?) -> Bool {
@@ -354,7 +353,7 @@ open class PaymentMethod: NSObject, Cellable {
             return true
         }
         if paymentPreference!.defaultPaymentMethodId != nil {
-            if self._id != paymentPreference!.defaultPaymentMethodId {
+            if self.paymentMethodId != paymentPreference!.defaultPaymentMethodId {
                 return false
             }
         }
@@ -368,7 +367,7 @@ open class PaymentMethod: NSObject, Cellable {
 
         if (paymentPreference?.excludedPaymentMethodIds) != nil {
             for (_, value) in (paymentPreference?.excludedPaymentMethodIds!.enumerated())! {
-                if value == self._id {
+                if value == self.paymentMethodId {
                     return false
                 }
             }
@@ -454,14 +453,14 @@ open class PaymentMethod: NSObject, Cellable {
     }
 
     var isBolbradesco: Bool {
-        return self._id.contains(PaymentTypeId.BOLBRADESCO.rawValue)
+        return self.paymentMethodId.contains(PaymentTypeId.BOLBRADESCO.rawValue)
     }
 }
 
 public func ==(obj1: PaymentMethod, obj2: PaymentMethod) -> Bool {
 
     let areEqual =
-        obj1._id == obj2._id &&
+        obj1.paymentMethodId == obj2.paymentMethodId &&
             obj1.name == obj2.name &&
             obj1.paymentTypeId == obj2.paymentTypeId &&
             obj1.settings == obj2.settings &&

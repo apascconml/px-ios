@@ -10,14 +10,14 @@ import UIKit
 
 open class CustomerPaymentMethod: NSObject, CardInformation, PaymentMethodOption {
 
-    var _id: String!
-    var _description: String!
+    var customerPaymentMethodId: String!
+    var customerPaymentMethodDescription: String!
     var paymentMethodId: String!
     var paymentMethodTypeId: String!
     var firstSixDigits: String!
 
     var securityCode: SecurityCode = SecurityCode()
-    var paymentMethod: PaymentMethod!
+    var paymentMethod: PaymentMethod?
     var card: Card?
 
     public override init() {
@@ -25,21 +25,21 @@ open class CustomerPaymentMethod: NSObject, CardInformation, PaymentMethodOption
     }
 
     public init(id: String, paymentMethodId: String, paymentMethodTypeId: String, description: String) {
-        self._id = id
+        self.customerPaymentMethodId = id
         self.paymentMethodId = paymentMethodId
         self.paymentMethodTypeId = paymentMethodTypeId
-        self._description = description
+        self.customerPaymentMethodDescription = description
     }
 
     open class func fromJSON(_ json: NSDictionary) -> CustomerPaymentMethod {
         let  customerPaymentMethod = CustomerPaymentMethod()
 
         if json["id"] != nil && !(json["id"]! is NSNull) {
-            customerPaymentMethod._id = json["id"] as! String
+            customerPaymentMethod.customerPaymentMethodId = json["id"] as! String
         }
 
         if json["description"] != nil && !(json["description"]! is NSNull) {
-            customerPaymentMethod._description = json["description"] as! String
+            customerPaymentMethod.customerPaymentMethodDescription = json["description"] as! String
         }
 
         if json["payment_method_id"] != nil && !(json["payment_method_id"]! is NSNull) {
@@ -63,8 +63,8 @@ open class CustomerPaymentMethod: NSObject, CardInformation, PaymentMethodOption
 
     open func toJSON() -> [String: Any] {
         let obj: [String: Any] = [
-            "_id": self._id,
-            "_description": self._description == nil ? "" : self._description!,
+            "_id": self.customerPaymentMethodId,
+            "_description": self.customerPaymentMethodDescription == nil ? "" : self.customerPaymentMethodDescription!,
             "payment_method_id": self.paymentMethodId,
             "payment_method_type": self.paymentMethodTypeId
         ]
@@ -85,7 +85,7 @@ open class CustomerPaymentMethod: NSObject, CardInformation, PaymentMethodOption
     }
 
     open func getCardId() -> String {
-        return self._id
+        return self.customerPaymentMethodId
     }
 
     open func getCardSecurityCode() -> SecurityCode {
@@ -93,15 +93,19 @@ open class CustomerPaymentMethod: NSObject, CardInformation, PaymentMethodOption
     }
 
     open func getCardDescription() -> String {
-        return self._description
+        return self.customerPaymentMethodDescription
     }
 
-    open func getPaymentMethod() -> PaymentMethod {
+    open func getPaymentMethod() -> PaymentMethod? {
         return paymentMethod
     }
 
     open func getPaymentMethodId() -> String {
         return self.paymentMethodId
+    }
+
+    open func getPaymentTypeId() -> String {
+        return self.paymentMethodTypeId
     }
 
     open func getCardBin() -> String? {
@@ -149,7 +153,7 @@ open class CustomerPaymentMethod: NSObject, CardInformation, PaymentMethodOption
     }
 
     public func getId() -> String {
-        return self._id
+        return self.customerPaymentMethodId
     }
 
     public func isCustomerPaymentMethod() -> Bool {
@@ -162,7 +166,7 @@ open class CustomerPaymentMethod: NSObject, CardInformation, PaymentMethodOption
     }
 
     public func getDescription() -> String {
-        return self._description
+        return self.customerPaymentMethodDescription
     }
 
     public func getComment() -> String {

@@ -9,6 +9,7 @@
 import UIKit
 
 class SummaryComponent: UIView, PXComponent {
+
     let SMALL_MARGIN_HEIGHT: CGFloat = 8.0
     let MEDIUM_MARGIN_HEIGHT: CGFloat = 12.0
     let LARGE_MARGIN_HEIGHT: CGFloat = 28.0
@@ -76,12 +77,12 @@ class SummaryComponent: UIView, PXComponent {
             if let detail = typeDetailDictionary[type] {
                 var value: Double = detail.getTotalAmount()
                 if type == SummaryType.DISCOUNT {
-                    value = value * (-1)
+                    value *= (-1)
                 }
                 let titleValueView = TitleValueView(frame: frame, titleText: detail.title, valueDouble: value, colorTitle: detail.titleColor, colorValue: detail.amountColor, valueEnable: true)
                 self.addSmallMargin()
                 self.addSubview(titleValueView)
-                requiredHeight = requiredHeight + titleValueView.getHeight()
+                requiredHeight += titleValueView.getHeight()
             }
         }
     }
@@ -89,19 +90,19 @@ class SummaryComponent: UIView, PXComponent {
     func addTotalView(totalAmount: Double) {
         let frame = CGRect(x: 0.0, y: requiredHeight, width: self.frame.size.width, height: DETAILS_HEIGHT)
         let titleValueView = TitleValueView(frame: frame, titleText: SummaryComponent.TOTAL_TITLE, valueDouble: totalAmount, valueEnable: true)
-        requiredHeight = requiredHeight + titleValueView.getHeight()
+        requiredHeight += titleValueView.getHeight()
         self.addSubview(titleValueView)
     }
     func addPayerCost(payerCost: PayerCost) {
         let payerCostView = PayerCostView(frame: CGRect(x: 0, y: requiredHeight, width: self.frame.size.width, height: PAYER_COST_HEIGHT), payerCost: payerCost)
         self.addSubview(payerCostView)
         payerCostView.frame =  CGRect(x: 0, y: requiredHeight, width: self.frame.size.width, height: payerCostView.getHeight())
-        requiredHeight = requiredHeight + payerCostView.getHeight()
+        requiredHeight += payerCostView.getHeight()
     }
     func addDisclaimerView(text: String, color: UIColor) {
         let disclaimerView = DisclaimerView(frame: CGRect(x: 0, y: requiredHeight, width: self.frame.size.width, height: DISCLAIMER_HEIGHT), disclaimerText: text, colorText: color, disclaimerFontSize: DISCLAIMER_FONT_SIZE)
         self.addSubview(disclaimerView)
-        self.requiredHeight = self.requiredHeight + disclaimerView.getHeight()
+        self.requiredHeight += disclaimerView.getHeight()
     }
 
     func iterateEnum<T: Hashable>(_: T.Type) -> AnyIterator<T> {
@@ -124,10 +125,10 @@ class SummaryComponent: UIView, PXComponent {
         self.addMargin(height: LARGE_MARGIN_HEIGHT)
     }
     func addMargin(height: CGFloat) {
-        self.requiredHeight = self.requiredHeight + height
+        self.requiredHeight += height
     }
     func addLine() {
-        self.addLine(y: self.requiredHeight, horizontalMargin: HORIZONTAL_MARGIN, width: self.frame.size.width - 2 * HORIZONTAL_MARGIN, height: 1)
-        self.requiredHeight = self.requiredHeight + 1.0
+        self.addLine(posY: self.requiredHeight, horizontalMargin: HORIZONTAL_MARGIN, width: self.frame.size.width - 2 * HORIZONTAL_MARGIN, height: 1)
+        self.requiredHeight += 1.0
     }
 }

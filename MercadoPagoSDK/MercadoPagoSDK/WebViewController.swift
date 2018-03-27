@@ -14,7 +14,7 @@ class WebViewController: MercadoPagoUIViewController, UIWebViewDelegate {
     var name: String?
     var navBarTitle: String!
     @IBOutlet weak var webView: UIWebView!
-    
+
     init( url: URL, screenName: String, navigationBarTitle: String) {
         super.init(nibName: "WebViewController", bundle: MercadoPago.getBundle())
         self.url = url

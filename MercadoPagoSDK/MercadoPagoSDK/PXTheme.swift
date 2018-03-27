@@ -16,7 +16,7 @@ import Foundation
     func labelTintColor() -> UIColor
     func lightLabelTintColor() -> UIColor
     func boldLabelTintColor() -> UIColor
-    func highlightedLabelTintColor() -> UIColor
+    func noTaxAndDiscountLabelTintColor() -> UIColor
 
     func successColor() -> UIColor
     func warningColor() -> UIColor

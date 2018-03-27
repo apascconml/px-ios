@@ -8,16 +8,18 @@
 
 import UIKit
 
-class PayerCostView: UIView, PXComponent {
-    private let VERTICAL_MARGIN: CGFloat = 2.0
-    private let HORIZONTAL_MARGIN: CGFloat = 24.0
-    private let INTER_MARGIN: CGFloat = 10.0
-    private let TITLE_WIDTH_PERCENT: CGFloat = 0.5
-    private let VALUE_WIDTH_PERCENT: CGFloat = 0.5
-    static private let TITLE_FONT_SIZE: CGFloat = PXLayout.S_FONT
-    static private let VALUE_FONT_SIZE: CGFloat = PXLayout.XL_FONT
-    static private let NO_INTEREST_TEXT =  "Sin interés".localized
-    static private let PAY_TEXT =  "Pagas".localized
+final class PayerCostView: UIView, PXComponent {
+
+    fileprivate let VERTICAL_MARGIN: CGFloat = 2.0
+    fileprivate let HORIZONTAL_MARGIN: CGFloat = 24.0
+    fileprivate let INTER_MARGIN: CGFloat = 10.0
+    fileprivate let TITLE_WIDTH_PERCENT: CGFloat = 0.5
+    fileprivate let VALUE_WIDTH_PERCENT: CGFloat = 0.5
+
+    static fileprivate let TITLE_FONT_SIZE: CGFloat = PXLayout.S_FONT
+    static fileprivate let VALUE_FONT_SIZE: CGFloat = PXLayout.XL_FONT
+    static fileprivate let NO_INTEREST_TEXT =  "Sin interés".localized
+    static fileprivate let PAY_TEXT =  "Pagas".localized
 
     var noRateLabel: UILabel!
     var purchaseDetailTitle: UILabel!
@@ -36,9 +38,9 @@ class PayerCostView: UIView, PXComponent {
             self.noRateLabel = MPLabel(frame:CGRect(x: (HORIZONTAL_MARGIN * 2) +  self.purchaseDetailTitle.frame.size.width, y: VERTICAL_MARGIN * 2 + self.purchaseDetailAmount.frame.size.height, width: (self.getWeight() - 3 * HORIZONTAL_MARGIN)/2, height: 0 ))
             self.noRateLabel.attributedText = NSAttributedString(string : MercadoPagoCheckout.showPayerCostDescription() ? PayerCostView.NO_INTEREST_TEXT: "")
             self.noRateLabel.font = Utils.getFont(size: PayerCostView.TITLE_FONT_SIZE)
-            self.noRateLabel.textColor = ThemeManager.shared.getTheme().highlightedLabelTintColor()
+            self.noRateLabel.textColor = ThemeManager.shared.getTheme().noTaxAndDiscountLabelTintColor()
             self.noRateLabel.textAlignment = .right
-            self.requiredHeight = self.requiredHeight + self.noRateLabel.requiredHeight()
+            self.requiredHeight += self.noRateLabel.requiredHeight()
             self.addSubview(noRateLabel)
         } else {
              self.purchaseDetailAmount = MPLabel(frame: CGRect(x: (HORIZONTAL_MARGIN * 2) +  self.purchaseDetailTitle.frame.size.width, y: VERTICAL_MARGIN, width: (self.getWeight() - 3 * HORIZONTAL_MARGIN)/2, height: 0 ))
@@ -53,7 +55,7 @@ class PayerCostView: UIView, PXComponent {
         self.removeFromSuperview()
         let purchaseAmount = getInstallmentsAmount(payerCost: payerCost)
         self.purchaseDetailAmount.attributedText = purchaseAmount
-        self.requiredHeight = self.requiredHeight + self.purchaseDetailAmount.requiredHeight()
+        self.requiredHeight += self.purchaseDetailAmount.requiredHeight()
         if PurchaseDetailTableViewCell.separatorLine != nil {
             PurchaseDetailTableViewCell.separatorLine!.removeFromSuperview()
         }
@@ -67,15 +69,19 @@ class PayerCostView: UIView, PXComponent {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+extension PayerCostView {
 
     func getHeight() -> CGFloat {
         return self.requiredHeight
     }
+
     func getWeight() -> CGFloat {
         return self.frame.size.width
     }
 
-    private func getInstallmentsAmount(payerCost: PayerCost) -> NSAttributedString {
+    fileprivate func getInstallmentsAmount(payerCost: PayerCost) -> NSAttributedString {
         return Utils.getTransactionInstallmentsDescription(payerCost.installments.description, currency: MercadoPagoContext.getCurrency(), installmentAmount: payerCost.installmentAmount, color: ThemeManager.shared.getTheme().boldLabelTintColor(), fontSize : PayerCostView.VALUE_FONT_SIZE, baselineOffset : 8)
     }
 
@@ -90,8 +96,7 @@ class PayerCostView: UIView, PXComponent {
 
         if self.noRateLabel != nil {
             self.noRateLabel.frame = CGRect(x: -HORIZONTAL_MARGIN, y: VERTICAL_MARGIN * 2 + self.purchaseDetailAmount.frame.size.height, width: self.frame.width, height: self.noRateLabel.requiredHeight())
-            self.requiredHeight = self.requiredHeight + VERTICAL_MARGIN + self.noRateLabel.requiredHeight()
+            self.requiredHeight += VERTICAL_MARGIN + self.noRateLabel.requiredHeight()
         }
     }
-
 }

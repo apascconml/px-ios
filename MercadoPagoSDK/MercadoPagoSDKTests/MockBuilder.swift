@@ -84,19 +84,19 @@ open class MockBuilder: NSObject {
 
     class func buildCheckoutPreference() -> CheckoutPreference {
         let preference = CheckoutPreference()
-        preference._id = PREF_ID_NO_EXCLUSIONS
+        preference.preferenceId = PREF_ID_NO_EXCLUSIONS
         preference.items = [self.buildItem("itemId", quantity: 1, unitPrice: 2559), self.buildItem("itemId2", quantity: 2, unitPrice: 10)]
         preference.payer = Payer.fromJSON(MockManager.getMockFor("Payer")!)
         return preference
     }
 
-    class func buildItem(_ id: String, quantity: Int, unitPrice: Double) -> Item {
-        return Item(_id: id, title : "item title", quantity: quantity, unitPrice: unitPrice)
+    class func buildItem(_ id: String, quantity: Int, unitPrice: Double, description: String? = "Description") -> Item {
+        return Item(itemId: id, title : "item title", quantity: quantity, unitPrice: unitPrice, description: description)
     }
 
     class func buildPayer(_ id: String) -> Payer {
         let payer =  Payer()
-        payer._id = id
+        payer.payerId = id
         payer.email = "thisisanem@il.com"
         return payer
     }
@@ -115,7 +115,7 @@ open class MockBuilder: NSObject {
         if multipleSettings == true {
             paymentMethod = PaymentMethod.fromJSON(MockManager.getMockFor("PaymentMethodMultipleSettings")!)
         }
-        paymentMethod._id = id
+        paymentMethod.paymentMethodId = id
         paymentMethod.name = name
         paymentMethod.paymentTypeId = paymentTypeId
         return paymentMethod
@@ -171,13 +171,13 @@ open class MockBuilder: NSObject {
         customerPm.paymentMethod = pm
         customerPm.paymentMethodId = paymentMethodId
         customerPm.paymentMethodTypeId = paymentTypeId
-        customerPm._description = paymentMethodId
+        customerPm.customerPaymentMethodDescription = paymentMethodId
         return customerPm
     }
 
     class func buildPayment(_ paymentMethodId: String, installments: Int? = 1, includeFinancingFee: Bool? = false, status: String? = "approved", statusDetail: String? = "approved") -> Payment {
         let payment = Payment()
-        payment._id = self.MOCK_PAYMENT_ID
+        payment.paymentId = self.MOCK_PAYMENT_ID
         payment.paymentMethodId = paymentMethodId
         payment.paymentTypeId = "credit_card"
         payment.status = status
@@ -200,7 +200,7 @@ open class MockBuilder: NSObject {
 
     class func buildOffPayment(_ paymentMethodId: String, paymentTypeId: String? = "ticket") -> Payment {
         let payment = Payment()
-        payment._id = self.MOCK_PAYMENT_ID
+        payment.paymentId = self.MOCK_PAYMENT_ID
         payment.paymentMethodId = paymentMethodId
         payment.paymentTypeId = paymentTypeId
         payment.status = "pending"
@@ -226,7 +226,7 @@ open class MockBuilder: NSObject {
             paymentMethodSearchItem.type = type
         }
         paymentMethodSearchItem.showIcon = true
-        paymentMethodSearchItem._description = paymentMethodId
+        paymentMethodSearchItem.paymentMethodSearchItemDescription = paymentMethodId
         return paymentMethodSearchItem
     }
 
@@ -286,7 +286,7 @@ open class MockBuilder: NSObject {
     }
 
     class func buildToken(withESC: Bool = false) -> Token {
-        let token = Token(_id: "tokenId", publicKey: MLA_PK, cardId: "cardId", luhnValidation: "luhn", status: "status", usedDate: "11", cardNumberLength: 16, creationDate: Date(), lastFourDigits: "1234", firstSixDigit: "123456", securityCodeLength: 3, expirationMonth: 11, expirationYear: 22, lastModifiedDate: Date(), dueDate: Date(), cardHolder: MockBuilder.buildCardholder())
+        let token = Token(tokenId: "tokenId", publicKey: MLA_PK, cardId: "cardId", luhnValidation: "luhn", status: "status", usedDate: "11", cardNumberLength: 16, creationDate: Date(), lastFourDigits: "1234", firstSixDigit: "123456", securityCodeLength: 3, expirationMonth: 11, expirationYear: 22, lastModifiedDate: Date(), dueDate: Date(), cardHolder: MockBuilder.buildCardholder())
         if withESC {
             token.esc = "esc"
         }
@@ -341,7 +341,7 @@ open class MockBuilder: NSObject {
 
     class func buildIssuer() -> Issuer {
         let issuer = Issuer()
-        issuer._id = "id"
+        issuer.issuerId = "id"
         issuer.name = "name"
         return issuer
     }
@@ -349,20 +349,21 @@ open class MockBuilder: NSObject {
     class func buildPaymentOptionSelected(_ id: String) -> PaymentMethodOption {
         let option = PaymentMethodSearchItem()
         option.idPaymentMethodSearchItem = id
-        option._description = "description"
+        option.paymentMethodSearchItemDescription = "description"
         return option
     }
 
     class func buildCustomerPaymentMethod(_ id: String, paymentMethodId: String) -> CardInformation {
         let customOption = CustomerPaymentMethod()
-        customOption._id = id
+        customOption.customerPaymentMethodId = id
         customOption.paymentMethodId = paymentMethodId
+        customOption.paymentMethodTypeId = paymentMethodId
         return customOption
     }
 
     class func buildCustomerPaymentMethodWithESC(paymentMethodId: String) -> CardInformation {
         let customOption = CustomerPaymentMethod()
-        customOption._id = "esc"
+        customOption.customerPaymentMethodId = "esc"
         customOption.paymentMethodId = paymentMethodId
         return customOption
     }
@@ -398,7 +399,7 @@ open class MockBuilder: NSObject {
         let paymentData = PaymentData()
         paymentData.paymentMethod = MockBuilder.buildPaymentMethod(paymentMethodId)
         paymentData.issuer = MockBuilder.buildIssuer()
-        paymentData.payer = Payer(_id: "", email: "asd@asd.com", identification: nil, entityType: nil)
+        paymentData.payer = Payer(payerId: "", email: "asd@asd.com", identification: nil, entityType: nil)
         paymentData.payerCost = MockBuilder.buildPayerCost(installments: installments, installmentRate: installmentRate)
         paymentData.token = MockBuilder.buildToken(withESC: withESC)
         return paymentData
@@ -430,7 +431,7 @@ open class MockBuilder: NSObject {
     }
 
     class func buildDiscount() -> DiscountCoupon {
-        let discount = DiscountCoupon(_id: 123)
+        let discount = DiscountCoupon(discountId: 123)
         discount.amount_off = "20"
         discount.amountWithoutDiscount = 5
         return discount
@@ -449,11 +450,11 @@ open class MockBuilder: NSObject {
         let customer = Customer()
         customer.cards = [MockBuilder.buildCard(paymentMethodId: "visa")]
         customer.defaultCard = "0"
-        customer._description = "description"
+        customer.customerDescription = "description"
         customer.email = "email"
         customer.firstName = "first_name"
         customer.lastName = "last_name"
-        customer._id = "id"
+        customer.customerId = "id"
         customer.identification = buildIdentification()
         customer.liveMode = true
         customer.address = buildAddress()
@@ -478,7 +479,7 @@ open class MockBuilder: NSObject {
 
         var cause = [Cause]()
         let invalidIdCause = Cause()
-        invalidIdCause._description = "Invalid parameter 'cardholder.identification.number'"
+        invalidIdCause.causeDescription = "Invalid parameter 'cardholder.identification.number'"
         invalidIdCause.code = "324"
 
         cause.append(invalidIdCause)

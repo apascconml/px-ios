@@ -18,7 +18,7 @@ open class MercadoPagoUIScrollViewController: MercadoPagoUIViewController {
     var titleCellHeight: CGFloat = 70
     var titleCell: TitleCellScrollable?
     var maxFontSize: CGFloat { get { return 24 } }
-    
+
     func scrollPositionToShowNavBar () -> CGFloat {
         return titleCellHeight - statusBarHeigth
     }

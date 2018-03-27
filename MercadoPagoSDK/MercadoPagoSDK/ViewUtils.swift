@@ -11,8 +11,8 @@ import UIKit
 
 class ViewUtils {
 
-    class func getTableCellSeparatorLineView(_ x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat) -> UIView {
-        let separatorLineView = UIView(frame: CGRect(x: x, y: y, width: width, height: height))
+    class func getTableCellSeparatorLineView(_ posX: CGFloat, posY: CGFloat, width: CGFloat, height: CGFloat) -> UIView {
+        let separatorLineView = UIView(frame: CGRect(x: posX, y: posY, width: width, height: height))
         separatorLineView.layer.zPosition = 1
         separatorLineView.backgroundColor = UIColor.grayTableSeparator()
         return separatorLineView
@@ -30,7 +30,7 @@ class ViewUtils {
         }
         return defaultHeight
     }
-    
+
     class func getStatusBarHeightForScrolling() -> CGFloat {
         var defaultHeight: CGFloat = 20
         // iPhoneX or any device with safe area inset > 0
@@ -43,38 +43,51 @@ class ViewUtils {
         }
         return defaultHeight
     }
-    
+
     class func addStatusBar(_ view: UIView, color: UIColor) {
         let addStatusBar = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: getStatusBarHeight()))
         addStatusBar.backgroundColor = color
         view.addSubview(addStatusBar)
     }
 
-    class func loadImageFromUrl(_ url: String) -> UIImage? {
-            let url = URL(string: url)
-            if url != nil {
-                let data = try? Data(contentsOf: url!)
-                if data != nil {
-                        let image = UIImage(data: data!)
-                        return image
-                    } else {
-                    return nil
-                }
+    class func getCustomNavigationTitleLabel(textColor: UIColor, font: UIFont, titleText: String?) -> UILabel {
+        let titleLabelView = UILabel.init(frame: CGRect(x: 0, y: 0, width: 0, height: 44))
+        titleLabelView.backgroundColor = .clear
+        titleLabelView.textAlignment = .center
+        titleLabelView.textColor = textColor
+        titleLabelView.font = font
+        titleLabelView.text = titleText
+        return titleLabelView
+    }
+
+    class func loadImageFromUrl(_ imageURL: String?) -> UIImage? {
+        guard let imageURL = imageURL else {
+            return nil
+        }
+        let url = URL(string: imageURL)
+        if url != nil {
+            let data = try? Data(contentsOf: url!)
+            if data != nil {
+                let image = UIImage(data: data!)
+                return image
             } else {
                 return nil
+            }
+        } else {
+            return nil
         }
     }
 
-    func getSeparatorLineForTop(width: Double, y: Float) -> UIView {
-        let lineFrame = CGRect(origin: CGPoint(x: 0, y :Int(y)), size: CGSize(width: width, height: 0.5))
+    func getSeparatorLineForTop(width: Double, posY: Float) -> UIView {
+        let lineFrame = CGRect(origin: CGPoint(x: 0, y :Int(posY)), size: CGSize(width: width, height: 0.5))
         let line = UIView(frame: lineFrame)
         line.alpha = 0.6
         line.backgroundColor = UIColor.px_grayLight()
         return line
     }
 
-    class func drawBottomLine(_ x: CGFloat = 0, y: CGFloat, width: CGFloat, inView view: UIView) {
-        let overLinewView = UIView(frame: CGRect(x: x, y: y, width: width, height: 1))
+    class func drawBottomLine(_ posX: CGFloat = 0, posY: CGFloat, width: CGFloat, inView view: UIView) {
+        let overLinewView = UIView(frame: CGRect(x: posX, y: posY, width: width, height: 1))
         overLinewView.backgroundColor = UIColor.UIColorFromRGB(0xDEDEDE)
         view.addSubview(overLinewView)
     }

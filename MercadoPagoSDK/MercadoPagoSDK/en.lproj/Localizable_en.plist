@@ -179,5 +179,12 @@ Or if you prefer, you can choose another payment method.</string>
 		<key>value</key>
 		<string>Type</string>
 	</dict>
+	<key>review_change_payment_method_action</key>
+	<dict>
+		<key>comment</key>
+		<string></string>
+		<key>value</key>
+		<string>Change payment method</string>
+	</dict>
 </dict>
 </plist>

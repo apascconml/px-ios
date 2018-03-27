@@ -12,7 +12,7 @@ open class PaymentMethodSearchItem: Equatable, PaymentOptionDrawable, PaymentMet
 
     open var idPaymentMethodSearchItem: String!
     open var type: PaymentMethodSearchItemType!
-    open var _description: String!
+    open var paymentMethodSearchItemDescription: String!
     open var comment: String?
     open var childrenHeader: String?
     open var children: [PaymentMethodSearchItem] = []
@@ -28,7 +28,7 @@ open class PaymentMethodSearchItem: Equatable, PaymentOptionDrawable, PaymentMet
             pmSearchItem.type = PaymentMethodSearchItemType(rawValue:type)
         }
         if let description = JSONHandler.attemptParseToString(json["description"]) {
-            pmSearchItem._description = description
+            pmSearchItem.paymentMethodSearchItemDescription = description
         }
         if let comment = JSONHandler.attemptParseToString(json["comment"]) {
             pmSearchItem.comment = comment
@@ -74,7 +74,7 @@ open class PaymentMethodSearchItem: Equatable, PaymentOptionDrawable, PaymentMet
      */
 
     public func getTitle() -> String {
-        return self._description
+        return self.paymentMethodSearchItemDescription
     }
 
     public func getSubtitle() -> String? {
@@ -113,7 +113,7 @@ open class PaymentMethodSearchItem: Equatable, PaymentOptionDrawable, PaymentMet
     }
 
     public func getDescription() -> String {
-        return self._description
+        return self.paymentMethodSearchItemDescription
     }
 
     public func getComment() -> String {
@@ -131,7 +131,7 @@ public func ==(obj1: PaymentMethodSearchItem, obj2: PaymentMethodSearchItem) -> 
     let areEqual =
     obj1.idPaymentMethodSearchItem == obj2.idPaymentMethodSearchItem &&
     obj1.type == obj2.type &&
-    obj1._description == obj2._description &&
+    obj1.paymentMethodSearchItemDescription == obj2.paymentMethodSearchItemDescription &&
     obj1.comment == obj2.comment &&
     obj1.childrenHeader == obj2.childrenHeader &&
     obj1.children == obj2.children &&

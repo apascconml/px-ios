@@ -19,22 +19,14 @@ class PXFooterComponent: NSObject, PXComponentizable {
         return PXFooterRenderer().render(self)
     }
 }
+
 class PXFooterProps: NSObject {
-    var buttonAction: PXFooterAction?
-    var linkAction: PXFooterAction?
+    var buttonAction: PXComponentAction?
+    var linkAction: PXComponentAction?
     var primaryColor: UIColor?
-    init(buttonAction: PXFooterAction? = nil, linkAction: PXFooterAction? = nil, primaryColor: UIColor? = .pxBlueMp) {
+    init(buttonAction: PXComponentAction? = nil, linkAction: PXComponentAction? = nil, primaryColor: UIColor? = .pxBlueMp) {
         self.buttonAction = buttonAction
         self.linkAction = linkAction
         self.primaryColor = primaryColor
-    }
-}
-
-class PXFooterAction: NSObject {
-    var label: String
-    var action : (() -> Void)
-    init(label: String, action:  @escaping (() -> Void)) {
-        self.label = label
-        self.action = action
     }
 }

@@ -125,7 +125,7 @@ class Utils {
         let entireAmount = getAmountFormatted(String(describing: Int(amount)), thousandSeparator: thousandSeparator, decimalSeparator: decimalSeparator)
         var amountFotmated = entireAmount
         if !cents.isEmpty {
-              amountFotmated = amountFotmated + decimalSeparator + cents
+              amountFotmated += decimalSeparator + cents
               amountFotmated = amountFotmated.replacingOccurrences(of: decimalSeparator + "00", with: "")
         }
 
@@ -136,6 +136,20 @@ class Utils {
             amountFotmated = "(\(amountFotmated))"
         }
         return amountFotmated
+    }
+
+    class func getAccreditationTimeAttributedString(from text: String, fontSize: CGFloat? = nil) -> NSAttributedString {
+        let clockImage = NSTextAttachment()
+        var attributes: [String: Any]? = nil
+        if let fontSize = fontSize {
+            attributes = [NSFontAttributeName: Utils.getFont(size: fontSize)]
+        }
+        clockImage.image = MercadoPago.getImage("iconTime")
+        let clockAttributedString = NSAttributedString(attachment: clockImage)
+        let labelAttributedString = NSMutableAttributedString(string: String(describing: " " + text), attributes: attributes)
+        labelAttributedString.insert(clockAttributedString, at: 0)
+        let labelTitle = labelAttributedString
+        return labelTitle
     }
 
     class func getTransactionInstallmentsDescription(_ installments: String, currency: Currency, installmentAmount: Double, additionalString: NSAttributedString? = nil, color: UIColor? = nil, fontSize: CGFloat = 22, centsFontSize: CGFloat = 10, baselineOffset: Int = 7) -> NSAttributedString {
@@ -202,11 +216,11 @@ class Utils {
      **/
     class func getCentsFormatted(_ formattedString: String, decimalSeparator: String, decimalPlaces: Int = MercadoPagoContext.getCurrency().getDecimalPlacesOrDefault()) -> String {
         var range = formattedString.range(of: decimalSeparator)
-        
+
         if range == nil {
             range = formattedString.range(of: ".")
         }
-        
+
         var cents = ""
         if range != nil {
             let centsIndex = formattedString.index(range!.lowerBound, offsetBy: 1)
@@ -217,7 +231,7 @@ class Utils {
             var missingZeros = decimalPlaces - cents.count
             while missingZeros > 0 {
                 cents.append("0")
-                missingZeros = missingZeros - 1
+                missingZeros -= 1
             }
         } else if cents.count > decimalPlaces {
             let index1 = cents.index(cents.startIndex, offsetBy: decimalPlaces)
@@ -350,8 +364,8 @@ class Utils {
         var paymentTypeSelected = ""
 
         let paymentMethod = paymentMethods.filter({ (paymentMethod: PaymentMethod) -> Bool in
-            if paymentMethodId.startsWith(paymentMethod._id) {
-                let paymentTypeIdRange = paymentMethodId.range(of: paymentMethod._id)
+            if paymentMethodId.startsWith(paymentMethod.paymentMethodId) {
+                let paymentTypeIdRange = paymentMethodId.range(of: paymentMethod.paymentMethodId)
                 // Override paymentTypeId if neccesary
                 if paymentTypeIdRange != nil {
                     paymentTypeSelected = paymentMethodId.substring(from: paymentTypeIdRange!.upperBound)
@@ -418,50 +432,57 @@ class Utils {
         formatterMonth.dateFormat = "MMMM"
         let formatterYear = DateFormatter()
         formatterYear.dateFormat = "yyyy"
-        
+
         var dayString = formatterDay.string(from:date)
         if dayString.first == "0" {
             dayString.removeFirst()
         }
-        
+
         return dayString + " de ".localized + formatterMonth.string(from:date).localized.lowercased() + " de ".localized + formatterYear.string(from:date)
     }
-    
-    
-    func loadImageWithCache(withUrl urlStr: String?, targetImage: UIImageView, placeHolderImage: UIImage?) {
-        
+
+    func loadImageWithCache(withUrl urlStr: String?, targetImage: UIImageView, placeHolderImage: UIImage?, fallbackImage: UIImage?) {
+
         guard let urlString = urlStr else {return}
-        
+
         let url = URL(string: urlString)
-        
+
         let imageCache = NSCache<NSString, AnyObject>()
-        
+
         targetImage.image = placeHolderImage
-        
+
         // Get cached image
         if let cachedImage = imageCache.object(forKey: urlString as NSString) as? UIImage {
             targetImage.image = cachedImage
             return
         }
-        
+
         if let targetUrl = url {
-            
+
             // Request image.
             URLSession.shared.dataTask(with: targetUrl, completionHandler: { (data, response, error) in
-                
+
                 if error != nil {
+                    DispatchQueue.main.async {
+                        targetImage.image = fallbackImage
+                    }
                     return
                 }
-                
+
                 DispatchQueue.main.async {
                     if let remoteData = data, let image = UIImage(data: remoteData) {
                         imageCache.setObject(image, forKey: urlString as NSString)
                         targetImage.image = image
+
+                    } else if let fallbackImage = fallbackImage {
+                        targetImage.image = fallbackImage
                     }
                 }
             }).resume()
+        } else if let fallbackImage = fallbackImage {
+            targetImage.image = fallbackImage
         }
-        
+
         return
     }
 

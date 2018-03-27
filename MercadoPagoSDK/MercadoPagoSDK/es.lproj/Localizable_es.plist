@@ -179,5 +179,12 @@ O si prefieres, puedes elegir otro medio de pago.</string>
 		<key>value</key>
 		<string>Tipo</string>
 	</dict>
+	<key>review_change_payment_method_action</key>
+	<dict>
+		<key>comment</key>
+		<string></string>
+		<key>value</key>
+		<string>Cambiar medio de pago</string>
+	</dict>
 </dict>
 </plist>

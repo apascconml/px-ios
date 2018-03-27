@@ -49,11 +49,11 @@ extension UIView {
     }
 
     //Eventualmente hay que borrar esto. Cuando summary deje de usarlo
-    func addLine(y: CGFloat, horizontalMargin: CGFloat, width: CGFloat, height: CGFloat) {
-        let lineFrame = CGRect(origin: CGPoint(x: horizontalMargin, y :y), size: CGSize(width: width, height: height))
+    func addLine(posY: CGFloat, horizontalMargin: CGFloat, width: CGFloat, height: CGFloat) {
+        let lineFrame = CGRect(origin: CGPoint(x: horizontalMargin, y:posY), size: CGSize(width: width, height: height))
         let line = UIView(frame: lineFrame)
         line.alpha = 0.6
-        line.backgroundColor = UIColor.px_grayLight()
+        line.backgroundColor = UIColor(red:0.00, green:0.00, blue:0.00, alpha:0.4)
         addSubview(line)
     }
 

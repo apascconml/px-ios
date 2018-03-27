@@ -23,19 +23,18 @@ extension PXResultViewModel {
 // MARK: Build Helpers
 extension PXResultViewModel {
 
-    func getActionButton() -> PXFooterAction? {
-         var actionButton: PXFooterAction?
+    func getActionButton() -> PXComponentAction? {
+         var actionButton: PXComponentAction?
         if let label = self.getButtonLabel(), let action = self.getButtonAction() {
-            actionButton = PXFooterAction(label: label, action: action)
+            actionButton = PXComponentAction(label: label, action: action)
         }
         return actionButton
     }
 
-    func getActionLink() -> PXFooterAction? {
-        var actionLink: PXFooterAction?
-
+    func getActionLink() -> PXComponentAction? {
+        var actionLink: PXComponentAction?
         if let labelLink = self.getLinkLabel(), let actionOfLink = self.getLinkAction() {
-            actionLink = PXFooterAction(label: labelLink, action: actionOfLink)
+            actionLink = PXComponentAction(label: labelLink, action: actionOfLink)
         }
         return actionLink
     }

@@ -262,7 +262,7 @@ open class IdentificationViewController: MercadoPagoUIViewController, UITextFiel
     }
 
     func rightArrowKeyTapped() {
-        let idnt = Identification(type: self.identificationType?._id, number: defaultEditTextMask.textUnmasked(numberTextField.text))
+        let idnt = Identification(type: self.identificationType?.identificationTypeId, number: defaultEditTextMask.textUnmasked(numberTextField.text))
 
         let cardToken = CardToken(cardNumber: "", expirationMonth: 10, expirationYear: 10, securityCode: "", cardholderName: "", docType: (self.identificationType?.type)!, docNumber:  defaultEditTextMask.textUnmasked(numberTextField.text))
 
@@ -329,7 +329,7 @@ open class IdentificationViewController: MercadoPagoUIViewController, UITextFiel
         let site = MercadoPagoContext.getSite()
 
         if IDtype != nil {
-            if let masks = maskFinder(dictID: site+"_"+(IDtype?._id)!, forKey: "identification_mask") {
+            if let masks = maskFinder(dictID: site+"_"+(IDtype?.identificationTypeId)!, forKey: "identification_mask") {
                 return masks
             } else if let masks = maskFinder(dictID: site, forKey: "identification_mask") {
                 return masks

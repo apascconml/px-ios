@@ -123,16 +123,16 @@ class MercadoPagoCheckoutViewModelTest: BaseTest {
         let pmsForSelectionCards = mpCheckout.viewModel.getPaymentMethodsForSelection()
         XCTAssertEqual(pmsForSelectionCards[0].paymentTypeId, "credit_card")
         XCTAssertEqual(pmsForSelectionCards[1].paymentTypeId, "credit_card")
-        XCTAssertEqual(pmsForSelectionCards[0]._id, "visa")
-        XCTAssertEqual(pmsForSelectionCards[1]._id, "master")
+        XCTAssertEqual(pmsForSelectionCards[0].paymentMethodId, "visa")
+        XCTAssertEqual(pmsForSelectionCards[1].paymentMethodId, "master")
         XCTAssertEqual(pmsForSelectionCards.count, 2)
 
         mpCheckout.viewModel.paymentOptionSelected = mpCheckout.viewModel.search?.groups[1]
         let pmsForSelectionOff = mpCheckout.viewModel.getPaymentMethodsForSelection()
         XCTAssertEqual(pmsForSelectionOff[0].paymentTypeId, "off")
         XCTAssertEqual(pmsForSelectionOff[1].paymentTypeId, "off")
-        XCTAssertEqual(pmsForSelectionOff[0]._id, "ticket")
-        XCTAssertEqual(pmsForSelectionOff[1]._id, "ticket 2")
+        XCTAssertEqual(pmsForSelectionOff[0].paymentMethodId, "ticket")
+        XCTAssertEqual(pmsForSelectionOff[1].paymentMethodId, "ticket 2")
         XCTAssertEqual(pmsForSelectionOff.count, 2)
     }
     func testPayerCostWithDiscount() {
@@ -275,7 +275,7 @@ class MercadoPagoCheckoutViewModelTest: BaseTest {
         // Setear paymentDataCallback
         let expectPaymentDataCallback = expectation(description: "paymentDataCallback")
         MercadoPagoCheckout.setPaymentDataCallback { (paymentData: PaymentData) in
-            XCTAssertEqual(paymentData.paymentMethod!._id, "account_money")
+            XCTAssertEqual(paymentData.paymentMethod!.paymentMethodId, "account_money")
             XCTAssertNil(paymentData.issuer)
             XCTAssertNil(paymentData.payerCost)
             XCTAssertNil(paymentData.token)
@@ -582,7 +582,7 @@ class MercadoPagoCheckoutViewModelTest: BaseTest {
 
         let checkoutPreference = MockBuilder.buildCheckoutPreference()
 
-        let discount = DiscountCoupon(_id: 123)
+        let discount = DiscountCoupon(discountId: 123)
         discount.name = "Patito Off"
         discount.coupon_amount = "30"
         discount.amount_off = "30"
@@ -832,13 +832,13 @@ class MercadoPagoCheckoutViewModelTest: BaseTest {
 
         mpCheckoutViewModel.handleCustomerPaymentMethod()
 
-        XCTAssertEqual(mpCheckoutViewModel.paymentData.paymentMethod!._id, "account_money")
+        XCTAssertEqual(mpCheckoutViewModel.paymentData.paymentMethod!.paymentMethodId, "account_money")
 
         MPCheckoutTestAction.selectCustomerCardOption(mpCheckoutViewModel: mpCheckoutViewModel)
 
         mpCheckoutViewModel.handleCustomerPaymentMethod()
 
-        XCTAssertEqual(mpCheckoutViewModel.paymentData.paymentMethod!._id, "visa")
+        XCTAssertEqual(mpCheckoutViewModel.paymentData.paymentMethod!.paymentMethodId, "visa")
     }
 
     func testResetGroupSelection() {

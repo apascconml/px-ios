@@ -13,8 +13,8 @@ class PayerTest: BaseTest {
     let identification = MockBuilder.buildIdentification()
 
     func testInit() {
-        let payer = Payer(_id: "1", email: "email", identification: identification)
-        XCTAssertEqual(payer._id, "1")
+        let payer = Payer(payerId: "1", email: "email", identification: identification)
+        XCTAssertEqual(payer.payerId, "1")
         XCTAssertEqual(payer.email, "email")
         XCTAssertEqual(payer.identification, identification)
     }

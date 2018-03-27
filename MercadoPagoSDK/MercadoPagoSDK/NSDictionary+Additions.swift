@@ -29,7 +29,7 @@ extension NSDictionary {
             for (key, value) in self {
                 if let key = key as? String,
                     let value = value as? String {
-                    parametersString = parametersString + key + "=" + value + "&"
+                    parametersString += key + "=" + value + "&"
                 }
             }
             parametersString = parametersString.substring(to: parametersString.index(before: parametersString.endIndex))

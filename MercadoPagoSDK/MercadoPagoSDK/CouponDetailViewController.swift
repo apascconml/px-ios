@@ -11,7 +11,7 @@ import UIKit
 open class CouponDetailViewController: MercadoPagoUIViewController {
 
     @IBOutlet weak var exitButton: UIButton!
-    
+
     let cuponViewWidth: CGFloat = 256.0
     let cuponViewHeight: CGFloat = 200.0
     override open var screenName: String { get { return "DISCOUNT_SUMMARY" } }

@@ -27,9 +27,9 @@ class CardTest: BaseTest {
         XCTAssertEqual(cardFromJSON.cardHolder!.name!, card.cardHolder!.name!)
         XCTAssertEqual(cardFromJSON.cardHolder!.identification.number!, card.cardHolder!.identification.number!)
 
-        XCTAssertEqual(cardFromJSON.paymentMethod!._id!, card.paymentMethod!._id!)
+        XCTAssertEqual(cardFromJSON.paymentMethod!.paymentMethodId!, card.paymentMethod!.paymentMethodId!)
 
-        XCTAssertEqual(cardFromJSON.issuer!._id!, card.issuer!._id!)
+        XCTAssertEqual(cardFromJSON.issuer!.issuerId!, card.issuer!.issuerId!)
 
         XCTAssertEqual(cardFromJSON.securityCode!.length, card.securityCode!.length)
 
@@ -50,9 +50,9 @@ class CardTest: BaseTest {
         XCTAssertEqual(cardFromJSON.cardHolder!.name!, card.cardHolder!.name!)
         XCTAssertEqual(cardFromJSON.cardHolder!.identification.number!, card.cardHolder!.identification.number!)
 
-        XCTAssertEqual(cardFromJSON.paymentMethod!._id!, card.paymentMethod!._id!)
+        XCTAssertEqual(cardFromJSON.paymentMethod!.paymentMethodId!, card.paymentMethod!.paymentMethodId!)
 
-        XCTAssertEqual(cardFromJSON.issuer!._id!, card.issuer!._id!)
+        XCTAssertEqual(cardFromJSON.issuer!.issuerId!, card.issuer!.issuerId!)
 
         XCTAssertEqual(cardFromJSON.securityCode!.length, card.securityCode!.length)
     }

@@ -11,8 +11,8 @@ import XCTest
 class ItemTest: BaseTest {
 
     func testInit() {
-        let item = Item(_id: "id", title: "title", quantity: 3, unitPrice: 500)
-        XCTAssertEqual(item._id, "id")
+        let item = Item(itemId: "id", title: "title", quantity: 3, unitPrice: 500)
+        XCTAssertEqual(item.itemId, "id")
         XCTAssertEqual(item.title, "title")
         XCTAssertEqual(item.quantity, 3)
         XCTAssertEqual(item.unitPrice, 500)

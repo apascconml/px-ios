@@ -12,7 +12,7 @@ extension PXResultViewModel {
     open func getReceiptComponentProps() -> PXReceiptProps {
         if hasReceiptComponent() {
             let date = Date()
-            return PXReceiptProps(dateLabelString: Utils.getFormatedStringDate(date), receiptDescriptionString: "Número de operación ".localized + self.paymentResult._id!)
+            return PXReceiptProps(dateLabelString: Utils.getFormatedStringDate(date), receiptDescriptionString: "Número de operación ".localized + self.paymentResult.paymentId!)
         } else {
             return PXReceiptProps()
         }
@@ -23,7 +23,7 @@ extension PXResultViewModel {
             let isPaymentMethodPlugin = self.paymentResult.paymentData?.getPaymentMethod()?.paymentTypeId == PaymentTypeId.PAYMENT_METHOD_PLUGIN.rawValue
 
             if isPaymentMethodPlugin {
-                let hasReceiptId = !String.isNullOrEmpty(self.paymentResult._id)
+                let hasReceiptId = !String.isNullOrEmpty(self.paymentResult.paymentId)
                 if hasReceiptId {
                     return true
                 }
@@ -34,7 +34,7 @@ extension PXResultViewModel {
         return false
     }
 
-    func buildReceiptComponent() -> PXReceiptComponent {
+    func buildReceiptComponent() -> PXReceiptComponent? {
         let receiptProps = getReceiptComponentProps()
         return PXReceiptComponent(props: receiptProps)
     }

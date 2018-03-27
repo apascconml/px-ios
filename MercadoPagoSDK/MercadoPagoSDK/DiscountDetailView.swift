@@ -21,7 +21,7 @@ class DiscountDetailView: UIView {
     let fontSize: CGFloat = 18.0
     let baselineOffSet: Int = 6
     let fontColor = ThemeManager.shared.getTheme().modalComponent().tintColor
-    let discountFontColor = ThemeManager.shared.getTheme().highlightedLabelTintColor()
+    let discountFontColor = ThemeManager.shared.getTheme().noTaxAndDiscountLabelTintColor()
 
     var coupon: DiscountCoupon!
     var amount: Double!

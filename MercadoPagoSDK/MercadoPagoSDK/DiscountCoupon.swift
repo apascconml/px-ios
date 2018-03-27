@@ -33,7 +33,7 @@ open class DiscountCoupon: NSObject {
      }
      */
 
-   open var _id: UInt
+   open var discountId: UInt
    open var name: String?
    open var percent_off: String = "0"
    open var amount_off: String = "0"
@@ -47,16 +47,16 @@ open class DiscountCoupon: NSObject {
     open func toJSONString() -> String {
         return JSONHandler.jsonCoding(self.toJSON())
     }
-    
-    public init(_id: UInt) {
-        self._id = _id
+
+    public init(discountId: UInt) {
+        self.discountId = discountId
         super.init()
     }
 
     func toJSON() -> [String: Any] {
-        
+
         var obj: [String: Any] = [
-            "id": self._id,
+            "id": self.discountId,
             "percent_off": Int(self.percent_off) != nil ? Int(self.percent_off)! : 0,
             "amount_off": Int(self.amount_off) != nil ? Int(self.amount_off)! : 0,
             "coupon_amount": Int(self.coupon_amount) != nil ? Int(self.coupon_amount)! : 0
@@ -73,7 +73,7 @@ open class DiscountCoupon: NSObject {
         if let concept = self.concept {
             obj["concept"] = concept
         }
-        
+
         if let campaignId = self.campaignId {
             obj["campaign_id"] = campaignId
         }
@@ -85,7 +85,7 @@ open class DiscountCoupon: NSObject {
         guard let couponId = json["id"]  else {
             return nil
         }
-        let discount = DiscountCoupon(_id:couponId as! UInt)
+        let discount = DiscountCoupon(discountId:couponId as! UInt)
         if json["name"] != nil && !(json["name"]! is NSNull) {
             discount.name = json["name"] as? String
         }
