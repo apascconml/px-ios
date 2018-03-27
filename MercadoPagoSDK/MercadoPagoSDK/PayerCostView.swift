@@ -18,8 +18,8 @@ final class PayerCostView: UIView, PXComponent {
     
     static fileprivate let TITLE_FONT_SIZE: CGFloat = PXLayout.S_FONT
     static fileprivate let VALUE_FONT_SIZE: CGFloat = PXLayout.XL_FONT
-    static fileprivate let NO_INTEREST_TEXT =  "Sin interés".localized_temp
-    static fileprivate let PAY_TEXT =  "Pagas".localized_temp
+    static fileprivate let NO_INTEREST_TEXT =  "Sin interés".localized
+    static fileprivate let PAY_TEXT =  "Pagas".localized
 
     var noRateLabel: UILabel!
     var purchaseDetailTitle: UILabel!

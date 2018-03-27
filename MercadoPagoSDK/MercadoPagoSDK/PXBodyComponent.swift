@@ -66,7 +66,7 @@ open class PXBodyComponent: NSObject, PXComponentizable {
 
         if pm.isCard {
             if let lastFourDigits = (self.props.paymentResult.paymentData?.token?.lastFourDigits) {
-                pmDescription = paymentMethodName + " " + "terminada en ".localized_temp + lastFourDigits
+                pmDescription = paymentMethodName + " " + "terminada en ".localized + lastFourDigits
             }
             if paymentMethodIssuerName.lowercased() != paymentMethodName.lowercased() && !paymentMethodIssuerName.isEmpty {
                 descriptionDetail = paymentMethodIssuerName.toAttributedString()
@@ -77,7 +77,7 @@ open class PXBodyComponent: NSObject, PXComponentizable {
 
         var disclaimerText: String? = nil
         if let statementDescription = self.props.paymentResult.statementDescription {
-            disclaimerText =  ("En tu estado de cuenta verás el cargo como %0".localized_temp as NSString).replacingOccurrences(of: "%0", with: "\(statementDescription)")
+            disclaimerText =  ("En tu estado de cuenta verás el cargo como %0".localized as NSString).replacingOccurrences(of: "%0", with: "\(statementDescription)")
         }
 
         let bodyProps = PXPaymentMethodProps(paymentMethodIcon: image, title: amountTitle.toAttributedString(), subtitle: amountDetail?.toAttributedString(), descriptionTitle: pmDescription.toAttributedString(), descriptionDetail: descriptionDetail, disclaimer: disclaimerText?.toAttributedString(), backgroundColor: ThemeManager.shared.getTheme().detailedBackgroundColor(), lightLabelColor: ThemeManager.shared.getTheme().labelTintColor(), boldLabelColor: ThemeManager.shared.getTheme().boldLabelTintColor())

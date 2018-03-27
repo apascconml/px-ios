@@ -141,35 +141,35 @@ open class CheckoutPreference: NSObject {
             return itemError
         }
         if self.payer == nil {
-            return "No hay información de payer".localized_temp
+            return "No hay información de payer".localized
         }
 
         if self.payer.email == nil || self.payer.email?.count == 0 {
-            return "Se requiere email de comprador".localized_temp
+            return "Se requiere email de comprador".localized
         }
 
         if !isActive() {
-            return "La preferencia no esta activa.".localized_temp
+            return "La preferencia no esta activa.".localized
         }
 
         if isExpired() {
-            return "La preferencia esta expirada".localized_temp
+            return "La preferencia esta expirada".localized
         }
         if self.getAmount() < 0 {
-            return "El monto de la compra no es válido".localized_temp
+            return "El monto de la compra no es válido".localized
         }
         return nil
     }
 
     open func itemsValid() -> String? {
         if Array.isNullOrEmpty(items) {
-            return "No hay items".localized_temp
+            return "No hay items".localized
         }
         let currencyIdAllItems = items[0].currencyId
 
         for (_, value) in items.enumerated() {
             if value.currencyId != currencyIdAllItems {
-                return "Los items tienen diferente moneda".localized_temp
+                return "Los items tienen diferente moneda".localized
             }
 
             if let error = value.validate() {

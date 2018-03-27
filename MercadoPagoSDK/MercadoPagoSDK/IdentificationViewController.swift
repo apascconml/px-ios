@@ -70,7 +70,7 @@ open class IdentificationViewController: MercadoPagoUIViewController, UITextFiel
         toolBar.barStyle = UIBarStyle.default
         toolBar.sizeToFit()
 
-        let doneButton = UIBarButtonItem(title: "OK".localized_temp, style: .plain, target: self, action: #selector(IdentificationViewController.donePicker))
+        let doneButton = UIBarButtonItem(title: "OK".localized, style: .plain, target: self, action: #selector(IdentificationViewController.donePicker))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
 
         let font = Utils.getFont(size: 14)

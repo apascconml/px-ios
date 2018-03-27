@@ -226,7 +226,7 @@ class PayerCostAdditionalStepViewModel: AdditionalStepViewModel {
     let cardViewRect = CGRect(x: 0, y: 0, width: 100, height: 30)
 
     init(amount: Double, token: CardInformationForm?, paymentMethod: PaymentMethod, dataSource: [Cellable], discount: DiscountCoupon? = nil, email: String? = nil, mercadoPagoServicesAdapter: MercadoPagoServicesAdapter) {
-        super.init(screenTitle: "¿En cuántas cuotas?".localized_temp, cardSectionVisible: true, cardSectionView: CardFrontView(frame: self.cardViewRect), totalRowVisible: true, showBankInsterestWarning: true, amount: amount, token: token, paymentMethods: [paymentMethod], dataSource: dataSource, discount: discount, email: email, mercadoPagoServicesAdapter: mercadoPagoServicesAdapter)
+        super.init(screenTitle: "¿En cuántas cuotas?".localized, cardSectionVisible: true, cardSectionView: CardFrontView(frame: self.cardViewRect), totalRowVisible: true, showBankInsterestWarning: true, amount: amount, token: token, paymentMethods: [paymentMethod], dataSource: dataSource, discount: discount, email: email, mercadoPagoServicesAdapter: mercadoPagoServicesAdapter)
     }
 
     override open var screenName: String { get { return TrackingUtil.SCREEN_NAME_CARD_FORM_INSTALLMENTS } }

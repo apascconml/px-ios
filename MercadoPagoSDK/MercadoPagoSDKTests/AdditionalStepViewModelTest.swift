@@ -21,7 +21,7 @@ class PayerCostAdditionalStepViewModelTest: BaseTest {
     }
 
     func testTitle() {
-        XCTAssertEqual(self.instance!.getTitle(), "¿En cuántas cuotas?".localized_temp)
+        XCTAssertEqual(self.instance!.getTitle(), "¿En cuántas cuotas?".localized)
         XCTAssertEqual(self.instance!.maxFontSize, 24)
     }
 

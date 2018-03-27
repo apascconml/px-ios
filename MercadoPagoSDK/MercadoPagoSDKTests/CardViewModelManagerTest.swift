@@ -234,7 +234,7 @@ class CardViewModelManagerTest: BaseTest {
 
     func testGetNotAvailableCardMessage() {
         let defaultMessage = PXStrings.payment_method_not_supported.PXLocalized
-        let message = "Solo puedes pagar con ".localized_temp
+        let message = "Solo puedes pagar con ".localized
         let paymentMethods = MockBuilder.getMockPaymentMethods()
         paymentMethods[0].name = "Visa"
         cardFormManager?.paymentMethods = paymentMethods

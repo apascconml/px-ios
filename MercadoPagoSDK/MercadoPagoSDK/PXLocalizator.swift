@@ -85,7 +85,7 @@ extension String {
         return PXLocalizator.sharedInstance.localize(string: self)
     }
     
-    var localized_temp: String {
+    var localized: String {
         return Localizator_temp.sharedInstance.localize(string: self)
     }
 }

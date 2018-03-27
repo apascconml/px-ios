@@ -26,8 +26,8 @@ class PaymentResultScreenPreferenceTest: BaseTest {
 
     func testSetTitle() {
         XCTAssertEqual(self.mpCheckout.viewModel.paymentResultScreenPreference.getApprovedTitle(), PXStrings.success_payment_title.PXLocalized)
-        XCTAssertEqual(self.mpCheckout.viewModel.paymentResultScreenPreference.getPendingTitle(), "Estamos procesando el pago".localized_temp)
-        XCTAssertEqual(self.mpCheckout.viewModel.paymentResultScreenPreference.getRejectedTitle(), "Uy, no pudimos procesar el pago".localized_temp)
+        XCTAssertEqual(self.mpCheckout.viewModel.paymentResultScreenPreference.getPendingTitle(), "Estamos procesando el pago".localized)
+        XCTAssertEqual(self.mpCheckout.viewModel.paymentResultScreenPreference.getRejectedTitle(), "Uy, no pudimos procesar el pago".localized)
 
         paymentResultScreenPreference.setApproved(title: "1")
         paymentResultScreenPreference.setPending(title: "2")
@@ -83,7 +83,7 @@ class PaymentResultScreenPreferenceTest: BaseTest {
     }
 
     func testSetIconSubtext() {
-        XCTAssertEqual(self.mpCheckout.viewModel.paymentResultScreenPreference.getRejectedIconSubtext(), "Algo salió mal...".localized_temp)
+        XCTAssertEqual(self.mpCheckout.viewModel.paymentResultScreenPreference.getRejectedIconSubtext(), "Algo salió mal...".localized)
 
         paymentResultScreenPreference.setRejectedIconSubtext(text: "lala")
 

@@ -21,7 +21,7 @@ final class PXSummaryFullComponentView: PXComponentView {
     fileprivate let PAYER_COST_HEIGHT: CGFloat = 20.0
     fileprivate let DISCLAIMER_HEIGHT: CGFloat = 20.0
     fileprivate let DISCLAIMER_FONT_SIZE: CGFloat = PXLayout.XXXS_FONT
-    fileprivate static let TOTAL_TITLE = "Total".localized_temp
+    fileprivate static let TOTAL_TITLE = "Total".localized
     
     fileprivate let customSummaryTitle: String
     fileprivate var requiredHeight: CGFloat = PXLayout.L_MARGIN

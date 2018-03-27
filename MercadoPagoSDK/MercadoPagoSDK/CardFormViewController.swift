@@ -621,7 +621,7 @@ open class CardFormViewController: MercadoPagoUIViewController, UITextFieldDeleg
                     showMessage((viewModel.cardToken?.validateCardNumber(viewModel.getGuessedPM()!))!)
                 } else {
                     if cardNumberLabel?.text?.count == 0 {
-                        showMessage("Ingresa el número de la tarjeta de crédito".localized_temp)
+                        showMessage("Ingresa el número de la tarjeta de crédito".localized)
                     } else {
                         showMessage(PXStrings.card_form_invalid_field.PXLocalized)
                     }
@@ -634,7 +634,7 @@ open class CardFormViewController: MercadoPagoUIViewController, UITextFieldDeleg
 
         case nameLabel! :
             if !self.validateCardholderName() {
-                showMessage("Ingresa el nombre y apellido impreso en la tarjeta".localized_temp)
+                showMessage("Ingresa el nombre y apellido impreso en la tarjeta".localized)
 
                 return
             }
@@ -659,7 +659,7 @@ open class CardFormViewController: MercadoPagoUIViewController, UITextFieldDeleg
         case cvvLabel! :
             if !self.validateCvv() {
 
-                showMessage(("Ingresa los %1$s números del código de seguridad".localized_temp as NSString).replacingOccurrences(of: "%1$s", with: ((viewModel.getGuessedPM()?.secCodeLenght())! as NSNumber).stringValue))
+                showMessage(("Ingresa los %1$s números del código de seguridad".localized as NSString).replacingOccurrences(of: "%1$s", with: ((viewModel.getGuessedPM()?.secCodeLenght())! as NSNumber).stringValue))
                 return
             }
             self.confirmPaymentMethod()
@@ -756,13 +756,13 @@ open class CardFormViewController: MercadoPagoUIViewController, UITextFieldDeleg
                 cvvLabel = cardFront?.cardCVV
                 cardBack?.cardCVV.text = ""
                 cardFront?.cardCVV.alpha = 1
-                cardFront?.cardCVV.text = "••••".localized_temp
+                cardFront?.cardCVV.text = "••••".localized
                 self.viewModel.cvvEmpty = true
             } else {
                 cvvLabel = cardBack?.cardCVV
                 cardFront?.cardCVV.text = ""
                 cardFront?.cardCVV.alpha = 0
-                cardBack?.cardCVV.text = "•••".localized_temp
+                cardBack?.cardCVV.text = "•••".localized
                 self.viewModel.cvvEmpty = true
             }
         }

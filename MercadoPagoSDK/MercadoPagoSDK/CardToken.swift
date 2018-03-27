@@ -63,7 +63,7 @@ open class CardToken: NSObject, CardInformationForm {
 
     open func validateCardNumber() -> String? {
         if String.isNullOrEmpty(cardNumber) {
-            return "Ingresa el número de la tarjeta de crédito".localized_temp
+            return "Ingresa el número de la tarjeta de crédito".localized
         } else if self.cardNumber!.count < MIN_LENGTH_NUMBER || self.cardNumber!.count > MAX_LENGTH_NUMBER {
             return PXStrings.card_form_invalid_field.PXLocalized
         } else {
@@ -85,7 +85,7 @@ open class CardToken: NSObject, CardInformationForm {
                 if userInfo == nil {
                     userInfo = [String: String]()
                 }
-                return "El número de tarjeta que ingresaste no se corresponde con el tipo de tarjeta".localized_temp
+                return "El número de tarjeta que ingresaste no se corresponde con el tipo de tarjeta".localized
             }
 
                 // Validate card length
@@ -107,15 +107,15 @@ open class CardToken: NSObject, CardInformationForm {
                     if userInfo == nil {
                         userInfo = [String: String]()
                     }
-                    return "El número de tarjeta que ingresaste es incorrecto".localized_temp
-                 //   userInfo?.updateValue("El número de tarjeta que ingresaste es incorrecto".localized_temp, forKey: "cardNumber")
+                    return "El número de tarjeta que ingresaste es incorrecto".localized
+                 //   userInfo?.updateValue("El número de tarjeta que ingresaste es incorrecto".localized, forKey: "cardNumber")
                 }
         }
 
         if userInfo == nil {
             return nil
         } else {
-            return "El número de tarjeta que ingresaste no se corresponde con el tipo de tarjeta".localized_temp
+            return "El número de tarjeta que ingresaste no se corresponde con el tipo de tarjeta".localized
          //   return NSError(domain: "mercadopago.sdk.card.error", code: 1, userInfo: userInfo)
         }
     }

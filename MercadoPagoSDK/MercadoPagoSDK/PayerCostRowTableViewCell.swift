@@ -34,7 +34,7 @@ class PayerCostRowTableViewCell: UITableViewCell {
             if showDescription == false {
                 interestDescription.attributedText = NSAttributedString(string : "")
             } else {
-                interestDescription.attributedText = NSAttributedString(string : "Sin interés".localized_temp)
+                interestDescription.attributedText = NSAttributedString(string : "Sin interés".localized)
             }
 
         }

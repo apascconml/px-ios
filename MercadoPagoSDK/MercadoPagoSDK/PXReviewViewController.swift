@@ -150,7 +150,7 @@ extension PXReviewViewController {
         PXLayout.pinBottom(view: floatingButtonView, to: view, withMargin: 0).isActive = true
 
         // Add elastic header.
-        addElasticHeader(headerBackgroundColor: summaryView.backgroundColor, navigationCustomTitle: PXReviewTitleComponentProps.DEFAULT_TITLE.localized_temp, textColor: ThemeManager.shared.getTitleColorForReviewConfirmNavigation())
+        addElasticHeader(headerBackgroundColor: summaryView.backgroundColor, navigationCustomTitle: PXReviewTitleComponentProps.DEFAULT_TITLE.localized, textColor: ThemeManager.shared.getTitleColorForReviewConfirmNavigation())
 
         self.view.layoutIfNeeded()
         PXLayout.pinFirstSubviewToTop(view: self.contentView)?.isActive = true

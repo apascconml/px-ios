@@ -60,9 +60,9 @@ open class PaymentResultScreenPreference: NSObject {
     var approvedIconBundle = MercadoPago.getBundle()!
 
     // MARK: Pending
-    var pendingTitle = PXHeaderResutlConstants.PENDING_HEADER_TITLE.localized_temp
+    var pendingTitle = PXHeaderResutlConstants.PENDING_HEADER_TITLE.localized
     var pendingSubtitle = ""
-    var pendingContentTitle = PaymentResultScreenPreference.PENDING_CONTENT_TITLE.localized_temp
+    var pendingContentTitle = PaymentResultScreenPreference.PENDING_CONTENT_TITLE.localized
     var pendingContentText = ""
     private var _pendingLabelText = ""
     private var _disablePendingLabelText = true
@@ -73,18 +73,18 @@ open class PaymentResultScreenPreference: NSObject {
     var hidePendingContentTitle = false
 
     // MARK: Rejected
-    var rejectedTitle = PXHeaderResutlConstants.REJECTED_HEADER_TITLE.localized_temp
+    var rejectedTitle = PXHeaderResutlConstants.REJECTED_HEADER_TITLE.localized
     var rejectedSubtitle = ""
     var rejectedTitleSetted = false
     private var disableRejectedLabelText = false
-    var rejectedIconSubtext = PXHeaderResutlConstants.REJECTED_ICON_SUBTEXT.localized_temp
+    var rejectedIconSubtext = PXHeaderResutlConstants.REJECTED_ICON_SUBTEXT.localized
     var rejectedBolbradescoIconName = "MPSDK_payment_result_bolbradesco_error"
     var rejectedPaymentMethodPluginIconName = "MPSDK_payment_result_plugin_error"
     var rejectedIconBundle = MercadoPago.getBundle()!
     var rejectedDefaultIconName: String?
     var rejectedURLImage : String? = nil
     var rejectedIconName: String?
-    var rejectedContentTitle = PaymentResultScreenPreference.REJECTED_CONTENT_TITLE.localized_temp
+    var rejectedContentTitle = PaymentResultScreenPreference.REJECTED_CONTENT_TITLE.localized
     var rejectedContentText = ""
     var hideRejectedContentText = false
     var hideRejectedContentTitle = false
@@ -518,7 +518,7 @@ open class PaymentResultScreenPreference: NSObject {
 
     open func getExitButtonTitle() -> String? {
         if let title = exitButtonTitle {
-            return title.localized_temp
+            return title.localized
         }
         return nil
     }
