@@ -46,7 +46,6 @@
 		76EF7F601D2706720087C785 /* ServicesExamplesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76EF7F5F1D2706720087C785 /* ServicesExamplesViewController.m */; };
 		8102F9B2205B6B42006730E6 /* IdentificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8102F9B1205B6B42006730E6 /* IdentificationScreen.swift */; };
 		811223D12056AC2A00293353 /* PXFlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811223D02056AC2A00293353 /* PXFlowUITests.swift */; };
-		811223DC2056B04D00293353 /* Pods_MercadoPagoSDKExamplesObjectiveC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 811223DD2056B04D00293353 /* Pods_MercadoPagoSDKExamplesObjectiveC.framework */; };
 		811223E02056B52700293353 /* MainPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811223DF2056B52700293353 /* MainPage.swift */; };
 		811223E52056B77D00293353 /* MainGroupScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811223E42056B77D00293353 /* MainGroupScreen.swift */; };
 		811223E82056CA3B00293353 /* BaseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811223E72056CA3B00293353 /* BaseScreen.swift */; };
@@ -56,6 +55,8 @@
 		81BD13E7205BEEA70022EB95 /* PayerCostScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BD13E6205BEEA70022EB95 /* PayerCostScreen.swift */; };
 		81BD13EA205BF0890022EB95 /* ReviewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BD13E9205BF0890022EB95 /* ReviewScreen.swift */; };
 		81F15F3A20629E9B0095B42B /* CongratsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F15F3920629E9B0095B42B /* CongratsScreen.swift */; };
+		AA6E9C59F70D16373FF72C13 /* Pods_MercadoPagoSDKExamplesObjectiveCTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E63040F2E13FF09B0FAC07F /* Pods_MercadoPagoSDKExamplesObjectiveCTests.framework */; };
+		EFBB436E7BAF399899210BF9 /* Pods_MercadoPagoSDKExamplesObjectiveC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 811223DD2056B04D00293353 /* Pods_MercadoPagoSDKExamplesObjectiveC.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -198,6 +199,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				15AF42AA1D36848100E70343 /* MercadoPagoSDK.framework in Frameworks */,
+				EFBB436E7BAF399899210BF9 /* Pods_MercadoPagoSDKExamplesObjectiveC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +207,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA6E9C59F70D16373FF72C13 /* Pods_MercadoPagoSDKExamplesObjectiveCTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,7 +215,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				811223DC2056B04D00293353 /* Pods_MercadoPagoSDKExamplesObjectiveC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
