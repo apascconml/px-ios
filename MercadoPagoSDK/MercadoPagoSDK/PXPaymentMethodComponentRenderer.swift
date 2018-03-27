@@ -15,7 +15,7 @@ class PXPaymentMethodComponentRenderer: NSObject {
 
     //Action Button
     let BUTTON_HEIGHT: CGFloat = 34.0
-    
+
     let TITLE_FONT_SIZE: CGFloat = PXLayout.M_FONT
     let SUBTITLE_FONT_SIZE: CGFloat = PXLayout.XS_FONT
     let DESCRIPTION_DETAIL_FONT_SIZE: CGFloat = PXLayout.XXS_FONT
@@ -106,7 +106,7 @@ class PXPaymentMethodComponentRenderer: NSObject {
             PXLayout.pinLeft(view: disclaimerLabel, withMargin:  PXLayout.XS_MARGIN).isActive = true
             PXLayout.pinRight(view: disclaimerLabel, withMargin:  PXLayout.XS_MARGIN).isActive = true
         }
-        
+
         if let action = component.props.action {
             let actionButton = PXSecondaryButton()
             actionButton.translatesAutoresizingMaskIntoConstraints = false
@@ -115,14 +115,14 @@ class PXPaymentMethodComponentRenderer: NSObject {
             pmBodyView.actionButton = actionButton
             pmBodyView.addSubview(actionButton)
             actionButton.backgroundColor = .clear
-            
+
             pmBodyView.putOnBottomOfLastView(view: actionButton, withMargin: PXLayout.S_MARGIN)?.isActive = true
-            
+
             PXLayout.pinLeft(view: actionButton, withMargin:  PXLayout.XXS_MARGIN).isActive = true
             PXLayout.pinRight(view: actionButton, withMargin:  PXLayout.XXS_MARGIN).isActive = true
             PXLayout.setHeight(owner: actionButton, height: BUTTON_HEIGHT).isActive = true
         }
-        
+
         pmBodyView.pinLastSubviewToBottom(withMargin: PXLayout.L_MARGIN)?.isActive = true
 
         return pmBodyView

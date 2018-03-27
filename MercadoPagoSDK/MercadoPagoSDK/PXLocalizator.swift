@@ -23,7 +23,7 @@ private class PXLocalizator {
     
     func localize(string: String) -> String {
         let languageID = MercadoPagoContext.getLanguage()
-        let parentlanguageID = MercadoPagoContext.getParentLanguage()
+        let parentlanguageID = MercadoPagoContext.getParentLanguageID()
         
         let localizedStringDictionary = localizableDictionary.value(forKey: string) as? NSDictionary
         
@@ -59,7 +59,7 @@ private class Localizator_temp {
     
     func localize(string: String) -> String {
         let languageID = MercadoPagoContext.getLanguage()
-        let parentlanguageID = MercadoPagoContext.getParentLanguage()
+        let parentlanguageID = MercadoPagoContext.getParentLanguageID()
         
         let localizedStringDictionary = localizableDictionary.value(forKey: string) as? NSDictionary
         

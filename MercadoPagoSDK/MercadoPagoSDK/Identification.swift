@@ -19,7 +19,7 @@ open class Identification: NSObject {
     }
 
     public init (identificationType: IdentificationType, identificationNumber: String) {
-        self.type = identificationType._id
+        self.type = identificationType.identificationTypeId
         self.number = identificationNumber
     }
 

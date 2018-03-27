@@ -8,8 +8,8 @@
 
 import Foundation
 
-final class PXSummaryComponentProps : NSObject {
-    
+final class PXSummaryComponentProps: NSObject {
+
     let width: CGFloat
     let summaryViewModel: Summary
     let paymentData: PaymentData
@@ -17,7 +17,7 @@ final class PXSummaryComponentProps : NSObject {
     let customTitle: String
     let textColor: UIColor
     let backgroundColor: UIColor
-    
+
     init(summaryViewModel: Summary, paymentData: PaymentData, total: Double, width: CGFloat, customTitle: String, textColor: UIColor, backgroundColor: UIColor) {
         self.width = width
         self.summaryViewModel = summaryViewModel

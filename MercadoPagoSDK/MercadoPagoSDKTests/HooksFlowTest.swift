@@ -820,7 +820,7 @@ class HooksFlowTest: BaseTest {
         step = mpCheckout.viewModel.nextStep()
         XCTAssertEqual(CheckoutStep.SCREEN_HOOK_BEFORE_PAYMENT, step)
         mpCheckout.viewModel.continueFrom(hook: .BEFORE_PAYMENT)
-        XCTAssertEqual(PXCheckoutStore.sharedInstance.getPaymentData().getPaymentMethod()?._id, "account_money")
+        XCTAssertEqual(PXCheckoutStore.sharedInstance.getPaymentData().getPaymentMethod()?.paymentMethodId, "account_money")
 
         // 11 . Pagar
         step = mpCheckout.viewModel.nextStep()

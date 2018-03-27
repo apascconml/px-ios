@@ -81,7 +81,7 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
     var payment: Payment?
     var paymentResult: PaymentResult?
     var businessResult: PXBusinessResult?
-    
+
     open var payerCosts: [PayerCost]?
     open var issuers: [Issuer]?
     open var entityTypes: [EntityType]?
@@ -138,7 +138,7 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
             }
             self.paymentData.discount = discount
         }
-        if !String.isNullOrEmpty(self.checkoutPreference._id) {
+        if !String.isNullOrEmpty(self.checkoutPreference.preferenceId) {
             needLoadPreference = true
         } else {
             self.paymentData.payer = self.checkoutPreference.getPayer()
@@ -180,10 +180,10 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
         let viewModel = PayerInfoViewModel(identificationTypes: self.identificationTypes!, payer: self.paymentData.payer!)
         return viewModel
     }
-    
+
     func getPluginPaymentMethodToShow() -> [PXPaymentMethodPlugin] {
         _ = copyViewModelAndAssignToCheckoutStore()
-        return paymentMethodPlugins.filter{$0.mustShowPaymentMethodPlugin(PXCheckoutStore.sharedInstance) == true}
+        return paymentMethodPlugins.filter {$0.mustShowPaymentMethodPlugin(PXCheckoutStore.sharedInstance) == true}
     }
 
     // Returns lists of all payment option available
@@ -192,7 +192,7 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
 
         if let paymentMethods = search?.paymentMethods {
             for paymentMethod in paymentMethods {
-                if let id = paymentMethod._id, let paymentTypeId = paymentMethod.paymentTypeId {
+                if let id = paymentMethod.paymentMethodId, let paymentTypeId = paymentMethod.paymentTypeId {
                     paymentMethodsOptions += "\(id):\(paymentTypeId)|"
                 }
             }
@@ -222,7 +222,7 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
         }
 
         _ = copyViewModelAndAssignToCheckoutStore()
-        let paymentMethodPluginsToShow = paymentMethodPlugins.filter{$0.mustShowPaymentMethodPlugin(PXCheckoutStore.sharedInstance) == true}
+        let paymentMethodPluginsToShow = paymentMethodPlugins.filter {$0.mustShowPaymentMethodPlugin(PXCheckoutStore.sharedInstance) == true}
 
         // Get payment methods options for tracking in PaymentVault
         let paymentMethodsOptions = getPaymentMethodsOptions(paymentMethodPluginsToShow)
@@ -293,7 +293,6 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
         return PXResultViewModel(paymentResult: self.paymentResult!, amount: self.getAmount(), instructionsInfo: self.instructionsInfo, paymentResultScreenPreference: self.paymentResultScreenPreference)
     }
 
-    
     //SEARCH_PAYMENT_METHODS
     public func updateCheckoutModel(paymentMethods: [PaymentMethod], cardToken: CardToken?) {
         self.cleanPayerCostSearch()
@@ -528,31 +527,31 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
         guard let search = self.search else {
             return
         }
-        
+
         self.reviewScreenPreference.disableChangeMethodOption()
-        
+
         if !Array.isNullOrEmpty(search.groups) && search.groups.count == 1 {
             self.updateCheckoutModel(paymentOptionSelected: search.groups[0])
-        } else if !Array.isNullOrEmpty(search.customerPaymentMethods) && search.customerPaymentMethods?.count == 1{
+        } else if !Array.isNullOrEmpty(search.customerPaymentMethods) && search.customerPaymentMethods?.count == 1 {
             let customOption = search.customerPaymentMethods![0] as! PaymentMethodOption
             self.updateCheckoutModel(paymentOptionSelected: customOption)
         } else if  !Array.isNullOrEmpty(paymentMethodPluginsToShow) && paymentMethodPluginsToShow.count == 1 {
             self.updateCheckoutModel(paymentOptionSelected: paymentMethodPluginsToShow[0])
         }
     }
-    
+
     public func updateCheckoutModel(paymentMethodSearch: PaymentMethodSearch) {
-        
+
         self.search = paymentMethodSearch
-        
+
         guard let search = self.search else {
             return
         }
-        
+
         self.rootPaymentMethodOptions = paymentMethodSearch.groups
         self.paymentMethodOptions = self.rootPaymentMethodOptions
         self.availablePaymentMethods = paymentMethodSearch.paymentMethods
-        
+
         if !Array.isNullOrEmpty(paymentMethodSearch.customerPaymentMethods) {
             if !MercadoPagoContext.accountMoneyAvailable() {
                 //Remover account_money como opción de pago
@@ -563,11 +562,11 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
                 self.customPaymentOptions = paymentMethodSearch.customerPaymentMethods
             }
         }
-        
+
         let totalPaymentMethodSearchCount = search.getPaymentOptionsCount()
         self.paymentMethodPluginsToShow = getPluginPaymentMethodToShow()
         let totalPaymentMethodsToShow =  totalPaymentMethodSearchCount + paymentMethodPluginsToShow.count
-        
+
         if totalPaymentMethodsToShow == 0 {
             self.errorInputs(error: MPSDKError(message: PXStrings.error_title.PXLocalized, errorDetail: "No se ha podido obtener los métodos de pago con esta preferencia".localized, retry: false), errorCallback: { (_) in
             })
@@ -582,9 +581,9 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
 
     public class func createMPPayment(preferenceId: String, paymentData: PaymentData, customerId: String? = nil, binaryMode: Bool) -> MPPayment {
 
-        let issuerId: String = paymentData.hasIssuer() ? paymentData.getIssuer()!._id! : ""
+        let issuerId: String = paymentData.hasIssuer() ? paymentData.getIssuer()!.issuerId! : ""
 
-        let tokenId: String = paymentData.hasToken() ? paymentData.getToken()!._id : ""
+        let tokenId: String = paymentData.hasToken() ? paymentData.getToken()!.tokenId : ""
 
         let installments = paymentData.hasPayerCost() ? paymentData.getPayerCost()!.installments : 0
 
@@ -600,7 +599,7 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
 
         let isBlacklabelPayment = paymentData.hasToken() && paymentData.getToken()!.cardId != nil && String.isNullOrEmpty(customerId)
 
-        let mpPayment = MPPaymentFactory.createMPPayment(preferenceId: preferenceId, publicKey: MercadoPagoContext.publicKey(), paymentMethodId: paymentData.getPaymentMethod()!._id, installments: installments, issuerId: issuerId, tokenId: tokenId, customerId: customerId, isBlacklabelPayment: isBlacklabelPayment, transactionDetails: transactionDetails, payer: payer, binaryMode: binaryMode)
+        let mpPayment = MPPaymentFactory.createMPPayment(preferenceId: preferenceId, publicKey: MercadoPagoContext.publicKey(), paymentMethodId: paymentData.getPaymentMethod()!.paymentMethodId, installments: installments, issuerId: issuerId, tokenId: tokenId, customerId: customerId, isBlacklabelPayment: isBlacklabelPayment, transactionDetails: transactionDetails, payer: payer, binaryMode: binaryMode)
         return mpPayment
     }
 
@@ -711,7 +710,7 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
 
             for ET in entityTypesKeys {
                 let entityType = EntityType()
-                entityType._id = ET as! String
+                entityType.entityTypeId = ET as! String
                 entityType.name = (siteETsDictionary.value(forKey: ET as! String) as! String!).localized
 
                 entityTypes.append(entityType)

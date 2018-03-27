@@ -34,7 +34,7 @@ import MercadoPagoSDK
     public func boldLabelTintColor() -> UIColor {
         return #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
     }
-    
+
     public func noTaxAndDiscountLabelTintColor() -> UIColor {
         return #colorLiteral(red: 0.2235294118, green: 0.7098039216, blue: 0.2901960784, alpha: 1)
     }

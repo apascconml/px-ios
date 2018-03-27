@@ -55,7 +55,7 @@ open class PaymentVaultViewController: MercadoPagoUIScrollViewController, UIColl
 
     fileprivate var tintColor = true
     fileprivate var loadingGroups = true
-    
+
     fileprivate let TOTAL_ROW_HEIGHT: CGFloat = 42.0
 
     fileprivate let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
@@ -77,7 +77,6 @@ open class PaymentVaultViewController: MercadoPagoUIScrollViewController, UIColl
     override func trackInfo() {
         let paymentMethodsOptions = PXTrackingStore.sharedInstance.getData(forKey: PXTrackingStore.PAYMENT_METHOD_OPTIONS) ?? ""
         let properties: [String: String] = [TrackingUtil.METADATA_OPTIONS: paymentMethodsOptions]
-        
         var finalId = screenId
         if let groupName = groupName {
             finalId = screenId + "/" + groupName
@@ -139,7 +138,7 @@ open class PaymentVaultViewController: MercadoPagoUIScrollViewController, UIColl
         super.viewWillAppear(animated)
 
         self.hideNavBar()
-        
+
         if let _ = self.navigationItem.leftBarButtonItem {
                self.navigationItem.leftBarButtonItem!.action = #selector(invokeCallbackCancelShowingNavBar)
         }
@@ -171,11 +170,11 @@ open class PaymentVaultViewController: MercadoPagoUIScrollViewController, UIColl
     }
 
     fileprivate func getCustomerCards() {
-        
+
         if self.viewModel!.shouldGetCustomerCardsInfo() {
             if let _ = MercadoPagoCheckoutViewModel.servicePreference.getCustomerURL() {
                 self.viewModel.mercadoPagoServicesAdapter.getCustomer(callback: { [weak self] (customer) in
-                    self?.viewModel.customerId = customer._id
+                    self?.viewModel.customerId = customer.customerId
                     self?.viewModel.customerPaymentOptions = customer.cards
                     self?.loadPaymentMethodSearch()
                 }, failure: { (error) in
@@ -212,9 +211,9 @@ open class PaymentVaultViewController: MercadoPagoUIScrollViewController, UIColl
 
         let paymentVaultTitleCollectionViewCell = UINib(nibName: "PaymentVaultTitleCollectionViewCell", bundle: self.bundle)
         self.collectionSearch.register(paymentVaultTitleCollectionViewCell, forCellWithReuseIdentifier: "paymentVaultTitleCollectionViewCell")
-        
+
         self.collectionSearch.register(UICollectionViewCell.classForCoder(), forCellWithReuseIdentifier: "CouponCell")
-        
+
         self.collectionSearch.register(UICollectionViewCell.classForCoder(), forCellWithReuseIdentifier: "TotalAmountCell")
     }
 
@@ -276,7 +275,7 @@ open class PaymentVaultViewController: MercadoPagoUIScrollViewController, UIColl
     func isCouponSection(section: Int) -> Bool {
         return MercadoPagoCheckoutViewModel.flowPreference.isDiscountEnable() && section == 1
     }
-    func isTotalSection(section:Int) -> Bool {
+    func isTotalSection(section: Int) -> Bool {
         return !MercadoPagoCheckoutViewModel.flowPreference.isDiscountEnable() && section == 1
     }
 
@@ -300,7 +299,7 @@ open class PaymentVaultViewController: MercadoPagoUIScrollViewController, UIColl
         if isTotalSection(section: section) {
             return 1
         }
-        
+
         return self.viewModel.getDisplayedPaymentMethodsCount()
     }
 
@@ -338,7 +337,7 @@ open class PaymentVaultViewController: MercadoPagoUIScrollViewController, UIColl
             for view in cell.contentView.subviews {
                 view.removeFromSuperview()
             }
-            
+
             let amountFontSize: CGFloat = 16
             let centsFontSize: CGFloat = 12
             let currency = MercadoPagoContext.getCurrency()
@@ -346,10 +345,10 @@ open class PaymentVaultViewController: MercadoPagoUIScrollViewController, UIColl
             let thousandSeparator = currency.getThousandsSeparatorOrDefault()
             let decimalSeparator = currency.getDecimalSeparatorOrDefault()
             let attributedTitle = NSMutableAttributedString(string: "Total: ".localized, attributes: [NSFontAttributeName: Utils.getFont(size: amountFontSize)])
-            
+
             let attributedAmount = Utils.getAttributedAmount(self.viewModel.amount, thousandSeparator: thousandSeparator, decimalSeparator: decimalSeparator, currencySymbol: currencySymbol, color: UIColor.px_white(), fontSize: amountFontSize, centsFontSize: centsFontSize, baselineOffset: 3, smallSymbol: false)
             attributedTitle.append(attributedAmount)
-            
+
             let props = PXContainedLabelProps(labelText: attributedTitle)
             let component = PXContainedLabelComponent(props: props)
             let view = component.render()

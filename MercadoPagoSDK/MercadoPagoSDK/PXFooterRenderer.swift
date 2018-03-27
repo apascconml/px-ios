@@ -58,7 +58,7 @@ class PXFooterRenderer: NSObject {
         button.add(for: .touchUpInside, footerAction.action)
         return button
     }
-  
+
     func buildLinkButton(with footerAction: PXComponentAction, color: UIColor? = .pxBlueMp) -> UIButton {
         let linkButton = PXSecondaryButton()
         linkButton.translatesAutoresizingMaskIntoConstraints = false

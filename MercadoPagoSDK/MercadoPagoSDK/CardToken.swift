@@ -331,9 +331,9 @@ open class CardToken: NSObject, CardInformationForm {
         var str: String
 
         str = String(self.expirationMonth) + "/" + String(self.expirationYear).substring(from:
-            
+
             String(self.expirationYear).index(before:String(self.expirationYear).index(before: String(self.expirationYear).endIndex)
-                
+
         ))
 
         return str as NSString

@@ -13,12 +13,12 @@ open class Customer: NSObject {
     open var address: Address?
     open var cards: [Card]?
     open var defaultCard: String?
-    open var _description: String?
+    open var customerDescription: String?
     open var dateCreated: Date?
     open var dateLastUpdated: Date?
     open var email: String?
     open var firstName: String?
-    open var _id: String?
+    open var customerId: String?
     open var identification: Identification?
     open var lastName: String?
     open var liveMode: Bool?
@@ -28,12 +28,12 @@ open class Customer: NSObject {
 
     open class func fromJSON(_ json: NSDictionary) -> Customer {
         let customer: Customer = Customer()
-        customer._id = json["id"] as! String!
+        customer.customerId = json["id"] as! String!
         customer.liveMode = json["live_mode"] as? Bool
         customer.email = json["email"] as? String
         customer.firstName = json["first_name"] as? String
         customer.lastName = json["last_name"] as? String
-        customer._description = json["description"] as? String
+        customer.customerDescription = json["description"] as? String
 
         if let identificationDic = json["identification"] as? NSDictionary {
             customer.identification = Identification.fromJSON(identificationDic)
@@ -65,11 +65,11 @@ open class Customer: NSObject {
 
     open func toJSONString() -> String {
         let defaultCard: Any =  self.defaultCard == nil ? JSONHandler.null : self.defaultCard!
-        let description: Any =   self._description == nil ? JSONHandler.null : self._description!
+        let description: Any =   self.customerDescription == nil ? JSONHandler.null : self.customerDescription!
         let email: Any =  self.email == nil ? JSONHandler.null : self.email!
         let firstName: Any =   self.firstName == nil ? JSONHandler.null : self.firstName!
         let lastName: Any =   self.lastName == nil ? JSONHandler.null : self.lastName!
-        let id: Any =   self._id == nil ? JSONHandler.null : self._id!
+        let id: Any =   self.customerId == nil ? JSONHandler.null : self.customerId!
         let identification: Any = self.identification == nil ? JSONHandler.null : self.identification!.toJSON()
         let address: Any = self.address == nil ? JSONHandler.null : self.address!.toJSON()
         let liveMode: Any = self.liveMode == nil ? JSONHandler.null : self.liveMode!
@@ -107,12 +107,12 @@ public func ==(obj1: Customer, obj2: Customer) -> Bool {
         obj1.address! == obj2.address! &&
             obj1.cards! == obj2.cards! &&
             obj1.defaultCard! == obj2.defaultCard! &&
-            obj1._description == obj2._description &&
+            obj1.customerDescription == obj2.customerDescription &&
             obj1.dateCreated == obj2.dateCreated &&
             obj1.dateLastUpdated == obj2.dateLastUpdated &&
             obj1.email == obj2.email &&
             obj1.firstName == obj2.firstName &&
-            obj1._id == obj2._id &&
+            obj1.customerId == obj2.customerId &&
             obj1.identification == obj2.identification &&
             obj1.lastName == obj2.lastName &&
             obj1.liveMode == obj2.liveMode &&

@@ -58,7 +58,7 @@ extension PXDefaultTheme: PXTheme {
     public func boldLabelTintColor() -> UIColor {
         return #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
     }
-    
+
     public func noTaxAndDiscountLabelTintColor() -> UIColor {
         return #colorLiteral(red: 0.2235294118, green: 0.7098039216, blue: 0.2901960784, alpha: 1)
     }
@@ -94,7 +94,7 @@ extension PXDefaultTheme: PXTheme {
     public func detailedBackgroundColor() -> UIColor {
         return #colorLiteral(red: 0.968627451, green: 0.968627451, blue: 0.968627451, alpha: 1)
     }
-    
+
     public func circleBackgroundColor() -> UIColor {
         return #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)
     }

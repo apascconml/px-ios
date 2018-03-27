@@ -13,7 +13,7 @@ extension ThemeManager {
     func saveNavBarStyleFor(navigationController: UINavigationController) {
         self.navigationControllerMemento = NavigationControllerMemento(navigationController: navigationController)
     }
-    
+
     func applyAppNavBarStyle(navigationController: UINavigationController) {
 
         guard let navControllerMemento = self.navigationControllerMemento else {

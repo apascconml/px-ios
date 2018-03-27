@@ -18,7 +18,7 @@ class PaymentMethodTest: BaseTest {
         let json: NSDictionary = MockManager.getMockFor("PaymentMethod")!
         let paymentMethodFromJSON = PaymentMethod.fromJSON(json)
 
-        XCTAssertEqual(paymentMethodFromJSON._id, "visa")
+        XCTAssertEqual(paymentMethodFromJSON.paymentMethodId, "visa")
         XCTAssertEqual(paymentMethodFromJSON.name, "Visa")
         XCTAssertEqual(paymentMethodFromJSON.paymentTypeId, "credit_card")
         XCTAssertEqual(paymentMethodFromJSON.status, "active")

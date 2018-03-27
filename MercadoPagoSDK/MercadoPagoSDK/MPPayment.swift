@@ -99,7 +99,7 @@ open class CustomerPayment: MPPayment {
     }
 
     open override func toJSON() -> [String: Any] {
-        self.payer?._id = customerId
+        self.payer?.payerId = customerId
         let customerPaymentObj: [String: Any] = super.toJSON()
         return customerPaymentObj
     }
@@ -114,7 +114,7 @@ open class BlacklabelPayment: MPPayment {
             return [:]
         }
 
-        self.payer = GroupsPayer(_id: payer._id, email: email, identification: payer.identification, entityType: payer.entityType)
+        self.payer = GroupsPayer(payerId: payer.payerId, email: email, identification: payer.identification, entityType: payer.entityType)
         let blacklabelPaymentObj: [String: Any] = super.toJSON()
         return blacklabelPaymentObj
     }

@@ -10,14 +10,14 @@ import UIKit
 import MercadoPagoPXTracking
 
 class PXReviewViewController: PXComponentContainerViewController {
-    
+
     // MARK: Tracking
     override open var screenName: String { get { return TrackingUtil.SCREEN_NAME_REVIEW_AND_CONFIRM } }
     override open var screenId: String { get { return TrackingUtil.SCREEN_ID_REVIEW_AND_CONFIRM } }
-    
+
     // MARK: Definitions
-    var footerView : UIView!
-    var floatingButtonView : UIView!
+    var footerView: UIView!
+    var floatingButtonView: UIView!
     var termsConditionView: PXTermsAndConditionView!
     lazy var itemViews = [UIView]()
     fileprivate var viewModel: PXReviewViewModel!
@@ -25,7 +25,7 @@ class PXReviewViewController: PXComponentContainerViewController {
     var callbackPaymentData: ((PaymentData) -> Void)
     var callbackConfirm: ((PaymentData) -> Void)
     var callbackExit: (() -> Void)
-    
+
     // MARK: Lifecycle - Publics
     init(viewModel: PXReviewViewModel, callbackPaymentData : @escaping ((PaymentData) -> Void), callbackConfirm: @escaping ((PaymentData) -> Void), callbackExit: @escaping (() -> Void)) {
         self.viewModel = viewModel
@@ -34,11 +34,11 @@ class PXReviewViewController: PXComponentContainerViewController {
         self.callbackExit = callbackExit
         super.init()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupUI()
@@ -46,7 +46,7 @@ class PXReviewViewController: PXComponentContainerViewController {
         self.scrollView.showsHorizontalScrollIndicator = false
         self.view.layoutIfNeeded()
     }
-    
+
     func update(viewModel: PXReviewViewModel) {
         self.viewModel = viewModel
     }
@@ -54,7 +54,7 @@ class PXReviewViewController: PXComponentContainerViewController {
 
 // MARK: UI Methods
 extension PXReviewViewController {
-    
+
     fileprivate func setupUI() {
         navBarTextColor = ThemeManager.shared.getTitleColorForReviewConfirmNavigation()
         loadMPStyles()
@@ -64,9 +64,9 @@ extension PXReviewViewController {
             renderViews()
         }
     }
-    
+
     fileprivate func renderViews() {
-        
+
         self.contentView.prepareForRender()
 
         // Add title view.
@@ -81,7 +81,7 @@ extension PXReviewViewController {
         contentView.addSubviewToBottom(summaryView)
         PXLayout.centerHorizontally(view: summaryView).isActive = true
         PXLayout.matchWidth(ofView: summaryView).isActive = true
-        
+
         // Add CFT view.
         if let cftView = getCFTComponentView() {
             contentView.addSubviewToBottom(cftView)
@@ -97,7 +97,7 @@ extension PXReviewViewController {
             PXLayout.matchWidth(ofView: itemView).isActive = true
             itemView.addSeparatorLineToBottom(height: 1)
         }
-        
+
         // Top Custom View
         if let topCustomView = getTopCustomView() {
             topCustomView.addSeparatorLineToBottom(height: 1)
@@ -106,14 +106,14 @@ extension PXReviewViewController {
             PXLayout.matchWidth(ofView: topCustomView).isActive = true
             PXLayout.centerHorizontally(view: topCustomView).isActive = true
         }
-        
+
         // Add payment method view.
         if let paymentMethodView = getPaymentMethodComponentView() {
             contentView.addSubviewToBottom(paymentMethodView)
             PXLayout.matchWidth(ofView: paymentMethodView).isActive = true
             PXLayout.centerHorizontally(view: paymentMethodView).isActive = true
         }
-        
+
         // Bottom Custom View
         if let bottomCustomView = getBottomCustomView() {
             bottomCustomView.addSeparatorLineToTop(height: 1)
@@ -155,14 +155,14 @@ extension PXReviewViewController {
         self.view.layoutIfNeeded()
         PXLayout.pinFirstSubviewToTop(view: self.contentView)?.isActive = true
         PXLayout.pinLastSubviewToBottom(view: self.contentView)?.isActive = true
-        
+
         super.refreshContentViewSize()
     }
 }
 
 // MARK: Component Builders
 extension PXReviewViewController {
-    
+
     fileprivate func buildItemComponentsViews() -> [UIView] {
         var itemViews = [UIView]()
         let itemComponents = viewModel.buildItemComponents()
@@ -185,25 +185,25 @@ extension PXReviewViewController {
         let action = PXComponentAction(label: PXStrings.review_change_payment_method_action.PXLocalized) {
             self.callbackPaymentData(self.viewModel.getClearPaymentData())
         }
-        
+
         if let paymentMethodComponent = viewModel.buildPaymentMethodComponent(withAction:action) {
             return paymentMethodComponent.render()
         }
-        
+
         return nil
     }
-    
+
     fileprivate func getSummaryComponentView() -> UIView {
         let summaryComponent = viewModel.buildSummaryComponent(width: PXLayout.getScreenWidth())
         let summaryView = summaryComponent.render()
         return summaryView
     }
-    
+
     fileprivate func getTitleComponentView() -> UIView {
         let titleComponent = viewModel.buildTitleComponent()
         return titleComponent.render()
     }
-    
+
     fileprivate func getCFTComponentView() -> UIView? {
         if viewModel.hasPayerCostAddionalInfo() {
             let cftView = PXCFTComponentView(withCFTValue: viewModel.paymentData.payerCost?.getCFTValue(), titleColor: ThemeManager.shared.getTheme().labelTintColor(), backgroundColor: ThemeManager.shared.getTheme().highlightBackgroundColor())
@@ -222,7 +222,7 @@ extension PXReviewViewController {
         let containedButtonView = PXContainedActionButtonRenderer().render(component)
         return containedButtonView
     }
-    
+
     fileprivate func getFooterView() -> UIView {
         let payAction = PXComponentAction(label: PXStrings.confirm_action.PXLocalized) { [weak self] in
             guard let strongSelf = self else {
@@ -241,26 +241,26 @@ extension PXReviewViewController {
         let footerComponent = PXFooterComponent(props: footerProps)
         return footerComponent.render()
     }
-    
+
     fileprivate func getTermsAndConditionView() -> PXTermsAndConditionView {
         let termsAndConditionView = PXTermsAndConditionView()
         return termsAndConditionView
     }
-    
+
     fileprivate func getTopCustomView() -> UIView? {
         if let component = self.viewModel.buildTopCustomComponent(), let componentView = component.render(store: PXCheckoutStore.sharedInstance, theme: ThemeManager.shared.getTheme()) {
             return componentView
         }
         return nil
     }
-    
+
     fileprivate func getBottomCustomView() -> UIView? {
         if let component = self.viewModel.buildBottomCustomComponent(), let componentView = component.render(store: PXCheckoutStore.sharedInstance, theme: ThemeManager.shared.getTheme()) {
             return componentView
         }
         return nil
     }
-    
+
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         super.scrollViewDidScroll(scrollView)
         if !isConfirmButtonVisible() {
@@ -271,14 +271,14 @@ extension PXReviewViewController {
     }
 }
 
-//MARK: Actions.
+// MARK: Actions.
 extension PXReviewViewController: PXTermsAndConditionViewDelegate {
-    
+
     fileprivate func trackConfirmActionEvent() {
-        var properties: [String: String] = [TrackingUtil.METADATA_PAYMENT_METHOD_ID: viewModel.paymentData.paymentMethod?._id ?? "", TrackingUtil.METADATA_PAYMENT_TYPE_ID: viewModel.paymentData.paymentMethod?.paymentTypeId ?? "", TrackingUtil.METADATA_AMOUNT_ID: viewModel.preference.getAmount().stringValue ?? ""]
+        var properties: [String: String] = [TrackingUtil.METADATA_PAYMENT_METHOD_ID: viewModel.paymentData.paymentMethod?.paymentMethodId ?? "", TrackingUtil.METADATA_PAYMENT_TYPE_ID: viewModel.paymentData.paymentMethod?.paymentTypeId ?? "", TrackingUtil.METADATA_AMOUNT_ID: viewModel.preference.getAmount().stringValue ?? ""]
 
         if let customerCard = viewModel.paymentOptionSelected as? CustomerPaymentMethod {
-            properties[TrackingUtil.METADATA_CARD_ID] = customerCard._id
+            properties[TrackingUtil.METADATA_CARD_ID] = customerCard.customerPaymentMethodId
         }
         if let installments = viewModel.paymentData.payerCost?.installments {
             properties[TrackingUtil.METADATA_INSTALLMENTS] = installments.stringValue
@@ -293,11 +293,11 @@ extension PXReviewViewController: PXTermsAndConditionViewDelegate {
         self.hideBackButton()
         self.callbackConfirm(self.viewModel.paymentData)
     }
-    
+
     fileprivate func cancelPayment() {
         self.callbackExit()
     }
-    
+
     func shouldOpenTermsCondition(_ title: String, screenName: String, url: URL) {
         let webVC = WebViewController(url: url, screenName: screenName, navigationBarTitle: title)
         webVC.title = title

@@ -12,7 +12,7 @@ extension MercadoPagoCheckout {
 
     func getCheckoutPreference() {
         self.presentLoading()
-        self.viewModel.mercadoPagoServicesAdapter.getCheckoutPreference(checkoutPreferenceId: self.viewModel.checkoutPreference._id, callback: { [weak self] (checkoutPreference) in
+        self.viewModel.mercadoPagoServicesAdapter.getCheckoutPreference(checkoutPreferenceId: self.viewModel.checkoutPreference.preferenceId, callback: { [weak self] (checkoutPreference) in
 
             guard let strongSelf = self else {
                 return
@@ -75,12 +75,11 @@ extension MercadoPagoCheckout {
         } else {
             _ = self.viewModel.copyViewModelAndAssignToCheckoutStore()
             let plugin = plugins[index]
-            plugin.initPaymentMethodPlugin(PXCheckoutStore.sharedInstance,{ [weak self] success in
+            plugin.initPaymentMethodPlugin(PXCheckoutStore.sharedInstance, { [weak self] success in
                 self?.initPlugin(plugins: plugins, index: index - 1)
             })
         }
     }
-
 
     func getPaymentMethodSearch() {
         self.presentLoading()
@@ -116,7 +115,7 @@ extension MercadoPagoCheckout {
             return
         }
         let bin = self.viewModel.cardToken?.getBin()
-        self.viewModel.mercadoPagoServicesAdapter.getIssuers(paymentMethodId: paymentMethod._id, bin: bin, callback: { [weak self] (issuers) in
+        self.viewModel.mercadoPagoServicesAdapter.getIssuers(paymentMethodId: paymentMethod.paymentMethodId, bin: bin, callback: { [weak self] (issuers) in
 
             guard let strongSelf = self else {
                 return
@@ -276,7 +275,7 @@ extension MercadoPagoCheckout {
 
     func cloneCardToken(token: Token, securityCode: String) {
         self.presentLoading()
-        self.viewModel.mercadoPagoServicesAdapter.cloneToken(tokenId: token._id, securityCode: securityCode, callback: { [weak self] (token) in
+        self.viewModel.mercadoPagoServicesAdapter.cloneToken(tokenId: token.tokenId, securityCode: securityCode, callback: { [weak self] (token) in
 
             guard let strongSelf = self else {
                 return
@@ -308,7 +307,7 @@ extension MercadoPagoCheckout {
 
         let bin = self.viewModel.cardToken?.getBin()
 
-        self.viewModel.mercadoPagoServicesAdapter.getInstallments(bin: bin, amount: self.viewModel.getAmount(), issuer: self.viewModel.paymentData.getIssuer(), paymentMethodId: paymentMethod._id, callback: { [weak self] (installments) in
+        self.viewModel.mercadoPagoServicesAdapter.getInstallments(bin: bin, amount: self.viewModel.getAmount(), issuer: self.viewModel.paymentData.getIssuer(), paymentMethodId: paymentMethod.paymentMethodId, callback: { [weak self] (installments) in
 
             guard let strongSelf = self else {
                 return
@@ -346,7 +345,7 @@ extension MercadoPagoCheckout {
 
         var paymentBody: [String: Any]
         if MercadoPagoCheckoutViewModel.servicePreference.isUsingDeafaultPaymentSettings() {
-            let mpPayment = MercadoPagoCheckoutViewModel.createMPPayment(preferenceId: self.viewModel.checkoutPreference._id, paymentData: self.viewModel.paymentData, binaryMode: self.viewModel.binaryMode)
+            let mpPayment = MercadoPagoCheckoutViewModel.createMPPayment(preferenceId: self.viewModel.checkoutPreference.preferenceId, paymentData: self.viewModel.paymentData, binaryMode: self.viewModel.binaryMode)
             paymentBody = mpPayment.toJSON()
         } else {
             paymentBody = self.viewModel.paymentData.toJSON()
@@ -402,7 +401,7 @@ extension MercadoPagoCheckout {
             fatalError("Get Instructions - Payment Result does no exist")
         }
 
-        guard let paymentId = paymentResult._id else {
+        guard let paymentId = paymentResult.paymentId else {
            fatalError("Get Instructions - Payment Id does no exist")
         }
 

@@ -9,8 +9,6 @@
 import UIKit
 import MercadoPagoPXTracking
 
-
-
 open class MercadoPagoCheckout: NSObject {
 
     static var currentCheckout: MercadoPagoCheckout?
@@ -240,7 +238,7 @@ open class MercadoPagoCheckout: NSObject {
     }
 
     func cancel() {
-        
+
         if let callback = viewModel.callbackCancel {
             callback()
             return
@@ -273,7 +271,7 @@ open class MercadoPagoCheckout: NSObject {
             }
         }
     }
-    
+
     func presentInitLoading() {
         self.createCurrentLoading()
         self.currentLoadingView?.modalTransitionStyle = .crossDissolve
@@ -300,7 +298,7 @@ open class MercadoPagoCheckout: NSObject {
     }
 
     internal func pushViewController(viewController: MercadoPagoUIViewController,
-                                     animated: Bool, backToChechoutRoot:Bool = false) {
+                                     animated: Bool, backToChechoutRoot: Bool = false) {
 
         viewController.hidesBottomBarWhenPushed = true
         // let mercadoPagoViewControllers = self.navigationController.viewControllers.filter {$0.isKind(of:MercadoPagoUIViewController.self)}
@@ -309,13 +307,13 @@ open class MercadoPagoCheckout: NSObject {
             self.navigationController.navigationBar.isHidden = false
             viewController.callbackCancel = { [weak self] in self?.backToCheckouitRoot() }
         }
-        
+
         self.navigationController.pushViewController(viewController, animated: animated)
         self.cleanCompletedCheckoutsFromNavigationStack()
         self.dismissLoading()
     }
 
-    func backToCheckouitRoot(){
+    func backToCheckouitRoot() {
         let mercadoPagoViewControllers = self.navigationController.viewControllers.filter {$0.isKind(of:MercadoPagoUIViewController.self)}
         if !mercadoPagoViewControllers.isEmpty {
             self.navigationController.popToViewController(mercadoPagoViewControllers[0], animated: true)
@@ -338,11 +336,11 @@ open class MercadoPagoCheckout: NSObject {
 }
 
 extension MercadoPagoCheckout: UINavigationControllerDelegate {
-    
+
     fileprivate func suscribeToNavigationFlow() {
         navigationController.delegate = self
     }
-    
+
     public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         if !(viewController is MercadoPagoUIViewController) {
             ThemeManager.shared.applyAppNavBarStyle(navigationController: navigationController)

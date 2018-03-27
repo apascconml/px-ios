@@ -50,11 +50,11 @@ open class PurchaseDetailTableViewCell: UITableViewCell {
                 separatorLineHeight = MercadoPagoCheckout.showPayerCostDescription() ? separatorLineHeight + 26 : separatorLineHeight
                 self.noRateLabel.attributedText = NSAttributedString(string : MercadoPagoCheckout.showPayerCostDescription() ? "Sin interés".localized : "")
             }
-            let separatorLine = ViewUtils.getTableCellSeparatorLineView(21, y: separatorLineHeight, width: self.frame.width - 42, height: 1)
+            let separatorLine = ViewUtils.getTableCellSeparatorLineView(21, posY: separatorLineHeight, width: self.frame.width - 42, height: 1)
             self.addSubview(separatorLine)
         } else {
             self.purchaseDetailAmount.attributedText = Utils.getAttributedAmount(amount, thousandSeparator: currency.thousandsSeparator, decimalSeparator: currency.decimalSeparator, currencySymbol: currency.symbol, color : ThemeManager.shared.getTheme().boldLabelTintColor(), fontSize : 18, centsFontSize: 12, baselineOffset : 5)
-            let separatorLine = ViewUtils.getTableCellSeparatorLineView(21, y: separatorLineHeight, width: self.frame.width - 42, height: 1)
+            let separatorLine = ViewUtils.getTableCellSeparatorLineView(21, posY: separatorLineHeight, width: self.frame.width - 42, height: 1)
             self.addSubview(separatorLine)
         }
 

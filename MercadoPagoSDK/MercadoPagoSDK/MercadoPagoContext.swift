@@ -126,7 +126,7 @@ open class MercadoPagoContext: NSObject {
     open static func getLanguage() -> String {
         return sharedInstance.language
     }
-    
+
     open static func getLocalizedID() -> String {
         let bundle = MercadoPago.getBundle() ?? Bundle.main
 
@@ -140,20 +140,20 @@ open class MercadoPagoContext: NSObject {
             return "es"
         }
     }
-    
-    open static func getParentLanguage() -> String {
+
+    open static func getParentLanguageID() -> String {
         return MercadoPagoContext.getLanguage().components(separatedBy: "-")[0]
     }
-    
+
     open static func getLocalizedPath() -> String {
         let bundle = MercadoPago.getBundle() ?? Bundle.main
         let pathID = getLocalizedID()
         return bundle.path(forResource: pathID, ofType : "lproj")!
     }
-    
+
     open static func getParentLocalizedPath() -> String {
         let bundle = MercadoPago.getBundle() ?? Bundle.main
-        let pathID = getParentLanguage()
+        let pathID = getParentLanguageID()
         return bundle.path(forResource: pathID, ofType : "lproj")!
     }
 

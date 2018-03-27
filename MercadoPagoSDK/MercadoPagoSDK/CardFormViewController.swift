@@ -70,7 +70,7 @@ open class CardFormViewController: MercadoPagoUIViewController, UITextFieldDeleg
     override func trackInfo() {
         var finalId = screenId
         if let cardType = self.viewModel.getPaymentMethodTypeId() {
-            finalId = finalId + "/" + cardType
+            finalId += "/" + cardType
         }
         MPXTracker.sharedInstance.trackScreen(screenId: finalId, screenName: screenName)
         self.trackStatus()
@@ -80,7 +80,7 @@ open class CardFormViewController: MercadoPagoUIViewController, UITextFieldDeleg
         var finalId = screenId
 
         if let cardType = self.viewModel.getPaymentMethodTypeId() {
-            finalId = finalId + "/" + cardType
+            finalId += "/" + cardType
         }
 
         if editingLabel === cardNumberLabel {
@@ -803,7 +803,7 @@ open class CardFormViewController: MercadoPagoUIViewController, UITextFieldDeleg
         let securityCode = self.viewModel.customerCard!.isSecurityCodeRequired() ? self.cvvLabel?.text : nil
         return  SavedCardToken(card: viewModel.customerCard!, securityCode: securityCode, securityCodeRequired: self.viewModel.customerCard!.isSecurityCodeRequired())
     }
-    
+
     fileprivate func getTextboxPlaceholder() -> String {
         if editingLabel == cardNumberLabel {
             return PXStrings.card_form_card_number.PXLocalized

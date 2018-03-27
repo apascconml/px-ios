@@ -215,7 +215,7 @@ class IssuerAdditionalStepViewModel: AdditionalStepViewModel {
     override open var screenId: String { get { return TrackingUtil.SCREEN_ID_CARD_FORM + TrackingUtil.CARD_ISSUER} }
 
     override func track() {
-        let metadata: [String: String] = [TrackingUtil.METADATA_PAYMENT_METHOD_ID: paymentMethods[0]._id, TrackingUtil.METADATA_PAYMENT_TYPE_ID: paymentMethods[0].paymentTypeId]
+        let metadata: [String: String] = [TrackingUtil.METADATA_PAYMENT_METHOD_ID: paymentMethods[0].paymentMethodId, TrackingUtil.METADATA_PAYMENT_TYPE_ID: paymentMethods[0].paymentTypeId]
         MPXTracker.sharedInstance.trackScreen(screenId: screenId, screenName: screenName, properties: metadata)
     }
 
@@ -249,7 +249,7 @@ class PayerCostAdditionalStepViewModel: AdditionalStepViewModel {
     }
 
     override func track() {
-        let metadata: [String: String] = [TrackingUtil.METADATA_PAYMENT_METHOD_ID: paymentMethods[0]._id]
+        let metadata: [String: String] = [TrackingUtil.METADATA_PAYMENT_METHOD_ID: paymentMethods[0].paymentMethodId]
         MPXTracker.sharedInstance.trackScreen(screenId: screenId, screenName: screenName, properties: metadata)
     }
 

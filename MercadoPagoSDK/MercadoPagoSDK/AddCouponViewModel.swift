@@ -28,12 +28,12 @@ class AddCouponViewModel: NSObject {
 
     func getCoupon(code: String, success: @escaping () -> Void, failure: @escaping ((_ errorMessage: String) -> Void)) {
         self.mercadoPagoServicesAdapter.getCodeDiscount(amount: self.amount, payerEmail: self.email, couponCode: code, callback: { [weak self] (discount) in
-        
+
             if let coupon = discount {
                 self?.coupon = coupon
                 success()
             }
-            
+
         }) { (error) in
 
             if error.localizedDescription == self.DISCOUNT_ERROR_CAMPAIGN_DOESNT_MATCH {

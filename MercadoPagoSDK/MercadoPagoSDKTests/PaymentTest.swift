@@ -13,7 +13,7 @@ class PaymentTest: BaseTest {
     func testFromJSON() {
         let json: NSDictionary = MockManager.getMockFor("Payment")!
         let paymentFromJSON = Payment.fromJSON(json)
-        XCTAssertEqual(paymentFromJSON._id, "123123124235")
+        XCTAssertEqual(paymentFromJSON.paymentId, "123123124235")
         XCTAssertEqual(paymentFromJSON.currencyId, "currency_id")
         XCTAssertEqual(paymentFromJSON.card.idCard, "123456")
         XCTAssertEqual(paymentFromJSON.card.lastFourDigits, "4444")

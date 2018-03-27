@@ -74,7 +74,7 @@
 
     [self setPaymentCallback];
 
-    DiscountCoupon* dc = [[DiscountCoupon alloc] initWith_id:123];
+    DiscountCoupon* dc = [[DiscountCoupon alloc] initWithDiscountId:123];
     dc.name = @"Patito Off";
     dc.coupon_amount = @"30";
     dc.amount_off = @"30";
@@ -83,7 +83,7 @@
     dc.amountWithoutDiscount = 60;
     dc = nil;
 
-    self.pref._id = @"243962506-a8ef5e89-927b-4e77-b937-5c88f1c21771";
+    self.pref.preferenceId = @"243966003-0812580b-6082-4104-9bce-1a4c48a5bc44";
 
     self.mpCheckout = [[MercadoPagoCheckout alloc] initWithPublicKey:@"TEST-e4bdd1cf-bcb2-43f7-b565-ed4c9ea25be7"
     accessToken:nil
@@ -173,7 +173,7 @@
 -(void) setPaymentData {
     PaymentData* paymentData = [[PaymentData alloc] init];
     paymentData.paymentMethod = [[PaymentMethod alloc] init];
-    paymentData.paymentMethod._id = @"visa";
+    paymentData.paymentMethod.paymentMethodId = @"visa";
     paymentData.paymentMethod.paymentTypeId = @"credit_card";
     paymentData.paymentMethod.name = @"visa";
     paymentData.payerCost = [[PayerCost alloc] initWithInstallments:1 installmentRate:0 labels:nil minAllowedAmount:100 maxAllowedAmount:1000 recommendedMessage:nil installmentAmount:100 totalAmount:100];
@@ -182,8 +182,8 @@
 }
 -(void)setRyCUpdate {
     [MercadoPagoCheckout setPaymentDataCallbackWithPaymentDataCallback: ^(PaymentData *paymentData) {
-        NSLog(@"%@", paymentData.paymentMethod._id);
-        NSLog(@"%@", paymentData.token._id);
+        NSLog(@"%@", paymentData.paymentMethod.paymentMethodId);
+        NSLog(@"%@", paymentData.token.tokenId);
         NSLog(@"%ld", paymentData.payerCost.installments);
 
         ReviewScreenPreference *reviewPreferenceUpdated = [[ReviewScreenPreference alloc] init];
@@ -199,10 +199,10 @@
 -(void)setPaymentDataCallback {
 
     [MercadoPagoCheckout setPaymentDataCallbackWithPaymentDataCallback:^(PaymentData * paymentData) {
-        NSLog(@"PaymentMethod: %@", paymentData.paymentMethod._id);
-        NSLog(@"Token_id: %@", paymentData.token._id);
+        NSLog(@"PaymentMethod: %@", paymentData.paymentMethod.paymentMethodId);
+        NSLog(@"Token_id: %@", paymentData.token.tokenId);
         NSLog(@"Installemtns: %ld", paymentData.payerCost.installments);
-        NSLog(@"Issuer_id: %@", paymentData.issuer._id);
+        NSLog(@"Issuer_id: %@", paymentData.issuer.issuerId);
         self.paymentData = paymentData;
         [self setPaymentCallback];
 
@@ -211,7 +211,7 @@
 
 -(void)setPaymentCallback {
     [MercadoPagoCheckout setPaymentCallbackWithPaymentCallback:^(Payment * payment) {
-        NSLog(@"%@", payment._id);
+        NSLog(@"%@", payment.paymentId);
         [self.navigationController popToRootViewControllerAnimated:NO];
     }];
 }
@@ -229,10 +229,10 @@
     [MercadoPagoCheckout setFlowPreference:flowPreference];
 
     [MercadoPagoCheckout setPaymentDataCallbackWithPaymentDataCallback:^(PaymentData * paymentData) {
-        NSLog(@"PaymentMethod: %@", paymentData.paymentMethod._id);
-        NSLog(@"Token_id: %@", paymentData.token._id);
+        NSLog(@"PaymentMethod: %@", paymentData.paymentMethod.paymentMethodId);
+        NSLog(@"Token_id: %@", paymentData.token.tokenId);
         NSLog(@"Installemtns: %ld", paymentData.payerCost.installments);
-        NSLog(@"Issuer_id: %@", paymentData.issuer._id);
+        NSLog(@"Issuer_id: %@", paymentData.issuer.issuerId);
 
         FlowPreference *flowPreference = [[FlowPreference alloc]init];
         [flowPreference enableReviewAndConfirmScreen];
@@ -245,9 +245,9 @@
 }
 
 -(void)setCheckoutPref_CreditCardNotExcluded {
-    Item *item = [[Item alloc] initWith_id:@"itemId" title:@"item title" quantity:100 unitPrice:10 description:nil currencyId:@"ARS"];
-    Item *item2 = [[Item alloc] initWith_id:@"itemId2" title:@"item title 2" quantity:2 unitPrice:2 description:@"item description" currencyId:@"ARS"];
-    Payer *payer = [[Payer alloc] initWith_id:@"payerId" email:@"payer@email.com" identification:nil entityType:nil];
+    Item *item = [[Item alloc] initWithItemId:@"itemId" title:@"item title" quantity:100 unitPrice:10 description:nil currencyId:@"ARS"];
+    Item *item2 = [[Item alloc] initWithItemId:@"itemId2" title:@"item title 2" quantity:2 unitPrice:2 description:@"item description" currencyId:@"ARS"];
+    Payer *payer = [[Payer alloc] initWithPayerId:@"payerId" email:@"payer@email.com" identification:nil entityType:nil];
 
     NSArray *items = [NSArray arrayWithObjects:item2, item2, nil];
 
@@ -259,9 +259,9 @@
 }
 
 -(void)setCheckoutPref_CardsNotExcluded {
-    Item *item = [[Item alloc] initWith_id:@"itemId" title:@"item title" quantity:100 unitPrice:10 description:@"Alfajor" currencyId:@"ARS"];
-    Item *item2 = [[Item alloc] initWith_id:@"itemId2" title:@"item title 2" quantity:1 unitPrice:2.5 description:@"Sugus" currencyId:@"ARS"];
-    Payer *payer = [[Payer alloc] initWith_id:@"payerId" email:@"payer@email.com" identification:nil entityType:nil];
+    Item *item = [[Item alloc] initWithItemId:@"itemId" title:@"item title" quantity:100 unitPrice:10 description:@"Alfajor" currencyId:@"ARS"];
+    Item *item2 = [[Item alloc] initWithItemId:@"itemId2" title:@"item title 2" quantity:1 unitPrice:2.5 description:@"Sugus" currencyId:@"ARS"];
+    Payer *payer = [[Payer alloc] initWithPayerId:@"payerId" email:@"payer@email.com" identification:nil entityType:nil];
 
     NSArray *items = [NSArray arrayWithObjects:item, item2, nil];
 
@@ -273,7 +273,7 @@
 }
 
 -(void)setCheckoutPref_WithId {
-    self.pref = [[CheckoutPreference alloc] initWith_id: @"242624092-2a26fccd-14dd-4456-9161-5f2c44532f1d"];
+    self.pref = [[CheckoutPreference alloc] initWithPreferenceId: @"242624092-2a26fccd-14dd-4456-9161-5f2c44532f1d"];
 }
 
 -(void)setPaymentResultScreenPreference {
@@ -331,8 +331,8 @@
 -(void)invokeCallback:(MPCustomCell *)button {
 
     [[self.customCell getDelegate] invokeCallbackWithPaymentDataWithRowCallback:^(PaymentData *paymentData) {
-        NSLog(@"%@", paymentData.paymentMethod._id);
-        NSLog(@"%@", paymentData.token._id);
+        NSLog(@"%@", paymentData.paymentMethod.paymentMethodId);
+        NSLog(@"%@", paymentData.token.tokenId);
         NSLog(@"%ld", paymentData.payerCost.installments);
 
         // Mostrar modal

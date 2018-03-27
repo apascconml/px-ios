@@ -22,7 +22,7 @@ extension MercadoPagoCheckout {
         }
 
         let containerVC = PXPluginConfigViewController()
-        
+
         guard let paymentMethodConfigPluginComponent = paymentMethodPlugin.paymentMethodConfigPlugin else {
             return
         }
@@ -112,5 +112,3 @@ extension MercadoPagoCheckout {
         showPaymentPluginComponent(paymentPluginComponent: paymentPluginComponent)
     }
 }
-
-

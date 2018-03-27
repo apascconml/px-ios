@@ -6,6 +6,7 @@
 //  Copyright © 2017 MercadoPago. All rights reserved.
 //
 
+
 import Foundation
 import XCTest
 
@@ -843,7 +844,7 @@ class PaymentMethodPluginFlowTest: BaseTest {
         step = mpCheckout.viewModel.nextStep()
         XCTAssertEqual(CheckoutStep.SCREEN_HOOK_BEFORE_PAYMENT, step)
         mpCheckout.viewModel.continueFrom(hook: .BEFORE_PAYMENT)
-        XCTAssertEqual(PXCheckoutStore.sharedInstance.getPaymentData().getPaymentMethod()?._id, "account_money")
+        XCTAssertEqual(PXCheckoutStore.sharedInstance.getPaymentData().getPaymentMethod()?.paymentMethodId, "account_money")
 
         // 11 . Pagar
         step = mpCheckout.viewModel.nextStep()
@@ -1232,3 +1233,4 @@ class PaymentMethodPluginFlowTest: BaseTest {
         XCTAssertEqual(CheckoutStep.ACTION_FINISH, step)
     }
 }
+    // swiftlint:disable:this file_length

@@ -125,34 +125,34 @@ extension MercadoPagoCheckout {
     }
 
     func showReviewAndConfirmScreen() {
-        
+
         let reviewVC = PXReviewViewController(viewModel: self.viewModel.reviewConfirmViewModel(), callbackPaymentData: { [weak self] (paymentData: PaymentData) in
             guard let strongSelf = self else {
                 return
             }
 
             strongSelf.viewModel.updateCheckoutModel(paymentData: paymentData)
-        
+
             if !paymentData.hasPaymentMethod() && MercadoPagoCheckoutViewModel.changePaymentMethodCallback != nil {
                 MercadoPagoCheckoutViewModel.changePaymentMethodCallback!()
             }
             strongSelf.executeNextStep()
-            
+
         }, callbackConfirm: { [weak self] (paymentData: PaymentData) in
-            
+
             guard let strongSelf = self else {
                 return
             }
 
             strongSelf.viewModel.updateCheckoutModel(paymentData: paymentData)
-            
+
             if MercadoPagoCheckoutViewModel.paymentDataConfirmCallback != nil {
                 MercadoPagoCheckoutViewModel.paymentDataCallback = MercadoPagoCheckoutViewModel.paymentDataConfirmCallback
                 strongSelf.finish()
             } else {
                 strongSelf.executeNextStep()
             }
-            
+
         }, callbackExit: { [weak self] () -> Void in
             guard let strongSelf = self else {
                 return
@@ -160,12 +160,12 @@ extension MercadoPagoCheckout {
 
             strongSelf.cancel()
         })
-        
+
         self.pushViewController(viewController: reviewVC, animated: true)
     }
 
     func showSecurityCodeScreen() {
-        
+
         let securityCodeVc = SecurityCodeViewController(viewModel: self.viewModel.savedCardSecurityCodeViewModel(), collectSecurityCodeCallback : { [weak self] (cardInformation: CardInformationForm, securityCode: String) -> Void in
             self?.createCardToken(cardInformation: cardInformation as? CardInformation, securityCode: securityCode)
 
@@ -216,16 +216,16 @@ extension MercadoPagoCheckout {
         self.pushViewController(viewController : congratsViewController, animated: false)
 
     }
-    
+
     func showBusinessResultScreen() {
-        
+
         guard let businessResult = self.viewModel.businessResult else {
             return
         }
         let viewModel = PXBusinessResultViewModel(businessResult: businessResult, paymentData: self.viewModel.paymentData)
         let congratsViewController = PXResultViewController(viewModel: viewModel) { (resultcode) in}
         self.pushViewController(viewController : congratsViewController, animated: false)
-        
+
     }
 
     func showErrorScreen() {

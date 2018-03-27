@@ -13,10 +13,10 @@ final class DisclaimerView: UIView, PXComponent {
     fileprivate let VERTICAL_MARGIN: CGFloat = 2.0
     fileprivate let HORIZONTAL_MARGIN: CGFloat = 24.0
     static private let FONT_SIZE: CGFloat = PXLayout.XXS_FONT
-    
+
     private var textColor: CGColor!
     var disclaimerLabel: UILabel!
-    
+
     public init(frame: CGRect, disclaimerText: String, colorText: UIColor =  UIColor.px_grayDark(), disclaimerFontSize: CGFloat = FONT_SIZE) {
         super.init(frame: frame)
         disclaimerLabel = UILabel(frame:CGRect(x: HORIZONTAL_MARGIN, y: VERTICAL_MARGIN, width: frame.size.width - 2*HORIZONTAL_MARGIN, height: frame.size.height - 2 * VERTICAL_MARGIN))
@@ -26,14 +26,14 @@ final class DisclaimerView: UIView, PXComponent {
         disclaimerLabel.text = disclaimerText
         self.addSubview(disclaimerLabel)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
     }
 }
 
 extension DisclaimerView {
-    
+
     func getHeight() -> CGFloat {
         return self.disclaimerLabel.requiredHeight() + 2 * VERTICAL_MARGIN
     }

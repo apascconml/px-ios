@@ -91,14 +91,14 @@ class MercadoPagoCheckoutTest: BaseTest {
 
     func testCollectCheckoutPreference() {
         let checkoutPreference = MockBuilder.buildCheckoutPreference()
-        checkoutPreference._id = "sarasa"
+        checkoutPreference.preferenceId = "sarasa"
         let navControllerInstance = UINavigationController()
         self.mpCheckout = MercadoPagoCheckoutMock(publicKey: "PK_MLA", accessToken: "", checkoutPreference: checkoutPreference, navigationController: navControllerInstance)
 
         self.mpCheckout!.getCheckoutPreference()
 
         // Se obtiene id de MockedResponse
-        XCTAssertEqual("NO_EXCLUSIONS", self.mpCheckout!.viewModel.checkoutPreference._id)
+        XCTAssertEqual("NO_EXCLUSIONS", self.mpCheckout!.viewModel.checkoutPreference.preferenceId)
 
     }
 
@@ -136,12 +136,9 @@ class MercadoPagoCheckoutTest: BaseTest {
 
         // Evitar ir a buscar preferencia. Preferencia inválida debería mostrar error
         checkoutPreference.items = nil
-        checkoutPreference._id = nil
+        checkoutPreference.preferenceId = nil
         self.mpCheckout = MercadoPagoCheckout(publicKey: "PK_MLA", accessToken: "", checkoutPreference: checkoutPreference, navigationController: navControllerInstance)
         self.mpCheckout!.validatePreference()
-//        XCTAssertNotNil(MercadoPagoCheckoutViewModel.error)
-//        XCTAssertNotNil(MercadoPagoCheckoutViewModel.error!.messageDetail)//,errorMessageExpected)
-
     }
 
     func testCollectCard() {

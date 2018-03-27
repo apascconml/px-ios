@@ -71,7 +71,7 @@ open class Installment: NSObject {
 
         var payerCostsJson = ""
         for pc in payerCosts! {
-            payerCostsJson = payerCostsJson + pc.toJSONString()
+            payerCostsJson += pc.toJSONString()
         }
         obj["payerCosts"] = payerCostsJson
 

@@ -39,7 +39,7 @@ extension PXResultViewModel {
     }
 
     func badgeImage() -> UIImage? {
-        if !preference._showBadgeImage {
+        if !preference.showBadgeImage {
             return nil
         }
         if isAccepted() {
@@ -77,7 +77,7 @@ extension PXResultViewModel {
                 return text.toAttributedString(attributes:[NSFontAttributeName: Utils.getFont(size: PXHeaderRenderer.LABEL_FONT_SIZE)])
             }
         }
-        if !preference._showLabelText {
+        if !preference.showLabelText {
             return nil
         } else {
             return NSMutableAttributedString(string: "Algo salió mal...".localized, attributes: [NSFontAttributeName: Utils.getFont(size: PXHeaderRenderer.LABEL_FONT_SIZE)])
@@ -165,11 +165,11 @@ extension PXResultViewModel {
     }
 
     func getTitleForRejected(_ paymentMethod: PaymentMethod, _ title: String) -> NSAttributedString {
-        
+
         guard let paymentMethodName = paymentMethod.name else {
             return getDefaultRejectedTitle()
         }
-        
+
         return NSMutableAttributedString(string: (title.localized as NSString).replacingOccurrences(of: "%0", with: "\(paymentMethodName)"), attributes: [NSFontAttributeName: Utils.getFont(size: PXHeaderRenderer.TITLE_FONT_SIZE)])
     }
 

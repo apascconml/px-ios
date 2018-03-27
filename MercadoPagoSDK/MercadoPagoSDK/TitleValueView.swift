@@ -51,30 +51,30 @@ final class TitleValueView: UIView, PXComponent {
         }
         self.adjustViewFrames()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
 extension TitleValueView {
-    
+
     func getHeight() -> CGFloat {
         return self.titleLabel.requiredHeight(numberOfLines: 1) + 2 * VERTICAL_MARGIN
     }
-    
+
     func getWeight() -> CGFloat {
         return self.frame.size.width
     }
-    
+
     func getTitleFrame() -> CGRect {
         return CGRect(x: HORIZONTAL_MARGIN, y: VERTICAL_MARGIN, width: (self.frame.size.width - 3 * HORIZONTAL_MARGIN) * VALUE_WIDTH_PERCENT, height: self.frame.size.height - 2 * VERTICAL_MARGIN)
     }
-    
+
     func getValueFrame() -> CGRect {
         return CGRect(x: HORIZONTAL_MARGIN +  ((self.frame.size.width - 3 * HORIZONTAL_MARGIN) * VALUE_WIDTH_PERCENT) + HORIZONTAL_MARGIN, y: VERTICAL_MARGIN, width: (self.frame.size.width - 3 * HORIZONTAL_MARGIN) * VALUE_WIDTH_PERCENT, height: self.frame.size.height - 2 * VERTICAL_MARGIN)
     }
-    
+
     func adjustViewFrames() {
         let frameTitle = self.titleLabel.frame
         self.titleLabel.frame = CGRect(x: frameTitle.origin.x, y: frameTitle.origin.y, width: frameTitle.size.width, height: self.titleLabel.requiredHeight(numberOfLines: 1))

@@ -355,6 +355,7 @@
 		4B8D73521E780F8F009C1209 /* SummaryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8D73501E780F8F009C1209 /* SummaryRow.swift */; };
 		4B9FEFCF1EA64E12002B78A2 /* PXReviewViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9FEFCD1EA64E12002B78A2 /* PXReviewViewModelTest.swift */; };
 		4B9FEFD11EAE35D0002B78A2 /* AdditionalStepViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9FEFD01EAE35D0002B78A2 /* AdditionalStepViewModelTest.swift */; };
+		4BA2934020659220000BC40D /* PXTrackingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE3C55120581048005BE20C /* PXTrackingStore.swift */; };
 		4BA4DB071E425C6700B70550 /* TotalPayerCostRowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFD451D1E4220BB006F9F62 /* TotalPayerCostRowTableViewCell.swift */; };
 		4BA52FB61FFEAD9C0088B379 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 155F58321E3923180070A0D6 /* Images.xcassets */; };
 		4BAA55E71DB0012300501061 /* AdditionalStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAA55E51DB0012300501061 /* AdditionalStepViewController.swift */; };
@@ -2853,7 +2854,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\necho \"Swiftlint disabled\"\n#swiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\necho \"Swiftlint disabled\"\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 		531F38B15A5AD3D6E3AC8F5C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3196,6 +3197,7 @@
 				4B161A27200545550009A7D9 /* ReviewScreenPreference.swift in Sources */,
 				FCD0890A1F7E8FB0002F3F22 /* SecondaryInfoTableViewCell.swift in Sources */,
 				156A6DD81F7019A200B17A20 /* CardFormViewModel.swift in Sources */,
+				4BA2934020659220000BC40D /* PXTrackingStore.swift in Sources */,
 				4B2823951E2E82B1004C02E9 /* UIImage+Additions.swift in Sources */,
 				4BFAC0FC1E2E8A0D005EB383 /* DecorationPreference.swift in Sources */,
 				4B08CDAF1F224CA600FE800A /* MercadoPagoESCImplementation.swift in Sources */,
