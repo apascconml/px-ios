@@ -159,10 +159,10 @@ open class IdentificationViewController: MercadoPagoUIViewController, UITextFiel
 
         self.tipoDeDocumentoLabel.text =  PXStrings.identification_form_id_number.PXLocalized
         self.tipoDeDocumentoLabel.font = Utils.getIdentificationFont(size: 10)
-        self.numberTextField.placeholder = "Número".localized_temp
+        self.numberTextField.placeholder = PXStrings.payer_info_number.PXLocalized
         self.numberTextField.borderActiveColor = ThemeManager.shared.getTheme().secondaryButton().tintColor
         self.numberTextField.borderInactiveColor = ThemeManager.shared.getTheme().secondaryButton().tintColor
-        self.textField.placeholder = "Tipo".localized_temp
+        self.textField.placeholder = PXStrings.payer_info_type.PXLocalized
         self.textField.borderActiveColor = ThemeManager.shared.getTheme().secondaryButton().tintColor
         self.textField.borderInactiveColor = ThemeManager.shared.getTheme().secondaryButton().tintColor
         self.view.backgroundColor = ThemeManager.shared.getMainColor()

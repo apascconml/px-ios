@@ -45,15 +45,6 @@
 		<key>pt</key>
 		<string>O número de identificação é inválido</string>
 	</dict>
-	<key>Continuar</key>
-	<dict>
-		<key>es</key>
-		<string>Continuar</string>
-		<key>en</key>
-		<string>Continue</string>
-		<key>pt</key>
-		<string>Continuar</string>
-	</dict>
 	<key>Ingresa el número de la tarjeta de crédito</key>
 	<dict>
 		<key>es</key>
@@ -90,24 +81,6 @@
 		<key>pt</key>
 		<string>Você só pode pagar com </string>
 	</dict>
-	<key>No puedes pagar con esta tarjeta</key>
-	<dict>
-		<key>es</key>
-		<string>No puedes pagar con esta tarjeta</string>
-		<key>en</key>
-		<string>Credit card not supported</string>
-		<key>pt</key>
-		<string>Você não pode pagar com este cartão</string>
-	</dict>
-	<key>MAS INFO</key>
-	<dict>
-		<key>es</key>
-		<string>MÁS INFO</string>
-		<key>en</key>
-		<string>MORE INFO</string>
-		<key>pt</key>
-		<string>MAIS INFO</string>
-	</dict>
 	<key>Ingresar tarjeta</key>
 	<dict>
 		<key>es</key>
@@ -135,24 +108,6 @@
 		<key>pt</key>
 		<string>OK</string>
 	</dict>
-	<key>Número</key>
-	<dict>
-		<key>es</key>
-		<string>Número</string>
-		<key>en</key>
-		<string>Number</string>
-		<key>pt</key>
-		<string>Número</string>
-	</dict>
-	<key>Tipo</key>
-	<dict>
-		<key>es</key>
-		<string>Tipo</string>
-		<key>en</key>
-		<string>Type</string>
-		<key>pt</key>
-		<string>Tipo</string>
-	</dict>
 	<key>-- Sin interés</key>
 	<dict>
 		<key>es</key>
@@ -179,60 +134,6 @@
 		<string>Doesn&apos;t include bank interest</string>
 		<key>pt</key>
 		<string>Não inclui juros bancários</string>
-	</dict>
-	<key>¿Quién emitió tu tarjeta?</key>
-	<dict>
-		<key>es</key>
-		<string>¿Quién emitió tu tarjeta?</string>
-		<key>en</key>
-		<string>Which is your bank?</string>
-		<key>pt</key>
-		<string>Qual é o seu banco?</string>
-	</dict>
-	<key>¿Qué tipo de tarjeta es?</key>
-	<dict>
-		<key>es</key>
-		<string>¿Qué tipo de tarjeta es?</string>
-		<key>en</key>
-		<string>Which type of card is it?</string>
-		<key>pt</key>
-		<string>Qual é o tipo do cartão?</string>
-	</dict>
-	<key>Crédito</key>
-	<dict>
-		<key>es</key>
-		<string>Crédito</string>
-		<key>en</key>
-		<string>Credit</string>
-		<key>pt</key>
-		<string>Crédito</string>
-	</dict>
-	<key>Débito</key>
-	<dict>
-		<key>es</key>
-		<string>Débito</string>
-		<key>en</key>
-		<string>Debit</string>
-		<key>pt</key>
-		<string>Débito</string>
-	</dict>
-	<key>¿Cuál es el tipo de persona?</key>
-	<dict>
-		<key>es</key>
-		<string>¿Cuál es el tipo de persona?</string>
-		<key>en</key>
-		<string>Which is your entity&apos;s type?</string>
-		<key>pt</key>
-		<string>Qual é o tipo de pessoa?</string>
-	</dict>
-	<key>¿Cuál es tu banco?</key>
-	<dict>
-		<key>es</key>
-		<string>¿Cuál es tu banco?</string>
-		<key>en</key>
-		<string>Which is your bank?</string>
-		<key>pt</key>
-		<string>Qual é o seu banco?</string>
 	</dict>
 	<key>Estamos procesando el pago</key>
 	<dict>

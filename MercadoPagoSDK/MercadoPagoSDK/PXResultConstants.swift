@@ -35,5 +35,5 @@ struct PXFooterResultConstants {
     static let ERROR_LINK_TEXT = PXStrings.cancel_payment_action
     static let C4AUTH_LINK_TEXT = PXStrings.cancel_payment_action
     static let WARNING_LINK_TEXT = "Pagar con otro medio"
-    static let DEFAULT_LINK_TEXT = "Continuar"
+    static let DEFAULT_LINK_TEXT = PXStrings.payment_result_screen_congrats_finish_button
 }

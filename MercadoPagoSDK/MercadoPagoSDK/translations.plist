@@ -360,6 +360,15 @@ Se preferir, você pode escolher outro meio de pagamento.</string>
 		<key>pt</key>
 		<string>Entre todos os números de cartão</string>
 	</dict>
+	<key>card_form_card_not_supported</key>
+	<dict>
+		<key>es</key>
+		<string>No puedes pagar con esta tarjeta</string>
+		<key>en</key>
+		<string>Credit card not supported</string>
+		<key>pt</key>
+		<string>Você não pode pagar com este cartão</string>
+	</dict>
 	<key>identification_form_id_number</key>
 	<dict>
 		<key>es</key>
@@ -564,6 +573,69 @@ Se preferir, você pode escolher outro meio de pagamento.</string>
 		<string>Payment Method no supported</string>
 		<key>pt</key>
 		<string>Você não pode pagar com este método de pagamento</string>
+	</dict>
+	<key>more_information</key>
+	<dict>
+		<key>es</key>
+		<string>MÁS INFO</string>
+		<key>en</key>
+		<string>MORE INFO</string>
+		<key>pt</key>
+		<string>MAIS INFO</string>
+	</dict>
+	<key>additional_step_issuer_selection_title</key>
+	<dict>
+		<key>es</key>
+		<string>¿Quién emitió tu tarjeta?</string>
+		<key>en</key>
+		<string>Which is your bank?</string>
+		<key>pt</key>
+		<string>Qual é o seu banco?</string>
+	</dict>
+	<key>additional_step_card_type_title</key>
+	<dict>
+		<key>es</key>
+		<string>¿Qué tipo de tarjeta es?</string>
+		<key>en</key>
+		<string>Which type of card is it?</string>
+		<key>pt</key>
+		<string>Qual é o tipo do cartão?</string>
+	</dict>
+	<key>additional_step_entity_type_title</key>
+	<dict>
+		<key>es</key>
+		<string>¿Cuál es el tipo de persona?</string>
+		<key>en</key>
+		<string>Which is your entity&apos;s type?</string>
+		<key>pt</key>
+		<string>Qual é o tipo de pessoa?</string>
+	</dict>
+	<key>additional_step_financial_institution_title</key>
+	<dict>
+		<key>es</key>
+		<string>¿Cuál es tu banco?</string>
+		<key>en</key>
+		<string>Which is your bank?</string>
+		<key>pt</key>
+		<string>Qual é o seu banco?</string>
+	</dict>
+	<key>card_type_credit_option</key>
+	<dict>
+		<key>es</key>
+		<string>Crédito</string>
+		<key>en</key>
+		<string>Credit</string>
+		<key>pt</key>
+		<string>Crédito</string>
+	</dict>
+	<key>card_type_debit_option</key>
+	<dict>
+		<key>es</key>
+		<string>Débito</string>
+		<key>en</key>
+		<string>Debit</string>
+		<key>pt</key>
+		<string>Débito</string>
 	</dict>
 </dict>
 </plist>

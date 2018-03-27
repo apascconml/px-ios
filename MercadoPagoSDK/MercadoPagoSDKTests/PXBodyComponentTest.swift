@@ -235,7 +235,7 @@ class PXBodyComponentTest: BaseTest {
         let referenceView = referencesView.referencesComponents![0] as! PXInstructionsReferenceView
         XCTAssertNotNil(referenceView.titleLabel)
         XCTAssertNotNil(referenceView.referenceLabel)
-        XCTAssertEqual(referenceView.titleLabel?.text, "Número")
+        XCTAssertEqual(referenceView.titleLabel?.text, PXStrings.payer_info_number.PXLocalized)
         XCTAssertEqual(referenceView.referenceLabel?.text, "2379 1729 0000 0400 1003 3802 6025 4607 2909 0063 3330")
 
         //Accreditation Time View
