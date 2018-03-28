@@ -117,7 +117,7 @@ extension MercadoPagoServicesAdapter {
         instruction.secondaryInfo = pxInstruction.secondaryInfo
         instruction.tertiaryInfo = pxInstruction.tertiaryInfo
 
-        if let pxInstructionAction = pxInstruction.actions {
+        if let pxInstructionAction = pxInstruction.action {
             for pxInstructionAction in pxInstructionAction {
                 let instructionAction = getInstructionActionFromPXInstructionAction(pxInstructionAction)
                 instruction.actions = Array.safeAppend(instruction.actions, instructionAction)

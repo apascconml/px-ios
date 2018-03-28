@@ -93,8 +93,10 @@
     //Setear ReviewScreenPrefernce
     [self setReviewScreenPreference];
     
+    //Seteo de timer (opcional)
+    [self.mpCheckout setCheckoutTimerWithSeconds:30];
+    
     [self.mpCheckout start];
-
 }
 
 -(void)setPaymentResult {
