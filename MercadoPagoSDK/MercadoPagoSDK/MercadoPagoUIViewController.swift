@@ -26,8 +26,8 @@ open class MercadoPagoUIViewController: UIViewController, UIGestureRecognizerDel
 
     var hideNavBarCallback: (() -> Void)?
 
-    open var screenName: String { get { return TrackingUtil.NO_NAME_SCREEN } }
-    open var screenId: String { get { return TrackingUtil.NO_SCREEN_ID } }
+    open var screenName: String { return TrackingUtil.NO_NAME_SCREEN }
+    open var screenId: String { return TrackingUtil.NO_SCREEN_ID }
 
     var loadingInstance: UIView?
 

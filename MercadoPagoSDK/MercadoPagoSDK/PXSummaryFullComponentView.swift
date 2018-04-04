@@ -74,7 +74,7 @@ final class PXSummaryFullComponentView: PXComponentView {
 
 extension PXSummaryFullComponentView {
 
-    fileprivate func shouldAddTotal() -> Bool {
+    internal func shouldAddTotal() -> Bool {
         return self.summary.details.count > 1
     }
 
@@ -110,7 +110,7 @@ extension PXSummaryFullComponentView {
         self.addSubview(titleValueView)
     }
 
-    fileprivate func addPayerCost(payerCost: PayerCost) {
+    internal func addPayerCost(payerCost: PayerCost) {
         let payerCostView = PayerCostView(frame: CGRect(x: 0, y: requiredHeight, width: self.frame.size.width, height: PAYER_COST_HEIGHT), payerCost: payerCost)
         self.addSubview(payerCostView)
         payerCostView.frame =  CGRect(x: 0, y: requiredHeight, width: self.frame.size.width, height: payerCostView.getHeight())

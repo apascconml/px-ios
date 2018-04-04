@@ -18,9 +18,4 @@ class PayerTest: BaseTest {
         XCTAssertEqual(payer.email, "email")
         XCTAssertEqual(payer.identification, identification)
     }
-    func testFromJSON() {
-        let json: NSDictionary = MockManager.getMockFor("Payer")!
-        let payerFromJSON = Payer.fromJSON(json)
-        XCTAssertEqual(payerFromJSON, payerFromJSON)
-    }
 }

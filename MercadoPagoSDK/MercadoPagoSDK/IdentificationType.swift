@@ -15,26 +15,6 @@ open class IdentificationType: NSObject {
     open var minLength: Int = 0
     open var maxLength: Int = 0
 
-    open class func fromJSON(_ json: NSDictionary) -> IdentificationType {
-        let identificationType: IdentificationType = IdentificationType()
-        if let identificationTypeId = JSONHandler.attemptParseToString(json["id"]) {
-            identificationType.identificationTypeId = identificationTypeId
-        }
-        if let name = JSONHandler.attemptParseToString(json["name"]) {
-            identificationType.name = name
-        }
-        if let type = JSONHandler.attemptParseToString(json["type"]) {
-            identificationType.type = type
-        }
-        if let minLength = JSONHandler.attemptParseToInt(json["min_length"]) {
-            identificationType.minLength = minLength
-        }
-        if let maxLength = JSONHandler.attemptParseToInt(json["max_length"]) {
-            identificationType.maxLength = maxLength
-        }
-        return identificationType
-    }
-
     open func toJSONString() -> String {
 
         let identificationTypeId: Any = self.identificationTypeId != nil ? JSONHandler.null : self.identificationTypeId!

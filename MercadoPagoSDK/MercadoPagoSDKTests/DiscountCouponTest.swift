@@ -12,11 +12,6 @@ class DiscountCouponTest: XCTestCase {
 
     let amount = 1000.0
 
-    func testFromJSON() {
-        let json: NSDictionary = MockManager.getMockFor("DiscountCoupon")!
-        let discountFromJSON = DiscountCoupon.fromJSON(json, amountWithoutDiscount: amount)
-        XCTAssertEqual(discountFromJSON, discountFromJSON)
-    }
 
     func testToJSON() {
 
@@ -39,20 +34,6 @@ class DiscountCouponTest: XCTestCase {
         XCTAssertEqual(discountJson["coupon_amount"] as! Int, 220)
         XCTAssertEqual(discountJson["currency_id"] as! String, "ARS")
         XCTAssertEqual(discountJson["concept"] as! String, "concept")
-    }
-
-    func testToJSONFromJSON() {
-        let json: NSDictionary = MockManager.getMockFor("DiscountCoupon")!
-        let discountObject: DiscountCoupon = DiscountCoupon.fromJSON(json, amountWithoutDiscount: amount)!
-        let discountObjectJSON = discountObject.toJSON() as NSDictionary
-
-        XCTAssertEqual(json["id"] as! Int, discountObjectJSON["id"] as! Int)
-        XCTAssertEqual(json["name"] as! String, discountObjectJSON["name"] as! String)
-        XCTAssertEqual(json["percent_off"] as! Int, discountObjectJSON["percent_off"] as! Int)
-        XCTAssertEqual(json["amount_off"] as! Int, discountObjectJSON["amount_off"] as! Int)
-        XCTAssertEqual(json["coupon_amount"] as! Int, discountObjectJSON["coupon_amount"] as! Int)
-        XCTAssertEqual(json["currency_id"] as! String, discountObjectJSON["currency_id"] as! String)
-        XCTAssertEqual(json["concept"] as! String, discountObjectJSON["concept"] as! String)
     }
 
 }

@@ -99,7 +99,7 @@ open class CardsAdminViewModel: NSObject {
 
     public func sizeForItemAt(indexPath: IndexPath) -> CGSize {
         if self.isHeaderSection(section: indexPath.section) {
-            return CGSize(width : screenWidth, height : titleCellHeight)
+            return CGSize(width: screenWidth, height : titleCellHeight)
 
         } else if self.isCardItemFor(indexPath: indexPath) || self.isExtraOptionItemFor(indexPath: indexPath) {
             return CGSize(width: widthPerItem, height: calculateHeight(indexPath: indexPath))

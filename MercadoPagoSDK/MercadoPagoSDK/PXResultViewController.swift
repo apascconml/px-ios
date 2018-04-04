@@ -94,7 +94,6 @@ class PXResultViewController: PXComponentContainerViewController {
             contentView.addSubviewToBottom(bodyView)
             PXLayout.matchWidth(ofView: bodyView).isActive = true
             PXLayout.centerHorizontally(view: bodyView).isActive = true
-            bodyView.addSeparatorLineToBottom(height: 1)
         }
 
         //Add Bottom Custom Component
@@ -110,6 +109,7 @@ class PXResultViewController: PXComponentContainerViewController {
         //Add Footer
         self.footerView = self.buildFooterView()
         if let footerView = self.footerView {
+            footerView.addSeparatorLineToTop(height: 1)
             contentView.addSubviewToBottom(footerView)
             PXLayout.matchWidth(ofView: footerView).isActive = true
             PXLayout.centerHorizontally(view: footerView, to: contentView).isActive = true

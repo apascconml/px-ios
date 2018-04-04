@@ -57,7 +57,7 @@ extension ThemeManager {
     }
 
     func getPlaceHolderColor() -> UIColor {
-        return UIColor(red:0.80, green:0.80, blue:0.80, alpha:1.0)
+        return UIColor(red: 0.80, green: 0.80, blue: 0.80, alpha: 1.0)
     }
 }
 

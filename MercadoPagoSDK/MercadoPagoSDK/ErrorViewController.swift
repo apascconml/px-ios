@@ -24,8 +24,8 @@ open class ErrorViewController: MercadoPagoUIViewController {
     var error: MPSDKError!
     var callback: (() -> Void)?
 
-    override open var screenName: String { get { return TrackingUtil.SCREEN_NAME_ERROR } }
-    override open var screenId: String { get { return TrackingUtil.SCREEN_ID_ERROR } }
+    override open var screenName: String { return TrackingUtil.SCREEN_NAME_ERROR }
+    override open var screenId: String { return TrackingUtil.SCREEN_ID_ERROR }
 
     open static var defaultErrorCancel: (() -> Void)?
 

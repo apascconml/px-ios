@@ -19,7 +19,7 @@ final class DisclaimerView: UIView, PXComponent {
 
     public init(frame: CGRect, disclaimerText: String, colorText: UIColor =  UIColor.px_grayDark(), disclaimerFontSize: CGFloat = FONT_SIZE) {
         super.init(frame: frame)
-        disclaimerLabel = UILabel(frame:CGRect(x: HORIZONTAL_MARGIN, y: VERTICAL_MARGIN, width: frame.size.width - 2*HORIZONTAL_MARGIN, height: frame.size.height - 2 * VERTICAL_MARGIN))
+        disclaimerLabel = UILabel(frame: CGRect(x: HORIZONTAL_MARGIN, y: VERTICAL_MARGIN, width: frame.size.width - 2*HORIZONTAL_MARGIN, height: frame.size.height - 2 * VERTICAL_MARGIN))
         disclaimerLabel.textAlignment = .center
         disclaimerLabel.textColor = colorText
         disclaimerLabel.font = Utils.getFont(size: disclaimerFontSize)

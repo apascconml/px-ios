@@ -14,19 +14,6 @@ open class EntityType: NSObject, Cellable {
     open var entityTypeId: String!
     open var name: String!
 
-    open class func fromJSON(_ json: NSDictionary) -> EntityType {
-        let entityType: EntityType = EntityType()
-
-        if let entityTypeId = JSONHandler.attemptParseToString(json["id"]) {
-            entityType.entityTypeId = entityTypeId
-        }
-        if let name = JSONHandler.attemptParseToString(json["name"]) {
-            entityType.name = name
-        }
-
-        return entityType
-    }
-
     open func toJSONString() -> String {
         return JSONHandler.jsonCoding(toJSON())
     }

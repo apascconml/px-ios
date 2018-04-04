@@ -19,17 +19,17 @@ extension MercadoPagoCheckout {
             MercadoPagoCheckoutViewModel.flowPreference.disableDiscount()
         }
 
-        let paymentMethodSelectionStep = PaymentVaultViewController(viewModel: self.viewModel.paymentVaultViewModel(), callback : { [weak self] (paymentOptionSelected: PaymentMethodOption) -> Void  in
+        let paymentMethodSelectionStep = PaymentVaultViewController(viewModel: self.viewModel.paymentVaultViewModel(), callback: { [weak self] (paymentOptionSelected: PaymentMethodOption) -> Void  in
 
             guard let strongSelf = self else {
                 return
             }
 
-            strongSelf.viewModel.updateCheckoutModel(paymentOptionSelected : paymentOptionSelected)
+            strongSelf.viewModel.updateCheckoutModel(paymentOptionSelected: paymentOptionSelected)
             strongSelf.viewModel.rootVC = false
             strongSelf.executeNextStep()
         })
-        self.pushViewController(viewController : paymentMethodSelectionStep, animated: true)
+        self.pushViewController(viewController: paymentMethodSelectionStep, animated: true)
 
     }
     func showCardForm() {
@@ -39,10 +39,10 @@ extension MercadoPagoCheckout {
                 return
             }
 
-            strongSelf.viewModel.updateCheckoutModel(paymentMethods: paymentMethods, cardToken:cardToken)
+            strongSelf.viewModel.updateCheckoutModel(paymentMethods: paymentMethods, cardToken: cardToken)
             strongSelf.executeNextStep()
         })
-        self.pushViewController(viewController : cardFormStep, animated: true)
+        self.pushViewController(viewController: cardFormStep, animated: true)
     }
 
     func showIdentificationScreen() {
@@ -51,7 +51,7 @@ extension MercadoPagoCheckout {
                 return
             }
 
-            strongSelf.viewModel.updateCheckoutModel(identification : identification)
+            strongSelf.viewModel.updateCheckoutModel(identification: identification)
             strongSelf.executeNextStep()
             }, errorExitCallback: { [weak self] in
                 self?.finish()
@@ -60,7 +60,7 @@ extension MercadoPagoCheckout {
         identificationStep.callbackCancel = {[weak self] in
             self?.navigationController.popViewController(animated: true)
         }
-        self.pushViewController(viewController : identificationStep, animated: true)
+        self.pushViewController(viewController: identificationStep, animated: true)
     }
 
     func showPayerInfoFlow() {
@@ -71,7 +71,7 @@ extension MercadoPagoCheckout {
                 return
             }
 
-            strongSelf.viewModel.updateCheckoutModel(payer : payer)
+            strongSelf.viewModel.updateCheckoutModel(payer: payer)
             strongSelf.executeNextStep()
         }
         self.pushViewController(viewController : vc, animated: true)
@@ -121,7 +121,7 @@ extension MercadoPagoCheckout {
             })
 
         }
-        self.pushViewController(viewController : payerCostStep, animated: true)
+        self.pushViewController(viewController: payerCostStep, animated: true)
     }
 
     func showReviewAndConfirmScreen() {
@@ -166,11 +166,11 @@ extension MercadoPagoCheckout {
 
     func showSecurityCodeScreen() {
 
-        let securityCodeVc = SecurityCodeViewController(viewModel: self.viewModel.savedCardSecurityCodeViewModel(), collectSecurityCodeCallback : { [weak self] (cardInformation: CardInformationForm, securityCode: String) -> Void in
+        let securityCodeVc = SecurityCodeViewController(viewModel: self.viewModel.savedCardSecurityCodeViewModel(), collectSecurityCodeCallback: { [weak self] (cardInformation: CardInformationForm, securityCode: String) -> Void in
             self?.createCardToken(cardInformation: cardInformation as? CardInformation, securityCode: securityCode)
 
         })
-        self.pushViewController(viewController : securityCodeVc, animated: true, backToChechoutRoot: true)
+        self.pushViewController(viewController: securityCodeVc, animated: true, backToChechoutRoot: true)
 
     }
 
@@ -179,7 +179,7 @@ extension MercadoPagoCheckout {
             self?.cloneCardToken(token: cardInformation as! Token, securityCode: securityCode)
 
         })
-        self.pushViewController(viewController : securityCodeVc, animated: true)
+        self.pushViewController(viewController: securityCodeVc, animated: true)
 
     }
 
@@ -213,7 +213,7 @@ extension MercadoPagoCheckout {
                 strongSelf.finish()
             }
         })
-        self.pushViewController(viewController : congratsViewController, animated: false)
+        self.pushViewController(viewController: congratsViewController, animated: false)
 
     }
 
@@ -224,7 +224,7 @@ extension MercadoPagoCheckout {
         }
         let viewModel = PXBusinessResultViewModel(businessResult: businessResult, paymentData: self.viewModel.paymentData)
         let congratsViewController = PXResultViewController(viewModel: viewModel) { (resultcode) in}
-        self.pushViewController(viewController : congratsViewController, animated: false)
+        self.pushViewController(viewController: congratsViewController, animated: false)
 
     }
 
@@ -298,6 +298,6 @@ extension MercadoPagoCheckout {
             self?.navigationController.popViewController(animated: true)
         }
 
-        self.pushViewController(viewController:entityTypeStep, animated: true)
+        self.pushViewController(viewController: entityTypeStep, animated: true)
     }
 }

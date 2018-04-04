@@ -97,44 +97,38 @@ class SummaryTest: BaseTest {
 
     func testSummaryComponentMultipleProductTaxesShipping() {
         let summary = getSummaryMultipleProductTaxesShipping()
-        let summaryComponent = SummaryComponent(frame: CGRect(x: 0, y: 0, width: 320.0, height: 0), summary: summary, paymentData: PaymentData(), totalAmount: 1000)
+        let summaryComponent = PXSummaryFullComponentView(width: 320, summaryViewModel: summary, paymentData: PaymentData(), totalAmount: 1000, backgroundColor: .white, customSummaryTitle: "Productos")
         XCTAssertTrue(summaryComponent.shouldAddTotal())
-        XCTAssertEqual(summaryComponent.requiredHeight, heightFor3summaryDetails())
     }
 
     func testSummaryComponentProductTaxesShipping() {
         let summary = getSummaryProductTaxesShipping()
-        let summaryComponent = SummaryComponent(frame: CGRect(x: 0, y: 0, width: 320.0, height: 0), summary: summary, paymentData: PaymentData(), totalAmount: 1000)
+        let summaryComponent = PXSummaryFullComponentView(width: 320, summaryViewModel: summary, paymentData: PaymentData(), totalAmount: 1000, backgroundColor: .white, customSummaryTitle: "Productos")
         XCTAssertTrue(summaryComponent.shouldAddTotal())
-        XCTAssertEqual(summaryComponent.requiredHeight, heightFor3summaryDetails())
     }
 
     func testSummaryComponentJustProduct() {
         let summary = getSummaryJustProduct()
-        let summaryComponent = SummaryComponent(frame: CGRect(x: 0, y: 0, width: 320.0, height: 0), summary: summary, paymentData: PaymentData(), totalAmount: 1000)
+        let summaryComponent = PXSummaryFullComponentView(width: 320, summaryViewModel: summary, paymentData: PaymentData(), totalAmount: 1000, backgroundColor: .white, customSummaryTitle: "Productos")
         XCTAssertFalse(summaryComponent.shouldAddTotal())
-        XCTAssertEqual(summaryComponent.requiredHeight, heightFor1summaryDetails())
     }
 
     func testSummaryComponentSummaryProductTaxesShippingCharge() {
         let summary = getSummaryProductTaxesCharge()
-        let summaryComponent = SummaryComponent(frame: CGRect(x: 0, y: 0, width: 320.0, height: 0), summary: summary, paymentData: PaymentData(), totalAmount: 1000)
+        let summaryComponent = PXSummaryFullComponentView(width: 320, summaryViewModel: summary, paymentData: PaymentData(), totalAmount: 1000, backgroundColor: .white, customSummaryTitle: "Productos")
         XCTAssertTrue(summaryComponent.shouldAddTotal())
-        XCTAssertEqual(summaryComponent.requiredHeight, heightFor3summaryDetails())
     }
 
     func testSummaryComponentSummaryProductTaxesShippingChargeDisclaimer() {
         let summary = getSummaryProductTaxesShippingChargeDisclaimer()
-        let summaryComponent = SummaryComponent(frame: CGRect(x: 0, y: 0, width: 320.0, height: 0), summary: summary, paymentData: PaymentData(), totalAmount: 1000)
+        let summaryComponent = PXSummaryFullComponentView(width: 320, summaryViewModel: summary, paymentData: PaymentData(), totalAmount: 1000, backgroundColor: .white, customSummaryTitle: "Productos")
         XCTAssertTrue(summaryComponent.shouldAddTotal())
-        XCTAssertEqual(summaryComponent.requiredHeight, heightFor4summaryDetailsAndDisclaimer() )
     }
 
     func testSummaryComponentSummaryProductTaxesShippingChargeDisclaimerPayerCost() {
         let summary = getSummaryProductTaxesShippingChargeDisclaimer()
-        let summaryComponent = SummaryComponent(frame: CGRect(x: 0, y: 0, width: 320.0, height: 0), summary: summary, paymentData: PaymentData(), totalAmount: 1000)
+        let summaryComponent = PXSummaryFullComponentView(width: 320, summaryViewModel: summary, paymentData: PaymentData(), totalAmount: 1000, backgroundColor: .white, customSummaryTitle: "Productos")
         summaryComponent.addPayerCost(payerCost: PayerCost(installments: 3, installmentRate: 1.0, labels: [], minAllowedAmount: 12, maxAllowedAmount: 123, recommendedMessage: "testes", installmentAmount: 123.0, totalAmount: 234.0))
         XCTAssertTrue(summaryComponent.shouldAddTotal())
-        XCTAssertEqual(summaryComponent.requiredHeight, heightFor4summaryDetailsPayerCostAndDisclaimer())
     }
 }

@@ -44,7 +44,9 @@ extension NSDictionary {
         var anyDict = [String: Any]()
 
         for (key, value) in self {
-            anyDict[key as! String] = value
+            if let keyValue = key as? String {
+                anyDict[keyValue] = value
+            }
         }
         return anyDict
     }

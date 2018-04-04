@@ -23,13 +23,6 @@ open class Identification: NSObject {
         self.number = identificationNumber
     }
 
-    open class func fromJSON(_ json: NSDictionary) -> Identification {
-        let identification: Identification = Identification()
-        identification.type = json["type"] as? String
-        identification.number = json["number"] as? String
-        return identification
-    }
-
     open func toJSONString() -> String {
         return JSONHandler.jsonCoding(self.toJSON())
     }
@@ -43,13 +36,4 @@ open class Identification: NSObject {
         ]
         return obj
     }
-}
-
-public func ==(obj1: Identification, obj2: Identification) -> Bool {
-
-    let areEqual =
-        obj1.type == obj2.type &&
-        obj1.number == obj2.number
-
-    return areEqual
 }

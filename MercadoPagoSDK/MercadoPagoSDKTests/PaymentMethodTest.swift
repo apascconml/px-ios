@@ -14,23 +14,6 @@ class PaymentMethodTest: BaseTest {
 
     }
 
-    func testFromJSON() {
-        let json: NSDictionary = MockManager.getMockFor("PaymentMethod")!
-        let paymentMethodFromJSON = PaymentMethod.fromJSON(json)
-
-        XCTAssertEqual(paymentMethodFromJSON.paymentMethodId, "visa")
-        XCTAssertEqual(paymentMethodFromJSON.name, "Visa")
-        XCTAssertEqual(paymentMethodFromJSON.paymentTypeId, "credit_card")
-        XCTAssertEqual(paymentMethodFromJSON.status, "active")
-        XCTAssertEqual(paymentMethodFromJSON.secureThumbnail, "https://www.mercadopago.com/org-img/MP3/API/logos/visa.gif")
-        XCTAssertEqual(paymentMethodFromJSON.thumbnail, "http://img.mlstatic.com/org-img/MP3/API/logos/visa.gif")
-        XCTAssertEqual(paymentMethodFromJSON.deferredCapture, "supported")
-        XCTAssertEqual(paymentMethodFromJSON.minAllowedAmount, 0)
-        XCTAssertEqual(paymentMethodFromJSON.maxAllowedAmount, 250000)
-        XCTAssertEqual(paymentMethodFromJSON.accreditationTime, 2880)
-
-    }
-
     func testToJSON() {
         let paymentMethod = MockBuilder.buildPaymentMethod("paymentMethodId", name: "name")
         paymentMethod.status = "active"

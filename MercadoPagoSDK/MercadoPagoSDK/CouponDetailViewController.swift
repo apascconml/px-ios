@@ -14,7 +14,7 @@ open class CouponDetailViewController: MercadoPagoUIViewController {
 
     let cuponViewWidth: CGFloat = 256.0
     let cuponViewHeight: CGFloat = 200.0
-    override open var screenName: String { get { return "DISCOUNT_SUMMARY" } }
+    override open var screenName: String { return "DISCOUNT_SUMMARY" }
     var couponView: DiscountDetailView!
     var viewModel: CouponDetailViewModel!
 

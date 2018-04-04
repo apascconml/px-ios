@@ -36,7 +36,7 @@ class BoletoComponent: UIView, PXComponent {
         boletoImageView.image = MercadoPago.getImage("boleto")
         self.boletoView = UIView(frame: CGRect(x: getImageX(), y: getImageY(), width: BoletoComponent.IMAGE_WIDTH, height: BoletoComponent.IMAGE_HEIGHT))
         self.boletoView.addSubview(boletoImageView)
-        let titleLabel = UILabel(frame: CGRect(x: 5, y: 15, width:BoletoComponent.IMAGE_WIDTH - 2 * 5, height: 14))
+        let titleLabel = UILabel(frame: CGRect(x: 5, y: 15, width: BoletoComponent.IMAGE_WIDTH - 2 * 5, height: 14))
         titleLabel.text = "DADOS PARA VALIDAR O SEU PAGAMENTO".localized
         titleLabel.textAlignment = .center
         titleLabel.font = Utils.getFont(size: 10.0)
@@ -47,14 +47,14 @@ class BoletoComponent: UIView, PXComponent {
         typeName.font = Utils.getFont(size: 13.0)
         typeName.textColor = UIColor.px_grayDark()
 
-        self.numberTF = UITextField(frame: CGRect(x: 60, y: 57, width:BoletoComponent.IMAGE_WIDTH - 48 - 5, height: 14))
+        self.numberTF = UITextField(frame: CGRect(x: 60, y: 57, width: BoletoComponent.IMAGE_WIDTH - 48 - 5, height: 14))
         self.numberTF.textAlignment = .left
         self.numberTF.font = Utils.getFont(size: 13.0)
         self.numberTF.textColor = UIColor.px_grayDark()
         self.numberTF.placeholder = "**** ***** ***** *****"
         self.numberTF.isEnabled = false
 
-        self.nameTF = UITextField(frame: CGRect(x: 16, y: 81, width:BoletoComponent.IMAGE_WIDTH - 2 * 16, height: 14))
+        self.nameTF = UITextField(frame: CGRect(x: 16, y: 81, width: BoletoComponent.IMAGE_WIDTH - 2 * 16, height: 14))
         self.nameTF.textAlignment = .left
         self.nameTF.font = Utils.getFont(size: 13.0)
         self.nameTF.textColor = UIColor.px_grayDark()

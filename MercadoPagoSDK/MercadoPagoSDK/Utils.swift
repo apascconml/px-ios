@@ -88,9 +88,9 @@ class Utils {
 
     class func getAttributedAmount(_ amount: Double, thousandSeparator: String, decimalSeparator: String, currencySymbol: String, color: UIColor = UIColor.px_white(), fontSize: CGFloat = 20, centsFontSize: CGFloat = 10, baselineOffset: Int = 7, negativeAmount: Bool = false, smallSymbol: Bool = false) -> NSMutableAttributedString {
         let cents = getCentsFormatted(String(amount), decimalSeparator: ".")
-        let amount = getAmountFormatted(String(describing: Int(amount)), thousandSeparator : thousandSeparator, decimalSeparator: ".")
+        let amount = getAmountFormatted(String(describing: Int(amount)), thousandSeparator: thousandSeparator, decimalSeparator: ".")
 
-        let normalAttributes: [String: AnyObject] = [NSFontAttributeName: UIFont(name:MercadoPago.DEFAULT_FONT_NAME, size: fontSize) ?? Utils.getFont(size: fontSize), NSForegroundColorAttributeName: color]
+        let normalAttributes: [String: AnyObject] = [NSFontAttributeName: UIFont(name: MercadoPago.DEFAULT_FONT_NAME, size: fontSize) ?? Utils.getFont(size: fontSize), NSForegroundColorAttributeName: color]
         let smallAttributes: [String: AnyObject] = [NSFontAttributeName: UIFont(name: MercadoPago.DEFAULT_FONT_NAME, size: centsFontSize) ?? UIFont.systemFont(ofSize: centsFontSize), NSForegroundColorAttributeName: color, NSBaselineOffsetAttributeName: baselineOffset as AnyObject]
 
         var symbols: String!
@@ -109,7 +109,7 @@ class Utils {
         let space = NSMutableAttributedString(string: String.NON_BREAKING_LINE_SPACE, attributes: smallAttributes)
         attributedSymbol.append(space)
         attributedSymbol.append(attributedAmount)
-        if cents != "00" || fontSize < 26 {
+        if cents != "00" {
             attributedSymbol.append(space)
             attributedSymbol.append(attributedCents)
         }
@@ -165,7 +165,7 @@ class Utils {
             stringToWrite.append(NSMutableAttributedString(string: installments + "x ", attributes: descriptionAttributes))
         }
 
-        stringToWrite.append(Utils.getAttributedAmount(installmentAmount, thousandSeparator: currency.getThousandsSeparatorOrDefault(), decimalSeparator: currency.getDecimalSeparatorOrDefault(), currencySymbol: currency.getCurrencySymbolOrDefault(), color:color, fontSize : fontSize, centsFontSize: centsFontSize, baselineOffset : baselineOffset))
+        stringToWrite.append(Utils.getAttributedAmount(installmentAmount, thousandSeparator: currency.getThousandsSeparatorOrDefault(), decimalSeparator: currency.getDecimalSeparatorOrDefault(), currencySymbol: currency.getCurrencySymbolOrDefault(), color: color, fontSize : fontSize, centsFontSize: centsFontSize, baselineOffset : baselineOffset))
 
         if additionalString != nil {
             stringToWrite.append(additionalString!)
@@ -248,7 +248,7 @@ class Utils {
      **/
     class func getAmountFormatted(_ formattedString: String, thousandSeparator: String, decimalSeparator: String) -> String {
 
-        let amount = self.getAmountDigits(formattedString, decimalSeparator : decimalSeparator)
+        let amount = self.getAmountDigits(formattedString, decimalSeparator: decimalSeparator)
         let length = amount.count
         if length <= 3 {
             return amount
@@ -259,7 +259,7 @@ class Utils {
         }
         let lastThreeDigits = amount.lastCharacters(number: 3)
 
-        return  getAmountFormatted(numberWithoutLastThreeDigits, thousandSeparator: thousandSeparator, decimalSeparator:thousandSeparator).appending(thousandSeparator).appending(lastThreeDigits)
+        return  getAmountFormatted(numberWithoutLastThreeDigits, thousandSeparator: thousandSeparator, decimalSeparator: thousandSeparator).appending(thousandSeparator).appending(lastThreeDigits)
     }
 
     /**
@@ -272,14 +272,14 @@ class Utils {
         if range != nil {
             return formattedString.substring(to: range!.lowerBound)
         }
-        if let _ = Double(formattedString) {
+        if Double(formattedString) != nil {
             return formattedString
         }
         return ""
     }
 
     static internal func findPaymentMethodSearchItemInGroups(_ paymentMethodSearch: PaymentMethodSearch, paymentMethodId: String, paymentTypeId: PaymentTypeId?) -> PaymentMethodSearchItem? {
-        guard let _ = paymentMethodSearch.groups
+        guard paymentMethodSearch.groups != nil
             else {return nil}
 
         if let result = Utils.findPaymentMethodSearchItemById(paymentMethodSearch.groups, paymentMethodId: paymentMethodId, paymentTypeId: paymentTypeId) {
@@ -433,12 +433,12 @@ class Utils {
         let formatterYear = DateFormatter()
         formatterYear.dateFormat = "yyyy"
 
-        var dayString = formatterDay.string(from:date)
+        var dayString = formatterDay.string(from: date)
         if dayString.first == "0" {
             dayString.removeFirst()
         }
 
-        return dayString + " de ".localized + formatterMonth.string(from:date).localized.lowercased() + " de ".localized + formatterYear.string(from:date)
+        return dayString + " de ".localized + formatterMonth.string(from: date).localized.lowercased() + " de ".localized + formatterYear.string(from:date)
     }
 
     func loadImageWithCache(withUrl urlStr: String?, targetImage: UIImageView, placeHolderImage: UIImage?, fallbackImage: UIImage?) {

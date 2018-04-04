@@ -110,9 +110,9 @@ class DiscountBodyCell: UIView {
         let normalAttributes: [String: AnyObject] = [NSFontAttributeName: Utils.getFont(size: 16), NSForegroundColorAttributeName: LABEL_COLOR]
         let total = NSMutableAttributedString(string: "Total: ".localized, attributes: normalAttributes)
         let space = NSMutableAttributedString(string: " ".localized, attributes: normalAttributes)
-        let oldAmount = Utils.getAttributedAmount( coupon.amountWithoutDiscount, currency: currency, color : LABEL_COLOR, fontSize: 16, baselineOffset:4)
+        let oldAmount = Utils.getAttributedAmount( coupon.amountWithoutDiscount, currency: currency, color: LABEL_COLOR, fontSize: 16, baselineOffset:4)
         oldAmount.addAttribute(NSStrikethroughStyleAttributeName, value: 1, range: NSMakeRange(0, oldAmount.length))
-        let newAmount = Utils.getAttributedAmount( coupon.newAmount(), currency: currency, color : DISCOUNT_COLOR, fontSize: 16, baselineOffset:4)
+        let newAmount = Utils.getAttributedAmount( coupon.newAmount(), currency: currency, color: DISCOUNT_COLOR, fontSize: 16, baselineOffset:4)
         result.append(total)
         result.append(oldAmount)
         result.append(space)
@@ -160,9 +160,9 @@ class DiscountBodyCell: UIView {
         let frameArrow = CGRect(x: x, y: 4 + (margin * 2 + topMargin + 20), width: 8, height: 12)
         rightArrow.frame = frameArrow
 
-        let path = UIBezierPath(roundedRect:discountAmountLabel.bounds,
-                                byRoundingCorners:[.topRight, .bottomRight],
-                                cornerRadii: CGSize(width: 2, height:  2))
+        let path = UIBezierPath(roundedRect: discountAmountLabel.bounds,
+                                byRoundingCorners: [.topRight, .bottomRight],
+                                cornerRadii: CGSize(width: 2, height: 2))
 
         let maskLayer = CAShapeLayer()
 

@@ -17,11 +17,4 @@ class ItemTest: BaseTest {
         XCTAssertEqual(item.quantity, 3)
         XCTAssertEqual(item.unitPrice, 500)
     }
-
-    func testFromJSON() {
-        let json: NSDictionary = MockManager.getMockFor("Item")!
-        let itemFromJSON = Item.fromJSON(json)
-        XCTAssertEqual(itemFromJSON, itemFromJSON)
-    }
-
 }

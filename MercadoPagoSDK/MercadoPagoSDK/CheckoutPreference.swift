@@ -200,38 +200,6 @@ open class CheckoutPreference: NSObject {
         return items.count > 1
     }
 
-    open class func fromJSON(_ json: NSDictionary) -> CheckoutPreference {
-        let preference: CheckoutPreference = CheckoutPreference()
-
-        if let _id = JSONHandler.attemptParseToString(json["id"]) {
-            preference.preferenceId = _id
-        }
-        if let siteId = JSONHandler.attemptParseToString(json["site_id"]) {
-            preference.siteId = siteId
-        }
-
-        if let payerDic = json["payer"] as? NSDictionary {
-            preference.payer = Payer.fromJSON(payerDic)
-        }
-
-        var items = [Item]()
-        if let itemsArray = json["items"] as? NSArray {
-            for i in 0..<itemsArray.count {
-                if let itemDic = itemsArray[i] as? NSDictionary {
-                    items.append(Item.fromJSON(itemDic))
-                }
-            }
-
-            preference.items = items
-        }
-
-        if let paymentPreference = json["payment_methods"] as? NSDictionary {
-            preference.paymentPreference = PaymentPreference.fromJSON(paymentPreference)
-        }
-
-        return preference
-    }
-
     open func toJSONString() -> String {
 
         let _id: Any = self.preferenceId == nil ? JSONHandler.null : (self.preferenceId)!

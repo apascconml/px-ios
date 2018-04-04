@@ -66,48 +66,4 @@ open class Item: NSObject {
         ]
         return JSONHandler.jsonCoding(obj)
     }
-
-    open class func fromJSON(_ json: NSDictionary) -> Item {
-        let item = Item()
-
-        item.itemId = JSONHandler.getValue(of: String.self, key: "id", from: json)
-
-        if let quantity = JSONHandler.attemptParseToInt(json["quantity"]) {
-            item.quantity = quantity
-        }
-        if let unitPrice = JSONHandler.attemptParseToDouble(json["unit_price"]) {
-            item.unitPrice = unitPrice
-        }
-        if let title = JSONHandler.attemptParseToString(json["title"]) {
-            item.title = title
-        }
-        if let description = JSONHandler.attemptParseToString(json["description"]) {
-            item.itemDescription = description
-        }
-
-        item.currencyId = JSONHandler.getValue(of: String.self, key: "currency_id", from: json)
-
-        if let categoryId = JSONHandler.attemptParseToString(json["category_id"]) {
-            item.categoryId = categoryId
-        }
-        if let pictureUrl = JSONHandler.attemptParseToString(json["picture_url"]) {
-            item.pictureUrl = pictureUrl
-        }
-
-        return item
-    }
-}
-
-public func == (obj1: Item, obj2: Item) -> Bool {
-
-    let areEqual =
-        obj1.itemId == obj2.itemId &&
-        obj1.quantity == obj2.quantity &&
-        obj1.unitPrice == obj2.unitPrice &&
-        obj1.title == obj2.title &&
-        obj1.currencyId == obj2.currencyId &&
-        obj1.categoryId == obj2.categoryId &&
-        obj1.pictureUrl == obj2.pictureUrl
-
-    return areEqual
 }

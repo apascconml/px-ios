@@ -24,36 +24,11 @@ open class CustomerPaymentMethod: NSObject, CardInformation, PaymentMethodOption
         super.init()
     }
 
-    public init(id: String, paymentMethodId: String, paymentMethodTypeId: String, description: String) {
-        self.customerPaymentMethodId = id
+    public init(cPaymentMethodId: String, paymentMethodId: String, paymentMethodTypeId: String, description: String) {
+        self.customerPaymentMethodId = cPaymentMethodId
         self.paymentMethodId = paymentMethodId
         self.paymentMethodTypeId = paymentMethodTypeId
         self.customerPaymentMethodDescription = description
-    }
-
-    open class func fromJSON(_ json: NSDictionary) -> CustomerPaymentMethod {
-        let  customerPaymentMethod = CustomerPaymentMethod()
-
-        if json["id"] != nil && !(json["id"]! is NSNull) {
-            customerPaymentMethod.customerPaymentMethodId = json["id"] as! String
-        }
-
-        if json["description"] != nil && !(json["description"]! is NSNull) {
-            customerPaymentMethod.customerPaymentMethodDescription = json["description"] as! String
-        }
-
-        if json["payment_method_id"] != nil && !(json["payment_method_id"]! is NSNull) {
-            customerPaymentMethod.paymentMethodId = json["payment_method_id"] as! String
-        }
-
-        if json["payment_method_type"] != nil && !(json["payment_method_type"]! is NSNull) {
-            customerPaymentMethod.paymentMethodTypeId = json["payment_method_type"] as! String
-        }
-        if json["first_six_digits"] != nil && !(json["first_six_digits"]! is NSNull) {
-            customerPaymentMethod.firstSixDigits = json["first_six_digits"] as! String
-        }
-
-        return customerPaymentMethod
     }
 
     public func getIssuer() -> Issuer? {

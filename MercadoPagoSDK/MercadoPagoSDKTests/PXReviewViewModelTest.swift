@@ -157,27 +157,6 @@ class PXReviewViewModelTest: BaseTest {
         return Summary(details: preference.details)
     }
 
-    // TODO: Move to summary tests.
-    func testInvalidSummary() {
-        instance?.reviewScreenPreference.details = getInvalidSummary().details
-        let summary = instance?.getSummaryViewModel(amount: 1000.0)
-        let summaryComponent = SummaryComponent(frame: CGRect(x: 0, y: 0, width: 320.0, height: 0), summary: summary!, paymentData: PaymentData(), totalAmount: 1000)
-        XCTAssertEqual(summaryComponent.requiredHeight, 73.5)
-    }
-
-    func testValidSummary() {
-        instance?.reviewScreenPreference.details = getValidSummary().details
-        let summary = instance?.getSummaryViewModel(amount: 1000.0)
-        let summaryComponent = SummaryComponent(frame: CGRect(x: 0, y: 0, width: 320.0, height: 0), summary: summary!, paymentData: PaymentData(), totalAmount: 1000)
-        XCTAssertEqual(summaryComponent.requiredHeight, 179.0)
-    }
-
-    func testValidSummaryWithoutProductDetail() {
-        instance?.reviewScreenPreference.details = getValidSummaryWithoutProductDetail().details
-        let summary = instance?.getSummaryViewModel(amount: 1000.0)
-        let summaryComponent = SummaryComponent(frame: CGRect(x: 0, y: 0, width: 320.0, height: 0), summary: summary!, paymentData: PaymentData(), totalAmount: 1000)
-        XCTAssertEqual(summaryComponent.requiredHeight, 73.5)
-    }
 }
 
 // MARK: Terms and conditions.

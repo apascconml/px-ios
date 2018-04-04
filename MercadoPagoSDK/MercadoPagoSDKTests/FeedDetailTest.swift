@@ -6,13 +6,3 @@
 //  Copyright © 2016 MercadoPago. All rights reserved.
 //
 
-import XCTest
-
-class FeedDetailTest: BaseTest {
-
-    func testFromJSON() {
-        let json: NSDictionary = MockManager.getMockFor("FeesDetail")!
-        let feesDetailFromJSON = FeesDetail.fromJSON(json)
-        XCTAssertEqual(feesDetailFromJSON, feesDetailFromJSON)
-    }
-}

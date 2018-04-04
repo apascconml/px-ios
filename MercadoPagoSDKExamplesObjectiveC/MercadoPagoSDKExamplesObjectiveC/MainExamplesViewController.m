@@ -75,17 +75,20 @@
     [self setPaymentCallback];
 
     DiscountCoupon* dc = [[DiscountCoupon alloc] initWithDiscountId:123];
+    
+    NSNumber *externalDiscount = [NSNumber numberWithDouble:2.00];
+    
     dc.name = @"Patito Off";
-    dc.coupon_amount = @"30";
-    dc.amount_off = @"30";
+    dc.coupon_amount = [externalDiscount stringValue];
+    dc.amount_off = [externalDiscount stringValue];
     dc.currency_id = @"ARS";
     dc.concept = @"Descuento de patito";
     dc.amountWithoutDiscount = 60;
     dc = nil;
 
-    self.pref.preferenceId = @"243966003-0812580b-6082-4104-9bce-1a4c48a5bc44";
+    self.pref.preferenceId = @"241261708-cd353b1b-940f-493b-b960-10106a24203c";
 
-    self.mpCheckout = [[MercadoPagoCheckout alloc] initWithPublicKey:@"TEST-e4bdd1cf-bcb2-43f7-b565-ed4c9ea25be7"
+    self.mpCheckout = [[MercadoPagoCheckout alloc] initWithPublicKey:@"APP_USR-2e257493-3b80-4b71-8547-c841d035e8f2"
     accessToken:nil
                                                   checkoutPreference:self.pref paymentData:self.paymentData paymentResult:self.paymentResult discount:dc navigationController:self.navigationController];
 
@@ -98,7 +101,7 @@
     
     //[self setHooks];
     
-    [self setPaymentMethodPlugins];
+    //[self setPaymentMethodPlugins];
 
 //    [self setPaymentPlugin];
 
@@ -315,17 +318,17 @@
     NSString *customerCon1Tarjetas = @"{\"cards\":[{\"expiration_year\":2017,\"issuer\":{\"id\":279,\"name\":\"Banco Galicia\"},\"last_four_digits\":\"1111\",\"date_created\":\"2017-05-23 03:00:00 +0000\",\"id\":210616405,\"payment_method\":{\"secure_thumbnail\":\"https:\/\/www.mercadopago.com\/org-img\/MP3\/API\/logos\/visa.gif\",\"name\":\"Visa\",\"thumbnail\":\"http:\/\/img.mlstatic.com\/org-img\/MP3\/API\/logos\/visa.gif\",\"payment_type_id\":\"credit_card\",\"accreditation_time\":null,\"additional_info_needed\":\"\",\"financial_institutions\":null,\"status\":null,\"id\":\"visa\",\"settings\":null,\"max_allowed_amount\":null,\"min_allowed_amount\":0,\"deferred_capture\":null},\"expiration_month\":6,\"security_code\":{\"mode\":\"\",\"cardLocation\":\"back\",\"length\":3},\"card_holder\":{\"name\":\"IGNACIO OVIEDO\",\"identification\":{\"type\":\"DNI\",\"number\":\"36409502\"}},\"date_last_updated\":\"2017-05-23 03:00:00 +0000\",\"customer_id\":\"242465951-bE6gna32mdkmFG\",\"first_six_digits\":\"454640\"}],\"identification\":{\"type\":null,\"number\":null}\,\"id\":\"242465951-bE6gna32mdkmFG\",\"last_name\":null\,\"default_card\":null\,\"email\":\"ignaciooviedo.gcba@gmail.com\",\"date_created\":\"2017-01-30\",\"description\":null,\"first_name\":null}";
 
 
-    NSData *customerData = [customerCon3Tarjetas dataUsingEncoding:NSUTF8StringEncoding];
-    id customerJson = [NSJSONSerialization JSONObjectWithData:customerData options:0 error:nil];
-    Customer *customer = [Customer fromJSON:customerJson];
-
-
-    CardsAdminViewModel *viewModel = [[CardsAdminViewModel alloc]initWithCards:customer.cards extraOptionTitle:@"Opcion" confirmPromptText: @"Eliminar"];
-    CardsAdminViewController *vc = [[CardsAdminViewController alloc]initWithViewModel:viewModel callback:^(Card * card) {
-        NSLog(@"callback");
-    }];
-
-    [self.navigationController pushViewController:vc animated:YES];
+//    NSData *customerData = [customerCon3Tarjetas dataUsingEncoding:NSUTF8StringEncoding];
+//    id customerJson = [NSJSONSerialization JSONObjectWithData:customerData options:0 error:nil];
+//    Customer *customer = [Customer fromJSON:customerJson];
+//
+//
+//    CardsAdminViewModel *viewModel = [[CardsAdminViewModel alloc]initWithCards:customer.cards extraOptionTitle:@"Opcion" confirmPromptText: @"Eliminar"];
+//    CardsAdminViewController *vc = [[CardsAdminViewController alloc]initWithViewModel:viewModel callback:^(Card * card) {
+//        NSLog(@"callback");
+//    }];
+//
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)invokeCallback:(MPCustomCell *)button {

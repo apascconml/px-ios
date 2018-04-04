@@ -34,7 +34,7 @@ open class IdentificationViewController: MercadoPagoUIViewController, UITextFiel
 
     //@IBOutlet var typePicker: UIPickerView! = UIPickerView()
 
-    override open var screenName: String { get { return "IDENTIFICATION_NUMBER" } }
+    override open var screenName: String { return "IDENTIFICATION_NUMBER" }
 
     public init(identificationTypes: [IdentificationType], callback : @escaping (( _ identification: Identification) -> Void), errorExitCallback: (() -> Void)?) {
         super.init(nibName: "IdentificationViewController", bundle: MercadoPago.getBundle())
