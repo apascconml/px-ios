@@ -537,9 +537,9 @@ Se preferir, você pode escolher outro meio de pagamento.</string>
 		<key>comment</key>
 		<string></string>
 		<key>es</key>
-		<string>Cancelar Pago</string>
+		<string>Cancelar pago</string>
 		<key>en</key>
-		<string>Cancel Payment</string>
+		<string>Cancel payment</string>
 		<key>pt</key>
 		<string>Cancelar pagamento</string>
 	</dict>
