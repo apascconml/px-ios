@@ -51,7 +51,7 @@ open class PaymentResultScreenPreference: NSObject {
     //HEADER
     // MARK: Approved
     var approvedBadge: ApprovedBadge? = ApprovedBadge.check
-    var approvedTitle = PXHeaderResutlConstants.APPROVED_HEADER_TITLE.PXLocalized
+    var approvedTitle = PXHeaderResultConstants.APPROVED_HEADER_TITLE.PXLocalized
     var approvedSubtitle = ""
     private var _approvedLabelText = ""
     private var _disableApprovedLabelText = true
@@ -60,9 +60,9 @@ open class PaymentResultScreenPreference: NSObject {
     var approvedIconBundle = MercadoPago.getBundle()!
 
     // MARK: Pending
-    var pendingTitle = PXHeaderResutlConstants.PENDING_HEADER_TITLE.localized
+    var pendingTitle = PXHeaderResultConstants.PENDING_HEADER_TITLE.localized
     var pendingSubtitle = ""
-    var pendingContentTitle = PaymentResultScreenPreference.PENDING_CONTENT_TITLE.localized
+    var pendingContentTitle = PaymentResultScreenPreference.PENDING_CONTENT_TITLE.PXLocalized
     var pendingContentText = ""
     private var _pendingLabelText = ""
     private var _disablePendingLabelText = true
@@ -73,18 +73,18 @@ open class PaymentResultScreenPreference: NSObject {
     var hidePendingContentTitle = false
 
     // MARK: Rejected
-    var rejectedTitle = PXHeaderResutlConstants.REJECTED_HEADER_TITLE.localized
+    var rejectedTitle = PXHeaderResultConstants.REJECTED_HEADER_TITLE.localized
     var rejectedSubtitle = ""
     var rejectedTitleSetted = false
     private var disableRejectedLabelText = false
-    var rejectedIconSubtext = PXHeaderResutlConstants.REJECTED_ICON_SUBTEXT.localized
+    var rejectedIconSubtext = PXHeaderResultConstants.REJECTED_ICON_SUBTEXT.localized
     var rejectedBolbradescoIconName = "MPSDK_payment_result_bolbradesco_error"
     var rejectedPaymentMethodPluginIconName = "MPSDK_payment_result_plugin_error"
     var rejectedIconBundle = MercadoPago.getBundle()!
     var rejectedDefaultIconName: String?
     var rejectedURLImage: String?
     var rejectedIconName: String?
-    var rejectedContentTitle = PaymentResultScreenPreference.REJECTED_CONTENT_TITLE.localized
+    var rejectedContentTitle = PaymentResultScreenPreference.REJECTED_CONTENT_TITLE.PXLocalized
     var rejectedContentText = ""
     var hideRejectedContentText = false
     var hideRejectedContentTitle = false

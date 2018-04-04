@@ -9,7 +9,7 @@
 import Foundation
 
 // MARK: Header Constants
-struct PXHeaderResutlConstants {
+struct PXHeaderResultConstants {
 
     // Header titles
     static let APPROVED_HEADER_TITLE = PXStrings.success_payment_title
