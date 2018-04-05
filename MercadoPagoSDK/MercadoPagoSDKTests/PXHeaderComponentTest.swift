@@ -70,7 +70,7 @@ class PXHeaderComponentTest: BaseTest {
         XCTAssertEqual(headerView.backgroundColor, PXDefaultTheme().rejectedColor())
         XCTAssertEqual(headerView.circleImage?.image, MercadoPago.getImage("card_icon", bundle: MercadoPago.getBundle()!))
         XCTAssertEqual(headerView.badgeImage?.image, MercadoPago.getImage("error_badge"))
-        XCTAssertEqual(headerView.statusLabel?.attributedText?.string, PXHeaderResutlConstants.REJECTED_ICON_SUBTEXT.localized)
+        XCTAssertEqual(headerView.statusLabel?.attributedText?.string, PXHeaderResutlConstants.REJECTED_ICON_SUBTEXT.PXLocalized)
     }
 
     func testHeaderView_rejectedCardPaymentPreference_render() {
@@ -84,7 +84,7 @@ class PXHeaderComponentTest: BaseTest {
         XCTAssertEqual(headerView.backgroundColor, PXDefaultTheme().rejectedColor())
         XCTAssertEqual(headerView.circleImage?.image, MercadoPago.getImage("card_icon", bundle: MercadoPago.getBundle()!))
         XCTAssertEqual(headerView.badgeImage?.image, MercadoPago.getImage("error_badge"))
-        XCTAssertEqual(headerView.statusLabel?.attributedText?.string, PXHeaderResutlConstants.REJECTED_ICON_SUBTEXT.localized)
+        XCTAssertEqual(headerView.statusLabel?.attributedText?.string, PXHeaderResutlConstants.REJECTED_ICON_SUBTEXT.PXLocalized)
         XCTAssertEqual(headerView.messageLabel?.attributedText?.string, ResultMockComponentHelper.rejectedTitleDummy)
     }
 

@@ -2,6 +2,20 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>success_header_title</key>
+	<dict>
+		<key>es</key>
+		<string>¡Apúrate a pagar!</string>
+	</dict>
+	<key>error_header_title</key>
+	<dict>
+		<key>es</key>
+		<string>Algo salió mal...</string>
+		<key>en</key>
+		<string>Something went wrong...</string>
+		<key>pt</key>
+		<string>Algo deu errado...</string>
+	</dict>
 	<key>error_body_title_</key>
 	<dict>
 		<key>comment</key>
@@ -636,6 +650,15 @@ Se preferir, você pode escolher outro meio de pagamento.</string>
 		<string>Debit</string>
 		<key>pt</key>
 		<string>Débito</string>
+	</dict>
+	<key>use_other_payment_method_action</key>
+	<dict>
+		<key>es</key>
+		<string>Pagar con otro medio</string>
+		<key>en</key>
+		<string>Choose another payment method</string>
+		<key>pt</key>
+		<string>Escolha outro meio de pagamento</string>
 	</dict>
 </dict>
 </plist>

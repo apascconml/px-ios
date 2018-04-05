@@ -77,7 +77,7 @@ open class PaymentResultScreenPreference: NSObject {
     var rejectedSubtitle = ""
     var rejectedTitleSetted = false
     private var disableRejectedLabelText = false
-    var rejectedIconSubtext = PXHeaderResultConstants.REJECTED_ICON_SUBTEXT.localized
+    var rejectedIconSubtext = PXHeaderResultConstants.REJECTED_ICON_SUBTEXT.PXLocalized
     var rejectedBolbradescoIconName = "MPSDK_payment_result_bolbradesco_error"
     var rejectedPaymentMethodPluginIconName = "MPSDK_payment_result_plugin_error"
     var rejectedIconBundle = MercadoPago.getBundle()!

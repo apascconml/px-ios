@@ -63,7 +63,7 @@ extension PXResultViewModel {
     func labelTextHeader() -> NSAttributedString? {
         if isAccepted() {
             if self.paymentResult.isWaitingForPayment() {
-                return "¡Apúrate a pagar!".localized.toAttributedString(attributes: [NSFontAttributeName: Utils.getFont(size: PXHeaderRenderer.LABEL_FONT_SIZE)])
+                return PXStrings.success_header_title.PXLocalized.toAttributedString(attributes: [NSFontAttributeName: Utils.getFont(size: PXHeaderRenderer.LABEL_FONT_SIZE)])
             } else {
                 var labelText: String?
                 if self.paymentResult.isApproved() {
@@ -80,7 +80,7 @@ extension PXResultViewModel {
         if !preference.showLabelText {
             return nil
         } else {
-            return NSMutableAttributedString(string: "Algo salió mal...".localized, attributes: [NSFontAttributeName: Utils.getFont(size: PXHeaderRenderer.LABEL_FONT_SIZE)])
+            return NSMutableAttributedString(string: PXStrings.error_header_title.PXLocalized, attributes: [NSFontAttributeName: Utils.getFont(size: PXHeaderRenderer.LABEL_FONT_SIZE)])
         }
 
     }

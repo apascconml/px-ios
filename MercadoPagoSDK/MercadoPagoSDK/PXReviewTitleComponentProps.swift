@@ -21,7 +21,7 @@ final class PXReviewTitleComponentProps : NSObject {
         if let customTitle = withTitle {
             self.reviewTitle = customTitle
         } else {
-            self.reviewTitle = PXReviewTitleComponentProps.DEFAULT_TITLE.localized
+            self.reviewTitle = PXReviewTitleComponentProps.DEFAULT_TITLE.PXLocalized
         }
 
         self.titleColor = titleColor

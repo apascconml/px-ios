@@ -56,13 +56,13 @@ extension PXResultViewModel {
             if let labelError = preference.getRejectedSecondaryButtonText() {
                 return labelError
             } else {
-                return PXFooterResultConstants.ERROR_BUTTON_TEXT.localized
+                return PXFooterResultConstants.ERROR_BUTTON_TEXT.PXLocalized
             }
         } else if self.isWarning() {
             if let labelWarning = preference.getPendingSecondaryButtonText() {
                 return labelWarning
             } else if self.paymentResult.statusDetail == RejectedStatusDetail.CALL_FOR_AUTH || self.paymentResult.statusDetail == RejectedStatusDetail.INSUFFICIENT_AMOUNT {
-                return PXFooterResultConstants.C4AUTH_BUTTON_TEXT.localized
+                return PXFooterResultConstants.C4AUTH_BUTTON_TEXT.PXLocalized
             } else if self.paymentResult.statusDetail == RejectedStatusDetail.CARD_DISABLE {
                 return PXFooterResultConstants.CARD_DISABLE_BUTTON_TEXT.localized
             } else {
@@ -84,7 +84,7 @@ extension PXResultViewModel {
             if self.paymentResult.statusDetail == RejectedStatusDetail.CALL_FOR_AUTH || self.paymentResult.statusDetail == RejectedStatusDetail.INSUFFICIENT_AMOUNT {
                 return PXFooterResultConstants.ERROR_LINK_TEXT.localized
             } else {
-                return PXFooterResultConstants.WARNING_LINK_TEXT.localized
+                return PXFooterResultConstants.WARNING_LINK_TEXT.PXLocalized
             }
         }
         return PXFooterResultConstants.DEFAULT_LINK_TEXT.localized

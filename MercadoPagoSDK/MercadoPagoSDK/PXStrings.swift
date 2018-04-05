@@ -5,6 +5,8 @@
 import Foundation
 
 enum PXStrings {
+    static let success_header_title = "success_header_title"
+    static let error_header_title = "error_header_title"
     static let error_body_title_ = "error_body_title_"
     static let error_body_description_ = "error_body_description_"
     static let error_body_description_pending_contingency = "error_body_description_pending_contingency"
@@ -64,4 +66,5 @@ enum PXStrings {
     static let additional_step_financial_institution_title = "additional_step_financial_institution_title"
     static let card_type_credit_option = "card_type_credit_option"
     static let card_type_debit_option = "card_type_debit_option"
+    static let use_other_payment_method_action = "use_other_payment_method_action"
 }

@@ -9,15 +9,6 @@
 		<key>en</key>
 		<string>Payment methods could not be obtained with this preference</string>
 	</dict>
-	<key>Pagar con otro medio</key>
-	<dict>
-		<key>es</key>
-		<string>Pagar con otro medio</string>
-		<key>en</key>
-		<string>Choose another payment method</string>
-		<key>pt</key>
-		<string>Escolha outro meio de pagamento</string>
-	</dict>
 	<key>Te enviaremos este comprobante a %0</key>
 	<dict>
 		<key>es</key>
@@ -386,24 +377,6 @@
 		<string>Shipping</string>
 		<key>pt</key>
 		<string>Remessa</string>
-	</dict>
-	<key>¡Apúrate a pagar!</key>
-	<dict>
-		<key>es</key>
-		<string>¡Apúrate a pagar!</string>
-		<key>en</key>
-		<string>¡Apúrate a pagar!</string>
-		<key>pt</key>
-		<string>¡Apúrate a pagar!</string>
-	</dict>
-	<key>Algo salió mal...</key>
-	<dict>
-		<key>es</key>
-		<string>Algo salió mal...</string>
-		<key>en</key>
-		<string>Something went wrong...</string>
-		<key>pt</key>
-		<string>Algo deu errado...</string>
 	</dict>
 	<key> de </key>
 	<dict>
