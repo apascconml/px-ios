@@ -57,7 +57,7 @@ extension MercadoPagoCheckoutViewModel {
 // MARK: Payment Plugin
 extension MercadoPagoCheckoutViewModel {
     func needToCreatePaymentForPaymentPlugin() -> Bool {
-        guard let _ = paymentPlugin else {
+        if paymentPlugin == nil {
             return false
         }
 

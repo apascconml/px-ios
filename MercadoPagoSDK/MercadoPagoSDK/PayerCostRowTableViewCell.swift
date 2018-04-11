@@ -20,7 +20,7 @@ class PayerCostRowTableViewCell: UITableViewCell {
 
         } else if payerCost.hasInstallmentsRate() {
             let attributedTotal = NSMutableAttributedString(attributedString: NSAttributedString(string: "(", attributes: [NSForegroundColorAttributeName: UIColor.px_grayLight()]))
-            attributedTotal.append(Utils.getAttributedAmount(payerCost.totalAmount, currency: currency, color : UIColor.px_grayLight(), fontSize: 15, baselineOffset:3))
+            attributedTotal.append(Utils.getAttributedAmount(payerCost.totalAmount, currency: currency, color: UIColor.px_grayLight(), fontSize: 15, baselineOffset: 3))
             attributedTotal.append(NSAttributedString(string: ")", attributes: [NSForegroundColorAttributeName: UIColor.px_grayLight()]))
 
             if showDescription == false {
@@ -32,15 +32,15 @@ class PayerCostRowTableViewCell: UITableViewCell {
         } else {
 
             if showDescription == false {
-                interestDescription.attributedText = NSAttributedString(string : "")
+                interestDescription.attributedText = NSAttributedString(string: "")
             } else {
-                interestDescription.attributedText = NSAttributedString(string : "Sin interés".localized)
+                interestDescription.attributedText = NSAttributedString(string: "Sin interés".localized)
             }
 
         }
-        var installmentNumber = String(format:"%i", payerCost.installments)
+        var installmentNumber = String(format: "%i", payerCost.installments)
         installmentNumber = "\(installmentNumber) x "
-        let totalAmount = Utils.getAttributedAmount(payerCost.installmentAmount, thousandSeparator: String(currency.thousandsSeparator), decimalSeparator: String(currency.decimalSeparator), currencySymbol: String(currency.symbol), color:UIColor.black, centsFontSize: 14, baselineOffset:5)
+        let totalAmount = Utils.getAttributedAmount(payerCost.installmentAmount, thousandSeparator: String(currency.thousandsSeparator), decimalSeparator: String(currency.decimalSeparator), currencySymbol: String(currency.symbol), color: UIColor.black, centsFontSize: 14, baselineOffset: 5)
 
         let atribute = [NSFontAttributeName: Utils.getFont(size: 20), NSForegroundColorAttributeName: UIColor.black]
         let installmentLabel = NSMutableAttributedString(string: installmentNumber, attributes: atribute)

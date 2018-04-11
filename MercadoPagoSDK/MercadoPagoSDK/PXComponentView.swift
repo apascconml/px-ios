@@ -98,10 +98,8 @@ public class PXComponentView: UIView {
         if !self.contentView.subviews.contains(view) {
             return nil
         }
-        for actualView in self.contentView.subviews.reversed() {
-            if actualView != view {
-                return PXLayout.put(view: view, onBottomOf: actualView, withMargin: margin)
-            }
+        for actualView in self.contentView.subviews.reversed() where actualView != view {
+            return PXLayout.put(view: view, onBottomOf: actualView, withMargin: margin)
         }
         return nil
     }

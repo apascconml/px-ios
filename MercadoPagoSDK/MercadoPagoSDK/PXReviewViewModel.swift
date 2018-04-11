@@ -94,7 +94,7 @@ extension PXReviewViewModel {
         let searchString: String = site + "_" + "\(issuerID)"
 
         if let link = dictionary?.value(forKey: searchString) as? String {
-            return URL(string:link)
+            return URL(string: link)
         }
 
         return nil
@@ -124,7 +124,7 @@ extension PXReviewViewModel {
             summary = getDefaultSummary()
             if self.reviewScreenPreference.details[SummaryType.PRODUCT]?.details.count == 0 { //Si solo le cambio el titulo a Productos
                 if let title = self.reviewScreenPreference.details[SummaryType.PRODUCT]?.title {
-                    summary.updateTitle(type: SummaryType.PRODUCT, oneWordTitle:title)
+                    summary.updateTitle(type: SummaryType.PRODUCT, oneWordTitle: title)
                 }
             }
         }
@@ -136,27 +136,27 @@ extension PXReviewViewModel {
                 summary.addAmountDetail(detail: discountAmountDetail, type: SummaryType.DISCOUNT)
             } else {
                 let discountSummaryDetail = SummaryDetail(title: self.reviewScreenPreference.summaryTitles[SummaryType.DISCOUNT]!, detail: discountAmountDetail)
-                summary.addSummaryDetail(summaryDetail:discountSummaryDetail, type: SummaryType.DISCOUNT)
+                summary.addSummaryDetail(summaryDetail: discountSummaryDetail, type: SummaryType.DISCOUNT)
             }
             summary.details[SummaryType.DISCOUNT]?.titleColor = ThemeManager.shared.getTheme().noTaxAndDiscountLabelTintColor()
             summary.details[SummaryType.DISCOUNT]?.amountColor = ThemeManager.shared.getTheme().noTaxAndDiscountLabelTintColor()
         }
         if let payerCost = self.paymentData.payerCost {
             var interest = 0.0
-            
+
             if let discountAmount = self.paymentData.discount?.coupon_amount, let discountValue = Double(discountAmount) {
                 interest = payerCost.totalAmount - (amount - discountValue)
             } else {
                 interest = payerCost.totalAmount - amount
             }
-            
+
             if interest > 0 {
                 let interestAmountDetail = SummaryItemDetail(amount: interest)
                 if summary.details[SummaryType.CHARGE] != nil {
                     summary.addAmountDetail(detail: interestAmountDetail, type: SummaryType.CHARGE)
                 } else {
                     let interestSummaryDetail = SummaryDetail(title: self.reviewScreenPreference.summaryTitles[SummaryType.CHARGE]!, detail: interestAmountDetail)
-                    summary.addSummaryDetail(summaryDetail:interestSummaryDetail, type: SummaryType.CHARGE)
+                    summary.addSummaryDetail(summaryDetail: interestSummaryDetail, type: SummaryType.CHARGE)
                 }
             }
         }
@@ -170,7 +170,7 @@ extension PXReviewViewModel {
     func getDefaultSummary() -> Summary {
         let productSummaryDetail = SummaryDetail(title: self.reviewScreenPreference.summaryTitles[SummaryType.PRODUCT]!, detail: SummaryItemDetail(amount: preference.getAmount()))
 
-        return Summary(details:[SummaryType.PRODUCT: productSummaryDetail])
+        return Summary(details: [SummaryType.PRODUCT: productSummaryDetail])
     }
 }
 

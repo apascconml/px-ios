@@ -42,7 +42,7 @@ open class CouponDetailViewController: MercadoPagoUIViewController {
         let screenWidth = screenSize.width
         let xPos = (screenWidth - cuponViewWidth)/2
         let yPos = (screenHeight - cuponViewHeight)/2
-        self.couponView = DiscountDetailView(frame:CGRect(x: xPos, y: yPos, width:cuponViewWidth, height: cuponViewHeight), coupon: self.viewModel.coupon, amount:self.viewModel.coupon.amountWithoutDiscount)
+        self.couponView = DiscountDetailView(frame: CGRect(x: xPos, y: yPos, width: cuponViewWidth, height: cuponViewHeight), coupon: self.viewModel.coupon, amount: self.viewModel.coupon.amountWithoutDiscount)
         self.couponView.layer.cornerRadius = 4
         self.couponView.layer.masksToBounds = true
         self.view.addSubview(self.couponView)

@@ -142,7 +142,7 @@
 
     PaymentPluginViewController *makePaymentComponent = [storyboard instantiateViewControllerWithIdentifier:@"paymentPlugin"];
 
-    PXPaymentMethodPlugin * bitcoinPaymentMethodPlugin = [[PXPaymentMethodPlugin alloc] initWithId:@"bitcoin_payment" name:@"Bitcoin" image:[UIImage imageNamed:@"bitcoin_payment"] description:@"" paymentPlugin:makePaymentComponent];
+    PXPaymentMethodPlugin * bitcoinPaymentMethodPlugin = [[PXPaymentMethodPlugin alloc] initWithPaymentMethodPluginId:@"bitcoin_payment" name:@"Bitcoin" image:[UIImage imageNamed:@"bitcoin_payment"] description:@"" paymentPlugin:makePaymentComponent];
 
     // Payment method config plugin component.
     PaymentMethodPluginConfigViewController *configPaymentComponent = [storyboard instantiateViewControllerWithIdentifier:@"paymentMethodConfigPlugin"];
@@ -168,7 +168,7 @@
 }
 
 -(void)setPaymentResult {
-    PaymentResult *paymentResult = [[PaymentResult alloc] initWithStatus:@"rejected" statusDetail:@"cc_rejected_call_for_authorize" paymentData:self.paymentData payerEmail:@"sarasa" id:@"123" statementDescription:@"sarasa"];
+    PaymentResult *paymentResult = [[PaymentResult alloc] initWithStatus:@"rejected" statusDetail:@"cc_rejected_call_for_authorize" paymentData:self.paymentData payerEmail:@"sarasa" paymentId:@"123" statementDescription:@"sarasa"];
     self.paymentResult = paymentResult;
 
 }

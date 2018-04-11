@@ -6,7 +6,6 @@
 //  Copyright © 2017 MercadoPago. All rights reserved.
 //
 
-
 import Foundation
 import XCTest
 
@@ -294,13 +293,13 @@ class PaymentMethodPluginFlowTest: BaseTest {
         let customerCardOption = MockBuilder.buildCustomerPaymentMethod("customerCardId", paymentMethodId: "visa")
         let creditCardOption = MockBuilder.buildPaymentMethodSearchItem("credit_card", type: PaymentMethodSearchItemType.PAYMENT_TYPE)
         let paymentMethodVisa = MockBuilder.buildPaymentMethod("visa")
-        let paymentMethodSearchMock = MockBuilder.buildPaymentMethodSearch(groups : [creditCardOption], paymentMethods : [paymentMethodVisa], customOptions : [customerCardOption])
+        let paymentMethodSearchMock = MockBuilder.buildPaymentMethodSearch(groups: [creditCardOption], paymentMethods: [paymentMethodVisa], customOptions: [customerCardOption])
         mpCheckout.viewModel.updateCheckoutModel(paymentMethodSearch: paymentMethodSearchMock)
 
         // 5. Display payment methods (no exclusions) y payment option selected : customer card visa
         step = mpCheckout.viewModel.nextStep()
         XCTAssertEqual(CheckoutStep.SCREEN_PAYMENT_METHOD_SELECTION, step)
-        mpCheckout.viewModel.updateCheckoutModel(paymentOptionSelected : customerCardOption as! PaymentMethodOption)
+        mpCheckout.viewModel.updateCheckoutModel(paymentOptionSelected: customerCardOption as! PaymentMethodOption)
 
         // 6. Display HOOK 1: After payment type selected
         step = mpCheckout.viewModel.nextStep()
@@ -480,13 +479,13 @@ class PaymentMethodPluginFlowTest: BaseTest {
         var customerCardOption = MockBuilder.buildCustomerPaymentMethodWithESC(paymentMethodId: "visa")
         let creditCardOption = MockBuilder.buildPaymentMethodSearchItem("credit_card", type: PaymentMethodSearchItemType.PAYMENT_TYPE)
         let paymentMethodVisa = MockBuilder.buildPaymentMethod("visa")
-        let paymentMethodSearchMock = MockBuilder.buildPaymentMethodSearch(groups : [creditCardOption], paymentMethods : [paymentMethodVisa], customOptions : [customerCardOption])
+        let paymentMethodSearchMock = MockBuilder.buildPaymentMethodSearch(groups: [creditCardOption], paymentMethods: [paymentMethodVisa], customOptions: [customerCardOption])
         mpCheckout.viewModel.updateCheckoutModel(paymentMethodSearch: paymentMethodSearchMock)
 
         // 5. Display payment methods (no exclusions) y payment option selected : customer card visa
         step = mpCheckout.viewModel.nextStep()
         XCTAssertEqual(CheckoutStep.SCREEN_PAYMENT_METHOD_SELECTION, step)
-        mpCheckout.viewModel.updateCheckoutModel(paymentOptionSelected : customerCardOption as! PaymentMethodOption)
+        mpCheckout.viewModel.updateCheckoutModel(paymentOptionSelected: customerCardOption as! PaymentMethodOption)
 
         // 6. Display HOOK 1: After payment type selected
         step = mpCheckout.viewModel.nextStep()

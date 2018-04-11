@@ -90,7 +90,7 @@ open class MockBuilder: NSObject {
     }
 
     class func buildItem(_ id: String, quantity: Int, unitPrice: Double, description: String? = "Description") -> Item {
-        return Item(itemId: id, title : "item title", quantity: quantity, unitPrice: unitPrice, description: description)
+        return Item(itemId: id, title: "item title", quantity: quantity, unitPrice: unitPrice, description: description)
     }
 
     class func buildPayer(_ id: String) -> Payer {
@@ -115,13 +115,13 @@ open class MockBuilder: NSObject {
         paymentMethod.name = name
         paymentMethod.paymentTypeId = paymentTypeId
         paymentMethod.additionalInfoNeeded = ["info"]
-        
+
         if multipleSettings {
             paymentMethod.settings = [MockBuilder.buildSetting(), MockBuilder.buildSetting()]
         } else {
             paymentMethod.settings = [MockBuilder.buildSetting()]
         }
-        
+
         return paymentMethod
     }
 
@@ -261,18 +261,18 @@ open class MockBuilder: NSObject {
     }
 
     class func buildPaymentMethodSearchComplete() -> PaymentMethodSearch {
-        let accountMoneyOption = MockBuilder.buildCustomerPaymentMethod("account_money", paymentMethodId : "account_money")
+        let accountMoneyOption = MockBuilder.buildCustomerPaymentMethod("account_money", paymentMethodId: "account_money")
         let customerCardOption = MockBuilder.buildCustomerPaymentMethod("customerCardId", paymentMethodId: "visa")
         let creditCardOption = MockBuilder.buildPaymentMethodSearchItem("credit_card", type: PaymentMethodSearchItemType.PAYMENT_TYPE)
         let offlineOption = MockBuilder.buildPaymentMethodSearchItem("off", type: PaymentMethodSearchItemType.PAYMENT_METHOD)
         let paymentMethodVisa = MockBuilder.buildPaymentMethod("visa")
         let paymentMethodMaster = MockBuilder.buildPaymentMethod("master")
-        let paymentMethodTicket = MockBuilder.buildPaymentMethod("ticket", paymentTypeId:"off")
-        let paymentMethodTicket2 = MockBuilder.buildPaymentMethod("ticket 2", paymentTypeId:"off")
+        let paymentMethodTicket = MockBuilder.buildPaymentMethod("ticket", paymentTypeId: "off")
+        let paymentMethodTicket2 = MockBuilder.buildPaymentMethod("ticket 2", paymentTypeId: "off")
         let paymentMethodAM = MockBuilder.buildPaymentMethod("account_money", paymentTypeId: "account_money")
-        let offlinePaymentMethod = MockBuilder.buildPaymentMethod("off", paymentTypeId : PaymentTypeId.TICKET.rawValue)
+        let offlinePaymentMethod = MockBuilder.buildPaymentMethod("off", paymentTypeId: PaymentTypeId.TICKET.rawValue)
 
-        let paymentMethodSearchMock = MockBuilder.buildPaymentMethodSearch(groups : [creditCardOption, offlineOption], paymentMethods : [paymentMethodVisa, paymentMethodMaster, paymentMethodAM, offlinePaymentMethod, paymentMethodTicket, paymentMethodTicket2], customOptions : [customerCardOption, accountMoneyOption])
+        let paymentMethodSearchMock = MockBuilder.buildPaymentMethodSearch(groups: [creditCardOption, offlineOption], paymentMethods: [paymentMethodVisa, paymentMethodMaster, paymentMethodAM, offlinePaymentMethod, paymentMethodTicket, paymentMethodTicket2], customOptions: [customerCardOption, accountMoneyOption])
         return paymentMethodSearchMock
     }
 
@@ -390,7 +390,7 @@ open class MockBuilder: NSObject {
         intructionsInfo.instructions = [MockBuilder.buildInstruction()]
         return intructionsInfo
     }
-    
+
     class func buildCurrency() -> Currency {
         let currency = Currency()
         currency.currencyDescription = "description"
@@ -399,18 +399,18 @@ open class MockBuilder: NSObject {
         currency.decimalSeparator = "."
         return currency
     }
-    
+
     class func buildInstruction() -> Instruction {
         let instruction = Instruction()
         instruction.references = [MockBuilder.buildInstructionReferenceNumber()]
-        instruction.info = ["1. Acesse o seu Internet Banking ou abra o aplicativo do seu banco.","2. Utilize o código abaixo para realizar o pagamento."]
+        instruction.info = ["1. Acesse o seu Internet Banking ou abra o aplicativo do seu banco.", "2. Utilize o código abaixo para realizar o pagamento."]
         instruction.subtitle = "Veja como é fácil pagar o seu produto"
         instruction.secondaryInfo = ["Uma cópia desse boleto foi enviada ao seu e-mail -payer.email- caso você precise realizar o pagamento depois."]
         instruction.accreditationMessage = "Assim que você pagar, será aprovado automaticamente entre 1 e 2 dias úteis, mas considere: Em caso de feriados, será identificado até às 18h do segundo dia útil subsequente ao feriado."
         //instruction.accreditationComment = ["Pagamentos realizados em correspondentes bancários podem ultrapassar este prazo."]
         return instruction
     }
-    
+
     class func builCompletedInstruction() -> Instruction {
         let instruction = Instruction()
         instruction.references = [MockBuilder.buildInstructionReferenceNumber(), MockBuilder.buildInstructionReference(label: "Concepto", value: ["MPAGO:COMPRA"]), MockBuilder.buildInstructionReference(label: "Empresa", value: ["Mercado Libre - Mercado Pago"])]
@@ -423,16 +423,16 @@ open class MockBuilder: NSObject {
         instruction.actions = [MockBuilder.buildInstructionAction()]
         return instruction
     }
-    
+
     class func buildInstructionReferenceNumber() -> InstructionReference {
         let instructionReference = InstructionReference()
         instructionReference.label = "Número"
-        instructionReference.value = ["2379","1729","0000","0400","1003","3802","6025","4607","2909","0063","3330"]
+        instructionReference.value = ["2379", "1729", "0000", "0400", "1003", "3802", "6025", "4607", "2909", "0063", "3330"]
         instructionReference.separator = " "
         instructionReference.comment = "Você pode copiar e colar o código no fluxo de pagamento do seu aplicativo para torná-lo mais simples e cômodo"
         return instructionReference
     }
-    
+
     class func buildInstructionReference(label: String, value: [String]) -> InstructionReference {
         let instructionReference = InstructionReference()
         instructionReference.label = label
@@ -441,7 +441,7 @@ open class MockBuilder: NSObject {
         instructionReference.comment = ""
         return instructionReference
     }
-    
+
     class func buildInstructionAction() -> InstructionAction {
         let instructionAction = InstructionAction()
         instructionAction.label = "Ir a banca en línea"

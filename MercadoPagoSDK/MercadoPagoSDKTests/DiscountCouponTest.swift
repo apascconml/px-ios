@@ -12,7 +12,6 @@ class DiscountCouponTest: XCTestCase {
 
     let amount = 1000.0
 
-
     func testToJSON() {
 
         let discountCoupon = DiscountCoupon(discountId: 123)

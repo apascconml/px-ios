@@ -51,7 +51,7 @@ class MercadoPagoCheckoutTest: BaseTest {
         paymentData.token = MockBuilder.buildToken()
         let navControllerInstance = UINavigationController()
 
-        self.mpCheckout = MercadoPagoCheckout(publicKey: "PK_MLA", checkoutPreference: checkoutPreference, paymentData : paymentData, navigationController: navControllerInstance)
+        self.mpCheckout = MercadoPagoCheckout(publicKey: "PK_MLA", checkoutPreference: checkoutPreference, paymentData: paymentData, navigationController: navControllerInstance)
 
         XCTAssertNotNil(self.mpCheckout!.viewModel)
         XCTAssertNotNil(self.mpCheckout!.viewModel.checkoutPreference)
@@ -74,7 +74,7 @@ class MercadoPagoCheckoutTest: BaseTest {
         let paymentResult = MockBuilder.buildPaymentResult(paymentMethodId: "visa")
         paymentResult.paymentData = paymentData
 
-        self.mpCheckout = MercadoPagoCheckout(publicKey: "PK_MLA", accessToken: "lala", checkoutPreference: checkoutPreference, paymentData : paymentData, paymentResult : paymentResult, navigationController: navControllerInstance)
+        self.mpCheckout = MercadoPagoCheckout(publicKey: "PK_MLA", accessToken: "lala", checkoutPreference: checkoutPreference, paymentData: paymentData, paymentResult: paymentResult, navigationController: navControllerInstance)
 
         XCTAssertNotNil(self.mpCheckout!.viewModel)
         XCTAssertNotNil(self.mpCheckout!.viewModel.checkoutPreference)
@@ -250,7 +250,7 @@ class MercadoPagoCheckoutTest: BaseTest {
         let navControllerInstance = UINavigationController()
         self.mpCheckout = MercadoPagoCheckout(publicKey: "PK_MLB", accessToken: "", checkoutPreference: checkoutPreference, navigationController: navControllerInstance)
 
-        let paymentMethod = MockBuilder.buildPaymentMethod("bolbradesco", paymentTypeId : "bank_transfer")
+        let paymentMethod = MockBuilder.buildPaymentMethod("bolbradesco", paymentTypeId: "bank_transfer")
         self.mpCheckout!.viewModel.payment = MockBuilder.buildPayment("bolbradesco")
         self.mpCheckout!.viewModel.paymentData = MockBuilder.buildPaymentData(paymentMethod: paymentMethod)
         self.mpCheckout?.viewModel.instructionsInfo = MockBuilder.buildInstructionsInfo(paymentMethod: paymentMethod)

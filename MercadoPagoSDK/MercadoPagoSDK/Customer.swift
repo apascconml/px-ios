@@ -26,6 +26,42 @@ open class Customer: NSObject {
     open var phone: Phone?
     open var registrationDate: Date?
 
+    open class func fromJSON(_ json: NSDictionary) -> Customer {
+        let customer: Customer = Customer()
+        customer.customerId = json["id"] as! String!
+        customer.liveMode = json["live_mode"] as? Bool
+        customer.email = json["email"] as? String
+        customer.firstName = json["first_name"] as? String
+        customer.lastName = json["last_name"] as? String
+        customer.customerDescription = json["description"] as? String
+
+        if let identificationDic = json["identification"] as? NSDictionary {
+            customer.identification = Identification.fromJSON(identificationDic)
+        }
+        if let phoneDic = json["phone"] as? NSDictionary {
+            customer.phone = Phone.fromJSON(phoneDic)
+        }
+        if let addressDic = json["address"] as? NSDictionary {
+            customer.address = Address.fromJSON(addressDic)
+        }
+        if let defaultCard = json["default_card"] as? String {
+            customer.defaultCard = defaultCard
+        }
+        customer.metadata = json["metadata"] as? NSDictionary
+        customer.dateCreated = Utils.getDateFromString(json["date_created"] as? String)
+        customer.dateLastUpdated = Utils.getDateFromString(json["date_last_updated"] as? String)
+        customer.registrationDate = Utils.getDateFromString(json["date_registered"] as? String)
+        var cards: [Card] = [Card]()
+        if let cardsArray = json["cards"] as? NSArray {
+            for i in 0..<cardsArray.count {
+                if let cardDic = cardsArray[i] as? NSDictionary {
+                    cards.append(Card.fromJSON(cardDic))
+                }
+            }
+        }
+        customer.cards = cards.isEmpty ? nil : cards
+        return customer
+    }
     open func toJSONString() -> String {
         let defaultCard: Any =  self.defaultCard == nil ? JSONHandler.null : self.defaultCard!
         let description: Any =   self.customerDescription == nil ? JSONHandler.null : self.customerDescription!

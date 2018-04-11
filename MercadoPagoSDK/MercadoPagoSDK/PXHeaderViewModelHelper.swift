@@ -74,7 +74,7 @@ extension PXResultViewModel {
                 guard let text = labelText else {
                     return nil
                 }
-                return text.toAttributedString(attributes:[NSFontAttributeName: Utils.getFont(size: PXHeaderRenderer.LABEL_FONT_SIZE)])
+                return text.toAttributedString(attributes: [NSFontAttributeName: Utils.getFont(size: PXHeaderRenderer.LABEL_FONT_SIZE)])
             }
         }
         if !preference.showLabelText {
@@ -85,7 +85,7 @@ extension PXResultViewModel {
 
     }
     func titleHeader() -> NSAttributedString {
-        if let _ = self.instructionsInfo {
+        if self.instructionsInfo != nil {
             return titleForInstructions()
         }
         if isAccepted() {
@@ -135,7 +135,7 @@ extension PXResultViewModel {
 
         if let range = amountRange {
             let attributedTitle = NSMutableAttributedString(string: (instructionsInfo.instructions[0].title.substring(to: (range.lowerBound))), attributes: [NSFontAttributeName: Utils.getFont(size: PXHeaderRenderer.TITLE_FONT_SIZE)])
-            let attributedAmount = Utils.getAttributedAmount(instructionsInfo.amountInfo.amount, thousandSeparator: thousandSeparator, decimalSeparator: decimalSeparator, currencySymbol: currencySymbol, color: UIColor.px_white(), fontSize: PXHeaderRenderer.TITLE_FONT_SIZE, centsFontSize:PXHeaderRenderer.TITLE_FONT_SIZE/2, smallSymbol: true)
+            let attributedAmount = Utils.getAttributedAmount(instructionsInfo.amountInfo.amount, thousandSeparator: thousandSeparator, decimalSeparator: decimalSeparator, currencySymbol: currencySymbol, color: UIColor.px_white(), fontSize: PXHeaderRenderer.TITLE_FONT_SIZE, centsFontSize: PXHeaderRenderer.TITLE_FONT_SIZE/2, smallSymbol: true)
             attributedTitle.append(attributedAmount)
             let endingTitle = NSAttributedString(string: (instructionsInfo.instructions[0].title.substring(from: (range.upperBound))), attributes: [NSFontAttributeName: Utils.getFont(size: PXHeaderRenderer.TITLE_FONT_SIZE)])
             attributedTitle.append(endingTitle)
@@ -153,7 +153,7 @@ extension PXResultViewModel {
             let currencySymbol = currency.getCurrencySymbolOrDefault()
             let thousandSeparator = currency.getThousandsSeparatorOrDefault()
             let decimalSeparator = currency.getDecimalSeparatorOrDefault()
-            let amountStr = Utils.getAttributedAmount(amount, thousandSeparator: thousandSeparator, decimalSeparator: decimalSeparator, currencySymbol: currencySymbol, color: UIColor.px_white(), fontSize:PXHeaderRenderer.TITLE_FONT_SIZE, centsFontSize:PXHeaderRenderer.TITLE_FONT_SIZE/2, smallSymbol: true)
+            let amountStr = Utils.getAttributedAmount(amount, thousandSeparator: thousandSeparator, decimalSeparator: decimalSeparator, currencySymbol: currencySymbol, color: UIColor.px_white(), fontSize: PXHeaderRenderer.TITLE_FONT_SIZE, centsFontSize: PXHeaderRenderer.TITLE_FONT_SIZE/2, smallSymbol: true)
             let string = "Debes autorizar ante %1$s el pago de ".localized.replacingOccurrences(of: "%1$s", with: "\(paymentMethodName)")
             let result: NSMutableAttributedString = NSMutableAttributedString(string: string, attributes: [NSFontAttributeName: Utils.getFont(size: PXHeaderRenderer.TITLE_FONT_SIZE)])
             result.append(amountStr)

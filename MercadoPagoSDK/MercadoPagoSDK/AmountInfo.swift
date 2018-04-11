@@ -16,7 +16,35 @@ open class AmountInfo: NSObject {
     override init() {
         super.init()
     }
-    
+    open class func fromJSON(_ json: NSDictionary) -> AmountInfo {
+
+        let amountInfo: AmountInfo = AmountInfo()
+
+        if let amount = JSONHandler.attemptParseToDouble(json["amount"]) {
+            amountInfo.amount = amount
+        }
+
+        let currency = Currency()
+        if let thousandsSeparator = JSONHandler.attemptParseToString(json["thousands_separator"]) {
+            currency.thousandsSeparator = thousandsSeparator
+        }
+
+        if let decimalSeparator = JSONHandler.attemptParseToString(json["decimal_separator"]) {
+            currency.decimalSeparator = decimalSeparator
+        }
+
+        if let symbol = JSONHandler.attemptParseToString(json["symbol"]) {
+            currency.symbol = symbol
+        }
+
+        if let decimalPlaces = JSONHandler.attemptParseToInt(json["decimal_places"]) {
+            currency.decimalPlaces = decimalPlaces
+        }
+
+        amountInfo.currency = currency
+        return amountInfo
+    }
+
     open func toJSONString() -> String {
        return JSONHandler.jsonCoding(self.toJSON())
     }
@@ -34,5 +62,4 @@ open class AmountInfo: NSObject {
             "decimal_places": decimal_places]
         return obj
     }
-
 }

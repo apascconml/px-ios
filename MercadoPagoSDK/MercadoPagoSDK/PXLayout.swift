@@ -125,10 +125,8 @@ class PXLayout: NSObject {
         if !view2.subviews.contains(view) {
             return nil
         }
-        for actualView in view2.subviews.reversed() {
-            if actualView != view {
-                return put(view: view, onBottomOf: actualView, withMargin: margin)
-            }
+        for actualView in view2.subviews.reversed() where actualView != view {
+            return put(view: view, onBottomOf: actualView, withMargin: margin)
         }
         return nil
     }

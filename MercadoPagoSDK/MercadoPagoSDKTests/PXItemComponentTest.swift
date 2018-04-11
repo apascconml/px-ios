@@ -57,15 +57,15 @@ class PXItemComponentTest: BaseTest {
         // Then
         XCTAssertEqual(itemViews.count, 1)
     }
-    
+
     func testItemView_oneItemWithNoDesciptionAndOneQuantity_render() {
         // Given
         let item = MockBuilder.buildItem("id", quantity: 1, unitPrice: 1, description: "")
         let reviewViewModel = ReviewMockComponentHelper.buildResultViewModelWithPreference(items: [item])
-        
+
         // When
         let itemViews = ReviewMockComponentHelper.buildItemComponentView(reviewViewModel: reviewViewModel)
-        
+
         // Then
         XCTAssertEqual(itemViews.count, 0)
     }

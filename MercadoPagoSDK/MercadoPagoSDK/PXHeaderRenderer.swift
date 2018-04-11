@@ -53,7 +53,7 @@ class PXHeaderRenderer: NSObject {
         headerView.messageLabel = buildMessageLabel(with: header.props.title)
         headerView.addSubview(headerView.messageLabel!)
         PXLayout.centerHorizontally(view: headerView.messageLabel!, to: headerView.messageLabel!.superview!).isActive = true
-        PXLayout.put(view: headerView.messageLabel!, onBottomOf:headerView.statusLabel!, withMargin: PXLayout.M_MARGIN).isActive = true
+        PXLayout.put(view: headerView.messageLabel!, onBottomOf: headerView.statusLabel!, withMargin: PXLayout.M_MARGIN).isActive = true
         PXLayout.matchWidth(ofView: headerView.messageLabel!, toView: headerView.messageLabel!.superview!, withPercentage: CONTENT_WIDTH_PERCENT).isActive = true
         PXLayout.pinBottom(view: headerView.messageLabel!, to: headerView.messageLabel!.superview!, withMargin: PXLayout.XL_MARGIN).isActive = true
 

@@ -264,7 +264,7 @@ open class IdentificationViewController: MercadoPagoUIViewController, UITextFiel
     func rightArrowKeyTapped() {
         let idnt = Identification(type: self.identificationType?.identificationTypeId, number: defaultEditTextMask.textUnmasked(numberTextField.text))
 
-        let cardToken = CardToken(cardNumber: "", expirationMonth: 10, expirationYear: 10, securityCode: "", cardholderName: "", docType: (self.identificationType?.type)!, docNumber:  defaultEditTextMask.textUnmasked(numberTextField.text))
+        let cardToken = CardToken(cardNumber: "", expirationMonth: 10, expirationYear: 10, securityCode: "", cardholderName: "", docType: (self.identificationType?.type)!, docNumber: defaultEditTextMask.textUnmasked(numberTextField.text))
 
         if (cardToken.validateIdentificationNumber(self.identificationType)) == nil {
             self.numberTextField.resignFirstResponder()

@@ -40,7 +40,7 @@ final class PXTermsAndConditionView: PXComponentView {
 
         addSubview(termsAndConditionsText)
 
-        let URLAttribute = [NSFontAttributeName: UIFont(name:MercadoPago.DEFAULT_FONT_NAME, size: 12) ?? UIFont.systemFont(ofSize: 12), NSForegroundColorAttributeName: ThemeManager.shared.getTheme().secondaryButton().tintColor] as [String: Any]
+        let URLAttribute = [NSFontAttributeName: UIFont(name: MercadoPago.DEFAULT_FONT_NAME, size: 12) ?? UIFont.systemFont(ofSize: 12), NSForegroundColorAttributeName: ThemeManager.shared.getTheme().secondaryButton().tintColor] as [String: Any]
 
         termsAndConditionsText.linkTextAttributes = URLAttribute
 
@@ -81,7 +81,7 @@ extension PXTermsAndConditionView {
         style.alignment = .center
         style.lineSpacing = CGFloat(3)
 
-        mutableAttributedString.addAttribute(NSParagraphStyleAttributeName, value: style, range: NSMakeRange(0, mutableAttributedString.length))
+        mutableAttributedString.addAttribute(NSParagraphStyleAttributeName, value: style, range: NSRange(location: 0, length: mutableAttributedString.length))
 
         return mutableAttributedString
     }

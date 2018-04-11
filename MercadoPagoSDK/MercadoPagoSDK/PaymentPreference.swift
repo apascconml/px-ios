@@ -53,6 +53,47 @@ open class PaymentPreference: NSObject {
         super.init()
     }
 
+    open class func fromJSON(_ json: NSDictionary) -> PaymentPreference {
+               let preferencePaymentMethods = PaymentPreference()
+
+               var excludedPaymentMethods = Set<String>()
+                if let pmArray = json["excluded_payment_methods"] as? NSArray {
+                       for i in 0..<pmArray.count {
+                                if let pmDic = pmArray[i] as? NSDictionary {
+                                        let pmDicValue = pmDic.value(forKey: "id") as? String
+                                        if pmDicValue != nil && pmDicValue!.count > 0 {
+                                                excludedPaymentMethods.insert(pmDicValue!)
+                                            }
+                                    }
+                           }
+                        preferencePaymentMethods.excludedPaymentMethodIds = excludedPaymentMethods
+                    }
+
+                var excludedPaymentTypesIds = Set<String>()
+                if let ptArray = json["excluded_payment_types"] as? NSArray {
+                        for i in 0..<ptArray.count {
+                                if let ptDic = ptArray[i] as? NSDictionary {
+                                        let ptDicValue = ptDic.value(forKey: "id") as? String
+                                        if ptDicValue != nil && ptDicValue?.count > 0 {
+                                                excludedPaymentTypesIds.insert(ptDicValue!)
+                                            }
+                                    }
+                            }
+                        preferencePaymentMethods.excludedPaymentTypeIds = Set<String>(excludedPaymentTypesIds)
+                    }
+                if let defaultPaymentMethodId = JSONHandler.attemptParseToString(json["default_payment_method_id"]) {
+                        preferencePaymentMethods.defaultPaymentMethodId = defaultPaymentMethodId
+                    }
+                if let maxAcceptedInstallments = JSONHandler.attemptParseToInt(json["installments"]) {
+                        preferencePaymentMethods.maxAcceptedInstallments = maxAcceptedInstallments
+                    }
+                if let defaultInstallments = JSONHandler.attemptParseToInt(json["default_installments"]) {
+                        preferencePaymentMethods.defaultInstallments = defaultInstallments
+                    }
+
+                return preferencePaymentMethods
+            }
+
     open func autoSelectPayerCost(_ payerCostList: [PayerCost]) -> PayerCost? {
         if payerCostList.count == 0 {
             return nil
@@ -61,10 +102,8 @@ open class PaymentPreference: NSObject {
             return payerCostList.first
         }
 
-            for payercost in payerCostList {
-                if payercost.installments == defaultInstallments {
-                    return payercost
-                }
+            for payercost in payerCostList where payercost.installments == defaultInstallments {
+                return payercost
             }
 
         if (payerCostList.first?.installments <= maxAcceptedInstallments)

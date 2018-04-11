@@ -13,7 +13,7 @@ open class AvailableCardsViewController: MercadoPagoUIViewController {
     let buttonFontSize: CGFloat = 18
 
     @IBOutlet weak var retryButton: UIButton!
-    override open var screenName: String { get { return "AVAILABLE_CARDS_DETAIL" } }
+    override open var screenName: String { return "AVAILABLE_CARDS_DETAIL" }
     var availableCardsDetailView: AvailableCardsDetailView!
     var viewModel: AvailableCardsViewModel!
 

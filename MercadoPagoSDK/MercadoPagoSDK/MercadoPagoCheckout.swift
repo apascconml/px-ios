@@ -321,8 +321,8 @@ open class MercadoPagoCheckout: NSObject {
 
     }
     internal func removeRootLoading() {
-        let currentViewControllers = self.navigationController.viewControllers.filter { (vc: UIViewController) -> Bool in
-            return vc != self.rootViewController
+        let currentViewControllers = self.navigationController.viewControllers.filter { (viewController: UIViewController) -> Bool in
+            return viewController != self.rootViewController
         }
         self.navigationController.viewControllers = currentViewControllers
     }

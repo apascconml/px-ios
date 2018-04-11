@@ -21,6 +21,31 @@ open class TransactionDetails: NSObject {
         super.init()
     }
 
+    open class func fromJSON(_ json: NSDictionary) -> TransactionDetails {
+        let transactionDetails: TransactionDetails = TransactionDetails()
+        if let couponAmount = JSONHandler.attemptParseToDouble(json["coupon_amount"]) {
+            transactionDetails.couponAmount = couponAmount
+        }
+        if let externalResourceUrl = JSONHandler.attemptParseToString(json["external_resource_url"]) {
+            transactionDetails.externalResourceUrl = externalResourceUrl
+        }
+        if let financialInstitution = json["financial_institution"] as? NSDictionary {
+            transactionDetails.financialInstitution = FinancialInstitution.fromJSON(financialInstitution)
+        }
+        if let installmentAmount = JSONHandler.attemptParseToDouble(json["installment_amount"]) {
+            transactionDetails.installmentAmount = installmentAmount
+        }
+        if let netReceivedAmount = JSONHandler.attemptParseToDouble(json["net_received_amount"]) {
+            transactionDetails.netReceivedAmount = netReceivedAmount
+        }
+        if let overpaidAmount = JSONHandler.attemptParseToDouble(json["overpaid_amount"]) {
+            transactionDetails.overpaidAmount = overpaidAmount
+        }
+        if let totalPaidAmount = JSONHandler.attemptParseToDouble(json["total_paid_amount"]) {
+            transactionDetails.totalPaidAmount = totalPaidAmount
+        }
+        return transactionDetails
+    }
     public init(financialInstitution: FinancialInstitution? = nil) {
         self.financialInstitution = financialInstitution
     }

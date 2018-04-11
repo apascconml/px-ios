@@ -30,4 +30,7 @@ import Foundation
     func circleBackgroundColor() -> UIColor
 
     func statusBarStyle() -> UIStatusBarStyle
+
+    @objc optional func fontName() -> String?
+    @objc optional func lightFontName() -> String?
 }

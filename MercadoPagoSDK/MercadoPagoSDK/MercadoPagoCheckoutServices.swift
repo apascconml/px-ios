@@ -22,7 +22,7 @@ extension MercadoPagoCheckout {
             strongSelf.viewModel.paymentData.payer = checkoutPreference.getPayer()
             strongSelf.executeNextStep()
 
-        }) { [weak self] (error) in
+        }, failure: { [weak self] (error) in
 
             guard let strongSelf = self else {
                 return
@@ -32,8 +32,7 @@ extension MercadoPagoCheckout {
                 self?.getCheckoutPreference()
             })
             strongSelf.executeNextStep()
-
-        }
+        })
     }
 
     func getDirectDiscount() {
@@ -47,7 +46,7 @@ extension MercadoPagoCheckout {
             strongSelf.viewModel.paymentData.discount = discount
             strongSelf.executeNextStep()
 
-        }) { [weak self] (error) in
+        }, failure: { [weak self] _ in
 
             guard let strongSelf = self else {
                 return
@@ -55,7 +54,7 @@ extension MercadoPagoCheckout {
 
             strongSelf.executeNextStep()
 
-        }
+        })
     }
 
     func initPaymentMethodPlugins() {
@@ -75,7 +74,7 @@ extension MercadoPagoCheckout {
         } else {
             _ = self.viewModel.copyViewModelAndAssignToCheckoutStore()
             let plugin = plugins[index]
-            plugin.initPaymentMethodPlugin(PXCheckoutStore.sharedInstance, { [weak self] success in
+            plugin.initPaymentMethodPlugin(PXCheckoutStore.sharedInstance, { [weak self] _ in
                 self?.initPlugin(plugins: plugins, index: index - 1)
             })
         }
@@ -93,20 +92,18 @@ extension MercadoPagoCheckout {
             strongSelf.viewModel.updateCheckoutModel(paymentMethodSearch: paymentMethodSearch)
             strongSelf.executeNextStep()
 
-        }) { [weak self] (error) in
+        }, failure: { [weak self] (error) in
 
             guard let strongSelf = self else {
                 return
             }
 
-            strongSelf.viewModel.errorInputs(error: MPSDKError.convertFrom(error, requestOrigin:  ApiUtil.RequestOrigin.PAYMENT_METHOD_SEARCH.rawValue), errorCallback: { [weak self] (_) -> Void in
+            strongSelf.viewModel.errorInputs(error: MPSDKError.convertFrom(error, requestOrigin: ApiUtil.RequestOrigin.PAYMENT_METHOD_SEARCH.rawValue), errorCallback: { [weak self] (_) -> Void in
 
                 self?.getPaymentMethodSearch()
             })
             strongSelf.executeNextStep()
-
-        }
-
+        })
     }
 
     func getIssuers() {
@@ -128,7 +125,7 @@ extension MercadoPagoCheckout {
             }
             strongSelf.executeNextStep()
 
-        }) { [weak self] (error) in
+        }, failure: { [weak self] (error) in
 
             guard let strongSelf = self else {
                 return
@@ -138,8 +135,7 @@ extension MercadoPagoCheckout {
                 self?.getIssuers()
             })
             strongSelf.executeNextStep()
-
-        }
+        })
     }
 
     func createCardToken(cardInformation: CardInformation? = nil, securityCode: String? = nil) {
@@ -182,7 +178,7 @@ extension MercadoPagoCheckout {
             strongSelf.viewModel.updateCheckoutModel(token: token)
             strongSelf.executeNextStep()
 
-        }) { [weak self] (error) in
+        }, failure: { [weak self] (error) in
 
             guard let strongSelf = self else {
                 return
@@ -200,8 +196,7 @@ extension MercadoPagoCheckout {
                 })
                 strongSelf.executeNextStep()
             }
-
-        }
+        })
     }
 
     func createSavedCardToken(cardInformation: CardInformation, securityCode: String) {
@@ -222,7 +217,7 @@ extension MercadoPagoCheckout {
             strongSelf.viewModel.updateCheckoutModel(token: token)
             strongSelf.executeNextStep()
 
-        }) { [weak self] (error) in
+        }, failure: { [weak self] (error) in
 
             guard let strongSelf = self else {
                 return
@@ -233,7 +228,7 @@ extension MercadoPagoCheckout {
             })
             strongSelf.executeNextStep()
 
-        }
+        })
     }
 
     func createSavedESCCardToken(savedESCCardToken: SavedESCCardToken) {
@@ -251,7 +246,7 @@ extension MercadoPagoCheckout {
             strongSelf.viewModel.updateCheckoutModel(token: token)
             strongSelf.executeNextStep()
 
-        }) { [weak self] (error) in
+        }, failure: { [weak self] (error) in
 
             guard let strongSelf = self else {
                 return
@@ -270,7 +265,7 @@ extension MercadoPagoCheckout {
             }
             strongSelf.executeNextStep()
 
-        }
+        })
     }
 
     func cloneCardToken(token: Token, securityCode: String) {
@@ -284,18 +279,18 @@ extension MercadoPagoCheckout {
             strongSelf.viewModel.updateCheckoutModel(token: token)
             strongSelf.executeNextStep()
 
-        }) { [weak self] (error) in
+        }, failure: { [weak self] (error) in
 
             guard let strongSelf = self else {
                 return
             }
 
-            strongSelf.viewModel.errorInputs(error: MPSDKError.convertFrom(error, requestOrigin:   ApiUtil.RequestOrigin.CREATE_TOKEN.rawValue), errorCallback: { [weak self] (_) in
+            strongSelf.viewModel.errorInputs(error: MPSDKError.convertFrom(error, requestOrigin: ApiUtil.RequestOrigin.CREATE_TOKEN.rawValue), errorCallback: { [weak self] (_) in
                 self?.cloneCardToken(token: token, securityCode: securityCode)
             })
             strongSelf.executeNextStep()
 
-        }
+        })
     }
 
     func getPayerCosts(updateCallback: (() -> Void)? = nil) {
@@ -326,18 +321,18 @@ extension MercadoPagoCheckout {
                 strongSelf.executeNextStep()
             }
 
-        }) { [weak self] (error) in
+        }, failure: {[weak self] (error) in
 
             guard let strongSelf = self else {
                 return
             }
 
-            strongSelf.viewModel.errorInputs(error: MPSDKError.convertFrom(error, requestOrigin:   ApiUtil.RequestOrigin.GET_INSTALLMENTS.rawValue), errorCallback: { [weak self] (_) in
+            strongSelf.viewModel.errorInputs(error: MPSDKError.convertFrom(error, requestOrigin: ApiUtil.RequestOrigin.GET_INSTALLMENTS.rawValue), errorCallback: { [weak self] (_) in
                 self?.getPayerCosts()
             })
             strongSelf.executeNextStep()
 
-        }
+        })
     }
 
     func createPayment() {
@@ -367,7 +362,7 @@ extension MercadoPagoCheckout {
             strongSelf.viewModel.updateCheckoutModel(payment: payment)
             strongSelf.executeNextStep()
 
-        }) { [weak self] (error) in
+            }, failure: { [weak self] (error) in
 
             guard let strongSelf = self else {
                 return
@@ -391,7 +386,7 @@ extension MercadoPagoCheckout {
             }
             strongSelf.executeNextStep()
 
-        }
+        })
     }
 
     func getInstructions() {
@@ -417,17 +412,17 @@ extension MercadoPagoCheckout {
             strongSelf.viewModel.instructionsInfo = instructionsInfo
             strongSelf.executeNextStep()
 
-        }) { [weak self] (error) in
+        }, failure: {[weak self] (error) in
 
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.viewModel.errorInputs(error: MPSDKError.convertFrom(error, requestOrigin:   ApiUtil.RequestOrigin.GET_INSTRUCTIONS.rawValue), errorCallback: { [weak self] (_) in
+            strongSelf.viewModel.errorInputs(error: MPSDKError.convertFrom(error, requestOrigin: ApiUtil.RequestOrigin.GET_INSTRUCTIONS.rawValue), errorCallback: { [weak self] (_) in
                 self?.getInstructions()
             })
             strongSelf.executeNextStep()
 
-        }
+        })
     }
 
     func getIdentificationTypes() {
@@ -441,17 +436,17 @@ extension MercadoPagoCheckout {
             strongSelf.viewModel.updateCheckoutModel(identificationTypes: identificationTypes)
             strongSelf.executeNextStep()
 
-        }) { [weak self] (error) in
+        }, failure: { [weak self] (error) in
 
             guard let strongSelf = self else {
                 return
             }
 
-            strongSelf.viewModel.errorInputs(error: MPSDKError.convertFrom(error, requestOrigin:   ApiUtil.RequestOrigin.GET_IDENTIFICATION_TYPES.rawValue), errorCallback: { [weak self] (_) in
+            strongSelf.viewModel.errorInputs(error: MPSDKError.convertFrom(error, requestOrigin: ApiUtil.RequestOrigin.GET_IDENTIFICATION_TYPES.rawValue), errorCallback: { [weak self] (_) in
                 self?.getIdentificationTypes()
             })
             strongSelf.executeNextStep()
 
-        }
+        })
     }
 }

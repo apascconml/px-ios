@@ -17,6 +17,15 @@ open class Setting: NSObject {
         super.init()
     }
 
+    open class func fromJSON(_ json: NSDictionary) -> Setting {
+                let setting: Setting = Setting()
+                setting.binMask = BinMask.fromJSON(json["bin"]!  as! NSDictionary)
+                if json["card_number"] != nil && !(json["card_number"]! is NSNull) {
+                        setting.cardNumber = CardNumber.fromJSON(json["card_number"]! as! NSDictionary)
+                    }
+                setting.securityCode = SecurityCode.fromJSON(json["security_code"]! as! NSDictionary)
+                return setting
+            }
     open class func getSettingByBin(_ settings: [Setting]!, bin: String!) -> [Setting]? {
         var selectedSetting = [Setting] ()
         if settings != nil && settings.count > 0 {

@@ -27,7 +27,7 @@ open class CardFormViewModel: NSObject {
     var cardToken: CardToken?
 
     let textMaskFormater = TextMaskFormater(mask: "XXXX XXXX XXXX XXXX")
-    let textEditMaskFormater = TextMaskFormater(mask: "XXXX XXXX XXXX XXXX", completeEmptySpaces :false)
+    let textEditMaskFormater = TextMaskFormater(mask: "XXXX XXXX XXXX XXXX", completeEmptySpaces: false)
 
     var cvvEmpty: Bool = true
     var cardholderNameEmpty: Bool = true
@@ -205,10 +205,10 @@ open class CardFormViewModel: NSObject {
 
         var paymentMethods = [PaymentMethod]()
 
-        for (_, value) in self.paymentMethods.enumerated() {
-                if value.conformsToBIN(getBIN(cardNumber)!) {
-                    paymentMethods.append(value.cloneWithBIN(getBIN(cardNumber)!)!)
-                }
+        for paymentMethod in self.paymentMethods {
+            if paymentMethod.conformsToBIN(getBIN(cardNumber)!) {
+                paymentMethods.append(paymentMethod.cloneWithBIN(getBIN(cardNumber)!)!)
+            }
         }
         if paymentMethods.isEmpty {
             return nil

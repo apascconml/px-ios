@@ -22,7 +22,7 @@ class WebViewController: MercadoPagoUIViewController, UIWebViewDelegate {
         self.navBarTitle = navigationBarTitle
 
     }
-    override internal var screenName: String { get { return name! } }
+    override internal var screenName: String { return name! }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -10,7 +10,6 @@ import XCTest
 
 class CardNumberTest: BaseTest {
 
-
     func testToJSON() {
 
         let cardNumber = MockBuilder.buildCardNumber()

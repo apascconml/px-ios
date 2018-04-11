@@ -88,8 +88,8 @@ class PXPaymentMethodComponentRenderer: NSObject {
             pmDetailLabel.textColor = component.props.lightLabelColor
             pmDetailLabel.textAlignment = .center
             pmBodyView.putOnBottomOfLastView(view: pmDetailLabel, withMargin: PXLayout.XXS_MARGIN)?.isActive = true
-            PXLayout.pinLeft(view: pmDetailLabel, withMargin:  PXLayout.XXS_MARGIN).isActive = true
-            PXLayout.pinRight(view: pmDetailLabel, withMargin:  PXLayout.XXS_MARGIN).isActive = true
+            PXLayout.pinLeft(view: pmDetailLabel, withMargin: PXLayout.XXS_MARGIN).isActive = true
+            PXLayout.pinRight(view: pmDetailLabel, withMargin: PXLayout.XXS_MARGIN).isActive = true
         }
 
         if let disclaimer = component.props.disclaimer {
@@ -103,8 +103,8 @@ class PXPaymentMethodComponentRenderer: NSObject {
             disclaimerLabel.textColor = component.props.lightLabelColor
             disclaimerLabel.textAlignment = .center
             pmBodyView.putOnBottomOfLastView(view: disclaimerLabel, withMargin: PXLayout.M_MARGIN)?.isActive = true
-            PXLayout.pinLeft(view: disclaimerLabel, withMargin:  PXLayout.XS_MARGIN).isActive = true
-            PXLayout.pinRight(view: disclaimerLabel, withMargin:  PXLayout.XS_MARGIN).isActive = true
+            PXLayout.pinLeft(view: disclaimerLabel, withMargin: PXLayout.XS_MARGIN).isActive = true
+            PXLayout.pinRight(view: disclaimerLabel, withMargin: PXLayout.XS_MARGIN).isActive = true
         }
 
         if let action = component.props.action {
@@ -118,8 +118,8 @@ class PXPaymentMethodComponentRenderer: NSObject {
 
             pmBodyView.putOnBottomOfLastView(view: actionButton, withMargin: PXLayout.S_MARGIN)?.isActive = true
 
-            PXLayout.pinLeft(view: actionButton, withMargin:  PXLayout.XXS_MARGIN).isActive = true
-            PXLayout.pinRight(view: actionButton, withMargin:  PXLayout.XXS_MARGIN).isActive = true
+            PXLayout.pinLeft(view: actionButton, withMargin: PXLayout.XXS_MARGIN).isActive = true
+            PXLayout.pinRight(view: actionButton, withMargin: PXLayout.XXS_MARGIN).isActive = true
             PXLayout.setHeight(owner: actionButton, height: BUTTON_HEIGHT).isActive = true
         }
 

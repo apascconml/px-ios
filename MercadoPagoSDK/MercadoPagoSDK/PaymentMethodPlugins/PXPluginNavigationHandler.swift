@@ -52,7 +52,7 @@ open class PXPluginNavigationHandler: NSObject {
             }
         }
 
-        let paymentResult = PaymentResult(status: paymentStatusStrDefault, statusDetail: statusDetailsStr, paymentData: paymentData, payerEmail: nil, id: receiptId, statementDescription: nil)
+        let paymentResult = PaymentResult(status: paymentStatusStrDefault, statusDetail: statusDetailsStr, paymentData: paymentData, payerEmail: nil, paymentId: receiptId, statementDescription: nil)
 
         checkout?.setPaymentResult(paymentResult: paymentResult)
         checkout?.executeNextStep()
@@ -74,7 +74,7 @@ open class PXPluginNavigationHandler: NSObject {
             paymentData.paymentMethod?.setExternalPaymentMethodImage(externalImage: paymentMethodPlugin.getImage())
         }
 
-        let paymentResult = PaymentResult(status: status, statusDetail: statusDetail, paymentData: paymentData, payerEmail: nil, id: receiptId, statementDescription: nil)
+        let paymentResult = PaymentResult(status: status, statusDetail: statusDetail, paymentData: paymentData, payerEmail: nil, paymentId: receiptId, statementDescription: nil)
 
         checkout?.setPaymentResult(paymentResult: paymentResult)
         checkout?.executeNextStep()

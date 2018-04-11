@@ -14,6 +14,16 @@ open class FinancialInstitution: NSObject, Cellable {
     open var financialInstitutionId: Int?
     open var financialInstitutionDescription: String?
 
+    open class func fromJSON(_ json: NSDictionary) -> FinancialInstitution {
+        let financialInstitution: FinancialInstitution = FinancialInstitution()
+        if let _id = JSONHandler.attemptParseToString(json["id"])?.numberValue, let iid = _id as? Int {
+            financialInstitution.financialInstitutionId = iid
+        }
+        if let description = JSONHandler.attemptParseToString(json["description"]) {
+            financialInstitution.financialInstitutionDescription = description
+        }
+        return financialInstitution
+    }
     open func toJSONString() -> String {
         return JSONHandler.jsonCoding(toJSON())
     }

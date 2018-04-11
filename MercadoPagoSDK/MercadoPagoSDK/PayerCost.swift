@@ -33,6 +33,39 @@ open class PayerCost: NSObject, Cellable {
         self.totalAmount = totalAmount
     }
 
+    open class func fromJSON(_ json: NSDictionary) -> PayerCost {
+                let payerCost: PayerCost = PayerCost()
+                if let installments = JSONHandler.attemptParseToInt(json["installments"]) {
+                        payerCost.installments = installments
+                }
+                if let installmentRate = JSONHandler.attemptParseToDouble(json["installment_rate"]) {
+                        payerCost.installmentRate = installmentRate
+                    }
+                if let minAllowedAmount = JSONHandler.attemptParseToDouble(json["min_allowed_amount"]) {
+                        payerCost.minAllowedAmount = minAllowedAmount
+                    }
+                if let maxAllowedAmount = JSONHandler.attemptParseToDouble(json["max_allowed_amount"]) {
+                        payerCost.maxAllowedAmount = maxAllowedAmount
+                    }
+                if let installmentAmount = JSONHandler.attemptParseToDouble(json["installment_amount"]) {
+                        payerCost.installmentAmount = installmentAmount
+                    }
+                if let totalAmount = JSONHandler.attemptParseToDouble(json["total_amount"]) {
+                        payerCost.totalAmount = totalAmount
+                    }
+                if let recommendedMessage = JSONHandler.attemptParseToString(json["recommended_message"]) {
+                        payerCost.recommendedMessage = recommendedMessage
+                    }
+                if let labelsArray = json["labels"] as? NSArray {
+                        for i in 0..<labelsArray.count {
+                                if let label = labelsArray[i] as? String {
+                                        payerCost.labels.append(label)
+                                    }
+                            }
+                    }
+                return payerCost
+            }
+
     open func toJSONString() -> String {
         return JSONHandler.jsonCoding(toJSON())
     }

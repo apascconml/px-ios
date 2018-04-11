@@ -50,7 +50,7 @@ class PaymentMethodTest: BaseTest {
     }
 
     func testGetPMFirstColor() {
-        let paymentMethod = MockBuilder.buildPaymentMethod("visa", name: "Visa", paymentTypeId : "credit_card", multipleSettings: false)
+        let paymentMethod = MockBuilder.buildPaymentMethod("visa", name: "Visa", paymentTypeId: "credit_card", multipleSettings: false)
         let cardNumber = "4242424242424242"
         let bin = cardNumber.substring(to: (cardNumber.characters.index(cardNumber.startIndex, offsetBy: 6)))
         let color = paymentMethod.getColor(bin: bin)
@@ -58,7 +58,7 @@ class PaymentMethodTest: BaseTest {
     }
 
     func testGetPMFirstColorForMultipleSettings() {
-        let paymentMethod = MockBuilder.buildPaymentMethod("maestro", name : "Maestro", paymentTypeId : "debit_card", multipleSettings: true)
+        let paymentMethod = MockBuilder.buildPaymentMethod("maestro", name: "Maestro", paymentTypeId: "debit_card", multipleSettings: true)
         let firstSettingCardNumber = "501041456060594693"
         let secondSettingCardNumber = "5010811232093852985"
         let firstBin = firstSettingCardNumber.substring(to: (firstSettingCardNumber.characters.index(firstSettingCardNumber.startIndex, offsetBy: 6)))
@@ -83,7 +83,7 @@ class PaymentMethodTest: BaseTest {
     }
 
     func testGetPMLabelMask() {
-        let paymentMethod = MockBuilder.buildPaymentMethod("visa", name: "Visa", paymentTypeId : "credit_card", multipleSettings: false)
+        let paymentMethod = MockBuilder.buildPaymentMethod("visa", name: "Visa", paymentTypeId: "credit_card", multipleSettings: false)
         let cardNumber = "4242424242424242"
         let bin = cardNumber.substring(to: (cardNumber.characters.index(cardNumber.startIndex, offsetBy: 6)))
         let mask = paymentMethod.getLabelMask(bin: bin)
@@ -91,7 +91,7 @@ class PaymentMethodTest: BaseTest {
     }
 
     func testGetPMLabelMaskForMultipleSettings() {
-        let paymentMethod = MockBuilder.buildPaymentMethod("maestro", name : "Maestro", paymentTypeId : "debit_card", multipleSettings: true)
+        let paymentMethod = MockBuilder.buildPaymentMethod("maestro", name: "Maestro", paymentTypeId: "debit_card", multipleSettings: true)
         let firstSettingCardNumber = "501041456060594693"
         let secondSettingCardNumber = "5010811232093852985"
         let firstBin = firstSettingCardNumber.substring(to: (firstSettingCardNumber.characters.index(firstSettingCardNumber.startIndex, offsetBy: 6)))
@@ -116,7 +116,7 @@ class PaymentMethodTest: BaseTest {
     }
 
     func testGetPMEditTextMask() {
-        let paymentMethod = MockBuilder.buildPaymentMethod("visa", name: "Visa", paymentTypeId : "credit_card", multipleSettings: false)
+        let paymentMethod = MockBuilder.buildPaymentMethod("visa", name: "Visa", paymentTypeId: "credit_card", multipleSettings: false)
         let cardNumber = "4242424242424242"
         let bin = cardNumber.substring(to: (cardNumber.characters.index(cardNumber.startIndex, offsetBy: 6)))
         let editTextMask = paymentMethod.getEditTextMask(bin: bin)
@@ -124,7 +124,7 @@ class PaymentMethodTest: BaseTest {
     }
 
     func testGetPMEditTextMaskForMultipleSettings() {
-        let paymentMethod = MockBuilder.buildPaymentMethod("maestro", name : "Maestro", paymentTypeId : "debit_card", multipleSettings: true)
+        let paymentMethod = MockBuilder.buildPaymentMethod("maestro", name: "Maestro", paymentTypeId: "debit_card", multipleSettings: true)
         let firstSettingCardNumber = "501041456060594693"
         let secondSettingCardNumber = "5010811232093852985"
         let firstBin = firstSettingCardNumber.substring(to: (firstSettingCardNumber.characters.index(firstSettingCardNumber.startIndex, offsetBy: 6)))
@@ -142,7 +142,7 @@ class PaymentMethodTest: BaseTest {
 
     //Test for PaymentMethod Image
     func testGetPMImage() {
-        let paymentMethod = MockBuilder.buildPaymentMethod("visa", name: "Visa", paymentTypeId : "credit_card", multipleSettings: false)
+        let paymentMethod = MockBuilder.buildPaymentMethod("visa", name: "Visa", paymentTypeId: "credit_card", multipleSettings: false)
         let cardNumber = "4242424242424242"
         let bin = cardNumber.substring(to: (cardNumber.characters.index(cardNumber.startIndex, offsetBy: 6)))
         let image = paymentMethod.getImage()

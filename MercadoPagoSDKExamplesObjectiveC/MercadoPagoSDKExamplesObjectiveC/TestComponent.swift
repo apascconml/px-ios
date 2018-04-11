@@ -52,23 +52,23 @@ import MercadoPagoSDK
         preference.setBottomComponent(bottom)
         // preference.disableItems()
         // preference.disableChangeMethodOption()
-        
+
         // preference.setSummaryProductTitle(productTitle: "Product title from ReviewScreenPreference")
         // preference.setAmountTitle(title: "Amount title from RSP")
-        
+
         //preference.setDisclaimerText(text: "Disclamer text from RSP")
-        
+
         //preference.setAmountTitle(title: "Pepito")
         //preference.addSummaryProductDetail(amount: 10)
-        
+
         //preference.setQuantityLabel(title: "La cantidad")
-        
+
         preference.addSummaryProductDetail(amount: 31)
         preference.addSummaryDiscountDetail(amount: 1)
         preference.addSummaryArrearsDetail(amount: 10)
         preference.addSummaryTaxesDetail(amount: 10)
         preference.addSummaryShippingDetail(amount: 10)
-        
+
         return preference
     }
 }

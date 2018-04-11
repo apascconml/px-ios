@@ -237,11 +237,11 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
     }
 
     public func entityTypeViewModel() -> AdditionalStepViewModel {
-        return EntityTypeAdditionalStepViewModel(amount: self.getAmount(), token: self.cardToken, paymentMethod: self.paymentData.getPaymentMethod()!, dataSource: self.entityTypes!, mercadoPagoServicesAdapter: mercadoPagoServicesAdapter)
+        return EntityTypeViewModel(amount: self.getAmount(), token: self.cardToken, paymentMethod: self.paymentData.getPaymentMethod()!, dataSource: self.entityTypes!, mercadoPagoServicesAdapter: mercadoPagoServicesAdapter)
     }
 
     public func financialInstitutionViewModel() -> AdditionalStepViewModel {
-        return FinancialInstitutionAdditionalStepViewModel(amount: self.getAmount(), token: self.cardToken, paymentMethod: self.paymentData.getPaymentMethod()!, dataSource: self.financialInstitutions!, mercadoPagoServicesAdapter: mercadoPagoServicesAdapter)
+        return FinancialInstitutionViewModel(amount: self.getAmount(), token: self.cardToken, paymentMethod: self.paymentData.getPaymentMethod()!, dataSource: self.financialInstitutions!, mercadoPagoServicesAdapter: mercadoPagoServicesAdapter)
     }
 
     public func issuerViewModel() -> AdditionalStepViewModel {
@@ -269,7 +269,9 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
     }
 
     public func savedCardSecurityCodeViewModel() -> SecurityCodeViewModel {
-        let cardInformation = self.paymentOptionSelected as! CardInformation
+        guard let cardInformation = self.paymentOptionSelected as? CardInformation else {
+            fatalError("Cannot conver payment option selected to CardInformation")
+        }
         var reason: SecurityCodeViewModel.Reason
         if paymentResult != nil && paymentResult!.isInvalidESC() {
             reason = SecurityCodeViewModel.Reason.INVALID_ESC
@@ -286,7 +288,7 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
     }
 
     func reviewConfirmViewModel() -> PXReviewViewModel {
-        return PXReviewViewModel(checkoutPreference: self.checkoutPreference, paymentData : self.paymentData, paymentOptionSelected : self.paymentOptionSelected!, discount: paymentData.discount, reviewScreenPreference: reviewScreenPreference)
+        return PXReviewViewModel(checkoutPreference: self.checkoutPreference, paymentData: self.paymentData, paymentOptionSelected: self.paymentOptionSelected!, discount: paymentData.discount, reviewScreenPreference: reviewScreenPreference)
     }
 
     func resultViewModel() -> PXResultViewModel {
@@ -533,7 +535,9 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
         if !Array.isNullOrEmpty(search.groups) && search.groups.count == 1 {
             self.updateCheckoutModel(paymentOptionSelected: search.groups[0])
         } else if !Array.isNullOrEmpty(search.customerPaymentMethods) && search.customerPaymentMethods?.count == 1 {
-            let customOption = search.customerPaymentMethods![0] as! PaymentMethodOption
+            guard let customOption = search.customerPaymentMethods![0] as? PaymentMethodOption else {
+                fatalError("Cannot conver customerPaymentMethod to PaymentMethodOption")
+            }
             self.updateCheckoutModel(paymentOptionSelected: customOption)
         } else if  !Array.isNullOrEmpty(paymentMethodPluginsToShow) && paymentMethodPluginsToShow.count == 1 {
             self.updateCheckoutModel(paymentOptionSelected: paymentMethodPluginsToShow[0])
@@ -660,13 +664,12 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
             self.paymentData.updatePaymentDataWith(paymentMethod: Utils.findPaymentMethod(self.availablePaymentMethods!, paymentMethodId: paymentMethodId))
         } else {
             let cardInformation = (self.paymentOptionSelected as! CardInformation)
-            let paymentMethod = Utils.findPaymentMethod(self.availablePaymentMethods!, paymentMethodId:cardInformation.getPaymentMethodId())
+            let paymentMethod = Utils.findPaymentMethod(self.availablePaymentMethods!, paymentMethodId: cardInformation.getPaymentMethodId())
             cardInformation.setupPaymentMethodSettings(paymentMethod.settings)
             cardInformation.setupPaymentMethod(paymentMethod)
             self.paymentData.updatePaymentDataWith(paymentMethod: cardInformation.getPaymentMethod())
             self.paymentData.updatePaymentDataWith(issuer: cardInformation.getIssuer())
         }
-
     }
 
     func hasCustomPaymentOptions() -> Bool {
@@ -678,7 +681,9 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
             self.paymentData.updatePaymentDataWith(paymentMethod: Utils.findPaymentMethod(self.availablePaymentMethods!, paymentMethodId: paymentOptionSelected!.getId()))
         } else {
             // Se necesita completar información faltante de settings y pm para custom payment options
-            let cardInformation = (self.paymentOptionSelected as! CardInformation)
+            guard let cardInformation = self.paymentOptionSelected as? CardInformation else {
+                fatalError("Cannot convert paymentOptionSelected to CardInformation")
+            }
             let paymentMethod = Utils.findPaymentMethod(self.availablePaymentMethods!, paymentMethodId: cardInformation.getPaymentMethodId())
             cardInformation.setupPaymentMethodSettings(paymentMethod.settings)
             cardInformation.setupPaymentMethod(paymentMethod)
@@ -710,10 +715,11 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
 
             for ET in entityTypesKeys {
                 let entityType = EntityType()
-                entityType.entityTypeId = ET as! String
-                entityType.name = (siteETsDictionary.value(forKey: ET as! String) as! String!).localized
-
-                entityTypes.append(entityType)
+                if let etKey = ET as? String, let etValue = siteETsDictionary.value(forKey: etKey) as? String {
+                    entityType.entityTypeId = etKey
+                    entityType.name = etValue.localized
+                    entityTypes.append(entityType)
+                }
             }
 
             return entityTypes

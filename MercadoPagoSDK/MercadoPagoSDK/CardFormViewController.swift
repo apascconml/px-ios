@@ -241,11 +241,11 @@ open class CardFormViewController: MercadoPagoUIViewController, UITextFieldDeleg
         self.viewModel.mercadoPagoServicesAdapter.getBankDeals(callback: { (bankDeals) in
             self.viewModel.promos = bankDeals
             self.updateCardSkin()
-        }) { (error) in
+        }, failure: { _ in
             // Si no se pudieron obtener promociones se ignora tal caso
             CardFormViewController.showBankDeals = false
             self.updateCardSkin()
-        }
+        })
     }
 
     func getCardWidth() -> CGFloat {

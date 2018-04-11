@@ -20,6 +20,42 @@ open class CustomerPaymentMethod: NSObject, CardInformation, PaymentMethodOption
     var paymentMethod: PaymentMethod?
     var card: Card?
 
+    open class func fromJSON(_ json: NSDictionary) -> CustomerPaymentMethod {
+                let customerPaymentMethod = CustomerPaymentMethod()
+
+                if json["id"] != nil && !(json["id"]! is NSNull) {
+                       if let cPaymentMethodId = json["id"] as? String {
+                                customerPaymentMethod.customerPaymentMethodId = cPaymentMethodId
+                            }
+                    }
+
+                if json["description"] != nil && !(json["description"]! is NSNull) {
+                        if let cPaymentMethodDesc = json["description"] as? String {
+                                customerPaymentMethod.customerPaymentMethodDescription = cPaymentMethodDesc
+                            }
+                   }
+
+                if json["payment_method_id"] != nil && !(json["payment_method_id"]! is NSNull) {
+                        if let paymentMethodId = json["payment_method_id"] as? String {
+                                customerPaymentMethod.paymentMethodId = paymentMethodId
+                            }
+                    }
+
+                if json["payment_method_type"] != nil && !(json["payment_method_type"]! is NSNull) {
+                        if let cPaymentMethodTypeId = json["payment_method_type"] as? String {
+                                customerPaymentMethod.paymentMethodTypeId = cPaymentMethodTypeId
+                            }
+                    }
+
+                if json["first_six_digits"] != nil && !(json["first_six_digits"]! is NSNull) {
+                        if let cFirstSixDigits = json["first_six_digits"] as? String {
+                                customerPaymentMethod.firstSixDigits = cFirstSixDigits
+                            }
+                    }
+
+                return customerPaymentMethod
+            }
+
     public override init() {
         super.init()
     }

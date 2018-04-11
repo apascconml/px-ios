@@ -35,9 +35,9 @@ final class TitleValueView: UIView, PXComponent {
             let currency = MercadoPagoContext.getCurrency()
             var attributedTotal: NSAttributedString
             if valueDouble < 0 {
-                attributedTotal  = Utils.getAttributedAmount(-valueDouble, currency: currency, color : colorValue, fontSize: valueFontSize, baselineOffset:5, negativeAmount:true)
+                attributedTotal  = Utils.getAttributedAmount(-valueDouble, currency: currency, color: colorValue, fontSize: valueFontSize, baselineOffset: 5, negativeAmount: true)
             } else {
-                attributedTotal  = Utils.getAttributedAmount(valueDouble, currency: currency, color : colorValue, fontSize: valueFontSize, baselineOffset:5)
+                attributedTotal  = Utils.getAttributedAmount(valueDouble, currency: currency, color: colorValue, fontSize: valueFontSize, baselineOffset: 5)
             }
 
             valueLabel?.textAlignment = .right

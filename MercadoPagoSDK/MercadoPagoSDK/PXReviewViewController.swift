@@ -12,8 +12,8 @@ import MercadoPagoPXTracking
 class PXReviewViewController: PXComponentContainerViewController {
 
     // MARK: Tracking
-    override open var screenName: String { get { return TrackingUtil.SCREEN_NAME_REVIEW_AND_CONFIRM } }
-    override open var screenId: String { get { return TrackingUtil.SCREEN_ID_REVIEW_AND_CONFIRM } }
+    override open var screenName: String { return TrackingUtil.SCREEN_NAME_REVIEW_AND_CONFIRM }
+    override open var screenId: String { return TrackingUtil.SCREEN_ID_REVIEW_AND_CONFIRM }
 
     // MARK: Definitions
     var footerView: UIView!
@@ -50,7 +50,7 @@ class PXReviewViewController: PXComponentContainerViewController {
     func update(viewModel: PXReviewViewModel) {
         self.viewModel = viewModel
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.checkFloatingButtonVisibility()
@@ -268,13 +268,12 @@ extension PXReviewViewController {
         return nil
     }
 
-    
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         super.scrollViewDidScroll(scrollView)
         self.checkFloatingButtonVisibility()
     }
-    
-    func checkFloatingButtonVisibility(){
+
+    func checkFloatingButtonVisibility() {
         if !isConfirmButtonVisible() {
             self.floatingButtonView.alpha = 1
         } else {

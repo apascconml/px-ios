@@ -33,6 +33,31 @@ open class Installment: NSObject {
     open var paymentMethodId: String!
     open var paymentTypeId: String!
 
+    open class func fromJSON(_ json: NSDictionary) -> Installment {
+                let installment: Installment = Installment()
+
+            if let paymentMethodId = JSONHandler.attemptParseToString(json["payment_method_id"]) {
+                        installment.paymentMethodId = paymentMethodId
+                    }
+                if let paymentTypeId = JSONHandler.attemptParseToString(json["payment_type_id"]) {
+                        installment.paymentTypeId = paymentTypeId
+                    }
+
+                if let issuerDic = json["issuer"] as? NSDictionary {
+                        installment.issuer = Issuer.fromJSON(issuerDic)
+                    }
+                var payerCosts: [PayerCost] = [PayerCost]()
+                if let payerCostsArray = json["payer_costs"] as? NSArray {
+                        for i in 0..<payerCostsArray.count {
+                                if let payerCostDic = payerCostsArray[i] as? NSDictionary {
+                                        payerCosts.append(PayerCost.fromJSON(payerCostDic))
+                                    }
+                            }
+                    }
+                installment.payerCosts = payerCosts
+                return installment
+            }
+
     open func toJSONString() -> String {
 
         let issuer: Any = self.issuer != nil ? JSONHandler.null : self.issuer.toJSONString()
@@ -67,11 +92,8 @@ open class Installment: NSObject {
     }
 
     open func containsInstallment(_ installment: Int) -> PayerCost? {
-
-        for pc in payerCosts! {
-            if pc.installments == installment {
+        for pc in payerCosts! where pc.installments == installment {
                 return pc
-            }
         }
         return nil
     }

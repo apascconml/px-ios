@@ -158,7 +158,7 @@ class PXErrorRenderer: NSObject {
         PXLayout.centerHorizontally(view: view, to: superView).isActive = true
 
         if let upperView = upperView {
-            PXLayout.put(view: view, onBottomOf:upperView, withMargin: PXLayout.XXL_MARGIN).isActive = true
+            PXLayout.put(view: view, onBottomOf: upperView, withMargin: PXLayout.XXL_MARGIN).isActive = true
         }
         return view
     }
@@ -173,7 +173,7 @@ class PXErrorRenderer: NSObject {
         PXLayout.centerHorizontally(view: view, to: superView).isActive = true
 
         if let upperView = upperView {
-            PXLayout.put(view: view, onBottomOf:upperView, withMargin: PXLayout.L_MARGIN).isActive = true
+            PXLayout.put(view: view, onBottomOf: upperView, withMargin: PXLayout.L_MARGIN).isActive = true
         }
         return view
     }

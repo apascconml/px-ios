@@ -33,9 +33,7 @@ class AddCouponViewModel: NSObject {
                 self?.coupon = coupon
                 success()
             }
-
-        }) { (error) in
-
+        }, failure: { (error) in
             if error.localizedDescription == self.DISCOUNT_ERROR_CAMPAIGN_DOESNT_MATCH {
                 failure("Vendedor sin descuento disponible".localized)
             } else if error.localizedDescription == self.DISCOUNT_ERROR_RUN_OUT_OF_USES {
@@ -47,7 +45,6 @@ class AddCouponViewModel: NSObject {
             } else {
                 failure(PXStrings.error_header_title.PXLocalized)
             }
-
-        }
+        })
     }
 }

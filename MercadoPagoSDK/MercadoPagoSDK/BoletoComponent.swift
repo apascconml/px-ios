@@ -32,7 +32,7 @@ class BoletoComponent: UIView, PXComponent {
     }
 
     func setupView() {
-        let boletoImageView = UIImageView(frame: CGRect(x: 0, y:0, width: BoletoComponent.IMAGE_WIDTH, height: BoletoComponent.IMAGE_HEIGHT))
+        let boletoImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: BoletoComponent.IMAGE_WIDTH, height: BoletoComponent.IMAGE_HEIGHT))
         boletoImageView.image = MercadoPago.getImage("boleto")
         self.boletoView = UIView(frame: CGRect(x: getImageX(), y: getImageY(), width: BoletoComponent.IMAGE_WIDTH, height: BoletoComponent.IMAGE_HEIGHT))
         self.boletoView.addSubview(boletoImageView)
@@ -42,7 +42,7 @@ class BoletoComponent: UIView, PXComponent {
         titleLabel.font = Utils.getFont(size: 10.0)
         titleLabel.textColor = UIColor.px_grayDark()
 
-        self.typeName = UILabel(frame: CGRect(x: 16, y: 57, width:40, height: 14))
+        self.typeName = UILabel(frame: CGRect(x: 16, y: 57, width: 40, height: 14))
         typeName.textAlignment = .left
         typeName.font = Utils.getFont(size: 13.0)
         typeName.textColor = UIColor.px_grayDark()

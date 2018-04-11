@@ -33,8 +33,8 @@ open class PaymentVaultViewController: MercadoPagoUIScrollViewController, UIColl
 
     @IBOutlet weak var collectionSearch: UICollectionView!
 
-    override open var screenName: String { get { return TrackingUtil.SCREEN_NAME_PAYMENT_VAULT} }
-    override open var screenId: String { get { return TrackingUtil.SCREEN_ID_PAYMENT_VAULT} }
+    override open var screenName: String { return TrackingUtil.SCREEN_NAME_PAYMENT_VAULT }
+    override open var screenId: String { return TrackingUtil.SCREEN_ID_PAYMENT_VAULT }
 
     static let VIEW_CONTROLLER_NIB_NAME: String = "PaymentVaultViewController"
 
@@ -172,12 +172,12 @@ open class PaymentVaultViewController: MercadoPagoUIScrollViewController, UIColl
     fileprivate func getCustomerCards() {
 
         if self.viewModel!.shouldGetCustomerCardsInfo() {
-            if let _ = MercadoPagoCheckoutViewModel.servicePreference.getCustomerURL() {
+            if MercadoPagoCheckoutViewModel.servicePreference.getCustomerURL() != nil {
                 self.viewModel.mercadoPagoServicesAdapter.getCustomer(callback: { [weak self] (customer) in
                     self?.viewModel.customerId = customer.customerId
                     self?.viewModel.customerPaymentOptions = customer.cards
                     self?.loadPaymentMethodSearch()
-                }, failure: { (error) in
+                }, failure: { (_) in
                     // Ir a Grupos igual
                     self.loadPaymentMethodSearch()
                 })
@@ -200,8 +200,9 @@ open class PaymentVaultViewController: MercadoPagoUIScrollViewController, UIColl
         self.loadingGroups = false
 
         if self.viewModel.getDisplayedPaymentMethodsCount() == 1 {
-            let paymentOptionDefault = self.viewModel.getPaymentMethodOption(row: 0) as! PaymentMethodOption
-            self.callback(paymentOptionDefault)
+            if let paymentOptionDefault = self.viewModel.getPaymentMethodOption(row: 0) as? PaymentMethodOption {
+                self.callback(paymentOptionDefault)
+            }
         }
     }
 
@@ -247,10 +248,11 @@ open class PaymentVaultViewController: MercadoPagoUIScrollViewController, UIColl
 
         if isGroupSection(section: indexPath.section) {
 
-            let paymentSearchItemSelected = self.viewModel.getPaymentMethodOption(row: indexPath.row) as! PaymentMethodOption
-            collectionView.deselectItem(at: indexPath, animated: true)
-            collectionView.allowsSelection = false
-            self.callback!(paymentSearchItemSelected)
+            if let paymentSearchItemSelected = self.viewModel.getPaymentMethodOption(row: indexPath.row) as? PaymentMethodOption {
+                collectionView.deselectItem(at: indexPath, animated: true)
+                collectionView.allowsSelection = false
+                self.callback!(paymentSearchItemSelected)
+            }
 
         } else if isCouponSection(section: indexPath.section) {
             if let coupon = self.viewModel.discount {
@@ -304,20 +306,16 @@ open class PaymentVaultViewController: MercadoPagoUIScrollViewController, UIColl
     }
 
     public func collectionView(_ collectionView: UICollectionView,
-                                 cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+                               cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         if indexPath.section == 0 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "paymentVaultTitleCollectionViewCell",
-
-                                                          for: indexPath) as! PaymentVaultTitleCollectionViewCell
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "paymentVaultTitleCollectionViewCell", for: indexPath) as? PaymentVaultTitleCollectionViewCell else { return UICollectionViewCell.init() }
             self.titleSectionReference = cell
             titleCell = cell
             return cell
         } else if isGroupSection(section: indexPath.section) {
 
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "searchCollectionCell",
-
-                                                          for: indexPath) as! PaymentSearchCollectionViewCell
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "searchCollectionCell", for: indexPath) as? PaymentSearchCollectionViewCell else { return UICollectionViewCell.init() }
 
             if let paymentMethodToDisplay = self.viewModel.getPaymentMethodOption(row: indexPath.row) {
                 cell.fillCell(drawablePaymentOption: paymentMethodToDisplay)
