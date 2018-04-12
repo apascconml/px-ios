@@ -5,12 +5,16 @@ PODS:
 
 DEPENDENCIES:
   - MercadoPagoPXTracking (= 2.1.0)
-  - MercadoPagoServices (= 1.0.6)
+  - MercadoPagoServices (from `../../px-ios_services/`)
+
+EXTERNAL SOURCES:
+  MercadoPagoServices:
+    :path: ../../px-ios_services/
 
 SPEC CHECKSUMS:
-  MercadoPagoPXTracking: 85dd47c3e7079d6c27a9fc5b196c8f74c09819f7
-  MercadoPagoServices: 46ef6c77c9d431805a5b193b1ccdf7d08ccceb4f
+  MercadoPagoPXTracking: 0e1a78ead026d1a3ba58c749cd870c41559944a0
+  MercadoPagoServices: e8957c90e9f6271c8293943ec5c0b6167674b4a6
 
-PODFILE CHECKSUM: 2cc235932c424b9ad648d7ea004da79a96c05814
+PODFILE CHECKSUM: 99b5b44e14b957f9815225a4cb2a7579573cfd54
 
 COCOAPODS: 1.4.0
