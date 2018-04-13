@@ -8,10 +8,10 @@
 
 import UIKit
 
-class SummaryItemDetail: NSObject {
+@objc open class SummaryItemDetail: NSObject {
     var name: String?
     var amount: Double
-    init(name: String? = nil, amount: Double) {
+    public init(name: String? = nil, amount: Double) {
         self.name = name
         self.amount = amount
     }

@@ -15,6 +15,7 @@ import Foundation
 
 @objc public protocol PXPaymentPluginComponent: PXPluginComponent {
     @objc optional func support(pluginStore: PXCheckoutStore) -> Bool
+    @objc optional func paymentPreprocess(pluginStore: PXCheckoutStore) -> [SummaryItemDetail] // TODO COMISIONES
 }
 
 @objc public protocol PXPluginComponent: PXCustomComponentizable {

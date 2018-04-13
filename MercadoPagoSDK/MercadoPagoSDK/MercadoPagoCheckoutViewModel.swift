@@ -110,6 +110,8 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
 
     // Payment plguin
     var paymentPlugin: PXPaymentPluginComponent?
+    
+    var additionalFees : [SummaryItemDetail]? // TODO COMISIONES
 
     init(checkoutPreference: CheckoutPreference, paymentData: PaymentData?, paymentResult: PaymentResult?, discount: DiscountCoupon?) {
         super.init()
@@ -288,7 +290,12 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
     }
 
     func reviewConfirmViewModel() -> PXReviewViewModel {
-        return PXReviewViewModel(checkoutPreference: self.checkoutPreference, paymentData: self.paymentData, paymentOptionSelected: self.paymentOptionSelected!, discount: paymentData.discount, reviewScreenPreference: reviewScreenPreference)
+        var fees : [SummaryItemDetail]?
+        if let paymentPlugin = self.paymentPlugin  {
+            fees = paymentPlugin.paymentPreprocess!(pluginStore: PXCheckoutStore.sharedInstance)
+        }
+        
+        return PXReviewViewModel(checkoutPreference: self.checkoutPreference, paymentData: self.paymentData, paymentOptionSelected: self.paymentOptionSelected!, discount: paymentData.discount, reviewScreenPreference: reviewScreenPreference, additionalFees: fees)
     }
 
     func resultViewModel() -> PXResultViewModel {
@@ -620,6 +627,7 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
         self.paymentData = paymentData
         if paymentData.getPaymentMethod() == nil {
             // Vuelvo a root para iniciar la selección de medios de pago
+            self.additionalFees = nil // TODO COMISIONES
             self.paymentOptionSelected = nil
             self.paymentMethodOptions = self.rootPaymentMethodOptions
             self.search = nil
@@ -642,12 +650,21 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
     }
 
     internal func getAmount() -> Double {
+        var additionalAmount : Double = 0 // TODO COMISIONES
+        if let paymentPlugin = self.paymentPlugin  {
+            let fees = paymentPlugin.paymentPreprocess!(pluginStore: PXCheckoutStore.sharedInstance)
+            for fee in fees {
+                additionalAmount += fee.amount
+            }
+            return self.checkoutPreference.getAmount() + additionalAmount
+        }
+        
         if let payerCost = paymentData.getPayerCost() {
             return payerCost.totalAmount
         } else if isDiscountEnable(), let discount = paymentData.discount {
-            return discount.newAmount()
+            return discount.newAmount() + additionalAmount
         } else {
-            return self.checkoutPreference.getAmount()
+            return self.checkoutPreference.getAmount() + additionalAmount
         }
     }
 
@@ -808,6 +825,7 @@ extension MercadoPagoCheckoutViewModel {
         self.cardToken = nil
         self.entityTypes = nil
         self.financialInstitutions = nil
+        self.additionalFees = nil // TODO COMISIONES
         cleanPayerCostSearch()
         cleanIssuerSearch()
         cleanIdentificationTypesSearch()

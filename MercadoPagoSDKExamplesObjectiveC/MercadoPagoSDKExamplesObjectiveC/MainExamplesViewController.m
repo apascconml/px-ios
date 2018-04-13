@@ -19,6 +19,7 @@
 #import "PaymentMethodPluginConfigViewController.h"
 #import "PaymentPluginViewController.h"
 
+
 @import MercadoPagoSDK;
 
 
@@ -92,7 +93,7 @@
     accessToken:nil
                                                   checkoutPreference:self.pref paymentData:self.paymentData paymentResult:self.paymentResult discount:dc navigationController:self.navigationController];
 
-    
+    [self.mpCheckout setPaymentPluginWithPaymentPlugin:[[Procesadora alloc] init] ];
     // Set default color or theme.
     MeliTheme *meliExampleTheme = [[MeliTheme alloc] init];
     [self.mpCheckout setTheme:meliExampleTheme];

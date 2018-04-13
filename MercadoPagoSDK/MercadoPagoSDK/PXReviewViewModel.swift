@@ -18,14 +18,16 @@ final class PXReviewViewModel: NSObject {
     var paymentOptionSelected: PaymentMethodOption
     var discount: DiscountCoupon?
     var reviewScreenPreference: ReviewScreenPreference
+    var additionalFees: [SummaryItemDetail]? // TODO COMISIONES
 
-    public init(checkoutPreference: CheckoutPreference, paymentData: PaymentData, paymentOptionSelected: PaymentMethodOption, discount: DiscountCoupon? = nil, reviewScreenPreference: ReviewScreenPreference = ReviewScreenPreference()) {
+    public init(checkoutPreference: CheckoutPreference, paymentData: PaymentData, paymentOptionSelected: PaymentMethodOption, discount: DiscountCoupon? = nil, reviewScreenPreference: ReviewScreenPreference = ReviewScreenPreference(), additionalFees: [SummaryItemDetail]? = nil) {
         PXReviewViewModel.CUSTOMER_ID = ""
         self.preference = checkoutPreference
         self.paymentData = paymentData
         self.discount = discount
         self.paymentOptionSelected = paymentOptionSelected
         self.reviewScreenPreference = reviewScreenPreference
+        self.additionalFees = additionalFees
         super.init()
     }
 }
@@ -75,13 +77,19 @@ extension PXReviewViewModel {
 extension PXReviewViewModel {
 
     func getTotalAmount() -> Double {
+        var additionalAmount : Double = 0
+        if let fees = self.additionalFees {
+            for fee in fees {
+                additionalAmount += fee.amount
+            }
+        }
         if let payerCost = paymentData.getPayerCost() {
             return payerCost.totalAmount
         }
         if MercadoPagoCheckoutViewModel.flowPreference.isDiscountEnable(), let discount = paymentData.discount {
-            return discount.newAmount()
+            return discount.newAmount() + additionalAmount
         }
-        return self.preference.getAmount()
+        return self.preference.getAmount() + additionalAmount
     }
 
     func getUnlockLink() -> URL? {
@@ -163,6 +171,16 @@ extension PXReviewViewModel {
         if let disclaimer = self.reviewScreenPreference.getDisclaimerText() {
             summary.disclaimer = disclaimer
             summary.disclaimerColor = self.reviewScreenPreference.getDisclaimerTextColor()
+        }
+        if let fees = self.additionalFees { // TODO COMISIONES
+            for fee in fees {
+                let summaryDetail = SummaryDetail(title: fee.name!, detail: fee)
+                if fee.amount > 0 {
+                    summary.addSummaryDetail(summaryDetail: summaryDetail, type: .CHARGE)
+                }else{
+                    summary.addSummaryDetail(summaryDetail: summaryDetail, type: .DISCOUNT)
+                }
+            }
         }
         return summary
     }

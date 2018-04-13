@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		154CBD192081172C00496F0E /* Procesadora.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154CBD182081172C00496F0E /* Procesadora.swift */; };
 		15AF42AA1D36848100E70343 /* MercadoPagoSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76EF7EFB1D255AA10087C785 /* MercadoPagoSDK.framework */; };
 		15AF42AB1D36848100E70343 /* MercadoPagoSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 76EF7EFB1D255AA10087C785 /* MercadoPagoSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		15C84A981D2D531E002E4988 /* MediosOffTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C84A971D2D531E002E4988 /* MediosOffTableViewController.m */; };
@@ -96,6 +97,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		154CBD182081172C00496F0E /* Procesadora.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Procesadora.swift; sourceTree = "<group>"; };
 		15C84A961D2D531E002E4988 /* MediosOffTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediosOffTableViewController.h; sourceTree = "<group>"; };
 		15C84A971D2D531E002E4988 /* MediosOffTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediosOffTableViewController.m; sourceTree = "<group>"; };
 		23346C2E1FE83733005FD8C9 /* PaymentPluginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentPluginViewController.m; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				23346C301FE83734005FD8C9 /* PaymentMethodPlugins.storyboard */,
 				23346C331FE83734005FD8C9 /* PaymentPluginViewController.h */,
 				23346C2E1FE83733005FD8C9 /* PaymentPluginViewController.m */,
+				154CBD182081172C00496F0E /* Procesadora.swift */,
 			);
 			name = PaymentMethodPlugins;
 			sourceTree = "<group>";
@@ -627,6 +630,7 @@
 				763B45021D2C02DE002E2B39 /* InstallmentsTableViewController.m in Sources */,
 				76E6E06E1D2AE529006CE49B /* SimpleVaultFormViewController.m in Sources */,
 				76EF7F5D1D27027A0087C785 /* StepsExamplesViewController.m in Sources */,
+				154CBD192081172C00496F0E /* Procesadora.swift in Sources */,
 				76E6E06A1D2AD33F006CE49B /* SimpleVaultViewController.m in Sources */,
 				76EF7F601D2706720087C785 /* ServicesExamplesViewController.m in Sources */,
 				76EF7EC21D2559140087C785 /* main.m in Sources */,
