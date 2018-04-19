@@ -26,7 +26,8 @@ class CheckoutOptionsViewController: UIViewController {
     }
 
     func setupUI() {
-        //Background View
+        //View
+        self.title = "Checkout Configuration"
         self.view.backgroundColor = .white
 
         //Public Key Input
@@ -48,8 +49,10 @@ class CheckoutOptionsViewController: UIViewController {
         let startButton: UIButton = {
             let button = UIButton()
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.backgroundColor = .blue
+            button.backgroundColor = .gray
             button.setTitle("Start Checkout", for: .normal)
+            button.layer.cornerRadius = 20
+            button.setTitleColor(.white, for: .normal)
             button.add(for: .touchUpInside, {
                 if let publicKey = publicKeyField.text, let prefId = preferenceIDField.text {
                     self.startCheckout(publicKey: publicKey, prefId: prefId, accessToken: accessTokenField.text)
