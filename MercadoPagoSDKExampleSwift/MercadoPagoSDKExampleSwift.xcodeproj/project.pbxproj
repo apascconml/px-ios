@@ -1,0 +1,583 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FCCA0D872088DE3F009F77D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA0D862088DE3F009F77D4 /* AppDelegate.swift */; };
+		FCCA0D892088DE3F009F77D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA0D882088DE3F009F77D4 /* ViewController.swift */; };
+		FCCA0D8C2088DE3F009F77D4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCCA0D8A2088DE3F009F77D4 /* Main.storyboard */; };
+		FCCA0D8E2088DE42009F77D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCCA0D8D2088DE42009F77D4 /* Assets.xcassets */; };
+		FCCA0D912088DE42009F77D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCCA0D8F2088DE42009F77D4 /* LaunchScreen.storyboard */; };
+		FCCA0D9C2088DE42009F77D4 /* MercadoPagoSDKExampleSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA0D9B2088DE42009F77D4 /* MercadoPagoSDKExampleSwiftTests.swift */; };
+		FCCA0DA72088DE42009F77D4 /* MercadoPagoSDKExampleSwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA0DA62088DE42009F77D4 /* MercadoPagoSDKExampleSwiftUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FCCA0D982088DE42009F77D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FCCA0D7B2088DE3F009F77D4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FCCA0D822088DE3F009F77D4;
+			remoteInfo = MercadoPagoSDKExampleSwift;
+		};
+		FCCA0DA32088DE42009F77D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FCCA0D7B2088DE3F009F77D4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FCCA0D822088DE3F009F77D4;
+			remoteInfo = MercadoPagoSDKExampleSwift;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FCCA0D832088DE3F009F77D4 /* MercadoPagoSDKExampleSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MercadoPagoSDKExampleSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCCA0D862088DE3F009F77D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FCCA0D882088DE3F009F77D4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FCCA0D8B2088DE3F009F77D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FCCA0D8D2088DE42009F77D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FCCA0D902088DE42009F77D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FCCA0D922088DE42009F77D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCCA0D972088DE42009F77D4 /* MercadoPagoSDKExampleSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MercadoPagoSDKExampleSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCCA0D9B2088DE42009F77D4 /* MercadoPagoSDKExampleSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MercadoPagoSDKExampleSwiftTests.swift; sourceTree = "<group>"; };
+		FCCA0D9D2088DE42009F77D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCCA0DA22088DE42009F77D4 /* MercadoPagoSDKExampleSwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MercadoPagoSDKExampleSwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCCA0DA62088DE42009F77D4 /* MercadoPagoSDKExampleSwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MercadoPagoSDKExampleSwiftUITests.swift; sourceTree = "<group>"; };
+		FCCA0DA82088DE42009F77D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FCCA0D802088DE3F009F77D4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCCA0D942088DE42009F77D4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCCA0D9F2088DE42009F77D4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FCCA0D7A2088DE3F009F77D4 = {
+			isa = PBXGroup;
+			children = (
+				FCCA0D852088DE3F009F77D4 /* MercadoPagoSDKExampleSwift */,
+				FCCA0D9A2088DE42009F77D4 /* MercadoPagoSDKExampleSwiftTests */,
+				FCCA0DA52088DE42009F77D4 /* MercadoPagoSDKExampleSwiftUITests */,
+				FCCA0D842088DE3F009F77D4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FCCA0D842088DE3F009F77D4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FCCA0D832088DE3F009F77D4 /* MercadoPagoSDKExampleSwift.app */,
+				FCCA0D972088DE42009F77D4 /* MercadoPagoSDKExampleSwiftTests.xctest */,
+				FCCA0DA22088DE42009F77D4 /* MercadoPagoSDKExampleSwiftUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FCCA0D852088DE3F009F77D4 /* MercadoPagoSDKExampleSwift */ = {
+			isa = PBXGroup;
+			children = (
+				FCCA0D862088DE3F009F77D4 /* AppDelegate.swift */,
+				FCCA0D882088DE3F009F77D4 /* ViewController.swift */,
+				FCCA0D8A2088DE3F009F77D4 /* Main.storyboard */,
+				FCCA0D8D2088DE42009F77D4 /* Assets.xcassets */,
+				FCCA0D8F2088DE42009F77D4 /* LaunchScreen.storyboard */,
+				FCCA0D922088DE42009F77D4 /* Info.plist */,
+			);
+			path = MercadoPagoSDKExampleSwift;
+			sourceTree = "<group>";
+		};
+		FCCA0D9A2088DE42009F77D4 /* MercadoPagoSDKExampleSwiftTests */ = {
+			isa = PBXGroup;
+			children = (
+				FCCA0D9B2088DE42009F77D4 /* MercadoPagoSDKExampleSwiftTests.swift */,
+				FCCA0D9D2088DE42009F77D4 /* Info.plist */,
+			);
+			path = MercadoPagoSDKExampleSwiftTests;
+			sourceTree = "<group>";
+		};
+		FCCA0DA52088DE42009F77D4 /* MercadoPagoSDKExampleSwiftUITests */ = {
+			isa = PBXGroup;
+			children = (
+				FCCA0DA62088DE42009F77D4 /* MercadoPagoSDKExampleSwiftUITests.swift */,
+				FCCA0DA82088DE42009F77D4 /* Info.plist */,
+			);
+			path = MercadoPagoSDKExampleSwiftUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FCCA0D822088DE3F009F77D4 /* MercadoPagoSDKExampleSwift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FCCA0DAB2088DE42009F77D4 /* Build configuration list for PBXNativeTarget "MercadoPagoSDKExampleSwift" */;
+			buildPhases = (
+				FCCA0D7F2088DE3F009F77D4 /* Sources */,
+				FCCA0D802088DE3F009F77D4 /* Frameworks */,
+				FCCA0D812088DE3F009F77D4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MercadoPagoSDKExampleSwift;
+			productName = MercadoPagoSDKExampleSwift;
+			productReference = FCCA0D832088DE3F009F77D4 /* MercadoPagoSDKExampleSwift.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FCCA0D962088DE42009F77D4 /* MercadoPagoSDKExampleSwiftTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FCCA0DAE2088DE42009F77D4 /* Build configuration list for PBXNativeTarget "MercadoPagoSDKExampleSwiftTests" */;
+			buildPhases = (
+				FCCA0D932088DE42009F77D4 /* Sources */,
+				FCCA0D942088DE42009F77D4 /* Frameworks */,
+				FCCA0D952088DE42009F77D4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FCCA0D992088DE42009F77D4 /* PBXTargetDependency */,
+			);
+			name = MercadoPagoSDKExampleSwiftTests;
+			productName = MercadoPagoSDKExampleSwiftTests;
+			productReference = FCCA0D972088DE42009F77D4 /* MercadoPagoSDKExampleSwiftTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		FCCA0DA12088DE42009F77D4 /* MercadoPagoSDKExampleSwiftUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FCCA0DB12088DE42009F77D4 /* Build configuration list for PBXNativeTarget "MercadoPagoSDKExampleSwiftUITests" */;
+			buildPhases = (
+				FCCA0D9E2088DE42009F77D4 /* Sources */,
+				FCCA0D9F2088DE42009F77D4 /* Frameworks */,
+				FCCA0DA02088DE42009F77D4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FCCA0DA42088DE42009F77D4 /* PBXTargetDependency */,
+			);
+			name = MercadoPagoSDKExampleSwiftUITests;
+			productName = MercadoPagoSDKExampleSwiftUITests;
+			productReference = FCCA0DA22088DE42009F77D4 /* MercadoPagoSDKExampleSwiftUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FCCA0D7B2088DE3F009F77D4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0930;
+				LastUpgradeCheck = 0930;
+				ORGANIZATIONNAME = "Mercado Pago";
+				TargetAttributes = {
+					FCCA0D822088DE3F009F77D4 = {
+						CreatedOnToolsVersion = 9.3;
+					};
+					FCCA0D962088DE42009F77D4 = {
+						CreatedOnToolsVersion = 9.3;
+						TestTargetID = FCCA0D822088DE3F009F77D4;
+					};
+					FCCA0DA12088DE42009F77D4 = {
+						CreatedOnToolsVersion = 9.3;
+						TestTargetID = FCCA0D822088DE3F009F77D4;
+					};
+				};
+			};
+			buildConfigurationList = FCCA0D7E2088DE3F009F77D4 /* Build configuration list for PBXProject "MercadoPagoSDKExampleSwift" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FCCA0D7A2088DE3F009F77D4;
+			productRefGroup = FCCA0D842088DE3F009F77D4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FCCA0D822088DE3F009F77D4 /* MercadoPagoSDKExampleSwift */,
+				FCCA0D962088DE42009F77D4 /* MercadoPagoSDKExampleSwiftTests */,
+				FCCA0DA12088DE42009F77D4 /* MercadoPagoSDKExampleSwiftUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FCCA0D812088DE3F009F77D4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCCA0D912088DE42009F77D4 /* LaunchScreen.storyboard in Resources */,
+				FCCA0D8E2088DE42009F77D4 /* Assets.xcassets in Resources */,
+				FCCA0D8C2088DE3F009F77D4 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCCA0D952088DE42009F77D4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCCA0DA02088DE42009F77D4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FCCA0D7F2088DE3F009F77D4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCCA0D892088DE3F009F77D4 /* ViewController.swift in Sources */,
+				FCCA0D872088DE3F009F77D4 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCCA0D932088DE42009F77D4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCCA0D9C2088DE42009F77D4 /* MercadoPagoSDKExampleSwiftTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FCCA0D9E2088DE42009F77D4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCCA0DA72088DE42009F77D4 /* MercadoPagoSDKExampleSwiftUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FCCA0D992088DE42009F77D4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FCCA0D822088DE3F009F77D4 /* MercadoPagoSDKExampleSwift */;
+			targetProxy = FCCA0D982088DE42009F77D4 /* PBXContainerItemProxy */;
+		};
+		FCCA0DA42088DE42009F77D4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FCCA0D822088DE3F009F77D4 /* MercadoPagoSDKExampleSwift */;
+			targetProxy = FCCA0DA32088DE42009F77D4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FCCA0D8A2088DE3F009F77D4 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FCCA0D8B2088DE3F009F77D4 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FCCA0D8F2088DE42009F77D4 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FCCA0D902088DE42009F77D4 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FCCA0DA92088DE42009F77D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FCCA0DAA2088DE42009F77D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FCCA0DAC2088DE42009F77D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = MercadoPagoSDKExampleSwift/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.MercadoPago.MercadoPagoSDKExampleSwift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FCCA0DAD2088DE42009F77D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = MercadoPagoSDKExampleSwift/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.MercadoPago.MercadoPagoSDKExampleSwift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		FCCA0DAF2088DE42009F77D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = MercadoPagoSDKExampleSwiftTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.MercadoPago.MercadoPagoSDKExampleSwiftTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MercadoPagoSDKExampleSwift.app/MercadoPagoSDKExampleSwift";
+			};
+			name = Debug;
+		};
+		FCCA0DB02088DE42009F77D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = MercadoPagoSDKExampleSwiftTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.MercadoPago.MercadoPagoSDKExampleSwiftTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MercadoPagoSDKExampleSwift.app/MercadoPagoSDKExampleSwift";
+			};
+			name = Release;
+		};
+		FCCA0DB22088DE42009F77D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = MercadoPagoSDKExampleSwiftUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.MercadoPago.MercadoPagoSDKExampleSwiftUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MercadoPagoSDKExampleSwift;
+			};
+			name = Debug;
+		};
+		FCCA0DB32088DE42009F77D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = MercadoPagoSDKExampleSwiftUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.MercadoPago.MercadoPagoSDKExampleSwiftUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MercadoPagoSDKExampleSwift;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FCCA0D7E2088DE3F009F77D4 /* Build configuration list for PBXProject "MercadoPagoSDKExampleSwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCCA0DA92088DE42009F77D4 /* Debug */,
+				FCCA0DAA2088DE42009F77D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FCCA0DAB2088DE42009F77D4 /* Build configuration list for PBXNativeTarget "MercadoPagoSDKExampleSwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCCA0DAC2088DE42009F77D4 /* Debug */,
+				FCCA0DAD2088DE42009F77D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FCCA0DAE2088DE42009F77D4 /* Build configuration list for PBXNativeTarget "MercadoPagoSDKExampleSwiftTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCCA0DAF2088DE42009F77D4 /* Debug */,
+				FCCA0DB02088DE42009F77D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FCCA0DB12088DE42009F77D4 /* Build configuration list for PBXNativeTarget "MercadoPagoSDKExampleSwiftUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCCA0DB22088DE42009F77D4 /* Debug */,
+				FCCA0DB32088DE42009F77D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FCCA0D7B2088DE3F009F77D4 /* Project object */;
+}
