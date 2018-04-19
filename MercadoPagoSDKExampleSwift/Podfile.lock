@@ -1,0 +1,27 @@
+PODS:
+  - MercadoPagoPXTracking (2.1.0)
+  - MercadoPagoSDK (4.0.0.beta.20):
+    - MercadoPagoPXTracking (= 2.1.0)
+    - MercadoPagoSDK/Default (= 4.0.0.beta.20)
+    - MercadoPagoServices (= 1.0.6)
+  - MercadoPagoSDK/Default (4.0.0.beta.20):
+    - MercadoPagoPXTracking (= 2.1.0)
+    - MercadoPagoServices (= 1.0.6)
+  - MercadoPagoServices (1.0.6):
+    - MercadoPagoPXTracking (= 2.1.0)
+
+DEPENDENCIES:
+  - MercadoPagoSDK (from `../`)
+
+EXTERNAL SOURCES:
+  MercadoPagoSDK:
+    :path: ../
+
+SPEC CHECKSUMS:
+  MercadoPagoPXTracking: 0e1a78ead026d1a3ba58c749cd870c41559944a0
+  MercadoPagoSDK: 261c71680390886774a31b5cf1939b570d10574b
+  MercadoPagoServices: b2b6f73455f9f2d89ff242b21eb202063677de87
+
+PODFILE CHECKSUM: c7401c7167683d52fa8c14694ba95d8637a3859c
+
+COCOAPODS: 1.4.0

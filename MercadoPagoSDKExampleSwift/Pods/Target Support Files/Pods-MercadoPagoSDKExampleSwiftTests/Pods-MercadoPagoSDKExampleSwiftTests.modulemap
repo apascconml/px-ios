@@ -1,0 +1,6 @@
+framework module Pods_MercadoPagoSDKExampleSwiftTests {
+  umbrella header "Pods-MercadoPagoSDKExampleSwiftTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
