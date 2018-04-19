@@ -41,7 +41,7 @@ class CheckoutOptionsViewController: UIViewController {
         PXLayout.centerHorizontally(view: preferenceIDField).isActive = true
 
         //Access Token Input
-        let accessTokenField: UITextField = createInputTextField(placeholder: "Access Token")
+        let accessTokenField: UITextField = createInputTextField(placeholder: "Access Token (Optional)")
         PXLayout.put(view: accessTokenField, onBottomOf: preferenceIDField, withMargin: PXLayout.S_MARGIN).isActive = true
         PXLayout.centerHorizontally(view: accessTokenField).isActive = true
 
