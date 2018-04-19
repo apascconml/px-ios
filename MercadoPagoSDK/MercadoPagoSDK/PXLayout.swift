@@ -240,8 +240,8 @@ class ClosureSleeve {
     }
 }
 
-extension UIControl {
-    func add (for controlEvents: UIControlEvents, _ closure: @escaping () -> Void) {
+public extension UIControl {
+    public func add (for controlEvents: UIControlEvents, _ closure: @escaping () -> Void) {
         let sleeve = ClosureSleeve(closure)
         addTarget(sleeve, action: #selector(ClosureSleeve.invoke), for: controlEvents)
         objc_setAssociatedObject(self, String(format: "[%d]", arc4random()), sleeve, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
