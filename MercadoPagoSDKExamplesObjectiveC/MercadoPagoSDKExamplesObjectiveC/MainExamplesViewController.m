@@ -86,9 +86,10 @@
     dc.amountWithoutDiscount = 60;
     dc = nil;
 
-    self.pref.preferenceId = @"241261708-cd353b1b-940f-493b-b960-10106a24203c";
-
-    self.mpCheckout = [[MercadoPagoCheckout alloc] initWithPublicKey:@"APP_USR-2e257493-3b80-4b71-8547-c841d035e8f2"
+    self.pref.preferenceId = @"241261700-459d4126-903c-4bad-bc05-82e5f13fa7d3";
+   // self.pref.preferenceId = @"241261708-cd353b1b-940f-493b-b960-10106a24203c"; // Error;
+    self.mpCheckout = [[MercadoPagoCheckout alloc] initWithPublicKey:@"TEST-93c0061e-ba7d-479c-9d52-c60b0af58a91"
+   // self.mpCheckout = [[MercadoPagoCheckout alloc] initWithPublicKey:@"APP_USR-2e257493-3b80-4b71-8547-c841d035e8f2" // Error
     accessToken:nil
                                                   checkoutPreference:self.pref paymentData:self.paymentData paymentResult:self.paymentResult discount:dc navigationController:self.navigationController];
 
@@ -103,7 +104,7 @@
     
     //[self setPaymentMethodPlugins];
 
-//    [self setPaymentPlugin];
+    [self setPaymentPlugin];
 
     // Setear PaymentResultScreenPreference
 //    [self setPaymentResultScreenPreference];
@@ -112,7 +113,7 @@
     [self setVoidCallback];
 
     //Setear ReviewScreenPrefernce
-    [self setReviewScreenPreference];
+ //   [self setReviewScreenPreference];
 
     [self.mpCheckout start];
 
@@ -152,9 +153,9 @@
     NSMutableArray *paymentMethodPlugins = [[NSMutableArray alloc] init];
     [paymentMethodPlugins addObject:bitcoinPaymentMethodPlugin];
 
-    [self.mpCheckout setPaymentMethodPluginsWithPlugins:paymentMethodPlugins];
+    //[self.mpCheckout setPaymentMethodPluginsWithPlugins:paymentMethodPlugins];
 
-    //[self.mpCheckout setPaymentPluginWithPaymentPlugin:makePaymentComponent];
+   // [self.mpCheckout setPaymentPluginWithPaymentPlugin:makePaymentComponent];
 }
 
 -(void)setPaymentPlugin {

@@ -1,5 +1,6 @@
 import UIKit
 
+@objcMembers
 open class ReviewScreenPreference: NSObject {
 
     fileprivate static let DEFAULT_AMOUNT_TITLE = PXStrings.unit_price_string.PXLocalized

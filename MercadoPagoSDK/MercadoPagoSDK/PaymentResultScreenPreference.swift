@@ -8,7 +8,7 @@
 
 import Foundation
 
-open class PaymentResultScreenPreference: NSObject {
+@objcMembers open class PaymentResultScreenPreference: NSObject {
 
     static let PENDING_CONTENT_TITLE = PXStrings.error_body_title_
     static let REJECTED_CONTENT_TITLE = PXStrings.error_body_title_

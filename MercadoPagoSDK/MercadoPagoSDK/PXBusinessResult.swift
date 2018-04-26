@@ -28,22 +28,24 @@ import UIKit
  Esta clase representa un resultado de pago de negocio.
  Por ejemplo, cuando hay un error al momento de realizar un pago que tiene que ver con el negocio y no con el payment method.
  */
-open class PXBusinessResult: NSObject {
+@objcMembers open class PXBusinessResult: NSObject {
 
     var status: PXBusinessResultStatus // APPROVED REJECTED PENDING
     var title: String // Titluo de Congrats
     var subtitle: String? // Sub Titluo de Congrats
-    var icon: UIImage  // Icono de Congrats
+    var icon: UIImage?  // Icono de Congrats
     var mainAction: PXComponentAction? // Boton principal (Azul)
-    var secondaryAction: PXComponentAction // Boton secundario (link) - Obligatoria
+    var secondaryAction: PXComponentAction? // Boton secundario (link)
     var helpMessage: String? // Texto
-    /* De momento es inaccesible */private var showPaymentMethod: Bool = false // Si quiere que muestre la celda de PM
-
+    var showPaymentMethod: Bool = false // Si quiere que muestre la celda de PM
+    var statementDescription : String?
+    var imageUrl: String?
+    
     //Datos que actualmente devuelve la procesadora de pagos
     var receiptId: String?
     //------
 
-    public init(receiptId: String? = nil, status: PXBusinessResultStatus, title: String, subtitle: String? = nil, icon: UIImage, mainAction: PXComponentAction? = nil, secondaryAction: PXComponentAction, helpMessage: String? = nil /*, showPaymentMethod : Bool = false*/ ) { // De momento no dejamos configurar el showPaymentMethod
+    public init(receiptId: String? = nil, status: PXBusinessResultStatus, title: String, subtitle: String? = nil, icon: UIImage? = nil, mainAction: PXComponentAction? = nil, secondaryAction: PXComponentAction?, helpMessage: String? = nil , showPaymentMethod : Bool = false, statementDescription: String? = nil, imageUrl: String? = nil) {
         self.receiptId = receiptId
         self.status = status
         self.title = title
@@ -52,6 +54,9 @@ open class PXBusinessResult: NSObject {
         self.mainAction = mainAction
         self.secondaryAction = secondaryAction
         self.helpMessage = helpMessage
+        self.showPaymentMethod = showPaymentMethod
+        self.statementDescription = statementDescription
+        self.imageUrl = imageUrl
         super.init()
     }
 }

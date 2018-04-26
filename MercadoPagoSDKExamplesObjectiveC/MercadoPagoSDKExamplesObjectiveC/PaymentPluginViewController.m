@@ -35,14 +35,14 @@
         
         [self.pluginNavigationHandler hideLoading];
         
-        PXComponentAction* popeame = [[PXComponentAction alloc] initWithLabel:@"Cancelar" action:^{
+        PXComponentAction* popeame = [[PXComponentAction alloc] initWithLabel:@"Aceptar" action:^{
             [self.pluginNavigationHandler cancel];
        }];
         PXComponentAction* printeaEnConsola = [[PXComponentAction alloc] initWithLabel:@"Intentar nuevamente" action:^{
             NSLog(@"print !!! action!!");
         }];
         
-        PXBusinessResult* businessResult = [[PXBusinessResult alloc] initWithReceiptId:@"12345" status:PXBusinessResultStatusREJECTED title:@"Claro no pudo procesar tu recarga" subtitle:@"Falló la recarga" icon:[UIImage imageNamed:@"claro_logo"] mainAction:printeaEnConsola secondaryAction:popeame helpMessage:@"Intenta mas tarde"];
+        PXBusinessResult* businessResult = [[PXBusinessResult alloc] initWithReceiptId:@"1879867544" status:PXBusinessResultStatusAPPROVED title:@"Sumaste 150 Km YPF Serviclub con tu carga" subtitle:nil icon:[UIImage imageNamed:@"ypf"] mainAction:nil secondaryAction:popeame helpMessage:nil showPaymentMethod:YES statementDescription:nil imageUrl:@"https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/YPF.svg/2000px-YPF.svg.png"];
         [self.pluginNavigationHandler didFinishPaymentWithBusinessResult:businessResult];
 
        // [self.pluginNavigationHandler didFinishPaymentWithPaymentStatus:RemotePaymentStatusAPPROVED statusDetails:@"" receiptId:nil];

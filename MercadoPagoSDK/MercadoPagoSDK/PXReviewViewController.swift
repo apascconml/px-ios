@@ -15,9 +15,12 @@ class PXReviewViewController: PXComponentContainerViewController {
     override open var screenName: String { return TrackingUtil.SCREEN_NAME_REVIEW_AND_CONFIRM }
     override open var screenId: String { return TrackingUtil.SCREEN_ID_REVIEW_AND_CONFIRM }
 
-    // MARK: Definitions
+    
     var footerView: UIView!
     var floatingButtonView: UIView!
+    
+    
+    // MARK: Definitions
     var termsConditionView: PXTermsAndConditionView!
     lazy var itemViews = [UIView]()
     fileprivate var viewModel: PXReviewViewModel!
@@ -45,15 +48,11 @@ class PXReviewViewController: PXComponentContainerViewController {
         self.scrollView.showsVerticalScrollIndicator = false
         self.scrollView.showsHorizontalScrollIndicator = false
         self.view.layoutIfNeeded()
+        self.checkFloatingButtonVisibility()
     }
 
     func update(viewModel: PXReviewViewModel) {
         self.viewModel = viewModel
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.checkFloatingButtonVisibility()
     }
 }
 
@@ -146,7 +145,8 @@ extension PXReviewViewController {
         PXLayout.centerHorizontally(view: footerView, to: contentView).isActive = true
         self.view.layoutIfNeeded()
         PXLayout.setHeight(owner: footerView, height: footerView.frame.height).isActive = true
-
+        
+        
         // Add floating button
         floatingButtonView = getFloatingButtonView()
         view.addSubview(floatingButtonView)
@@ -184,9 +184,9 @@ extension PXReviewViewController {
         }
         let floatingButtonCoordinates = floatingButton.convert(CGPoint.zero, from: self.view.window)
         let fixedButtonCoordinates = fixedButton.convert(CGPoint.zero, from: self.view.window)
-        return fixedButtonCoordinates.y >= floatingButtonCoordinates.y
+        return fixedButtonCoordinates.y > floatingButtonCoordinates.y
     }
-
+    
     fileprivate func getPaymentMethodComponentView() -> UIView? {
         let action = PXComponentAction(label: PXStrings.review_change_payment_method_action.PXLocalized, action: { [weak self] in
             if let reviewViewModel = self?.viewModel {
@@ -232,23 +232,16 @@ extension PXReviewViewController {
 
     fileprivate func getFooterView() -> UIView {
         let payAction = PXComponentAction(label: PXStrings.confirm_action.PXLocalized) { [weak self] in
-            guard let strongSelf = self else {
-                return
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.confirmPayment()
             }
-            strongSelf.confirmPayment()
-        }
-        let cancelAction = PXComponentAction(label: PXStrings.cancel_action.PXLocalized) {
-            [weak self] in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.cancelPayment()
-        }
-        let footerProps = PXFooterProps(buttonAction: payAction, linkAction: cancelAction)
+        let footerProps = PXFooterProps(buttonAction: payAction)
         let footerComponent = PXFooterComponent(props: footerProps)
         return footerComponent.render()
     }
-
+    
     fileprivate func getTermsAndConditionView() -> PXTermsAndConditionView {
         let termsAndConditionView = PXTermsAndConditionView()
         return termsAndConditionView
@@ -267,17 +260,18 @@ extension PXReviewViewController {
         }
         return nil
     }
-
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         super.scrollViewDidScroll(scrollView)
         self.checkFloatingButtonVisibility()
     }
-
+    
     func checkFloatingButtonVisibility() {
-        if !isConfirmButtonVisible() {
+       if !isConfirmButtonVisible() {
             self.floatingButtonView.alpha = 1
+            self.footerView.alpha = 0
         } else {
             self.floatingButtonView.alpha = 0
+            self.footerView.alpha = 1
         }
     }
 }
