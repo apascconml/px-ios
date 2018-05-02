@@ -9,14 +9,14 @@
 import UIKit
 
 class ReviewScreen: BaseScreen {
-    private lazy var payButton = cellButton("Pagar")
+    private lazy var payButton = cellButton("Confirmar")
     
     override func waitForElements() {
         waitFor(element: payButton)
     }
+    
     func tapPayButton()  -> CongratsScreen{
         payButton.tap()
         return CongratsScreen()
-        
     }
 }

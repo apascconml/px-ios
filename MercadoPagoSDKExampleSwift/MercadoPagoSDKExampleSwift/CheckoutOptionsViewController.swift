@@ -20,6 +20,7 @@ class CheckoutOptionsViewController: UIViewController {
         let checkoutPreference = CheckoutPreference(preferenceId: prefId)
         let at: String = accessToken != nil ? accessToken! : ""
         if let navigationController = self.navigationController {
+            MercadoPagoCheckout.setLanguage(language: ._SPANISH)
             let mpCheckout = MercadoPagoCheckout(publicKey: publicKey, accessToken: at, checkoutPreference: checkoutPreference, discount: nil, navigationController: navigationController)
             mpCheckout.start()
         }
@@ -65,6 +66,31 @@ class CheckoutOptionsViewController: UIViewController {
         PXLayout.centerHorizontally(view: startButton).isActive = true
         PXLayout.setHeight(owner: startButton, height: 40).isActive = true
         PXLayout.setWidth(owner: startButton, width: 200).isActive = true
+
+        //Clear Fields Button
+        let clearFieldsButton: UIButton = {
+            let button = UIButton()
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.backgroundColor = .red
+            button.setTitle("Clear fields", for: .normal)
+            button.layer.cornerRadius = 20
+            button.setTitleColor(.white, for: .normal)
+            button.add(for: .touchUpInside, {
+                publicKeyField.text = ""
+                preferenceIDField.text = ""
+                accessTokenField.text = ""
+            })
+            return button
+        }()
+        self.view.addSubview(clearFieldsButton)
+        PXLayout.put(view: clearFieldsButton, onBottomOf: startButton, withMargin: PXLayout.M_MARGIN).isActive = true
+        PXLayout.centerHorizontally(view: clearFieldsButton).isActive = true
+        PXLayout.setHeight(owner: clearFieldsButton, height: 40).isActive = true
+        PXLayout.setWidth(owner: clearFieldsButton, width: 200).isActive = true
+
+        publicKeyField.text = "APP_USR-648a260d-6fd9-4ad7-9284-90f22262c18d"
+        preferenceIDField.text = "243966003-d0be0be0-6fd8-4769-bf2f-7f2d979655f5"
+        accessTokenField.text = ""
     }
 
     func createInputTextField(placeholder: String? = nil) -> UITextField {

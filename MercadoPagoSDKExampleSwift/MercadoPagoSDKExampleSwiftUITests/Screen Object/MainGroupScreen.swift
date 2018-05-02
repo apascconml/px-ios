@@ -46,6 +46,7 @@ class CashOptionsScreen: BaseScreen {
         rapipagoButton.tap()
         return ReviewScreen()
     }
+    
     override func waitForElements() {
         waitFor(element: rapipagoButton)
     }

@@ -11,6 +11,7 @@ import XCTest
 class MainScreen: BaseScreen {
 
     private lazy var checkoutButton = button("Start Checkout")
+    private lazy var clearButton = button("Clear fields")
     private lazy var publicKeyField = textField("Public Key")
     private lazy var preferenceIdField = textField("Pref ID")
     private lazy var accessTokenField = textField("Access Token (Optional)")
@@ -19,6 +20,16 @@ class MainScreen: BaseScreen {
         checkoutButton.tap()
         let mainGroupScreen = MainGroupScreen()
         return mainGroupScreen
+    }
+
+    func tapCheckoutOptionOnlyCredit() -> CardScreen {
+        checkoutButton.tap()
+        return CardScreen()
+    }
+
+    func tapClearButton() -> MainScreen {
+        clearButton.tap()
+        return self
     }
 
     func fillPublicKey(_ text: String) -> MainScreen {

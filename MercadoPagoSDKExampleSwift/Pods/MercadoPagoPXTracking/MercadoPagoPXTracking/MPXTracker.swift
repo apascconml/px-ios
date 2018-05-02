@@ -10,7 +10,7 @@ import UIKit
 
 @objc
 public protocol MPTrackListener {
-    func trackScreen(screenName: String)
+    func trackScreen(screenName: String, extraParams: [String: Any]?)
     func trackEvent(screenName: String?, action: String!, result: String?, extraParams: [String: Any]?)
 }
 
@@ -22,46 +22,46 @@ public struct MPXTrackingEnvironment {
 @objc
 public class MPXTracker: NSObject {
     @objc open static let sharedInstance = MPXTracker()
-    
+
     var public_key: String = ""
     var sdkVersion = ""
     static let kTrackingSettings = "tracking_settings"
     fileprivate static let kTrackingEnabled = "tracking_enabled"
-    
+
     @objc open var trackListener: MPTrackListener?
     var trackingStrategy: TrackingStrategy = RealTimeStrategy()
-    
+
     fileprivate var flowService: FlowService = FlowService()
     fileprivate lazy var currentEnvironment: String = MPXTrackingEnvironment.production
 }
 
 // MARK: Getters/setters.
 extension MPXTracker {
-    
+
     open class func setPublicKey(_ public_key: String) {
         sharedInstance.public_key = public_key.trimSpaces()
     }
-    
+
     open class func setSdkVersion(_ version: String) {
         sharedInstance.sdkVersion = version
     }
-    
+
     open func getPublicKey() -> String! {
         return self.public_key
     }
-    
+
     open func setEnvironment(environment: String) {
         self.currentEnvironment = environment
     }
-    
+
     open func getSdkVersion() -> String {
         return sdkVersion
     }
-    
+
     open func getPlatformType() -> String {
         return "/mobile/ios"
     }
-    
+
     func isEnabled() -> Bool {
         guard let trackiSettings: [String:Any] = Utils.getSetting(identifier: MPXTracker.kTrackingSettings) else {
             return false
@@ -71,19 +71,19 @@ extension MPXTracker {
         }
         return trackingEnabled
     }
-    
+
     open class func setTrack(listener: MPTrackListener) {
         sharedInstance.trackListener = listener
     }
-    
+
     open func getTrackListener() -> MPTrackListener? {
         return trackListener
     }
-    
+
     open func startNewFlow() {
         flowService.startNewFlow()
     }
-    
+
     open func startNewFlow(externalFlowId:String) {
         flowService.startNewFlow(externalFlowId: externalFlowId)
     }
@@ -95,10 +95,10 @@ extension MPXTracker {
 
 // MARK: Public interfase.
 extension MPXTracker {
-    
+
     open func trackScreen(screenId: String, screenName: String, properties: [String: String] = [:]) {
         if let trackListenerInterfase = trackListener {
-            trackListenerInterfase.trackScreen(screenName: screenName)
+            trackListenerInterfase.trackScreen(screenName: screenName, extraParams: properties)
         }
         if !isEnabled() {
             return
@@ -117,7 +117,7 @@ extension MPXTracker {
         self.trackingStrategy = trackingStrategy
         trackingStrategy.trackActionEvent(actionEvenTrack: screenTrack)
     }
-    
+
     open func setTrackingStrategy(screenID: String) {
         let forcedScreens: [String] = [TrackingUtil.SCREEN_ID_PAYMENT_RESULT,
                                        TrackingUtil.SCREEN_ID_PAYMENT_RESULT_APPROVED,
@@ -135,7 +135,7 @@ extension MPXTracker {
 
 // MARK: Internal interfase.
 extension MPXTracker {
-    
+
     internal func generateJSONDefault() -> [String:Any] {
         let deviceJSON = MPTDevice().toJSON()
         let applicationJSON = MPTApplication(checkoutVersion: MPXTracker.sharedInstance.getSdkVersion(), platform: MPXTracker.sharedInstance.getPlatformType(), flowId: flowService.getFlowId(), environment: currentEnvironment).toJSON()
@@ -153,14 +153,14 @@ extension MPXTracker {
         obj["events"] = [screenJSON]
         return obj
     }
-    
+
     internal func generateJSONEvent(screenId: String, screenName: String, action: String, category: String, label: String, value: String) -> [String:Any] {
         var obj = generateJSONDefault()
         let eventJSON = self.eventJSON(screenId: screenId, screenName: screenName, action: action, category: category, label: label, value: value)
         obj["events"] = [eventJSON]
         return obj
     }
-    
+
     internal func eventJSON(screenId: String, screenName: String, action: String, category: String, label: String, value: String) -> [String:Any] {
         let timestamp = Date().getCurrentMillis()
         let obj: [String:Any] = [
@@ -189,3 +189,4 @@ extension MPXTracker {
         return obj
     }
 }
+

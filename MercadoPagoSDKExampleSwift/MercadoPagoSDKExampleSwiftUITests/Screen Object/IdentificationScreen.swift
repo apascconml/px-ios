@@ -17,10 +17,15 @@ class IdentificationScreen: BaseScreen {
         waitFor(element: numberTextField)
     }
     
-    func completeNumberAndContinue(_ text: String) -> PayerCostScreen {
+    func completeNumberAndContinueToPayerCost(_ text: String) -> PayerCostScreen {
         numberTextField.typeText(text)
         continueButton.tap()
         return PayerCostScreen()
     }
 
+    func completeNumberAndContinueToIssuers(_ text: String) -> IssuersScreen {
+        numberTextField.typeText(text)
+        continueButton.tap()
+        return IssuersScreen()
+    }
 }

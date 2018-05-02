@@ -9,9 +9,10 @@
 import UIKit
 
 class CongratsScreen: BaseScreen {
-    private lazy var payButton = cellButton("Pagar")
+
+    private lazy var footerButton = cellButton("Continuar")
     
     override func waitForElements() {
-    //    waitFor(element: payButton)
+        waitFor(element: footerButton)
     }
 }
