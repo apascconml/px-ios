@@ -7,12 +7,24 @@
 //
 
 import UIKit
+import MercadoPagoPXTracking
 
 class PXBusinessResultViewModel: NSObject, PXResultViewModelInterface {
+    var screenName: String { return TrackingUtil.SCREEN_NAME_PAYMENT_RESULT }
+    var screenId: String { return TrackingUtil.SCREEN_ID_PAYMENT_RESULT_BUSINESS }
+    
+    func trackInfo() {
+        MPXTracker.sharedInstance.trackScreen(screenId: screenId, screenName: screenName, properties: [String:String]())
+    }
+    
 
     let businessResult: PXBusinessResult
     let paymentData: PaymentData
     let amount: Double
+
+    //Default Image
+    private lazy var approvedIconName = "default_item_icon"
+    private lazy var approvedIconBundle = MercadoPago.getBundle()
 
     init(businessResult: PXBusinessResult, paymentData: PaymentData, amount: Double) {
         self.businessResult = businessResult
@@ -41,7 +53,6 @@ class PXBusinessResultViewModel: NSObject, PXResultViewModelInterface {
     }
 
     func setCallback(callback: @escaping (PaymentResult.CongratsState) -> Void) {
-        // Nothing to do
     }
 
     func getPaymentStatus() -> String {
@@ -73,12 +84,14 @@ class PXBusinessResultViewModel: NSObject, PXResultViewModelInterface {
         }
     }
     func buildHeaderComponent() -> PXHeaderComponent {
-        let headerProps = PXHeaderProps(labelText: businessResult.subtitle?.toAttributedString(), title: businessResult.title.toAttributedString(), backgroundColor: primaryResultColor(), productImage: businessResult.icon, statusImage: getBadgeImage())
+        let headerImage = getHeaderIcon()
+        let headerProps = PXHeaderProps(labelText: businessResult.subtitle?.toAttributedString(), title: businessResult.title.toAttributedString(), backgroundColor: primaryResultColor(), productImage: headerImage, statusImage: getBadgeImage())
         return PXHeaderComponent(props: headerProps)
     }
 
     func buildFooterComponent() -> PXFooterComponent {
-        let footerProps = PXFooterProps(buttonAction: businessResult.mainAction, linkAction: businessResult.secondaryAction)
+        let linkAction = businessResult.secondaryAction != nil ? businessResult.secondaryAction : PXCloseLinkAction()
+        let footerProps = PXFooterProps(buttonAction: businessResult.mainAction, linkAction: linkAction)
         return PXFooterComponent(props: footerProps)
     }
 
@@ -173,6 +186,19 @@ class PXBusinessResultViewModel: NSObject, PXResultViewModelInterface {
         return nil
     }
 
+    func getHeaderIcon() -> UIImage? {
+        if let brImageUrl = businessResult.imageUrl {
+            if let image =  ViewUtils.loadImageFromUrl(brImageUrl) {
+                return image
+            }
+        } else if let brIcon = businessResult.icon {
+            return brIcon
+        } else if let defaultBundle = approvedIconBundle, let defaultImage = MercadoPago.getImage(approvedIconName, bundle: defaultBundle) {
+            return defaultImage
+        }
+        return nil
+    }
+
 }
 
 class PXBusinessResultBodyComponent : PXComponentizable {
@@ -203,6 +229,4 @@ class PXBusinessResultBodyComponent : PXComponentizable {
         PXLayout.pinLastSubviewToBottom(view: bodyView)?.isActive = true
         return bodyView
     }
-    
-    
 }

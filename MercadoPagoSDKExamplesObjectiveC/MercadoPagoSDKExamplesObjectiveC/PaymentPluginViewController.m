@@ -42,7 +42,7 @@
             NSLog(@"print !!! action!!");
         }];
         
-        PXBusinessResult* businessResult = [[PXBusinessResult alloc] initWithReceiptId:@"1879867544" status:PXBusinessResultStatusAPPROVED title:@"Sumaste 150 Km YPF Serviclub con tu carga" subtitle:nil icon:[UIImage imageNamed:@"ypf"] mainAction:nil secondaryAction:popeame helpMessage:nil showPaymentMethod:YES statementDescription:nil];
+        PXBusinessResult* businessResult = [[PXBusinessResult alloc] initWithReceiptId:@"1879867544" status:PXBusinessResultStatusAPPROVED title:@"Sumaste 150 Km YPF Serviclub con tu carga" subtitle:nil icon:[UIImage imageNamed:@"ypf"] mainAction:nil secondaryAction:nil helpMessage:nil showPaymentMethod:YES statementDescription:nil imageUrl:@"https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/YPF.svg/2000px-YPF.svg.png"];
         [self.pluginNavigationHandler didFinishPaymentWithBusinessResult:businessResult];
 
        // [self.pluginNavigationHandler didFinishPaymentWithPaymentStatus:RemotePaymentStatusAPPROVED statusDetails:@"" receiptId:nil];
