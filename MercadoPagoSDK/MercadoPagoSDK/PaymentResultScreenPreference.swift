@@ -51,7 +51,7 @@ import Foundation
     //HEADER
     // MARK: Approved
     var approvedBadge: ApprovedBadge? = ApprovedBadge.check
-    var approvedTitle = PXHeaderResutlConstants.APPROVED_HEADER_TITLE.localized
+    var approvedTitle = PXHeaderResultConstants.APPROVED_HEADER_TITLE.localized
     var approvedSubtitle = ""
     private var _approvedLabelText = ""
     private var _disableApprovedLabelText = true
@@ -60,7 +60,7 @@ import Foundation
     var approvedIconBundle = MercadoPago.getBundle()!
 
     // MARK: Pending
-    var pendingTitle = PXHeaderResutlConstants.PENDING_HEADER_TITLE.localized
+    var pendingTitle = PXHeaderResultConstants.PENDING_HEADER_TITLE.localized
     var pendingSubtitle = ""
     var pendingContentTitle = PaymentResultScreenPreference.PENDING_CONTENT_TITLE.localized
     var pendingContentText = ""
@@ -73,11 +73,11 @@ import Foundation
     var hidePendingContentTitle = false
 
     // MARK: Rejected
-    var rejectedTitle = PXHeaderResutlConstants.REJECTED_HEADER_TITLE.localized
+    var rejectedTitle = PXHeaderResultConstants.REJECTED_HEADER_TITLE.localized
     var rejectedSubtitle = ""
     var rejectedTitleSetted = false
     private var disableRejectedLabelText = false
-    var rejectedIconSubtext = PXHeaderResutlConstants.REJECTED_ICON_SUBTEXT.localized
+    var rejectedIconSubtext = PXHeaderResultConstants.REJECTED_ICON_SUBTEXT.localized
     var rejectedBolbradescoIconName = "MPSDK_payment_result_bolbradesco_error"
     var rejectedPaymentMethodPluginIconName = "MPSDK_payment_result_plugin_error"
     var rejectedIconBundle = MercadoPago.getBundle()!
