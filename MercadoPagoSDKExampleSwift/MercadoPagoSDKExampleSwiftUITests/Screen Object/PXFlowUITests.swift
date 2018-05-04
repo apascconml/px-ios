@@ -35,7 +35,7 @@ class PXFlowUITests: XCTestCase {
             .completeNumberAndContinueToIssuers("30666777")
             .selectFirstOption()
             .selectFirstOption()
-            .tapPayButton()
+            .tapPayButtonForAnyCongrats()
     }
 
     func test_REGRESSION_ETE3() {
@@ -46,7 +46,7 @@ class PXFlowUITests: XCTestCase {
             .tapCheckoutOption()
             .tapCashOption()
             .tapRapipagoOption()
-            .tapPayButton()
+            .tapPayButtonForInstructions()
     }
 
     func test_REGRESSION_ETE5() {
@@ -63,7 +63,7 @@ class PXFlowUITests: XCTestCase {
             .completeCVVAndContinue("123")
             .completeNumberAndContinueToIssuers("30666777")
             .selectToReviewOptionAt(6)
-            .tapPayButton()
+            .tapPayButtonForAnyCongrats()
     }
 
     func test_REGRESSION_ETE6() {
@@ -71,7 +71,7 @@ class PXFlowUITests: XCTestCase {
             .tapClearButton()
             .fillPublicKey("APP_USR-0d933ff3-b803-4999-a211-8b3c7d5c7c03")
             .fillPreferenceId("243966003-bb8f7422-39c1-4337-81dd-60a88eb787df")
-            .tapCheckoutOptionOnlyCredit()
+            .tapCheckoutOptionOnlyCard()
             .completeNumberAndContinue("5323 7937 3550 6106")
             .completeNameAndContinue("APRO")
             .completeExpirationDateAndContinue("1225")
@@ -79,7 +79,7 @@ class PXFlowUITests: XCTestCase {
             .completeNumberAndContinueToIssuers("30666777")
             .selectToPayerCostOptionAt(6)
             .selectFirstOption()
-            .tapPayButton()
+            .tapPayButtonForAnyCongrats()
     }
   
 //    func testCreditCardFlow() {
@@ -99,14 +99,14 @@ class PXFlowUITests: XCTestCase {
 //            .tapPayButton()
 //    }
 
-    func testPaymentMethodOff() {
-        MainScreen()
-            .tapCheckoutOption()
-            .tapCashOption()
-            .tapRapipagoOption()
-            .tapPayButton()
-        
-    }
+//    func testPaymentMethodOff() {
+//        MainScreen()
+//            .tapCheckoutOption()
+//            .tapCashOption()
+//            .tapRapipagoOption()
+//            .tapPayButton()
+//        
+//    }
     
     
 }

@@ -22,7 +22,7 @@ class MainScreen: BaseScreen {
         return mainGroupScreen
     }
 
-    func tapCheckoutOptionOnlyCredit() -> CardScreen {
+    func tapCheckoutOptionOnlyCard() -> CardScreen {
         checkoutButton.tap()
         return CardScreen()
     }

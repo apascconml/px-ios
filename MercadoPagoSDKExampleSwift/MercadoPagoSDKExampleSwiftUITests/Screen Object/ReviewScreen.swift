@@ -14,9 +14,34 @@ class ReviewScreen: BaseScreen {
     override func waitForElements() {
         waitFor(element: payButton)
     }
-    
-    func tapPayButton()  -> CongratsScreen{
+
+    func tapPayButtonForApproved() -> ApprovedScreen {
+        payButton.tap()
+        return ApprovedScreen()
+    }
+
+    func tapPayButtonForRejected() -> RejectedScreen {
+        payButton.tap()
+        return RejectedScreen()
+    }
+
+    func tapPayButtonForPending() -> PendingScreen {
+        payButton.tap()
+        return PendingScreen()
+    }
+
+    func tapPayButtonForInstructions() -> InstructionsScreen {
+        payButton.tap()
+        return InstructionsScreen()
+    }
+
+    func tapPayButtonForAnyCongrats() -> CongratsScreen {
         payButton.tap()
         return CongratsScreen()
     }
+
+//    func tapPayButton()  -> CongratsScreen{
+//        payButton.tap()
+//        return CongratsScreen()
+//    }
 }

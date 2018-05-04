@@ -9,10 +9,58 @@
 import UIKit
 
 class CongratsScreen: BaseScreen {
-
-    private lazy var footerButton = cellButton("Continuar")
-    
     override func waitForElements() {
-        waitFor(element: footerButton)
+        
+    }
+//
+//    func waitForAnyCongrats() -> CongratsScreen {
+////        let instructionsFooterButton = cellButton("Continuar")
+////        waitFor(element: instructionsFooterButton)
+//        return self
+//    }
+//
+//    func waitForApprovedCongrats() -> CongratsScreen {
+//        let instructionsFooterButton = cellButton("Continuar")
+//        waitFor(element: instructionsFooterButton)
+//        return self
+//    }
+//
+//    func waitForRejectedCongrats() -> CongratsScreen {
+//        let instructionsFooterButton = cellButton("Pagar con otro medio")
+//        waitFor(element: instructionsFooterButton)
+//        return self
+//    }
+//
+//    func waitForInstructionsCongrats() -> CongratsScreen {
+//        let instructionsFooterButton = cellButton("Continuar")
+//        waitFor(element: instructionsFooterButton)
+//        return self
+//    }
+}
+
+class ApprovedScreen: CongratsScreen {
+    override func waitForElements() {
+
     }
 }
+
+class RejectedScreen: CongratsScreen {
+    private lazy var subtitleLabel = cellButton("Continuar")
+    override func waitForElements() {
+        waitFor(element: subtitleLabel)
+    }
+}
+
+class PendingScreen: CongratsScreen {
+    override func waitForElements() {
+
+    }
+}
+
+class InstructionsScreen: CongratsScreen {
+    private lazy var instructionsFooterButton = cellButton("Continuar")
+    override func waitForElements() {
+        waitFor(element: instructionsFooterButton)
+    }
+}
+
