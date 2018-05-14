@@ -100,7 +100,7 @@
     
     [self setPaymentMethodPlugins];
 
-//    [self setPaymentPlugin];
+    [self setPaymentPlugin];
 
     // Setear PaymentResultScreenPreference
 //    [self setPaymentResultScreenPreference];

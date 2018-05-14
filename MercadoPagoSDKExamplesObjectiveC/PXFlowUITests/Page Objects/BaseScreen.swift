@@ -23,7 +23,7 @@ class BaseScreen : BaseScreenProtocol {
         return self
     }
     internal func waitForElements() {
-         fatalError("All Screens Must Override this Method")
+        fatalError("All Screens Must Override this Method")
     }
 }
 
@@ -46,7 +46,7 @@ extension BaseScreen {
     }
 }
 
-// MARK: Take elements from screen
+// MARK: Find elements helper
 extension BaseScreen {
     func findAll(_ type: XCUIElement.ElementType) -> XCUIElementQuery {
         return XCUIApplication().descendants(matching: type)
@@ -66,5 +66,14 @@ extension BaseScreen {
     }
     func cellButton(_ text: String) -> XCUIElement {
         return XCUIApplication().buttons[text].firstMatch
+    }
+    func button(_ text: String) -> XCUIElement {
+        return XCUIApplication().buttons[text].firstMatch
+    }
+    func label(_ text: String) -> XCUIElement {
+        return  XCUIApplication().staticTexts.element(matching: .any, identifier: text)
+    }
+    func navBarButton(_ number: Int) -> XCUIElement {
+        return  XCUIApplication().navigationBars.buttons.allElementsBoundByIndex[number]
     }
 }
