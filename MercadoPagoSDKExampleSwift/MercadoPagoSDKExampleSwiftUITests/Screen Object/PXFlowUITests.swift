@@ -81,4 +81,34 @@ class PXFlowUITests: XCTestCase {
             .selectFirstOption()
             .tapPayButtonForAnyCongrats()
     }
+
+    func test_REGRESSION_ETE7_1() {
+        MainScreen()
+            .tapClearButton()
+            .fillPublicKey("APP_USR-0d933ff3-b803-4999-a211-8b3c7d5c7c03")
+            .fillPreferenceId("243966003-55f883b7-2cfb-4266-8001-11e081a45797")
+            .tapCheckoutOption()
+            .tapCardOption()
+            .tapCreditCardOption()
+            .completeNumberAndContinue("5323 7937 3550 6106")
+            .completeNameAndContinue("APRO")
+            .completeExpirationDateAndContinue("1225")
+            .completeCVVAndContinue("123")
+            .completeNumberAndContinueToIssuers("30666777")
+            .selectFirstOption()
+            .selectFirstOption()
+            .tapPayButtonForAnyCongrats()
+    }
+
+    func test_REGRESSION_ETE7_2() {
+        MainScreen()
+            .tapClearButton()
+            .fillPublicKey("APP_USR-0d933ff3-b803-4999-a211-8b3c7d5c7c03")
+            .fillPreferenceId("243966003-55f883b7-2cfb-4266-8001-11e081a45797")
+            .tapCheckoutOption()
+            .tapCardOption()
+            .tapCreditCardOption()
+            .completeNumberAndExpectInvalidFieldError("4509 9535 6623 3704")
+            .tapAvailableCardsButton()
+    }
 }

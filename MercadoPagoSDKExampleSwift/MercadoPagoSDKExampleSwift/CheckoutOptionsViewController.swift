@@ -30,11 +30,12 @@ class CheckoutOptionsViewController: UIViewController {
         //View
         self.title = "Checkout Configuration"
         self.view.backgroundColor = .white
+        let topMargin = PXLayout.getSafeAreaTopInset() + 70
 
         //Public Key Input
         let publicKeyField: UITextField = createInputTextField(placeholder: "Public Key")
         PXLayout.centerHorizontally(view: publicKeyField).isActive = true
-        PXLayout.pinTop(view: publicKeyField, withMargin: 80).isActive = true
+        PXLayout.pinTop(view: publicKeyField, withMargin: topMargin).isActive = true
 
         //Preference ID Input
         let preferenceIDField: UITextField = createInputTextField(placeholder: "Pref ID")

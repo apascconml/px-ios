@@ -15,6 +15,8 @@ class CardScreen: BaseScreen {
     private lazy var expirationDateTextField = textField("Fecha de expiración")
     private lazy var cvvTextField = textField("Código de seguridad")
     private lazy var continueButton = toolbarButton("Continuar")
+    private lazy var invalidCardLabel = element("No puedes pagar con esta tarjeta")
+    private lazy var availableCardsButton = element("MÁS INFO")
     
     override func waitForElements() {
         waitFor(element: numberTextField)
@@ -25,6 +27,19 @@ class CardScreen: BaseScreen {
         continueButton.tap()
         return self
     }
+    
+    func completeNumberAndExpectInvalidFieldError(_ text: String) -> CardScreen{
+        numberTextField.typeText(text)
+        waitFor(element: invalidCardLabel)
+        return self
+    }
+
+    func tapAvailableCardsButton() -> CardScreen{
+        waitFor(element: availableCardsButton)
+         availableCardsButton.tap()
+        return self
+    }
+
     func completeNameAndContinue(_ text: String) -> CardScreen{
         nameTextField.typeText(text)
         continueButton.tap()
