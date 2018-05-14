@@ -81,32 +81,4 @@ class PXFlowUITests: XCTestCase {
             .selectFirstOption()
             .tapPayButtonForAnyCongrats()
     }
-  
-//    func testCreditCardFlow() {
-//        MainScreen()
-//            .tapCheckoutOption().validate(validationAssets: {
-//                (groupsScreen) in
-//                    groupsScreen.waitFor(element: groupsScreen.cell("Pago en efectivo"))
-//            })
-//            .tapCardOption()
-//            .tapCreditCardOption()
-//            .completeNumberAndContinue("4242 4242 4242 4242")
-//            .completeNameAndContinue("Juan Sanzone")
-//            .completeExpirationDateAndContinue("1122")
-//            .completeCVVAndContinue("123")
-//            .completeNumberAndContinue("30666777")
-//            .selectFirstOption()
-//            .tapPayButton()
-//    }
-
-//    func testPaymentMethodOff() {
-//        MainScreen()
-//            .tapCheckoutOption()
-//            .tapCashOption()
-//            .tapRapipagoOption()
-//            .tapPayButton()
-//        
-//    }
-    
-    
 }

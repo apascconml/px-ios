@@ -45,7 +45,7 @@ class ApprovedScreen: CongratsScreen {
 }
 
 class RejectedScreen: CongratsScreen {
-    private lazy var subtitleLabel = cellButton("Continuar")
+    private lazy var subtitleLabel = element("Continuar")
     override func waitForElements() {
         waitFor(element: subtitleLabel)
     }
@@ -58,7 +58,7 @@ class PendingScreen: CongratsScreen {
 }
 
 class InstructionsScreen: CongratsScreen {
-    private lazy var instructionsFooterButton = cellButton("Continuar")
+    private lazy var instructionsFooterButton = element("Continuar")
     override func waitForElements() {
         waitFor(element: instructionsFooterButton)
     }

@@ -9,7 +9,7 @@
 import UIKit
 
 class ReviewScreen: BaseScreen {
-    private lazy var payButton = cellButton("Confirmar")
+    private lazy var payButton = element("Confirmar")
     
     override func waitForElements() {
         waitFor(element: payButton)
