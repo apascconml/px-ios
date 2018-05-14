@@ -134,11 +134,17 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/FXBlurView/FXBlurView.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/JRSwizzle/JRSwizzle.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/MLUI/MLUI.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MercadoPagoPXTracking/MercadoPagoPXTracking.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MercadoPagoSDK/MercadoPagoSDK.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MercadoPagoServices/MercadoPagoServices.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/FXBlurView/FXBlurView.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/JRSwizzle/JRSwizzle.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/MLUI/MLUI.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MercadoPagoPXTracking/MercadoPagoPXTracking.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MercadoPagoSDK/MercadoPagoSDK.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MercadoPagoServices/MercadoPagoServices.framework"
