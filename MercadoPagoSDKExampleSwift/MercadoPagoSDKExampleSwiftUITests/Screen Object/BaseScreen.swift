@@ -18,12 +18,19 @@ class BaseScreen : BaseScreenProtocol {
     init() {
         waitForElements()
     }
+    
     func validate(validationAssets:((BaseScreen)->Void)) -> Self {
         validationAssets(self)
         return self
     }
+
     internal func waitForElements() {
          fatalError("All Screens Must Override this Method")
+    }
+
+    func exist(element : XCUIElement) -> Bool{
+        let exists = NSPredicate(format: "exists = 1")
+        return element.exists
     }
 }
 

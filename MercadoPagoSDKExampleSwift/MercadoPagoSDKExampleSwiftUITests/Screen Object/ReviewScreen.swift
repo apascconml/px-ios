@@ -10,6 +10,7 @@ import UIKit
 
 class ReviewScreen: BaseScreen {
     private lazy var payButton = element("Confirmar")
+    private lazy var changePaymentMethodButton = element("Cambiar medio de pago")
     
     override func waitForElements() {
         waitFor(element: payButton)
@@ -38,6 +39,13 @@ class ReviewScreen: BaseScreen {
     func tapPayButtonForAnyCongrats() -> CongratsScreen {
         payButton.tap()
         return CongratsScreen()
+    }
+
+    func tapChangePaymentMethod() -> MainGroupScreen {
+
+        //TODO: Add scrolling. If fails in small devices.
+        changePaymentMethodButton.tap()
+        return MainGroupScreen()
     }
 
 //    func tapPayButton()  -> CongratsScreen{

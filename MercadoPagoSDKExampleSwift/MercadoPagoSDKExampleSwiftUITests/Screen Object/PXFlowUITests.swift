@@ -111,4 +111,38 @@ class PXFlowUITests: XCTestCase {
             .completeNumberAndExpectInvalidFieldError("4509 9535 6623 3704")
             .tapAvailableCardsButton()
     }
+
+    func test_REGRESSION_ETE10() {
+        MainScreen()
+            .tapClearButton()
+            .fillPublicKey("TEST-c6d9b1f9-71ff-4e05-9327-3c62468a23ee")
+            .fillPreferenceId("243962506-465d2dc6-f83b-4090-be64-8374196a3ab3")
+            .tapCheckoutOption()
+            .tapCardOption()
+            .tapCreditCardOption()
+            .completeNumberAndContinue("5323 7937 3550 6106")
+            .completeNameAndContinue("APRO")
+            .completeExpirationDateAndContinue("1225")
+            .completeCVVAndContinue("123")
+            .completeNumberAndContinueToIssuers("30666777")
+            .selectFirstOption()
+            .selectFirstOption()
+            .tapChangePaymentMethod()
+            .tapCashOption()
+            .tapRapipagoOption()
+            .tapPayButtonForInstructions()
+    }
+
+    func test_REGRESSION_ETE12() {
+        MainScreen()
+            .tapClearButton()
+            .fillPublicKey("APP_USR-2681ea61-10af-4bf6-a73d-e426d6b07e2c")
+            .fillPreferenceId("243962506-76f3ae80-28de-4c8a-94a5-dad78ef8b4c4")
+            .tapCheckoutOption()
+            .tapCardOption()
+            .tapCreditCardOption()
+            .validate(validationAssets: { (cardScreen) in
+                XCTAssertTrue(cardScreen.exist(element: cardScreen.element("Solo puedes pagar con Visa")))
+            })
+    }
 }

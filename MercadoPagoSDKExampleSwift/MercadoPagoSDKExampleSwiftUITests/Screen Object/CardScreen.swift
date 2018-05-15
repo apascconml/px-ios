@@ -45,11 +45,13 @@ class CardScreen: BaseScreen {
         continueButton.tap()
         return self
     }
+
     func completeExpirationDateAndContinue(_ text: String) -> CardScreen{
         expirationDateTextField.typeText(text)
         continueButton.tap()
         return self
     }
+    
     func completeCVVAndContinue(_ text: String) -> IdentificationScreen{
         waitFor(element: cvvTextField)
         cvvTextField.typeText(text)
