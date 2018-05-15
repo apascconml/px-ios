@@ -20,7 +20,7 @@ class PXFlowUITests: XCTestCase {
         super.tearDown()
     }
 
-    func test_REGRESSION_ETE1() {
+    func test_REGRESSION_ETE1_1() { //Tarjeta MASTER con cuotas SIN INTERES
         MainScreen()
             .tapClearButton()
             .fillPublicKey("APP_USR-648a260d-6fd9-4ad7-9284-90f22262c18d")
@@ -34,7 +34,73 @@ class PXFlowUITests: XCTestCase {
             .completeCVVAndContinue("123")
             .completeNumberAndContinueToIssuers("30666777")
             .selectFirstOption()
-            .selectFirstOption()
+            .selectPayerCostOptionAtRow(2)
+            .tapPayButtonForAnyCongrats()
+    }
+
+    func test_REGRESSION_ETE1_2() { //Tarjeta VISA con cuotas CON INTERES
+        MainScreen()
+            .tapClearButton()
+            .fillPublicKey("APP_USR-648a260d-6fd9-4ad7-9284-90f22262c18d")
+            .fillPreferenceId("243966003-d0be0be0-6fd8-4769-bf2f-7f2d979655f5")
+            .tapCheckoutOption()
+            .tapCardOption()
+            .tapCreditCardOption()
+            .completeNumberAndContinue("4509 9535 6623 3704")
+            .completeNameAndContinue("APRO")
+            .completeExpirationDateAndContinue("1225")
+            .completeCVVAndContinue("123")
+            .completeNumberAndContinueToPayerCost("30666777")
+            .selectPayerCostOptionAtRow(3)
+            .tapPayButtonForAnyCongrats()
+    }
+
+    func test_REGRESSION_ETE1_3() { //Tarjeta AMEX en una sola cuota
+        MainScreen()
+            .tapClearButton()
+            .fillPublicKey("APP_USR-648a260d-6fd9-4ad7-9284-90f22262c18d")
+            .fillPreferenceId("243966003-d0be0be0-6fd8-4769-bf2f-7f2d979655f5")
+            .tapCheckoutOption()
+            .tapCardOption()
+            .tapCreditCardOption()
+            .completeNumberAndContinue("3711 803032 57522")
+            .completeNameAndContinue("APRO")
+            .completeExpirationDateAndContinue("1225")
+            .completeCVVAndContinue("1234")
+            .completeNumberAndContinueToPayerCost("30666777")
+            .selectPayerCostOptionAtRow(1)
+            .tapPayButtonForAnyCongrats()
+    }
+
+    func test_REGRESSION_ETE1_4() { //Tarjeta MAESTRO
+        MainScreen()
+            .tapClearButton()
+            .fillPublicKey("APP_USR-648a260d-6fd9-4ad7-9284-90f22262c18d")
+            .fillPreferenceId("243966003-d0be0be0-6fd8-4769-bf2f-7f2d979655f5")
+            .tapCheckoutOption()
+            .tapCardOption()
+            .tapDebitCardOption()
+            .completeNumberAndContinue("501081066 0634280114")
+            .completeNameAndContinue("APRO")
+            .completeExpirationDateAndContinue("1225")
+            .completeCVVAndContinue("123")
+            .completeNumberAndContinueToReview("30666777")
+            .tapPayButtonForAnyCongrats()
+    }
+
+    func test_REGRESSION_ETE1_5() { //Tarjeta VISA DEBITO
+        MainScreen()
+            .tapClearButton()
+            .fillPublicKey("APP_USR-648a260d-6fd9-4ad7-9284-90f22262c18d")
+            .fillPreferenceId("243966003-d0be0be0-6fd8-4769-bf2f-7f2d979655f5")
+            .tapCheckoutOption()
+            .tapCardOption()
+            .tapDebitCardOption()
+            .completeNumberAndContinue("4002 7686 9439 5619")
+            .completeNameAndContinue("APRO")
+            .completeExpirationDateAndContinue("1225")
+            .completeCVVAndContinue("123")
+            .completeNumberAndContinueToReview("30666777")
             .tapPayButtonForAnyCongrats()
     }
 
@@ -77,8 +143,8 @@ class PXFlowUITests: XCTestCase {
             .completeExpirationDateAndContinue("1225")
             .completeCVVAndContinue("123")
             .completeNumberAndContinueToIssuers("30666777")
-            .selectToPayerCostOptionAt(6)
             .selectFirstOption()
+            .selectPayerCostOptionAtRow(1)
             .tapPayButtonForAnyCongrats()
     }
 
@@ -96,7 +162,7 @@ class PXFlowUITests: XCTestCase {
             .completeCVVAndContinue("123")
             .completeNumberAndContinueToIssuers("30666777")
             .selectFirstOption()
-            .selectFirstOption()
+            .selectPayerCostOptionAtRow(1)
             .tapPayButtonForAnyCongrats()
     }
 
@@ -126,7 +192,7 @@ class PXFlowUITests: XCTestCase {
             .completeCVVAndContinue("123")
             .completeNumberAndContinueToIssuers("30666777")
             .selectFirstOption()
-            .selectFirstOption()
+            .selectPayerCostOptionAtRow(1)
             .tapChangePaymentMethod()
             .tapCashOption()
             .tapRapipagoOption()

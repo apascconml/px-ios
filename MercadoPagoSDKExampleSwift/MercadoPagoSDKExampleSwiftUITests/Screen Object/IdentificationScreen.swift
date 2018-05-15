@@ -28,4 +28,10 @@ class IdentificationScreen: BaseScreen {
         continueButton.tap()
         return IssuersScreen()
     }
+
+    func completeNumberAndContinueToReview(_ text: String) -> ReviewScreen {
+        numberTextField.typeText(text)
+        continueButton.tap()
+        return ReviewScreen()
+    }
 }

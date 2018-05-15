@@ -10,13 +10,15 @@ import UIKit
 
 class PayerCostScreen: BaseScreen {
 
-     private lazy var payerCost1 = cellNumber(5)
+    private lazy var headerCellCount = 2
     
     override func waitForElements() {
-        waitFor(element: payerCost1)
+        waitFor(element: cellNumber(3))
     }
-    func selectFirstOption() -> ReviewScreen{
-        payerCost1.tap()
+
+    func selectPayerCostOptionAtRow(_ rowNumber: Int) -> ReviewScreen {
+        let payerCostCell = cellNumber(headerCellCount + rowNumber)
+        payerCostCell.tap()
         return ReviewScreen()
     }
 }

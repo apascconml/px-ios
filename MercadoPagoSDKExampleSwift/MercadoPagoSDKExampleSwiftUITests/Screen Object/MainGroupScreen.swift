@@ -29,11 +29,18 @@ class MainGroupScreen: BaseScreen {
 
 class CardsOptionsScreen: BaseScreen {
     private lazy var creditCardButton = cell("Tarjeta de crédito")
+    private lazy var debitCardButton = cell("Tarjeta de débito")
     
     func tapCreditCardOption() -> CardScreen{
         creditCardButton.tap()
         return CardScreen()
     }
+
+    func tapDebitCardOption() -> CardScreen {
+        debitCardButton.tap()
+        return CardScreen()
+    }
+
     override func waitForElements() {
         waitFor(element: creditCardButton)
     }
