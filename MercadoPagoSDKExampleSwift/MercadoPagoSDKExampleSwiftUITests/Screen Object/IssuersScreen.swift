@@ -10,27 +10,30 @@ import UIKit
 
 class IssuersScreen: BaseScreen {
 
-    private lazy var issuer1 = cellNumber(5)
+    private lazy var headerCellCount = 1
+    private lazy var backButton = getBackButton()
 
     override func waitForElements() {
-        waitFor(element: issuer1)
+        waitFor(element: cellNumber(3))
     }
 
-    func selectToPayerCostOptionAt(_ row: Int) -> PayerCostScreen {
-        let issuerCell = cellNumber(row)
-        issuerCell.tap()
+    func selectIssuerOptionToPayerCostScreenAtRow(_ rowNumber: Int) -> PayerCostScreen {
+        tapRow(number: rowNumber)
         return PayerCostScreen()
     }
 
-    func selectToReviewOptionAt(_ row: Int) -> ReviewScreen {
-        let issuerCell = cellNumber(row)
-        issuerCell.tap()
+    func selectIssuerOptionToReviewScreenAtRow(_ rowNumber: Int) -> ReviewScreen {
+        tapRow(number: rowNumber)
         return ReviewScreen()
     }
 
-    func selectFirstOption() -> PayerCostScreen {
-        issuer1.tap()
-        return PayerCostScreen()
+    func tapRow(number: Int) {
+        let issuerCell = cellNumber(headerCellCount + number)
+        issuerCell.tap()
+    }
+
+    func tapBackButtonToIdentificationScreen() -> IdentificationScreen {
+        backButton.tap()
+        return IdentificationScreen()
     }
 }
-

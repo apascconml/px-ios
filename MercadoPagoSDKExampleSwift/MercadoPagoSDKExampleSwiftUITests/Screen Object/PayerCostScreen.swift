@@ -11,14 +11,29 @@ import UIKit
 class PayerCostScreen: BaseScreen {
 
     private lazy var headerCellCount = 2
+    private lazy var backButton = getBackButton()
     
     override func waitForElements() {
         waitFor(element: cellNumber(3))
     }
 
     func selectPayerCostOptionAtRow(_ rowNumber: Int) -> ReviewScreen {
-        let payerCostCell = cellNumber(headerCellCount + rowNumber)
-        payerCostCell.tap()
+        tapRow(number: rowNumber)
         return ReviewScreen()
+    }
+
+    func tapRow(number: Int) {
+        let payerCostCell = cellNumber(headerCellCount + number)
+        payerCostCell.tap()
+    }
+
+    func tapBackButtonToIssuersScreen() -> IssuersScreen {
+        backButton.tap()
+        return IssuersScreen()
+    }
+
+    func tapBackButtonToIdentificationScreen() -> IdentificationScreen {
+        backButton.tap()
+        return IdentificationScreen()
     }
 }

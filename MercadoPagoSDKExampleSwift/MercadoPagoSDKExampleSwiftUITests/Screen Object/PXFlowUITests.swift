@@ -33,7 +33,7 @@ class PXFlowUITests: XCTestCase {
             .completeExpirationDateAndContinue("1225")
             .completeCVVAndContinue("123")
             .completeNumberAndContinueToIssuers("30666777")
-            .selectFirstOption()
+            .selectIssuerOptionToPayerCostScreenAtRow(1)
             .selectPayerCostOptionAtRow(2)
             .tapPayButtonForAnyCongrats()
     }
@@ -128,7 +128,7 @@ class PXFlowUITests: XCTestCase {
             .completeExpirationDateAndContinue("1225")
             .completeCVVAndContinue("123")
             .completeNumberAndContinueToIssuers("30666777")
-            .selectToReviewOptionAt(6)
+            .selectIssuerOptionToReviewScreenAtRow(5)
             .tapPayButtonForAnyCongrats()
     }
 
@@ -143,7 +143,7 @@ class PXFlowUITests: XCTestCase {
             .completeExpirationDateAndContinue("1225")
             .completeCVVAndContinue("123")
             .completeNumberAndContinueToIssuers("30666777")
-            .selectFirstOption()
+            .selectIssuerOptionToPayerCostScreenAtRow(1)
             .selectPayerCostOptionAtRow(1)
             .tapPayButtonForAnyCongrats()
     }
@@ -161,7 +161,7 @@ class PXFlowUITests: XCTestCase {
             .completeExpirationDateAndContinue("1225")
             .completeCVVAndContinue("123")
             .completeNumberAndContinueToIssuers("30666777")
-            .selectFirstOption()
+            .selectIssuerOptionToPayerCostScreenAtRow(1)
             .selectPayerCostOptionAtRow(1)
             .tapPayButtonForAnyCongrats()
     }
@@ -178,6 +178,46 @@ class PXFlowUITests: XCTestCase {
             .tapAvailableCardsButton()
     }
 
+    func test_REGRESSION_ETE8() {
+        MainScreen()
+            .tapClearButton()
+            .fillPublicKey("TEST-e4bdd1cf-bcb2-43f7-b565-ed4c9ea25be7")
+            .fillPreferenceId("243966003-bb8f7422-39c1-4337-81dd-60a88eb787df")
+            .tapCheckoutOptionOnlyCard()
+            .completeNumberAndContinue("5323 7937 3550 6106")
+            .completeNameAndContinue("APRO")
+            .completeExpirationDateAndContinue("1225")
+            .completeCVVAndContinue("123")
+            .completeNumberAndContinueToIssuers("30666777")
+            .selectIssuerOptionToPayerCostScreenAtRow(1)
+            .selectPayerCostOptionAtRow(1)
+            .tapBackButtonToPayerCostScreen()
+            .tapBackButtonToIssuersScreen()
+            .tapBackButtonToIdentificationScreen()
+            .tapBackButtonToCardScreen()
+    }
+
+    func test_REGRESSION_ETE9() { //Hacer backs sin exclusiones
+        MainScreen()
+            .tapClearButton()
+            .fillPublicKey("TEST-c6d9b1f9-71ff-4e05-9327-3c62468a23ee")
+            .fillPreferenceId("243962506-e9464aff-30dd-43e0-a6fa-37e3a54b884c")
+            .tapCheckoutOption()
+            .tapCardOption()
+            .tapCreditCardOption()
+            .completeNumberAndContinue("5323 7937 3550 6106")
+            .completeNameAndContinue("APRO")
+            .completeExpirationDateAndContinue("1225")
+            .completeCVVAndContinue("123")
+            .completeNumberAndContinueToIssuers("30666777")
+            .selectIssuerOptionToPayerCostScreenAtRow(1)
+            .selectPayerCostOptionAtRow(1)
+            .tapBackButtonToPayerCostScreen()
+            .tapBackButtonToIssuersScreen()
+            .tapBackButtonToIdentificationScreen()
+            .tapBackButtonToCardScreen()
+    }
+
     func test_REGRESSION_ETE10() {
         MainScreen()
             .tapClearButton()
@@ -191,7 +231,7 @@ class PXFlowUITests: XCTestCase {
             .completeExpirationDateAndContinue("1225")
             .completeCVVAndContinue("123")
             .completeNumberAndContinueToIssuers("30666777")
-            .selectFirstOption()
+            .selectIssuerOptionToPayerCostScreenAtRow(1)
             .selectPayerCostOptionAtRow(1)
             .tapChangePaymentMethod()
             .tapCashOption()

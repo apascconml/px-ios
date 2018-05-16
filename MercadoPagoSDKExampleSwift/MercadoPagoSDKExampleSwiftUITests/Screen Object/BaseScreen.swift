@@ -29,7 +29,6 @@ class BaseScreen : BaseScreenProtocol {
     }
 
     func exist(element : XCUIElement) -> Bool{
-        let exists = NSPredicate(format: "exists = 1")
         return element.exists
     }
 }
@@ -79,5 +78,23 @@ extension BaseScreen {
     }
     func element(_ text: String) -> XCUIElement {
         return XCUIApplication().staticTexts[text].firstMatch
+    }
+    func getBackButton() -> XCUIElement {
+        return XCUIApplication().navigationBars.buttons.element(boundBy: 0)
+    }
+}
+
+// MARK: UI Controls
+extension BaseScreen {
+    func swipeUp() {
+        let scrollViewsQuery = XCUIApplication().scrollViews
+        let elementQuery = scrollViewsQuery.otherElements.firstMatch
+        elementQuery.swipeUp()
+    }
+
+    func swipeDown() {
+        let scrollViewsQuery = XCUIApplication().scrollViews
+        let elementQuery = scrollViewsQuery.otherElements.firstMatch
+        elementQuery.swipeDown()
     }
 }
