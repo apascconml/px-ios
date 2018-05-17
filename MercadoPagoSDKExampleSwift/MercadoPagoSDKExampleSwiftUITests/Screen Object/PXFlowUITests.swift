@@ -9,13 +9,13 @@
 import XCTest
 
 class PXFlowUITests: XCTestCase {
-        
+
     override func setUp() {
         super.setUp()
         continueAfterFailure = false
         XCUIApplication().launch()
     }
-    
+
     override func tearDown() {
         super.tearDown()
     }
@@ -195,6 +195,12 @@ class PXFlowUITests: XCTestCase {
             .tapBackButtonToIssuersScreen()
             .tapBackButtonToIdentificationScreen()
             .tapBackButtonToCardScreen()
+            .pressPreviousButton()
+            .validateTextField(with: "Fecha de expiración")
+            .pressPreviousButton()
+            .validateTextField(with: "Nombre y apellido")
+            .pressPreviousButton()
+            .validateTextField(with: "Número de tarjeta")
     }
 
     func test_REGRESSION_ETE9() { //Hacer backs sin exclusiones
@@ -216,6 +222,12 @@ class PXFlowUITests: XCTestCase {
             .tapBackButtonToIssuersScreen()
             .tapBackButtonToIdentificationScreen()
             .tapBackButtonToCardScreen()
+            .pressPreviousButton()
+            .validateTextField(with: "Fecha de expiración")
+            .pressPreviousButton()
+            .validateTextField(with: "Nombre y apellido")
+            .pressPreviousButton()
+            .validateTextField(with: "Número de tarjeta")
     }
 
     func test_REGRESSION_ETE10() {

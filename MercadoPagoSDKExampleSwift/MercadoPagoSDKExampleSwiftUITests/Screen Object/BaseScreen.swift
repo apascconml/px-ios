@@ -13,7 +13,7 @@ protocol BaseScreenProtocol {
     func waitForElements()
 }
 
-class BaseScreen : BaseScreenProtocol {
+public class BaseScreen : BaseScreenProtocol {
     let TIME_OUT : Double = 5 // Seconds
     init() {
         waitForElements()
