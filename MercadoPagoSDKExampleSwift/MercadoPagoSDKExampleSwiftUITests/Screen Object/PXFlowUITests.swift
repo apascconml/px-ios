@@ -178,7 +178,7 @@ class PXFlowUITests: XCTestCase {
             .tapAvailableCardsButton()
     }
 
-    func test_REGRESSION_ETE8() {
+    func test_REGRESSION_ETE8() { //Hacer backs payment_type: Crédito
         MainScreen()
             .tapClearButton()
             .fillPublicKey("TEST-e4bdd1cf-bcb2-43f7-b565-ed4c9ea25be7")
@@ -249,6 +249,44 @@ class PXFlowUITests: XCTestCase {
             .tapCashOption()
             .tapRapipagoOption()
             .tapPayButtonForInstructions()
+    }
+
+    func test_REGRESSION_ETE11_1() { //Verificar CFT Tarjeta VISA con Interes
+        MainScreen()
+            .tapClearButton()
+            .fillPublicKey("TEST-c6d9b1f9-71ff-4e05-9327-3c62468a23ee")
+            .fillPreferenceId("243962506-76cc070f-4678-4eb2-9ada-1605e95986b5")
+            .tapCheckoutOption()
+            .tapCardOption()
+            .tapCreditCardOption()
+            .completeNumberAndContinue("4509 9535 6623 3704")
+            .completeNameAndContinue("APRO")
+            .completeExpirationDateAndContinue("1225")
+            .completeCVVAndContinue("123")
+            .completeNumberAndContinueToPayerCost("30666777")
+            .selectPayerCostOptionAtRow(3)
+            .validate { (reviewScreen) in
+                XCTAssert(reviewScreen.element("CFT 130,09%").exists)
+            }
+    }
+
+    func test_REGRESSION_ETE11_2() { //Verificar CFT Tarjeta MASTER sin Interes
+        MainScreen()
+            .tapClearButton()
+            .fillPublicKey("TEST-c6d9b1f9-71ff-4e05-9327-3c62468a23ee")
+            .fillPreferenceId("243962506-76cc070f-4678-4eb2-9ada-1605e95986b5")
+            .tapCheckoutOption()
+            .tapCardOption()
+            .tapCreditCardOption()
+            .completeNumberAndContinue("5323 8425 8853 0125")
+            .completeNameAndContinue("APRO")
+            .completeExpirationDateAndContinue("1225")
+            .completeCVVAndContinue("123")
+            .completeNumberAndContinueToPayerCost("30666777")
+            .selectPayerCostOptionAtRow(2)
+            .validate { (reviewScreen) in
+                XCTAssert(reviewScreen.element("CFT 0,00%").exists)
+            }
     }
 
     func test_REGRESSION_ETE12() {
