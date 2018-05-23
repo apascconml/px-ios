@@ -11,37 +11,17 @@ import Foundation
 extension OneTapFlow {
 
     func showReviewAndConfirmScreenForOneTap() {
-        let reviewVC = PXOneTapViewController(viewModel: viewModel.reviewConfirmViewModel(), callbackPaymentData: { [weak self] (paymentData: PaymentData) in
+        let reviewVC: PXOneTapSheetViewController = PXOneTapSheetViewController()
+        reviewVC.update(viewModel: viewModel.reviewConfirmViewModel())
 
-            // Change payment method callback
-            if let search = self?.viewModel.search {
-                search.deleteCheckoutDefaultOption()
-            }
-            self?.cancel()
-
-            if !paymentData.hasPaymentMethod() && MercadoPagoCheckoutViewModel.changePaymentMethodCallback != nil {
-                MercadoPagoCheckoutViewModel.changePaymentMethodCallback?()
-            }
-            return
-
-            }, callbackConfirm: {(paymentData: PaymentData) in
-                self.viewModel.updateCheckoutModel(paymentData: paymentData)
-
-                if MercadoPagoCheckoutViewModel.paymentDataConfirmCallback != nil {
-                    MercadoPagoCheckoutViewModel.paymentDataCallback = MercadoPagoCheckoutViewModel.paymentDataConfirmCallback
-                    self.finish()
-                } else {
-                    self.executeNextStep()
-                }
-
-        }, callbackExit: { [weak self] () -> Void in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.cancel()
+        guard let viewController = self.pxNavigationHandler.navigationController.viewControllers.last else {
+            fatalError("Checkout express doesn't work in a empty navigation controller")
+        }
+        reviewVC.modalPresentationStyle = .overCurrentContext
+        viewController.present(reviewVC, animated: false, completion: {
+            print("ExpressViewController Done")
         })
-
-        self.pxNavigationHandler.pushViewController(viewController: reviewVC, animated: true)
+        //self.pxNavigationHandler.pushViewController(viewController: reviewVC, animated: true)
     }
 
     func showSecurityCodeScreen() {

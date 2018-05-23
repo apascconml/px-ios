@@ -11,4 +11,9 @@ import Foundation
 final class PXFooterView: UIView {
     public var principalButton: PXPrimaryButton?
     public var linkButton: PXSecondaryButton?
+
+    func getPrincipalButton() -> PXPrimaryButton? {
+        guard let mainButton = principalButton else { return nil }
+        return mainButton as? PXPrimaryButton
+    }
 }

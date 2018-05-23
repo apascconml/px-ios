@@ -245,6 +245,7 @@
 		237A1A032050048800B0C2D2 /* DisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AE1DBD1F672FAE00B0DAF8 /* DisclaimerView.swift */; };
 		237A1A042050048A00B0C2D2 /* PayerCostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15822D521F69ABD5008353B9 /* PayerCostView.swift */; };
 		237A1A052050048E00B0C2D2 /* PXTermsAndConditionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235A3278204D6F92002D1F54 /* PXTermsAndConditionView.swift */; };
+		23945EB820B5BD0B00464BCC /* PXOnetapSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23945EB720B5BD0B00464BCC /* PXOnetapSheetViewController.swift */; };
 		239A9C161F0FFA7100C338C7 /* Cause.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232FA92B1F06D30F002F7E39 /* Cause.swift */; };
 		23A07FCC20482FEB0074CB64 /* PXSummaryComponentProps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A07FCB20482FEB0074CB64 /* PXSummaryComponentProps.swift */; };
 		23A07FCF204837AB0074CB64 /* PXSummaryFullComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A07FCE204837AB0074CB64 /* PXSummaryFullComponentView.swift */; };
@@ -930,6 +931,7 @@
 		23625A3620AB06380069AE30 /* PXOneTapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXOneTapViewController.swift; sourceTree = "<group>"; };
 		23675B5420A073E7008C4E1D /* PXComponentFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXComponentFactory.swift; sourceTree = "<group>"; };
 		2372588120AE600E00F46ED6 /* PXSmallSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXSmallSummaryView.swift; sourceTree = "<group>"; };
+		23945EB720B5BD0B00464BCC /* PXOnetapSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXOnetapSheetViewController.swift; sourceTree = "<group>"; };
 		23A07FCB20482FEB0074CB64 /* PXSummaryComponentProps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXSummaryComponentProps.swift; sourceTree = "<group>"; };
 		23A07FCE204837AB0074CB64 /* PXSummaryFullComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXSummaryFullComponentView.swift; sourceTree = "<group>"; };
 		23A366A8200CDA1C00E69FD7 /* ThemeManager+NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ThemeManager+NavigationController.swift"; sourceTree = "<group>"; };
@@ -1774,6 +1776,7 @@
 				4B08AC9320AC9A4C008AF845 /* Item */,
 				23625A3220AB05550069AE30 /* PXOneTapViewModel.swift */,
 				23BABFFB20B4FA68007B6687 /* PXOneTapViewModel+Summary.swift */,
+				23945EB720B5BD0B00464BCC /* PXOnetapSheetViewController.swift */,
 				231EB53020ABBAD20022D8DF /* PXOneTapViewModel+PaymentMethodComponent.swift */,
 				23625A3620AB06380069AE30 /* PXOneTapViewController.swift */,
 				23C3893B20AC4574001EFDA9 /* PXOneTapPaymentMethodView.swift */,
@@ -3197,6 +3200,7 @@
 				4B2823941E2E4536004C02E9 /* UIImage+Additions.swift in Sources */,
 				1563DCA71E9C11CB00A7E5C8 /* CardsAdminViewController.swift in Sources */,
 				0FC4FC181B0FAA6400CF7148 /* BankDeal.swift in Sources */,
+				23945EB820B5BD0B00464BCC /* PXOnetapSheetViewController.swift in Sources */,
 				FC7BD8AD1FD5899000D5B2C7 /* PXErrorRenderer.swift in Sources */,
 				76445AF61CCF9847008EE68E /* MPPayment.swift in Sources */,
 				4B09206D1FE984F600CA4BF7 /* PXHookNavigationHandler.swift in Sources */,

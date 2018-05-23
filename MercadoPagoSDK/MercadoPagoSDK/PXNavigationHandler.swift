@@ -42,18 +42,16 @@ class PXNavigationHandler: NSObject {
             let when = DispatchTime.now() //+ 0.3
             DispatchQueue.main.asyncAfter(deadline: when) {
                 if self.countLoadings > 0 && self.currentLoadingView == nil {
-                    self.createCurrentLoading()
-                    self.currentLoadingView?.modalTransitionStyle = .crossDissolve
-                    self.navigationController.present(self.currentLoadingView!, animated: true, completion: completion)
+                    self.showLoading()
                 }
             }
         }
     }
 
-    func presentInitLoading() {
+    func showLoading(animated: Bool = true) {
         self.createCurrentLoading()
         self.currentLoadingView?.modalTransitionStyle = .crossDissolve
-        self.navigationController.present(self.currentLoadingView!, animated: false, completion: nil)
+        //self.navigationController.present(self.currentLoadingView!, animated: animated, completion: nil)
     }
 
     func dismissLoading(animated: Bool = true, finishCallback:(() -> Void)? = nil) {

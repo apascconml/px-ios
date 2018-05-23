@@ -10,6 +10,7 @@ import UIKit
 import MercadoPagoPXTracking
 
 final class PXOneTapViewController: PXComponentContainerViewController {
+
     // MARK: Tracking
     override var screenName: String { return TrackingUtil.SCREEN_NAME_REVIEW_AND_CONFIRM_ONE_TAP }
     override var screenId: String { return TrackingUtil.SCREEN_ID_REVIEW_AND_CONFIRM_ONE_TAP }
