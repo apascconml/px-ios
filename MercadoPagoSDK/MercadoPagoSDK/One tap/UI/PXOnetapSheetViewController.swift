@@ -19,6 +19,7 @@ final class PXOneTapSheetViewController: PXSheetViewController {
     private var callbackPaymentData: ((PaymentData) -> Void)?
     private var callbackConfirm: ((PaymentData) -> Void)?
     private var callbackExit: (() -> Void)?
+    private var callbackShowCongrats: (() -> Void)?
 
     // MARK: PXSheeDelegate overrides
     override func contentViewForSheet() -> UIView {
@@ -58,6 +59,10 @@ extension PXOneTapSheetViewController {
 
     func setExitCallback(callback: @escaping (() -> Void)) {
         callbackExit = callback
+    }
+
+    func setShowCongratsCallback(callback: @escaping (() -> Void)) {
+        callbackShowCongrats = callback
     }
 }
 
@@ -112,16 +117,16 @@ extension PXOneTapSheetViewController {
     }
 
     private func getFooterView() -> UIView? {
-        //var loadingButtonComponent: PXPrimaryButton?
+        var loadingButtonComponent: PXPrimaryButton?
         let mainAction = PXComponentAction(label: "Pagar", action: { [weak self] in
             // self?.confirmPayment()
-            // loadingButtonComponent?.startLoading(loadingText:"Pagando...", retryText:"Pagar")
+            loadingButtonComponent?.startLoading(loadingText:"Pagando...", retryText:"Pagar")
         })
         let footerProps = PXFooterProps(buttonAction: mainAction)
         let footerComponent = PXFooterComponent(props: footerProps)
         if let footerView = footerComponent.oneTapRender() as? PXFooterView {
-            //loadingButtonComponent = footerV.getPrincipalButton()
-            //loadingButtonComponent?.animationDelegate = self
+            loadingButtonComponent = footerView.getPrincipalButton()
+            loadingButtonComponent?.animationDelegate = self
             return footerView
         }
         return nil
@@ -160,6 +165,22 @@ extension PXOneTapSheetViewController {
 
     private func cancelPayment() {
         callbackExit?()
+    }
+}
+
+//MARK: - Payment Button animation delegate
+extension PXOneTapSheetViewController: PXAnimatedButtonDelegate {
+    func expandAnimationInProgress() {
+        expandSheet(fullScreen: true)
+    }
+
+    func didFinishAnimation() {
+        callbackShowCongrats?()
+        UIView.animate(withDuration: 0.5, animations: { [weak self] in
+            self?.view.alpha = 0
+        }) { finish in
+            self.dismiss(animated: false, completion: nil)
+        }
     }
 }
 

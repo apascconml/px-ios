@@ -233,11 +233,14 @@ class PXSheetViewController: UIViewController, PXSheetDelegate {
         }
     }
 
-    func expandSheet() {
+    func expandSheet(fullScreen: Bool = false) {
         let defaultStatusOffset: CGFloat = 22
         var topMarginDelta = PXLayout.getSafeAreaTopInset()
         if topMarginDelta == 0 {
             topMarginDelta = defaultStatusOffset
+        }
+        if fullScreen {
+            topMarginDelta = 0
         }
         popupView.layer.masksToBounds = true
         if #available(iOS 10.0, *) {

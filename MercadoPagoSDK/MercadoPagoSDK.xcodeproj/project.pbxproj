@@ -262,6 +262,7 @@
 		23BDC9212073DF3500678B0F /* Double+Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BDC9202073DF3500678B0F /* Double+Format.swift */; };
 		23BDC9222073DF3500678B0F /* Double+Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BDC9202073DF3500678B0F /* Double+Format.swift */; };
 		23BF8AA020BB71CC00306383 /* PXSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BF8A9F20BB71CC00306383 /* PXSheetViewController.swift */; };
+		23BF8AA220BB74DA00306383 /* PXProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BF8AA120BB74DA00306383 /* PXProgressView.swift */; };
 		23C3892A20AC42E3001EFDA9 /* PXFooterProps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3892920AC42E3001EFDA9 /* PXFooterProps.swift */; };
 		23C3892B20AC42E3001EFDA9 /* PXFooterProps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3892920AC42E3001EFDA9 /* PXFooterProps.swift */; };
 		23C3892D20AC432D001EFDA9 /* PXFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C3892C20AC432D001EFDA9 /* PXFooterView.swift */; };
@@ -944,6 +945,7 @@
 		23BC73841F0E84FB00B19C1A /* CauseTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CauseTest.swift; sourceTree = "<group>"; };
 		23BDC9202073DF3500678B0F /* Double+Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Format.swift"; sourceTree = "<group>"; };
 		23BF8A9F20BB71CC00306383 /* PXSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PXSheetViewController.swift; path = Components/PXSheetViewController.swift; sourceTree = "<group>"; };
+		23BF8AA120BB74DA00306383 /* PXProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PXProgressView.swift; path = Components/PXProgressView.swift; sourceTree = "<group>"; };
 		23C3892920AC42E3001EFDA9 /* PXFooterProps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXFooterProps.swift; sourceTree = "<group>"; };
 		23C3892C20AC432D001EFDA9 /* PXFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXFooterView.swift; sourceTree = "<group>"; };
 		23C3892F20AC4386001EFDA9 /* PXFooterRenderer+OneTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PXFooterRenderer+OneTap.swift"; sourceTree = "<group>"; };
@@ -1589,6 +1591,7 @@
 				FC2E9B9720A5EB2300D43B1E /* PXUIImageView.swift */,
 				231AB99A20ADF416006DC5A0 /* PXXibRenderer.swift */,
 				23BF8A9F20BB71CC00306383 /* PXSheetViewController.swift */,
+				23BF8AA120BB74DA00306383 /* PXProgressView.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -3236,6 +3239,7 @@
 				FC2A09541FEC3EF2009EFDB0 /* PXPaymentMethodIconComponent.swift in Sources */,
 				4B48541E204825D1001C0921 /* PXItemRenderer.swift in Sources */,
 				76FD24791C5BFEA1008C5DC0 /* CardBackView.swift in Sources */,
+				23BF8AA220BB74DA00306383 /* PXProgressView.swift in Sources */,
 				15AE1DBE1F672FAE00B0DAF8 /* DisclaimerView.swift in Sources */,
 				23C3893320AC43D7001EFDA9 /* PXPaymentMethodProps.swift in Sources */,
 				235A326B204B4185002D1F54 /* PXReviewTitleComponentProps.swift in Sources */,

@@ -80,6 +80,7 @@ extension OneTapFlow {
         // Change payment method callback.
         sheetVC.setChangePaymentMethodCallback { [weak self] (paymentData: PaymentData) in
 
+            // TODO: Ver con edi.
             /*
             if let search = self?.viewModel.search {
                 search.deleteCheckoutDefaultOption()
@@ -94,6 +95,19 @@ extension OneTapFlow {
                 MercadoPagoCheckoutViewModel.changePaymentMethodCallback?()
             }
             return*/
+        }
+
+        // Congrats action callback.
+        sheetVC.setShowCongratsCallback {
+            [weak self] in
+
+            /*
+
+             // TODO: Ver con edi.
+            self?.viewModel.businessResult = PXBusinessResult(status: PXBusinessResultStatus.APPROVED, title: "Pago confirmado", icon: MercadoPago.getImage("MPSDK_review_iconoCarrito")!, secondaryAction: PXComponentAction(label: "Continuar", action: {
+                self?.cancel()
+            })) */
+            self?.executeNextStep()
         }
 
         // Exit callback.
