@@ -606,8 +606,9 @@ extension MercadoPagoServicesAdapter {
         var payerCosts: [PayerCost] = []
         if let pxPayerCosts = pxOneTapCard.payerCosts {
             for pxPayerCost in pxPayerCosts {
-                let payerCost = getPayerCostFromPXPayerCost(pxPayerCost)
-                payerCosts = Array.safeAppend(payerCosts, payerCost)
+                if let payerCost = getPayerCostFromPXPayerCost(pxPayerCost) {
+                    payerCosts = Array.safeAppend(payerCosts, payerCost)
+                }
             }
         }
         let oneTapCard = OneTapCard(cardId: cardId, cardDescription: cardDescription, issuer: issuer, lastFourDigits: lastFourDigits, installments: installments, payerCosts: payerCosts)
@@ -751,25 +752,22 @@ extension MercadoPagoServicesAdapter {
         if let pxInstallmentPayerCosts = pxInstallment.payerCosts {
             installment.payerCosts = []
             for pxPayerCost in pxInstallmentPayerCosts {
-                let payerCost = getPayerCostFromPXPayerCost(pxPayerCost)
-                installment.payerCosts = Array.safeAppend(installment.payerCosts, payerCost)
+                if let payerCost = getPayerCostFromPXPayerCost(pxPayerCost) {
+                    installment.payerCosts = Array.safeAppend(installment.payerCosts, payerCost)
+                }
             }
         }
         return installment
     }
 
-    open func getPayerCostFromPXPayerCost(_ pxPayerCost: PXPayerCost?) -> PayerCost {
-        let payerCost = PayerCost()
+    open func getPayerCostFromPXPayerCost(_ pxPayerCost: PXPayerCost?) -> PayerCost? {
         if let pxPayerCost = pxPayerCost {
-            payerCost.installmentRate = pxPayerCost.installmentRate ?? 0.0
-            payerCost.labels = pxPayerCost.labels
-            payerCost.minAllowedAmount = pxPayerCost.minAllowedAmount ?? 1
-            payerCost.maxAllowedAmount = pxPayerCost.maxAllowedAmount ?? 1000000
-            payerCost.recommendedMessage = pxPayerCost.recommendedMessage
-            payerCost.installmentAmount = pxPayerCost.installmentAmount ?? 1000
-            payerCost.totalAmount = pxPayerCost.totalAmount ?? 1000
-            payerCost.installments = pxPayerCost.installments ?? 1
+            guard let installments = pxPayerCost.installments, let installmentRate = pxPayerCost.installmentRate, let labels = pxPayerCost.labels, let installmentAmount = pxPayerCost.installmentAmount, let totalAmount = pxPayerCost.totalAmount else {
+                return nil
+            }
+            return PayerCost(installments: installments, installmentRate: installmentRate, labels: labels, minAllowedAmount: pxPayerCost.minAllowedAmount ?? 0, maxAllowedAmount: pxPayerCost.maxAllowedAmount ?? 0, recommendedMessage: pxPayerCost.recommendedMessage, installmentAmount: installmentAmount, totalAmount: totalAmount)
+
         }
-        return payerCost
+        return nil
     }
 }

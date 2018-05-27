@@ -7,11 +7,13 @@
 //
 
 import Foundation
-class OneTapFlowViewModel: NSObject {
+class OneTapFlowViewModel: NSObject, PXFlowModel {
+
     enum Steps: String {
-        case ACTION_FINISH
-        case SCREEN_REVIEW_AND_CONFIRM_ONE_TAP
-        case SCREEN_SECURITY_CODE
+        case finish
+        case screenReviewOneTap
+        case screenSecurityCode
+        case serviceCreateESCCardToken
     }
 
     var paymentData: PaymentData
@@ -39,12 +41,15 @@ class OneTapFlowViewModel: NSObject {
     }
     public func nextStep() -> Steps {
         if needReviewAndConfirmForOneTap() {
-            return .SCREEN_REVIEW_AND_CONFIRM_ONE_TAP
+            return .screenReviewOneTap
         }
         if needSecurityCode() {
-            return .SCREEN_SECURITY_CODE
+            return .screenSecurityCode
         }
-        return .ACTION_FINISH
+        if needCreateESCToken() {
+            return .serviceCreateESCCardToken
+        }
+        return .finish
     }
 }
 
@@ -108,9 +113,6 @@ extension OneTapFlowViewModel {
             return true
         }
 
-        if paymentData.isComplete(shouldCheckForToken: false) {
-            return MercadoPagoCheckoutViewModel.flowPreference.isReviewAndConfirmScreenEnable()
-        }
         return false
     }
 
@@ -130,6 +132,18 @@ extension OneTapFlowViewModel {
             return true
         }
         return false
+    }
+
+    func needCreateESCToken() -> Bool {
+
+        guard let pm = self.paymentData.getPaymentMethod() else {
+            return false
+        }
+
+        let hasInstallmentsIfNeeded = self.paymentData.getPayerCost() != nil || !pm.isCreditCard
+        let savedCardWithESC = !paymentData.hasToken() && pm.isCard && hasSavedESC() && hasInstallmentsIfNeeded
+
+        return savedCardWithESC
     }
 
     func hasSavedESC() -> Bool {

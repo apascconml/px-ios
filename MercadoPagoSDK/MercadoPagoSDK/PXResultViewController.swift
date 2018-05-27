@@ -38,6 +38,16 @@ class PXResultViewController: PXComponentContainerViewController {
         self.viewModel.trackInfo()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        ViewUtils.addStatusBar(self.view, color: viewModel.primaryResultColor())
+        self.scrollView.showsVerticalScrollIndicator = false
+        self.scrollView.showsHorizontalScrollIndicator = false
+        if contentView.getSubviews().isEmpty {
+            renderViews()
+        }
+    }
+
     func renderViews() {
 
         self.contentView.prepareForRender()
@@ -152,15 +162,6 @@ class PXResultViewController: PXComponentContainerViewController {
             return true
         }
         return bodyView.frame.height == 0
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        ViewUtils.addStatusBar(self.view, color: viewModel.primaryResultColor())
-        self.scrollView.showsVerticalScrollIndicator = false
-        self.scrollView.showsHorizontalScrollIndicator = false
-        self.view.layoutIfNeeded()
-        renderViews()
     }
 }
 

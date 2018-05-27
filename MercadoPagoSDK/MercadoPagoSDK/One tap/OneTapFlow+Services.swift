@@ -69,11 +69,13 @@ extension OneTapFlow {
                 if let apiException = error.apiException, apiException.containsCause(code: ApiUtil.ErrorCauseCodes.INVALID_ESC.rawValue) ||  apiException.containsCause(code: ApiUtil.ErrorCauseCodes.INVALID_FINGERPRINT.rawValue) {
 
                     self?.viewModel.mpESCManager.deleteESC(cardId: savedESCCardToken.cardId)
-                }
+                    self?.executeNextStep()
+                } else {
+                    self?.pxNavigationHandler.showErrorScreen(error: error, callbackCancel: self?.exitCheckoutCallback, errorCallback: { [weak self] () in
+                        self?.createSavedESCCardToken(savedESCCardToken: savedESCCardToken)
+                    })
 
-                self?.pxNavigationHandler.showErrorScreen(error: error, callbackCancel: self?.exitCheckoutCallback, errorCallback: { [weak self] () in
-                    self?.createSavedESCCardToken(savedESCCardToken: savedESCCardToken)
-                })
+                }
         })
     }
 }

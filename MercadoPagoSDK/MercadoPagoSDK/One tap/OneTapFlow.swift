@@ -7,7 +7,8 @@
 //
 
 import Foundation
-class OneTapFlow: NSObject {
+final class OneTapFlow: PXFlow {
+
     let viewModel: OneTapFlowViewModel
     let pxNavigationHandler: PXNavigationHandler
     let finishOneTapCallback: ((PaymentData) -> Void)
@@ -34,27 +35,29 @@ class OneTapFlow: NSObject {
 
     func executeNextStep() {
         switch self.viewModel.nextStep() {
-        case .SCREEN_REVIEW_AND_CONFIRM_ONE_TAP:
+        case .screenReviewOneTap:
             self.showReviewAndConfirmScreenForOneTap()
-        case .SCREEN_SECURITY_CODE:
+        case .screenSecurityCode:
             self.showSecurityCodeScreen()
-        case .ACTION_FINISH:
-            self.finish()
+        case .serviceCreateESCCardToken:
+            self.createCardToken()
+        case .finish:
+            self.finishFlow()
         }
     }
 
     // Cancel one tap and go to checkout
-    func cancel() {
+    func cancelFlow() {
         cancelOneTapCallback()
     }
 
     // Finish one tap and continue with checkout
-    func finish() {
+    func finishFlow() {
         finishOneTapCallback(viewModel.paymentData)
     }
 
     // Exit checkout
-    func exit() {
+    func exitCheckout() {
         exitCheckoutCallback()
     }
 }
