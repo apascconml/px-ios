@@ -117,9 +117,9 @@ extension PXOneTapSheetViewController {
     }
 
     private func getFooterView() -> UIView? {
-        var loadingButtonComponent: PXPrimaryButton?
+        var loadingButtonComponent: PXAnimatedButton?
         let mainAction = PXComponentAction(label: "Pagar", action: { [weak self] in
-            // self?.confirmPayment()
+            //self?.confirmPayment()
             loadingButtonComponent?.startLoading(loadingText:"Pagando...", retryText:"Pagar")
         })
         let footerProps = PXFooterProps(buttonAction: mainAction)
@@ -127,6 +127,7 @@ extension PXOneTapSheetViewController {
         if let footerView = footerComponent.oneTapRender() as? PXFooterView {
             loadingButtonComponent = footerView.getPrincipalButton()
             loadingButtonComponent?.animationDelegate = self
+            loadingButtonComponent?.layer.cornerRadius = 4
             return footerView
         }
         return nil

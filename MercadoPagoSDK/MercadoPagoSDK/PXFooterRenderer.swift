@@ -50,10 +50,11 @@ final class PXFooterRenderer: NSObject {
         return fooView
     }
 
-    func buildPrincipalButton(with footerAction: PXComponentAction, color: UIColor? = .pxBlueMp) -> PXPrimaryButton {
-        let button = PXPrimaryButton()
+    func buildPrincipalButton(with footerAction: PXComponentAction, color: UIColor? = .pxBlueMp) -> PXAnimatedButton {
+        let button = PXAnimatedButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.buttonTitle = footerAction.label
+        //button.buttonTitle = footerAction.label
+        button.setTitle(footerAction.label, for: .normal)
         button.add(for: .touchUpInside, footerAction.action)
         return button
     }

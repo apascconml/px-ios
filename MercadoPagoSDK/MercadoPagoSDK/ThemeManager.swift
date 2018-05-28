@@ -35,6 +35,7 @@ extension ThemeManager {
         customizeNavigationBar(theme: currentTheme)
         customizeToolBar()
         PXMonospaceLabel.appearance().font = UIFont(name: "Courier-Bold", size: 50.0)
+        customizeAnimatedButton()
     }
 
     func setDefaultColor(color: UIColor) {
@@ -193,6 +194,11 @@ extension ThemeManager: PXTheme {
 
 // MARK: - UI Theme customization
 extension ThemeManager {
+
+    private func customizeAnimatedButton() {
+        PXAnimatedButton.appearance().backgroundColor = currentStylesheet.secondaryColor
+        PXAnimatedButton.appearance().tintColor = .white
+    }
 
     fileprivate func customizeNavigationBar(theme: PXTheme) {
         UINavigationBar.appearance(whenContainedInInstancesOf: [MercadoPagoUIViewController.self]).tintColor = theme.navigationBar().tintColor
