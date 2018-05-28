@@ -9,6 +9,7 @@
 import Foundation
 import MercadoPagoPXTracking
 
+@available(iOS 10.0, *)
 final class PXOneTapSheetViewController: PXSheetViewController {
     // MARK: Definitions
     lazy var itemViews = [UIView]()
@@ -44,6 +45,7 @@ final class PXOneTapSheetViewController: PXSheetViewController {
 }
 
 // MARK: Public Setters
+@available(iOS 10.0, *)
 extension PXOneTapSheetViewController {
     func update(viewModel: PXOneTapViewModel) {
         self.viewModel = viewModel
@@ -67,6 +69,7 @@ extension PXOneTapSheetViewController {
 }
 
 // MARK: Components Builders.
+@available(iOS 10.0, *)
 extension PXOneTapSheetViewController {
     private func renderContentView() -> UIView {
 
@@ -135,6 +138,7 @@ extension PXOneTapSheetViewController {
 }
 
 // MARK: User Actions.
+@available(iOS 10.0, *)
 extension PXOneTapSheetViewController {
     @objc func shouldOpenSummary() {
         expandSheet()
@@ -170,6 +174,7 @@ extension PXOneTapSheetViewController {
 }
 
 //MARK: - Payment Button animation delegate
+@available(iOS 10.0, *)
 extension PXOneTapSheetViewController: PXAnimatedButtonDelegate {
     func expandAnimationInProgress() {
         expandSheet(fullScreen: true)
@@ -186,31 +191,28 @@ extension PXOneTapSheetViewController: PXAnimatedButtonDelegate {
 }
 
 // MARK: Animated Transitions.
+@available(iOS 10.0, *)
 extension PXOneTapSheetViewController {
     private func openGroupsTransitionAnimation() {
-        if #available(iOS 10.0, *) {
-            let targetFrame = view.frame
-            let transitionAnimator = UIViewPropertyAnimator(duration: 0.65, dampingRatio: 1.3, animations: { [weak self] in
-                self?.popupView.frame = targetFrame
-                self?.popupView.layer.cornerRadius = 0
-            })
+        let targetFrame = view.frame
+        let transitionAnimator = UIViewPropertyAnimator(duration: 0.65, dampingRatio: 1.3, animations: { [weak self] in
+            self?.popupView.frame = targetFrame
+            self?.popupView.layer.cornerRadius = 0
+        })
 
-            transitionAnimator.addCompletion({ [weak self] _ in
-                self?.changePaymentMethodAction()
-                self?.fadeOut()
-            })
+        transitionAnimator.addCompletion({ [weak self] _ in
+            self?.changePaymentMethodAction()
+            self?.fadeOut()
+        })
 
-            transitionAnimator.startAnimation()
+        transitionAnimator.startAnimation()
 
-            let overlayWhite = UIView(frame: self.view.frame)
-            overlayWhite.alpha = 0
-            overlayWhite.backgroundColor = .white
-            popupView.addSubview(overlayWhite)
-            UIView.animate(withDuration: 0.5, animations: {
-                overlayWhite.alpha = 1
-            })
-        } else {
-            changePaymentMethodAction()
-        }
+        let overlayWhite = UIView(frame: self.view.frame)
+        overlayWhite.alpha = 0
+        overlayWhite.backgroundColor = .white
+        popupView.addSubview(overlayWhite)
+        UIView.animate(withDuration: 0.5, animations: {
+            overlayWhite.alpha = 1
+        })
     }
 }

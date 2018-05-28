@@ -59,65 +59,72 @@ extension OneTapFlow {
     }
 
     private func showOneTapSheetVC() {
-        let sheetVC: PXOneTapSheetViewController = PXOneTapSheetViewController()
-        guard let viewController = self.pxNavigationHandler.navigationController.viewControllers.last else {
-            fatalError("Sheet checkout express doesn't work in a empty parent navigation controller")
-        }
 
-        sheetVC.update(viewModel: viewModel.reviewConfirmViewModel())
+        if #available(iOS 10.0, *) {
 
-        // Payment action callback.
-        sheetVC.setConfirmCallback { [weak self] (paymentData: PaymentData) in
-            self?.viewModel.updateCheckoutModel(paymentData: paymentData)
-            if MercadoPagoCheckoutViewModel.paymentDataConfirmCallback != nil {
-                MercadoPagoCheckoutViewModel.paymentDataCallback = MercadoPagoCheckoutViewModel.paymentDataConfirmCallback
-                self?.finishFlow()
-            } else {
+            let sheetVC: PXOneTapSheetViewController = PXOneTapSheetViewController()
+
+            guard let viewController = self.pxNavigationHandler.navigationController.viewControllers.last else {
+                fatalError("Sheet checkout express doesn't work in a empty parent navigation controller")
+            }
+
+            sheetVC.update(viewModel: viewModel.reviewConfirmViewModel())
+
+            // Payment action callback.
+            sheetVC.setConfirmCallback { [weak self] (paymentData: PaymentData) in
+                self?.viewModel.updateCheckoutModel(paymentData: paymentData)
+                if MercadoPagoCheckoutViewModel.paymentDataConfirmCallback != nil {
+                    MercadoPagoCheckoutViewModel.paymentDataCallback = MercadoPagoCheckoutViewModel.paymentDataConfirmCallback
+                    self?.finishFlow()
+                } else {
+                    self?.executeNextStep()
+                }
+            }
+
+            // Change payment method callback.
+            sheetVC.setChangePaymentMethodCallback { [weak self] (paymentData: PaymentData) in
+
+                // TODO: Ver con edi.
+                /*
+                 if let search = self?.viewModel.search {
+                 search.deleteCheckoutDefaultOption()
+                 }*/
+
+                self?.viewModel.search.deleteCheckoutDefaultOption()
+                self?.cancelFlow()
+                self?.executeNextStep()
+
+                /*
+                 if !paymentData.hasPaymentMethod() && MercadoPagoCheckoutViewModel.changePaymentMethodCallback != nil {
+                 MercadoPagoCheckoutViewModel.changePaymentMethodCallback?()
+                 }
+                 return*/
+            }
+
+            // Congrats action callback.
+            sheetVC.setShowCongratsCallback {
+                [weak self] in
+
+                /*
+
+                 // TODO: Ver con edi.
+                 self?.viewModel.businessResult = PXBusinessResult(status: PXBusinessResultStatus.APPROVED, title: "Pago confirmado", icon: MercadoPago.getImage("MPSDK_review_iconoCarrito")!, secondaryAction: PXComponentAction(label: "Continuar", action: {
+                 self?.cancel()
+                 })) */
                 self?.executeNextStep()
             }
-        }
 
-        // Change payment method callback.
-        sheetVC.setChangePaymentMethodCallback { [weak self] (paymentData: PaymentData) in
-
-            // TODO: Ver con edi.
-            /*
-            if let search = self?.viewModel.search {
-                search.deleteCheckoutDefaultOption()
-            }*/
-
-            self?.viewModel.search.deleteCheckoutDefaultOption()
-            self?.cancelFlow()
-            self?.executeNextStep()
-
-            /*
-            if !paymentData.hasPaymentMethod() && MercadoPagoCheckoutViewModel.changePaymentMethodCallback != nil {
-                MercadoPagoCheckoutViewModel.changePaymentMethodCallback?()
+            // Exit callback.
+            sheetVC.setExitCallback { [weak self] () -> Void in
+                self?.cancelFlow()
             }
-            return*/
+
+            sheetVC.modalPresentationStyle = .overCurrentContext
+            viewController.present(sheetVC, animated: false, completion: {
+                print("PXOneTapSheetViewController Done")
+            })
+        } else {
+            showOneTapVC()
         }
-
-        // Congrats action callback.
-        sheetVC.setShowCongratsCallback {
-            [weak self] in
-
-            /*
-
-             // TODO: Ver con edi.
-            self?.viewModel.businessResult = PXBusinessResult(status: PXBusinessResultStatus.APPROVED, title: "Pago confirmado", icon: MercadoPago.getImage("MPSDK_review_iconoCarrito")!, secondaryAction: PXComponentAction(label: "Continuar", action: {
-                self?.cancel()
-            })) */
-            self?.executeNextStep()
-        }
-
-        // Exit callback.
-        sheetVC.setExitCallback { [weak self] () -> Void in
-            self?.cancelFlow()
-        }
-
-        sheetVC.modalPresentationStyle = .overCurrentContext
-        viewController.present(sheetVC, animated: false, completion: {
-            print("PXOneTapSheetViewController Done")
-        })
     }
 }

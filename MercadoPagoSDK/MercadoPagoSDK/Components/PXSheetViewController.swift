@@ -8,6 +8,7 @@
 
 import Foundation
 import MercadoPagoPXTracking
+import UIKit.UIGestureRecognizerSubclass
 
 internal protocol PXSheetDelegate: NSObjectProtocol {
     func contentViewForSheet() -> UIView
@@ -16,16 +17,19 @@ internal protocol PXSheetDelegate: NSObjectProtocol {
     func titleForSheet() -> String?
 }
 
+@available(iOS 10.0, *)
 class PXSheetViewController: UIViewController, PXSheetDelegate {
+
+    private let RADIUS_WITH_SAFE_AREA: CGFloat = 32
+    private let RADIUS_WITHOUT_SAFE_AREA: CGFloat = 15
+
     private var popUpViewHeight: CGFloat = 0
     private let borderMargin = PXLayout.XXXS_MARGIN
     private var blurView: UIVisualEffectView = UIVisualEffectView()
     private var bottomConstraint = NSLayoutConstraint()
+    private var sheetRadius: CGFloat = 0
     lazy var popupView: UIView = UIView()
     weak var sheetDelegate: PXSheetDelegate?
-
-    @available(iOS 10.0, *)
-    private lazy var animator = UIViewPropertyAnimator()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,18 +83,17 @@ class PXSheetViewController: UIViewController, PXSheetDelegate {
         let closeButtonImage = MercadoPago.getImage("oneTapClose")
         let closeButtonColor: UIColor = ThemeManager.shared.labelTintColor()
 
-        let RADIUS_WITH_SAFE_AREA: CGFloat = 32
-        let RADIUS_WITHOUT_SAFE_AREA: CGFloat = 15
         let TITLE_VIEW_HEIGHT: CGFloat = 58
 
         var estimatedHeight: CGFloat = 0
 
         if PXLayout.getSafeAreaTopInset() > 0 {
-            view.layer.cornerRadius = RADIUS_WITH_SAFE_AREA
+            sheetRadius = RADIUS_WITH_SAFE_AREA
         } else {
-            view.layer.cornerRadius = RADIUS_WITHOUT_SAFE_AREA
+            sheetRadius = RADIUS_WITHOUT_SAFE_AREA
         }
 
+        view.layer.cornerRadius = sheetRadius
         view.clipsToBounds = true
         view.backgroundColor = UIColor.white
 
@@ -184,7 +187,6 @@ class PXSheetViewController: UIViewController, PXSheetDelegate {
         animatedHeaderView.backgroundColor = ThemeManager.shared.getMainColor()
         popupView.addSubview(animatedHeaderView)
 
-        if #available(iOS 10.0, *) {
             var height: CGFloat = 153
             if PXLayout.getSafeAreaTopInset() > 0 {
                 height = 177
@@ -202,17 +204,9 @@ class PXSheetViewController: UIViewController, PXSheetDelegate {
                 }
             }
             transitionAnimator.startAnimation()
-        } else {
-            UIView.animate(withDuration: 0.5, animations: {
-                self.view.alpha = 0
-            }) { finish in
-                self.dismiss(animated: false, completion: nil)
-            }
-        }
     }
 
     func animatePopUpView(isDeployed: Bool) {
-        if #available(iOS 10.0, *) {
             var bottomContraint = 0 - self.borderMargin
             if isDeployed {
                 bottomContraint = self.borderMargin + popUpViewHeight
@@ -231,9 +225,6 @@ class PXSheetViewController: UIViewController, PXSheetDelegate {
                 }
             }
             transitionAnimator.startAnimation()
-        } else {
-            // No support < iOS 10.
-        }
     }
 
     func expandSheet(fullScreen: Bool = false) {
@@ -246,36 +237,11 @@ class PXSheetViewController: UIViewController, PXSheetDelegate {
             topMarginDelta = 0
         }
         popupView.layer.masksToBounds = true
-        if #available(iOS 10.0, *) {
-            let targetFrame = CGRect(x: view.frame.origin.x, y: view.frame.origin.y + topMarginDelta, width: view.frame.width, height: view.frame.height - topMarginDelta)
-            let transitionAnimator = UIViewPropertyAnimator(duration: 0.60, dampingRatio: 1.4, animations: {
-                self.popupView.frame = targetFrame
-            })
-            transitionAnimator.startAnimation()
-        } else {
-            // No support < iOS 10.
-        }
-    }
-}
 
-extension PXSheetViewController {
-
-    @available(iOS 10.0, *)
-    private func handlePan(recognizer: UIPanGestureRecognizer) {
-        switch recognizer.state {
-        case .began:
-            animator = UIViewPropertyAnimator(duration: 3, curve: .easeOut, animations: {
-                    self.popupView.transform = CGAffineTransform(translationX: 275, y: 0)
-                    self.popupView.alpha = 0
-                })
-            animator.startAnimation()
-            animator.pauseAnimation()
-        case .changed:
-            animator.fractionComplete = recognizer.translation(in: self.popupView).x / 275
-        case .ended:
-            animator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
-        default:
-            ()
-        }
+        let targetFrame = CGRect(x: view.frame.origin.x, y: view.frame.origin.y + topMarginDelta, width: view.frame.width, height: view.frame.height - topMarginDelta)
+        let transitionAnimator = UIViewPropertyAnimator(duration: 0.60, dampingRatio: 1.4, animations: {
+            self.popupView.frame = targetFrame
+        })
+        transitionAnimator.startAnimation()
     }
 }
