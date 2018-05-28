@@ -82,23 +82,14 @@ extension OneTapFlow {
             }
 
             // Change payment method callback.
-            sheetVC.setChangePaymentMethodCallback { [weak self] (paymentData: PaymentData) in
+            sheetVC.setChangePaymentMethodCallback { (paymentData: PaymentData) in
+                self.viewModel.search.deleteCheckoutDefaultOption()
+                self.cancelFlow()
 
-                // TODO: Ver con edi.
-                /*
-                 if let search = self?.viewModel.search {
-                 search.deleteCheckoutDefaultOption()
-                 }*/
-
-                self?.viewModel.search.deleteCheckoutDefaultOption()
-                self?.cancelFlow()
-                self?.executeNextStep()
-
-                /*
-                 if !paymentData.hasPaymentMethod() && MercadoPagoCheckoutViewModel.changePaymentMethodCallback != nil {
-                 MercadoPagoCheckoutViewModel.changePaymentMethodCallback?()
-                 }
-                 return*/
+                if !paymentData.hasPaymentMethod() && MercadoPagoCheckoutViewModel.changePaymentMethodCallback != nil {
+                    MercadoPagoCheckoutViewModel.changePaymentMethodCallback?()
+                }
+                return
             }
 
             // Congrats action callback.
