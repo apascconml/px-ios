@@ -24,6 +24,9 @@ class PXSheetViewController: UIViewController, PXSheetDelegate {
     lazy var popupView: UIView = UIView()
     weak var sheetDelegate: PXSheetDelegate?
 
+    @available(iOS 10.0, *)
+    private lazy var animator = UIViewPropertyAnimator()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         sheetDelegate = self
@@ -251,6 +254,28 @@ class PXSheetViewController: UIViewController, PXSheetDelegate {
             transitionAnimator.startAnimation()
         } else {
             // No support < iOS 10.
+        }
+    }
+}
+
+extension PXSheetViewController {
+
+    @available(iOS 10.0, *)
+    private func handlePan(recognizer: UIPanGestureRecognizer) {
+        switch recognizer.state {
+        case .began:
+            animator = UIViewPropertyAnimator(duration: 3, curve: .easeOut, animations: {
+                    self.popupView.transform = CGAffineTransform(translationX: 275, y: 0)
+                    self.popupView.alpha = 0
+                })
+            animator.startAnimation()
+            animator.pauseAnimation()
+        case .changed:
+            animator.fractionComplete = recognizer.translation(in: self.popupView).x / 275
+        case .ended:
+            animator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
+        default:
+            ()
         }
     }
 }
