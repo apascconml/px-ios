@@ -24,7 +24,7 @@ public class PXPaymentMethodComponent: NSObject, PXComponentizable {
     }
 }
 
-// MARK:- Helper functions
+// MARK: - Helper functions
 extension PXPaymentMethodComponent {
     func getPaymentMethodIconComponent() -> PXPaymentMethodIconComponent {
         let paymentMethodIconProps = PXPaymentMethodIconProps(paymentMethodIcon: self.props.paymentMethodIcon)

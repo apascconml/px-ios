@@ -77,33 +77,33 @@ extension PXPaymentMethodComponentRenderer {
             PXLayout.pinRight(view: arrowImageView, withMargin: PXLayout.S_MARGIN).isActive = true
         }
 
-        // No interest label.
-        if let noInterestAttr = component.props.descriptionTitle, let subtitleLabel = pmView.paymentMethodSubtitle {
-            let noInterestLabel = UILabel()
-            noInterestLabel.translatesAutoresizingMaskIntoConstraints = false
-            pmView.addSubview(noInterestLabel)
-            noInterestLabel.attributedText = noInterestAttr
-            noInterestLabel.font = Utils.getFont(size: PXLayout.XXS_FONT)
-            noInterestLabel.textColor = ThemeManager.shared.noTaxAndDiscountLabelTintColor()
-            noInterestLabel.textAlignment = .left
-            PXLayout.setHeight(owner: noInterestLabel, height: PXLayout.M_FONT).isActive = true
-            PXLayout.centerVertically(view: noInterestLabel, to: subtitleLabel).isActive = true
-            PXLayout.put(view: noInterestLabel, rightOf: subtitleLabel, withMargin: PXLayout.XXS_MARGIN).isActive = true
+        // Right label description
+        if let rightAttr = component.props.descriptionTitle, let subtitleLabel = pmView.paymentMethodSubtitle {
+            let rightAttrLabel = UILabel()
+            rightAttrLabel.translatesAutoresizingMaskIntoConstraints = false
+            pmView.addSubview(rightAttrLabel)
+            rightAttrLabel.attributedText = rightAttr
+            rightAttrLabel.font = Utils.getFont(size: PXLayout.XXS_FONT)
+            rightAttrLabel.textColor = component.props.lightLabelColor
+            rightAttrLabel.textAlignment = .left
+            PXLayout.setHeight(owner: rightAttrLabel, height: PXLayout.M_FONT).isActive = true
+            PXLayout.centerVertically(view: rightAttrLabel, to: subtitleLabel).isActive = true
+            PXLayout.put(view: rightAttrLabel, rightOf: subtitleLabel, withMargin: PXLayout.XXS_MARGIN).isActive = true
+        }
 
-            // CFT label.
-            if let cftAttr = component.props.descriptionDetail {
-                let cftLabel = UILabel()
-                cftLabel.translatesAutoresizingMaskIntoConstraints = false
-                pmView.addSubview(cftLabel)
-                cftLabel.attributedText = cftAttr
-                cftLabel.font = Utils.getFont(size: PXLayout.M_FONT)
-                cftLabel.textColor = cftColor
-                cftLabel.textAlignment = .left
-                PXLayout.setHeight(owner: cftLabel, height: PXLayout.M_FONT).isActive = true
-                PXLayout.pinLeft(view: cftLabel, to: subtitleLabel, withMargin: 0).isActive = true
-                PXLayout.pinBottom(view: cftLabel, to: pmView, withMargin: PXLayout.S_MARGIN).isActive = true
-                defaultHeight += PXLayout.M_MARGIN
-            }
+        // CFT label.
+        if let subtitleLabel = pmView.paymentMethodSubtitle, let cftAttr = component.props.descriptionDetail {
+            let cftLabel = UILabel()
+            cftLabel.translatesAutoresizingMaskIntoConstraints = false
+            pmView.addSubview(cftLabel)
+            cftLabel.attributedText = cftAttr
+            cftLabel.font = Utils.getFont(size: PXLayout.M_FONT)
+            cftLabel.textColor = cftColor
+            cftLabel.textAlignment = .left
+            PXLayout.setHeight(owner: cftLabel, height: PXLayout.M_FONT).isActive = true
+            PXLayout.pinLeft(view: cftLabel, to: subtitleLabel, withMargin: 0).isActive = true
+            PXLayout.pinBottom(view: cftLabel, to: pmView, withMargin: PXLayout.S_MARGIN).isActive = true
+            defaultHeight += PXLayout.M_MARGIN
         }
 
         // Bordered line color.

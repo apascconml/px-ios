@@ -9,8 +9,30 @@
 import Foundation
 
 extension PXOneTapViewModel {
-    //TODO: Align and check. Remove mocked data.
+    func shouldShowSummaryModal() -> Bool {
+        let itemsCount = buildItemComponents().count
+        return itemsCount > 0 || (MercadoPagoCheckoutViewModel.flowPreference.isDiscountEnable() && paymentData.discount != nil)
+    }
+
     func getSummaryProps() -> [PXSummaryRowProps]? {
-        return [(title: "AySA", subTitle: "Factura agua", rightText: "$ 1200", backgroundColor: nil), (title: "Edenor", subTitle: "Pago de luz mensual", rightText: "$ 400", backgroundColor: nil)]
+        let currency: Currency = MercadoPagoContext.getCurrency()
+        let itemComponentsModel = buildItemComponents()
+
+        var props = [PXSummaryRowProps]()
+        for itemComponent in itemComponentsModel {
+            if let title = itemComponent.getTitle(), let amountPrice = itemComponent.getUnitAmountPrice() {
+
+                var totalAmount: Double = amountPrice
+                var titleWithQty = title
+                if let qty = itemComponent.props.quantity {
+                    titleWithQty = "\(qty) \(title)"
+                    totalAmount = amountPrice * Double(qty)
+                }
+
+                let formatedAmount = Utils.getAmountFormatted(amount: totalAmount, thousandSeparator: currency.getThousandsSeparatorOrDefault(), decimalSeparator: currency.getDecimalSeparatorOrDefault(), addingCurrencySymbol: currency.getCurrencySymbolOrDefault(), addingParenthesis: false)
+                props.append((title: titleWithQty, subTitle: itemComponent.getDescription(), rightText: formatedAmount, backgroundColor: nil))
+            }
+        }
+        return props
     }
 }

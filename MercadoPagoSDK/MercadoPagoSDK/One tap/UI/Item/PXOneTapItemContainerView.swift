@@ -12,5 +12,7 @@ final class PXOneTapItemContainerView: PXComponentView {
     var itemImage: UIImageView?
     var itemTitle: UILabel?
     var amountWithoutDiscount: UILabel?
-    var totalView: UIView?
+    var totalAmount: UILabel?
+    var arrow: UIImageView?
+    var discountDescription: UILabel?
 }

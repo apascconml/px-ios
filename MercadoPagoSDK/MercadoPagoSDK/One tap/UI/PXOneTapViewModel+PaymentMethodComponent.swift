@@ -21,10 +21,11 @@ extension PXOneTapViewModel {
         var title = NSAttributedString(string: "")
         var subtitle: NSAttributedString? = nil
         var cftText: NSAttributedString? = nil
-        var noInterestText: NSAttributedString? = nil
+        var subtitleRight: NSMutableAttributedString? = nil
         let backgroundColor = ThemeManager.shared.whiteColor()
         let lightLabelColor = ThemeManager.shared.labelTintColor()
         let boldLabelColor = ThemeManager.shared.boldLabelTintColor()
+        let currency: Currency = MercadoPagoContext.getCurrency()
 
         if pm.isCard {
             if let lastFourDigits = (paymentData.token?.lastFourDigits) {
@@ -40,27 +41,31 @@ extension PXOneTapViewModel {
             title = paymentMethodName.toAttributedString()
         }
 
-        if let payerCost = paymentData.getPayerCost() {
-            // Installments.
-            let numberOfInstallments: Int = payerCost.installments
-            let installmentAmount: Double = payerCost.installmentAmount
-            let currency: Currency = MercadoPagoContext.getCurrency()
-            let amountFormatted: String = Utils.getAmountFormatted(amount: installmentAmount, thousandSeparator: currency.getThousandsSeparatorOrDefault(), decimalSeparator: currency.getDecimalSeparatorOrDefault(), addingCurrencySymbol: currency.getCurrencySymbolOrDefault(), addingParenthesis: false)
-            let subtitleDisplayText = "\(numberOfInstallments)x \(amountFormatted)"
-            subtitle = subtitleDisplayText.toAttributedString()
+        if MercadoPagoCheckoutViewModel.flowPreference.isDiscountEnable(), paymentData.discount != nil {
+            // With discount
+            let amount: String = Utils.getAmountFormatted(amount: preference.getAmount(), thousandSeparator: currency.getThousandsSeparatorOrDefault(), decimalSeparator: currency.getDecimalSeparatorOrDefault(), addingCurrencySymbol: currency.getCurrencySymbolOrDefault(), addingParenthesis: false)
+            subtitleRight = amount.toAttributedString()
 
-            // Interest.
-            if !payerCost.hasInstallmentsRate() {
-                noInterestText = "Sin interés".localized.toAttributedString()
-            }
-
-            // CFT.
-            if payerCost.hasCFTValue(), let cftValue = payerCost.getCFTValue() {
-                cftText = cftValue.toAttributedString()
+            let amountWithDiscount: String = Utils.getAmountFormatted(amount: getTotalAmount(), thousandSeparator: currency.getThousandsSeparatorOrDefault(), decimalSeparator: currency.getDecimalSeparatorOrDefault(), addingCurrencySymbol: currency.getCurrencySymbolOrDefault(), addingParenthesis: true)
+            subtitle = amountWithDiscount.toAttributedString()
+        } else {
+            // Without discount
+            if let pCost = paymentData.payerCost, pCost.installments > 1 {
+                let totalAmount: String = Utils.getAmountFormatted(amount: getTotalAmount(), thousandSeparator: currency.getThousandsSeparatorOrDefault(), decimalSeparator: currency.getDecimalSeparatorOrDefault(), addingCurrencySymbol: currency.getCurrencySymbolOrDefault(), addingParenthesis: true)
+                subtitle = totalAmount.toAttributedString()
             }
         }
 
-        let props = PXPaymentMethodProps(paymentMethodIcon: image, title: title, subtitle: subtitle, descriptionTitle: noInterestText, descriptionDetail: cftText, disclaimer: nil, action: nil, backgroundColor: backgroundColor, lightLabelColor: lightLabelColor, boldLabelColor: boldLabelColor)
+        if let attrSubtitleRight = subtitleRight {
+            attrSubtitleRight.addAttribute(NSAttributedStringKey.strikethroughStyle, value: 1, range: NSRange(location: 0, length: attrSubtitleRight.length))
+        }
+
+        // CFT.
+        if let payerCost = paymentData.getPayerCost(), let cftValue = payerCost.getCFTValue(), payerCost.hasCFTValue() {
+            cftText = cftValue.toAttributedString()
+        }
+
+        let props = PXPaymentMethodProps(paymentMethodIcon: image, title: title, subtitle: subtitle, descriptionTitle: subtitleRight, descriptionDetail: cftText, disclaimer: nil, action: nil, backgroundColor: backgroundColor, lightLabelColor: lightLabelColor, boldLabelColor: boldLabelColor)
         return PXPaymentMethodComponent(props: props)
     }
 }
