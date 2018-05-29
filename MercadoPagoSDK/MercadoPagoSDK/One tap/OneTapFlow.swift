@@ -79,20 +79,26 @@ extension OneTapFlow {
         if search.hasCheckoutDefaultOption() {
             // Check if can autoselect plugin
             let paymentMethodPluginsFound = paymentMethodPlugins.filter { (paymentMethodPlugin: PXPaymentMethodPlugin) -> Bool in
-                return paymentMethodPlugin.getId() == search.oneTap?.getPaymentOptionId()
+                return paymentMethodPlugin.getId() == search.oneTap?.paymentMethodId
             }
             if let paymentMethodPlugin = paymentMethodPluginsFound.first {
                 selectedPaymentOption = paymentMethodPlugin
             } else {
-                // Check if can autoselect customer card
-                let customOptionsFound = search.customerPaymentMethods!.filter { (cardInformation: CardInformation) -> Bool in
-                    return cardInformation.getCardId() == search.oneTap?.getPaymentOptionId()
+                // Creates customer card for one tap selection
+                if let oneTap = search.oneTap, let oneTapCard = oneTap.oneTapCard {
+                    let customerCard = CustomerPaymentMethod(cPaymentMethodId: oneTapCard.cardId, paymentMethodId: oneTap.paymentMethodId, paymentMethodTypeId: oneTap.paymentTypeId ?? "", description: oneTapCard.cardDescription ?? "")
+                    let card = Card()
+                    card.idCard = oneTapCard.cardId
+                    card.lastFourDigits = oneTapCard.lastFourDigits
+                    card.issuer = oneTapCard.issuer
+                    customerCard.card = card
+                    let paymentMethod = Utils.findPaymentMethod(search.paymentMethods, paymentMethodId: oneTap.paymentMethodId)
+                    customerCard.setupPaymentMethodSettings(paymentMethod.settings)
+                    customerCard.setupPaymentMethod(paymentMethod)
+
+                    selectedPaymentOption = customerCard
                 }
-                if let customerPaymentOption = customOptionsFound.first as? PaymentMethodOption {
-                    if search.oneTap?.oneTapCard?.getSelectedPayerCost() != nil {
-                        selectedPaymentOption = customerPaymentOption
-                    }
-                }}
+            }
         }
         return selectedPaymentOption
     }
