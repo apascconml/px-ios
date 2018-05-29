@@ -135,19 +135,34 @@ extension PXOneTapSheetViewController {
         }
         return nil
     }
+
+    private func getDiscountDetailView() -> UIView? {
+        //TODO: (Nutria team) - Make Discount detail view.
+        let discountDetailView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 900))
+        discountDetailView.backgroundColor = .red
+        return discountDetailView
+    }
 }
 
 // MARK: User Actions.
 @available(iOS 10.0, *)
 extension PXOneTapSheetViewController {
     @objc func shouldOpenSummary() {
-        expandSheet()
-        /* TODO: Show Summary
-        if let summaryProps = viewModel?.getSummaryProps(), summaryProps.count > 0 {
-            let summaryViewController = PXOneTapSummaryModalViewController()
-            summaryViewController.setProps(summaryProps: viewModel?.getSummaryProps())
-            PXComponentFactory.Modal.show(viewController: summaryViewController, title: nil)
-        } */
+        // expandSheet()
+        if let vm = viewModel, vm.shouldShowSummaryModal() {
+            if let summaryProps = vm.getSummaryProps(), summaryProps.count > 0 {
+                let summaryViewController = PXOneTapSummaryModalViewController()
+                summaryViewController.setProps(summaryProps: summaryProps, bottomCustomView: getDiscountDetailView())
+                //TODO: "Detalle" translation. Pedir a contenidos.
+                PXComponentFactory.Modal.show(viewController: summaryViewController, title: "Detalle".localized)
+            } else {
+                if let discountView = getDiscountDetailView() {
+                    let summaryViewController = PXOneTapSummaryModalViewController()
+                    summaryViewController.setProps(summaryProps: nil, bottomCustomView: discountView)
+                    PXComponentFactory.Modal.show(viewController: summaryViewController, title: nil)
+                }
+            }
+        }
     }
 
     @objc func shouldChangePaymentMethod() {
