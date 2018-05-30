@@ -129,9 +129,7 @@ extension PXOneTapViewController {
 
     private func getDiscountDetailView() -> UIView? {
         //TODO: (Nutria team) - Make Discount detail view.
-        let discountDetailView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 900))
-        discountDetailView.backgroundColor = .red
-        return discountDetailView
+        return nil
     }
 }
 

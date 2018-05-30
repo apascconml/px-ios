@@ -11,11 +11,20 @@ import Foundation
 extension PXPaymentMethodComponentRenderer {
     func oneTapRender(component: PXPaymentMethodComponent) -> PXOneTapPaymentMethodView {
         let arrowImage: UIImage? = MercadoPago.getImage("oneTapArrow")
-        var defaultHeight: CGFloat = 80
+        var defaultHeight: CGFloat = 84
         let leftRightMargin = PXLayout.S_MARGIN
-        let interMargin = PXLayout.S_MARGIN
+        let interMargin = PXLayout.XS_MARGIN
         let pmView = PXOneTapPaymentMethodView()
         let cftColor = UIColor(red: 0.29, green: 0.29, blue: 0.29, alpha: 0.3) // Not in MLUI
+
+        // Arrow image.
+        let arrowImageView = UIImageView(image: arrowImage)
+        arrowImageView.contentMode = .scaleAspectFit
+        pmView.addSubview(arrowImageView)
+        PXLayout.setHeight(owner: arrowImageView, height: PXLayout.XS_MARGIN).isActive = true
+        PXLayout.setWidth(owner: arrowImageView, width: PXLayout.XXS_MARGIN).isActive = true
+        PXLayout.centerVertically(view: arrowImageView).isActive = true
+        PXLayout.pinRight(view: arrowImageView, withMargin: PXLayout.S_MARGIN).isActive = true
 
         // PamentMethod Icon.
         let paymentMethodIcon = component.getPaymentMethodIconComponent()
@@ -38,11 +47,10 @@ extension PXPaymentMethodComponentRenderer {
         title.font = Utils.getFont(size: PXLayout.XS_FONT)
         title.textColor = component.props.boldLabelColor
         title.textAlignment = .left
-        title.numberOfLines = 1
+        title.numberOfLines = 2
         if let pmTitle = pmView.paymentMethodTitle, let pmIcon = pmView.paymentMethodIcon {
             PXLayout.put(view: pmTitle, rightOf: pmIcon, withMargin: interMargin).isActive = true
-            PXLayout.pinRight(view: pmTitle, withMargin: PXLayout.S_MARGIN).isActive = true
-            PXLayout.setHeight(owner: pmTitle, height: PXLayout.L_FONT).isActive = true
+            PXLayout.pinRight(view: pmTitle, to: arrowImageView, withMargin: PXLayout.S_MARGIN).isActive = true
         }
 
         // PaymentMethod Subtitle.
@@ -57,24 +65,15 @@ extension PXPaymentMethodComponentRenderer {
             PXLayout.setHeight(owner: detailLabel, height: PXLayout.M_FONT).isActive = true
             PXLayout.pinLeft(view: detailLabel, to: pmTitle).isActive = true
             PXLayout.pinTop(view: pmTitle, to: pmIcon, withMargin: PXLayout.XXXS_MARGIN).isActive = true
-            PXLayout.pinBottom(view: detailLabel, to: pmIcon, withMargin: PXLayout.XXXS_MARGIN).isActive = true
+            PXLayout.put(view: detailLabel, onBottomOf: pmTitle, withMargin: PXLayout.XXXS_MARGIN).isActive = true
             PXLayout.setWidth(owner: detailLabel, width: detailLabel.intrinsicContentSize.width).isActive = true
             pmView.paymentMethodSubtitle = detailLabel
+            pmTitle.layoutIfNeeded()
+            defaultHeight += pmTitle.frame.height - PXLayout.XXXS_MARGIN
         } else {
             if let pmTitle = pmView.paymentMethodTitle {
                 PXLayout.centerVertically(view: pmTitle, to: pmView).isActive = true
             }
-        }
-
-        // Arrow image.
-        if let pmIcon = pmView.paymentMethodIcon {
-            let arrowImageView = UIImageView(image: arrowImage)
-            arrowImageView.contentMode = .scaleAspectFit
-            pmView.addSubview(arrowImageView)
-            PXLayout.setHeight(owner: arrowImageView, height: PXLayout.XS_MARGIN).isActive = true
-            PXLayout.setWidth(owner: arrowImageView, width: PXLayout.XXS_MARGIN).isActive = true
-            PXLayout.centerVertically(view: arrowImageView, to: pmIcon).isActive = true
-            PXLayout.pinRight(view: arrowImageView, withMargin: PXLayout.S_MARGIN).isActive = true
         }
 
         // Right label description

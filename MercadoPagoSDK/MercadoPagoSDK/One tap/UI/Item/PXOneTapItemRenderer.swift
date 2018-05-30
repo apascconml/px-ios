@@ -172,10 +172,10 @@ extension PXOneTapItemRenderer {
         label.text = text
         label.textColor = color
         label.lineBreakMode = .byTruncatingTail
-        label.numberOfLines = 1
+        label.numberOfLines = 2
         label.font = font
         let screenWidth = PXLayout.getScreenWidth(applyingMarginFactor: CONTENT_WIDTH_PERCENT)
-        let height = UILabel.requiredHeight(forText: text, withFont: font, inNumberOfLines: 1, inWidth: screenWidth)
+        let height = UILabel.requiredHeight(forText: text, withFont: font, inNumberOfLines: 2, inWidth: screenWidth)
         PXLayout.setHeight(owner: label, height: height).isActive = true
         return label
     }

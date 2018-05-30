@@ -42,6 +42,9 @@ extension OneTapFlow {
             }, callbackConfirm: {(paymentData: PaymentData) in
                 self.viewModel.updateCheckoutModel(paymentData: paymentData)
 
+                // Deletes default one tap option in payment method search
+                self.viewModel.search.deleteCheckoutDefaultOption()
+
                 if MercadoPagoCheckoutViewModel.paymentDataConfirmCallback != nil {
                     MercadoPagoCheckoutViewModel.paymentDataCallback = MercadoPagoCheckoutViewModel.paymentDataConfirmCallback
                     self.finishFlow()
