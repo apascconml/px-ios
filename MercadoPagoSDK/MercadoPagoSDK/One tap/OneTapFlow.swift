@@ -96,7 +96,9 @@ extension OneTapFlow {
                     customerCard.setupPaymentMethodSettings(paymentMethod.settings)
                     customerCard.setupPaymentMethod(paymentMethod)
 
-                    selectedPaymentOption = customerCard
+                    if search.oneTap?.oneTapCard?.getSelectedPayerCost() != nil {
+                        selectedPaymentOption = customerCard
+                    }
                 }
             }
         }
