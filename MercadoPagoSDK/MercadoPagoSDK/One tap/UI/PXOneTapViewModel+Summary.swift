@@ -11,7 +11,8 @@ import Foundation
 extension PXOneTapViewModel {
     func shouldShowSummaryModal() -> Bool {
         let itemsCount = buildItemComponents().count
-        return itemsCount > 0 || (MercadoPagoCheckoutViewModel.flowPreference.isDiscountEnable() && paymentData.discount != nil)
+        return itemsCount > 0 // ONLY FOR DEMO
+        //return itemsCount > 0 || (MercadoPagoCheckoutViewModel.flowPreference.isDiscountEnable() && paymentData.discount != nil)
     }
 
     func getSummaryProps() -> [PXSummaryRowProps]? {

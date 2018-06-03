@@ -203,10 +203,14 @@ class PXSheetViewController: UIViewController, PXSheetDelegate {
                     self.dismiss(animated: false, completion: nil)
                 }
             }
+
             transitionAnimator.startAnimation()
     }
 
     func animatePopUpView(isDeployed: Bool) {
+            let generator = UIImpactFeedbackGenerator(style: .heavy)
+            generator.impactOccurred()
+
             var bottomContraint = 0 - self.borderMargin
             if isDeployed {
                 bottomContraint = self.borderMargin + popUpViewHeight
@@ -227,7 +231,7 @@ class PXSheetViewController: UIViewController, PXSheetDelegate {
             transitionAnimator.startAnimation()
     }
 
-    func expandSheet(fullScreen: Bool = false) {
+    func expandSheet(fullScreen: Bool = false, animationDidFinish: (() -> Void)?) {
         let defaultStatusOffset: CGFloat = 22
         var topMarginDelta = PXLayout.getSafeAreaTopInset()
         if topMarginDelta == 0 {
@@ -243,5 +247,9 @@ class PXSheetViewController: UIViewController, PXSheetDelegate {
             self.popupView.frame = targetFrame
         })
         transitionAnimator.startAnimation()
+
+        transitionAnimator.addCompletion { _ in
+            animationDidFinish?()
+        }
     }
 }

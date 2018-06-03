@@ -14,12 +14,14 @@ final class OneTapFlow: PXFlow {
     let finishOneTapCallback: ((PaymentData) -> Void)
     let cancelOneTapCallback: (() -> Void)
     let exitCheckoutCallback: (() -> Void)
+    var force: Bool = false // ONLY FOR DEMO
 
-    init(navigationController: PXNavigationHandler, paymentData: PaymentData, checkoutPreference: CheckoutPreference, search: PaymentMethodSearch, paymentOptionSelected: PaymentMethodOption, reviewScreenPreference: ReviewScreenPreference, finishOneTap: @escaping ((PaymentData) -> Void), cancelOneTap: @escaping (() -> Void), exitCheckout: @escaping (() -> Void)) {
+    init(navigationController: PXNavigationHandler, paymentData: PaymentData, checkoutPreference: CheckoutPreference, search: PaymentMethodSearch, paymentOptionSelected: PaymentMethodOption, reviewScreenPreference: ReviewScreenPreference, finishOneTap: @escaping ((PaymentData) -> Void), cancelOneTap: @escaping (() -> Void), exitCheckout: @escaping (() -> Void), forceFlow: Bool) {
         pxNavigationHandler = navigationController
         finishOneTapCallback = finishOneTap
         cancelOneTapCallback = cancelOneTap
         exitCheckoutCallback = exitCheckout
+        force = forceFlow // ONLY FOR DEMO
         viewModel = OneTapFlowViewModel(paymentData: paymentData, checkoutPreference: checkoutPreference, search: search, paymentOptionSelected: paymentOptionSelected, reviewScreenPreference: reviewScreenPreference)
     }
 
@@ -34,6 +36,13 @@ final class OneTapFlow: PXFlow {
     }
 
     func executeNextStep() {
+
+        // ONLY FOR DEMO: FORCE FLOW - BACK TO SHEET
+        if force {
+            showReviewAndConfirmScreenForOneTap()
+            return
+        }
+
         switch self.viewModel.nextStep() {
         case .screenReviewOneTap:
             self.showReviewAndConfirmScreenForOneTap()

@@ -118,7 +118,7 @@ open class PaymentVaultViewController: MercadoPagoUIScrollViewController, UIColl
                 if let targetVC = self?.navigationController?.viewControllers[0], let currentVC = self, targetVC == currentVC {
                     self?.dismiss(animated: true, completion: {})
                 } else {
-                    self?.navigationController!.popViewController(animated: true)
+                    self?.navigationController?.popViewController(animated: true)
                 }
             }
         } else {

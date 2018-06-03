@@ -27,8 +27,8 @@ final class PXPogressView: UIView {
     }
 
     init(forView: UIView, loadingColor: UIColor = UIColor.white) {
-        progressViewHeight = forView.frame.height
-        progressViewEndX = forView.frame.width
+        progressViewHeight = forView.bounds.height
+        progressViewEndX = forView.bounds.width
         progressViewDeltaIncrement = progressViewEndX / deltaIncrementFraction
 
         super.init(frame: CGRect(x: 0, y: 0, width: 0, height: progressViewHeight))
@@ -43,9 +43,9 @@ final class PXPogressView: UIView {
 
     @objc fileprivate func increment() {
 
-        let newWidth =  self.frame.width + deltaIncrementFraction
+        let newWidth =  self.bounds.width + deltaIncrementFraction
 
-        let newFrame = CGRect(x: 0, y: 0, width: (self.frame.width + deltaIncrementFraction), height: self.frame.height)
+        let newFrame = CGRect(x: 0, y: 0, width: (self.bounds.width + deltaIncrementFraction), height: self.bounds.height)
 
         UIView.animate(withDuration: 0.3, animations: {
             self.frame = newFrame
@@ -81,12 +81,12 @@ extension PXPogressView {
     }
 
     func doReset() {
-        let newFrame = CGRect(x: 0, y: 0, width: 0, height: self.frame.height)
+        let newFrame = CGRect(x: 0, y: 0, width: 0, height: self.bounds.height)
         self.frame = newFrame
     }
 
     func doComplete(completion: @escaping (_ finish: Bool) -> Void) {
-        let newFrame = CGRect(x: 0, y: 0, width: progressViewEndX, height: self.frame.height)
+        let newFrame = CGRect(x: 0, y: 0, width: progressViewEndX, height: self.bounds.height)
         UIView.animate(withDuration: 0.5, animations: {
             self.frame = newFrame
         }) { _ in

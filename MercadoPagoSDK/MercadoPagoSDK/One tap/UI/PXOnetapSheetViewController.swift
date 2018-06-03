@@ -121,9 +121,9 @@ extension PXOneTapSheetViewController {
 
     private func getFooterView() -> UIView? {
         var loadingButtonComponent: PXAnimatedButton?
-        let mainAction = PXComponentAction(label: "Pagar", action: { [weak self] in
+        let mainAction = PXComponentAction(label: "Pagar", action: {
             //self?.confirmPayment()
-            loadingButtonComponent?.startLoading(loadingText:"Pagando...", retryText:"Pagar")
+            loadingButtonComponent?.startLoading(loadingText: "Pagando...", retryText: "Pagar")
         })
         let footerProps = PXFooterProps(buttonAction: mainAction)
         let footerComponent = PXFooterComponent(props: footerProps)
@@ -138,31 +138,17 @@ extension PXOneTapSheetViewController {
 
     private func getDiscountDetailView() -> UIView? {
         //TODO: (Nutria team) - Make Discount detail view.
-        let discountDetailView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 900))
-        discountDetailView.backgroundColor = .red
-        return discountDetailView
+        return nil
     }
 }
 
 // MARK: User Actions.
 @available(iOS 10.0, *)
 extension PXOneTapSheetViewController {
+
     @objc func shouldOpenSummary() {
-        // expandSheet()
-        if let vm = viewModel, vm.shouldShowSummaryModal() {
-            if let summaryProps = vm.getSummaryProps(), summaryProps.count > 0 {
-                let summaryViewController = PXOneTapSummaryModalViewController()
-                summaryViewController.setProps(summaryProps: summaryProps, bottomCustomView: getDiscountDetailView())
-                //TODO: "Detalle" translation. Pedir a contenidos.
-                PXComponentFactory.Modal.show(viewController: summaryViewController, title: "Detalle".localized)
-            } else {
-                if let discountView = getDiscountDetailView() {
-                    let summaryViewController = PXOneTapSummaryModalViewController()
-                    summaryViewController.setProps(summaryProps: nil, bottomCustomView: discountView)
-                    PXComponentFactory.Modal.show(viewController: summaryViewController, title: nil)
-                }
-            }
-        }
+        selectionFeedback()
+        openSummary()
     }
 
     @objc func shouldChangePaymentMethod() {
@@ -186,13 +172,33 @@ extension PXOneTapSheetViewController {
     private func cancelPayment() {
         callbackExit?()
     }
+
+    @objc func openSummary() {
+        if let vm = self.viewModel, vm.shouldShowSummaryModal() {
+            if let summaryProps = vm.getSummaryProps(), summaryProps.count > 0 {
+                let summaryViewController = PXOneTapSummaryModalViewController()
+                summaryViewController.setProps(summaryProps: summaryProps, bottomCustomView: self.getDiscountDetailView())
+                //TODO: "Detalle" translation. Pedir a contenidos.
+                PXComponentFactory.Modal.show(viewController: summaryViewController, title: "Detalle".localized)
+            }
+            // ONLY FOR DEMO:
+            /* else {
+             // Commented Only for DEMO without discount.
+             if let discountView = getDiscountDetailView() {
+             let summaryViewController = PXOneTapSummaryModalViewController()
+             summaryViewController.setProps(summaryProps: nil, bottomCustomView: discountView)
+             PXComponentFactory.Modal.show(viewController: summaryViewController, title: nil)
+             }
+             } */
+        }
+    }
 }
 
-//MARK: - Payment Button animation delegate
+// MARK: Payment Button animation delegate
 @available(iOS 10.0, *)
 extension PXOneTapSheetViewController: PXAnimatedButtonDelegate {
     func expandAnimationInProgress() {
-        expandSheet(fullScreen: true)
+        expandSheet(fullScreen: true, animationDidFinish: nil)
     }
 
     func didFinishAnimation() {
@@ -208,7 +214,13 @@ extension PXOneTapSheetViewController: PXAnimatedButtonDelegate {
 // MARK: Animated Transitions.
 @available(iOS 10.0, *)
 extension PXOneTapSheetViewController {
+    private func selectionFeedback() {
+        let generator = UISelectionFeedbackGenerator()
+        generator.selectionChanged()
+    }
+
     private func openGroupsTransitionAnimation() {
+        selectionFeedback()
         let targetFrame = view.frame
         let transitionAnimator = UIViewPropertyAnimator(duration: 0.65, dampingRatio: 1.3, animations: { [weak self] in
             self?.popupView.frame = targetFrame

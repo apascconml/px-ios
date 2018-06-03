@@ -20,8 +20,8 @@ internal class PXAnimatedButton: UIButton {
 }
 
 extension PXAnimatedButton {
-    func startLoading(loadingText:String, retryText:String) {
-        progressView = PXPogressView(forView: self)
+    func startLoading(loadingText: String, retryText: String) {
+        progressView = PXPogressView(forView: self, loadingColor:  #colorLiteral(red:0.03, green:0.33, blue:0.85, alpha:1.0))
         progressView?.start(timeOutBlock: {
             // This is temporary. Only for now, without real payment.
             /*
@@ -38,11 +38,10 @@ extension PXAnimatedButton {
     }
 
     func animateFinishSuccess() {
-
         let successColor = ThemeManager.shared.successColor()
-        let successCheckImage = MercadoPago.getImage("success_image")
+        let successCheckImage = MercadoPago.getImage("sheetSuccess")
 
-        let newFrame = CGRect(x: self.frame.midX-self.frame.height/2, y: self.frame.midY-self.frame.height/2, width: self.frame.height , height: self.frame.height)
+        let newFrame = CGRect(x: self.frame.midX-self.frame.height/2, y: self.frame.midY-self.frame.height/2, width: self.frame.height, height: self.frame.height)
 
         var expandAnimationNotified = false
 
@@ -60,7 +59,7 @@ extension PXAnimatedButton {
                         }, completion: { _ in
 
                             let scaleFactor: CGFloat = 0.40
-                            let successImage = UIImageView(frame: CGRect(x: newFrame.width/2 - (newFrame.width*scaleFactor)/2, y: newFrame.width/2 - (newFrame.width*scaleFactor)/2, width: newFrame.width*scaleFactor, height:newFrame.height*scaleFactor))
+                            let successImage = UIImageView(frame: CGRect(x: newFrame.width/2 - (newFrame.width*scaleFactor)/2, y: newFrame.width/2 - (newFrame.width*scaleFactor)/2, width: newFrame.width*scaleFactor, height:  newFrame.height*scaleFactor))
 
                             successImage.image = successCheckImage
                             successImage.contentMode = .scaleAspectFit
@@ -68,15 +67,15 @@ extension PXAnimatedButton {
 
                             self.addSubview(successImage)
 
-                            let systemSoundID: SystemSoundID = 1109
-                            AudioServicesPlaySystemSound(systemSoundID)
-
                             if #available(iOS 10.0, *) {
                                 let notification = UINotificationFeedbackGenerator()
                                 notification.notificationOccurred(.success)
                             } else {
                                 // Fallback on earlier versions
                             }
+
+                            let systemSoundID: SystemSoundID = 1109
+                            AudioServicesPlaySystemSound(systemSoundID)
 
                             UIView.animate(withDuration: 0.6, animations: {
                                 successImage.alpha = 1

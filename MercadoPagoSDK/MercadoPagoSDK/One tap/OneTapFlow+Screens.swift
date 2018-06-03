@@ -100,12 +100,27 @@ extension OneTapFlow {
                 [weak self] in
 
                 /*
-
                  // TODO: Ver con edi.
                  self?.viewModel.businessResult = PXBusinessResult(status: PXBusinessResultStatus.APPROVED, title: "Pago confirmado", icon: MercadoPago.getImage("MPSDK_review_iconoCarrito")!, secondaryAction: PXComponentAction(label: "Continuar", action: {
                  self?.cancel()
                  })) */
-                self?.executeNextStep()
+                //self?.executeNextStep()
+
+                // ONLY FOR DEMO: SHOW STATIC CONGRATS.
+                var congratsVC: PXResultViewController?
+
+                let businessResult = PXBusinessResult(status: PXBusinessResultStatus.APPROVED, title: "Pago confirmado", icon: MercadoPago.getImage("MPSDK_review_iconoCarrito")!, secondaryAction:
+                    PXCloseLinkAction()
+                )
+
+                let businesResultViewModel = PXBusinessResultViewModel(businessResult: businessResult, paymentData: (self?.viewModel.paymentData)!, amount: (self?.viewModel.getAmount())!)
+
+                congratsVC = PXResultViewController(viewModel: businesResultViewModel, callback: { _ in})
+
+                if let vcCongrats = congratsVC {
+                    self?.pxNavigationHandler.pushViewController(viewController: vcCongrats, animated: false)
+                }
+                // END - ONLY FOR DEMO: SHOW STATIC CONGRATS.
             }
 
             // Exit callback.

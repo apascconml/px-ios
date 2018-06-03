@@ -29,9 +29,16 @@ extension MercadoPagoCheckout {
             strongSelf.viewModel.rootVC = false
             strongSelf.executeNextStep()
         })
-        self.pxNavigationHandler.pushViewController(viewController: paymentMethodSelectionStep, animated: true)
 
+        // ONLY FOR DEMO: BACK TO SHEET
+        paymentMethodSelectionStep.callbackCancel = {
+            paymentMethodSelectionStep.navigationController?.popViewController(animated: false)
+            self.startOneTapFlow(restorePaymentMethod: true)
+        }
+
+        self.pxNavigationHandler.pushViewController(viewController: paymentMethodSelectionStep, animated: true)
     }
+
     func showCardForm() {
         let cardFormStep = CardFormViewController(cardFormManager: self.viewModel.cardFormManager(), callback: { [weak self](paymentMethods, cardToken) in
 
@@ -299,7 +306,13 @@ extension MercadoPagoCheckout {
         self.pxNavigationHandler.pushViewController(viewController: entityTypeStep, animated: true)
     }
 
-    func startOneTapFlow() {
+    func startOneTapFlow(restorePaymentMethod: Bool = false) {
+
+        if restorePaymentMethod {
+            viewModel.paymentOptionSelected = MockPaymentOption()
+            viewModel.readyToPay = true
+        }
+
         guard let search = viewModel.search, let paymentOtionSelected = viewModel.paymentOptionSelected else {
             return
         }
@@ -316,7 +329,7 @@ extension MercadoPagoCheckout {
             }, exitCheckout: {
                 [weak self] in
                 self?.finish()
-        })
+        }, forceFlow: restorePaymentMethod)
         onetapFlow.start()
     }
 }
