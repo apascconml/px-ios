@@ -20,4 +20,6 @@ public protocol MercadoPagoESC: NSObjectProtocol {
     func deleteESC(cardId: String)
 
     func deleteAllESC()
+
+    func getSavedCardIds() -> [String]
 }

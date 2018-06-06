@@ -82,8 +82,20 @@ extension MercadoPagoCheckout {
 
     func getPaymentMethodSearch() {
         self.pxNavigationHandler.presentLoading()
+      
+        let paymentMethodPluginsToShow = viewModel.paymentMethodPlugins.filter {$0.mustShowPaymentMethodPlugin(PXCheckoutStore.sharedInstance) == true}
+        var pluginIds = [String]()
+        for plugin in paymentMethodPluginsToShow {
+            pluginIds.append(plugin.getId())
+        }
 
-        self.viewModel.mercadoPagoServicesAdapter.getPaymentMethodSearch(amount: self.viewModel.amountHelper.amountToPay, excludedPaymentTypesIds: self.viewModel.getExcludedPaymentTypesIds(), excludedPaymentMethodsIds: self.viewModel.getExcludedPaymentMethodsIds(), defaultPaymentMethod: self.viewModel.getDefaultPaymentMethodId(), payer: Payer(), site: MercadoPagoContext.getSite(), callback: { [weak self] (paymentMethodSearch) in
+        let cardIdsWithEsc = viewModel.mpESCManager.getSavedCardIds()
+
+        let exclusions: MercadoPagoServicesAdapter.PaymentSearchExclusions = (self.viewModel.getExcludedPaymentTypesIds(), self.viewModel.getExcludedPaymentMethodsIds())
+        let oneTapInfo: MercadoPagoServicesAdapter.PaymentSearchOneTapInfo = (cardIdsWithEsc, pluginIds)
+
+        self.viewModel.mercadoPagoServicesAdapter.getPaymentMethodSearch(amount: self.viewModel.amountHelper.amountToPay, exclusions: exclusions, oneTapInfo: oneTapInfo, defaultPaymentMethod: self.viewModel.getDefaultPaymentMethodId(), payer: Payer(), site: MercadoPagoContext.getSite(), callback: { [weak self] (paymentMethodSearch) in
+
 
             guard let strongSelf = self else {
                 return

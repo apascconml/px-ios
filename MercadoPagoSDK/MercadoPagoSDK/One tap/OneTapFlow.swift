@@ -84,23 +84,19 @@ extension OneTapFlow {
             if let paymentMethodPlugin = paymentMethodPluginsFound.first {
                 selectedPaymentOption = paymentMethodPlugin
             } else {
-                // Creates customer card for one tap selection
-                if let oneTap = search.oneTap, let oneTapCard = oneTap.oneTapCard {
-                    let customerCard = CustomerPaymentMethod(cPaymentMethodId: oneTapCard.cardId, paymentMethodId: oneTap.paymentMethodId, paymentMethodTypeId: oneTap.paymentTypeId ?? "", description: oneTapCard.cardDescription ?? "")
-                    let card = Card()
-                    card.idCard = oneTapCard.cardId
-                    card.lastFourDigits = oneTapCard.lastFourDigits
-                    card.issuer = oneTapCard.issuer
-                    customerCard.card = card
-                    let paymentMethod = Utils.findPaymentMethod(search.paymentMethods, paymentMethodId: oneTap.paymentMethodId)
-                    customerCard.setupPaymentMethodSettings(paymentMethod.settings)
-                    customerCard.setupPaymentMethod(paymentMethod)
-
-                    if search.oneTap?.oneTapCard?.getSelectedPayerCost() != nil {
-                        selectedPaymentOption = customerCard
-                    }
+                // Check if can autoselect customer card
+                let customOptionsFound = search.customerPaymentMethods!.filter { (cardInformation: CardInformation) -> Bool in
+                    return cardInformation.getCardId() == search.oneTap?.oneTapCard?.cardId
                 }
-            }
+                if let customerPaymentMethod = customOptionsFound.first, let customerPaymentOption = customerPaymentMethod as? PaymentMethodOption {
+                    // Check if one tap response has payer costs
+                    if let oneTap = search.oneTap, oneTap.oneTapCard?.selectedPayerCost != nil {
+                        // Check if card found has same paymentmethod as One tap response
+                        if oneTap.paymentMethodId == customerPaymentMethod.getPaymentMethodId() && oneTap.paymentTypeId == customerPaymentMethod.getPaymentTypeId() {
+                            selectedPaymentOption = customerPaymentOption
+                        }
+                    }
+                }}
         }
         return selectedPaymentOption
     }

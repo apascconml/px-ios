@@ -57,4 +57,13 @@ open class MercadoPagoESCImplementation: NSObject, MercadoPagoESC {
             #endif
         }
     }
+
+    public func getSavedCardIds() -> [String] {
+        if hasESCEnable() {
+            #if MPESC_ENABLE
+               return ESCManager.getSavedCardIds()
+            #endif
+        }
+        return []
+    }
 }
