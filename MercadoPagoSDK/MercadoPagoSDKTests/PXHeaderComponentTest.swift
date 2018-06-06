@@ -23,8 +23,8 @@ class PXHeaderComponentTest: BaseTest {
         XCTAssertEqual(headerView.circleImage?.image, MercadoPago.getImage("default_item_icon", bundle: MercadoPago.getBundle()!))
         XCTAssertEqual(headerView.badgeImage?.image, MercadoPago.getImage("ok_badge"))
         XCTAssertNil(headerView.statusLabel?.attributedText)
-        XCTAssertEqual(headerView.messageLabel?.attributedText?.string, PXHeaderResutlConstants.APPROVED_HEADER_TITLE.PXLocalized)
-        XCTAssertEqual(headerView.backgroundColor, PXDefaultTheme().successColor())
+        XCTAssertEqual(headerView.messageLabel?.attributedText?.string, PXHeaderResutlConstants.APPROVED_HEADER_TITLE.localized)
+        XCTAssertEqual(headerView.backgroundColor, ThemeManager.shared.successColor())
     }
 
     func testHeaderView_approvedCardPaymentPreference_render() {
@@ -39,7 +39,7 @@ class PXHeaderComponentTest: BaseTest {
         XCTAssertEqual(headerView.badgeImage?.image, MercadoPago.getImage("ok_badge"))
         XCTAssertEqual(headerView.statusLabel?.text, ResultMockComponentHelper.approvedLabelDummy)
         XCTAssertEqual(headerView.messageLabel?.attributedText?.string, ResultMockComponentHelper.approvedTitleDummy)
-        XCTAssertEqual(headerView.backgroundColor, PXDefaultTheme().successColor())
+        XCTAssertEqual(headerView.backgroundColor, ThemeManager.shared.successColor())
     }
 
     // MARK: APPROVED - ACCOUNT MONEY
@@ -54,8 +54,8 @@ class PXHeaderComponentTest: BaseTest {
         XCTAssertEqual(headerView.circleImage?.image, MercadoPago.getImage("default_item_icon", bundle: MercadoPago.getBundle()!))
         XCTAssertEqual(headerView.badgeImage?.image, MercadoPago.getImage("ok_badge"))
         XCTAssertNil(headerView.statusLabel?.attributedText)
-        XCTAssertEqual(headerView.messageLabel?.attributedText?.string, PXHeaderResutlConstants.APPROVED_HEADER_TITLE.PXLocalized)
-        XCTAssertEqual(headerView.backgroundColor, PXDefaultTheme().successColor())
+        XCTAssertEqual(headerView.messageLabel?.attributedText?.string, PXHeaderResutlConstants.APPROVED_HEADER_TITLE.localized)
+        XCTAssertEqual(headerView.backgroundColor, ThemeManager.shared.successColor())
     }
 
     // MARK: REJECTED - CARD
@@ -67,7 +67,7 @@ class PXHeaderComponentTest: BaseTest {
         let headerView = ResultMockComponentHelper.buildHeaderView(resultViewModel: resultViewModel)
 
         // Then:
-        XCTAssertEqual(headerView.backgroundColor, PXDefaultTheme().rejectedColor())
+        XCTAssertEqual(headerView.backgroundColor, ThemeManager.shared.rejectedColor())
         XCTAssertEqual(headerView.circleImage?.image, MercadoPago.getImage("card_icon", bundle: MercadoPago.getBundle()!))
         XCTAssertEqual(headerView.badgeImage?.image, MercadoPago.getImage("error_badge"))
         XCTAssertEqual(headerView.statusLabel?.attributedText?.string, PXHeaderResutlConstants.REJECTED_ICON_SUBTEXT.PXLocalized)
@@ -81,7 +81,7 @@ class PXHeaderComponentTest: BaseTest {
         let headerView = ResultMockComponentHelper.buildHeaderView(resultViewModel: resultViewModel)
 
         // Then:
-        XCTAssertEqual(headerView.backgroundColor, PXDefaultTheme().rejectedColor())
+        XCTAssertEqual(headerView.backgroundColor, ThemeManager.shared.rejectedColor())
         XCTAssertEqual(headerView.circleImage?.image, MercadoPago.getImage("card_icon", bundle: MercadoPago.getBundle()!))
         XCTAssertEqual(headerView.badgeImage?.image, MercadoPago.getImage("error_badge"))
         XCTAssertEqual(headerView.statusLabel?.attributedText?.string, PXHeaderResutlConstants.REJECTED_ICON_SUBTEXT.PXLocalized)
@@ -96,7 +96,7 @@ class PXHeaderComponentTest: BaseTest {
         let headerView = ResultMockComponentHelper.buildHeaderView(resultViewModel: resultViewModel)
 
         // Then:
-        XCTAssertEqual(headerView.backgroundColor, PXDefaultTheme().warningColor())
+        XCTAssertEqual(headerView.backgroundColor, ThemeManager.shared.warningColor())
         XCTAssertEqual(headerView.circleImage?.image, MercadoPago.getImage("card_icon", bundle: MercadoPago.getBundle()!))
         XCTAssertEqual(headerView.badgeImage?.image, MercadoPago.getImage("need_action_badge"))
         XCTAssertEqual(headerView.messageLabel?.attributedText?.string, resultViewModel.getTitleForCallForAuth(resultViewModel.paymentResult.paymentData!.paymentMethod!).string)
@@ -111,7 +111,7 @@ class PXHeaderComponentTest: BaseTest {
         let headerView = ResultMockComponentHelper.buildHeaderView(resultViewModel: resultViewModel)
 
         // Then:
-        XCTAssertEqual(headerView.backgroundColor, PXDefaultTheme().successColor())
+        XCTAssertEqual(headerView.backgroundColor, ThemeManager.shared.successColor())
         XCTAssertEqual(headerView.circleImage?.image, MercadoPago.getImage("card_icon", bundle: MercadoPago.getBundle()!))
         XCTAssertEqual(headerView.badgeImage?.image, MercadoPago.getImage("pending_badge"))
         XCTAssertNil(headerView.statusLabel?.attributedText)
@@ -126,7 +126,7 @@ class PXHeaderComponentTest: BaseTest {
         let headerView = ResultMockComponentHelper.buildHeaderView(resultViewModel: resultViewModel)
 
         // Then:
-        XCTAssertEqual(headerView.backgroundColor, PXDefaultTheme().successColor())
+        XCTAssertEqual(headerView.backgroundColor, ThemeManager.shared.successColor())
         XCTAssertEqual(headerView.circleImage?.image, MercadoPago.getImage("card_icon", bundle: MercadoPago.getBundle()!))
         XCTAssertEqual(headerView.badgeImage?.image, MercadoPago.getImage("pending_badge"))
         XCTAssertNil(headerView.statusLabel?.attributedText)
@@ -146,7 +146,6 @@ class PXHeaderComponentTest: BaseTest {
         XCTAssertEqual(headerView.badgeImage?.image, MercadoPago.getImage("pending_badge"))
         XCTAssertNil(headerView.statusLabel?.attributedText)
         XCTAssertEqual(headerView.messageLabel?.attributedText?.string, resultViewModel.titleForInstructions().string)
-        XCTAssertEqual(headerView.backgroundColor, PXDefaultTheme().successColor())
-
+        XCTAssertEqual(headerView.backgroundColor, ThemeManager.shared.successColor())
     }
 }

@@ -37,7 +37,7 @@ class MercadoPagoCheckoutTest: BaseTest {
         XCTAssertNotNil(self.mpCheckout!.viewModel.checkoutPreference)
         XCTAssertFalse(self.mpCheckout!.viewModel.paymentData.isComplete())
         XCTAssertNil(self.mpCheckout!.viewModel.paymentResult)
-        XCTAssertEqual(self.mpCheckout!.navigationController, navControllerInstance)
+        XCTAssertEqual(self.mpCheckout!.pxNavigationHandler.navigationController, navControllerInstance)
         XCTAssertEqual(MercadoPagoContext.publicKey(), "PK_MLA")
         XCTAssertEqual(MercadoPagoContext.payerAccessToken(), "")
 
@@ -57,7 +57,7 @@ class MercadoPagoCheckoutTest: BaseTest {
         XCTAssertNotNil(self.mpCheckout!.viewModel.checkoutPreference)
         XCTAssertEqual(self.mpCheckout!.viewModel.paymentData.paymentMethod, paymentMethod)
         XCTAssertNil(self.mpCheckout!.viewModel.paymentResult)
-        XCTAssertEqual(self.mpCheckout!.navigationController, navControllerInstance)
+        XCTAssertEqual(self.mpCheckout!.pxNavigationHandler.navigationController, navControllerInstance)
         XCTAssertEqual(MercadoPagoContext.publicKey(), "PK_MLA")
         XCTAssertEqual(MercadoPagoContext.payerAccessToken(), "")
     }
@@ -80,7 +80,7 @@ class MercadoPagoCheckoutTest: BaseTest {
         XCTAssertNotNil(self.mpCheckout!.viewModel.checkoutPreference)
         XCTAssertEqual(self.mpCheckout!.viewModel.paymentData.paymentMethod, paymentMethod)
         XCTAssertNotNil(self.mpCheckout!.viewModel.paymentResult)
-        XCTAssertEqual(self.mpCheckout!.navigationController, navControllerInstance)
+        XCTAssertEqual(self.mpCheckout!.pxNavigationHandler.navigationController, navControllerInstance)
         XCTAssertEqual(MercadoPagoContext.publicKey(), "PK_MLA")
         XCTAssertEqual(MercadoPagoContext.payerAccessToken(), "lala")
     }
@@ -116,8 +116,8 @@ class MercadoPagoCheckoutTest: BaseTest {
         XCTAssertNil(self.mpCheckout?.viewModel.paymentData.payerCost)
         XCTAssertNil(self.mpCheckout?.viewModel.paymentData.token)
         XCTAssertNil(self.mpCheckout?.viewModel.paymentData.issuer)
-        XCTAssertEqual(self.mpCheckout?.navigationController.viewControllers.count, 1)
-        let lastVC = self.mpCheckout!.navigationController.viewControllers[0]
+        XCTAssertEqual(self.mpCheckout?.pxNavigationHandler.navigationController.viewControllers.count, 1)
+        let lastVC = self.mpCheckout!.pxNavigationHandler.navigationController.viewControllers[0]
         XCTAssertTrue(lastVC.isKind(of: PaymentVaultViewController.self))
     }
 
@@ -153,8 +153,8 @@ class MercadoPagoCheckoutTest: BaseTest {
         XCTAssertNil(self.mpCheckout?.viewModel.paymentData.payerCost)
         XCTAssertNil(self.mpCheckout?.viewModel.paymentData.token)
         XCTAssertNil(self.mpCheckout?.viewModel.paymentData.issuer)
-        XCTAssertEqual(self.mpCheckout?.navigationController.viewControllers.count, 1)
-        let lastVC = self.mpCheckout!.navigationController.viewControllers[0]
+        XCTAssertEqual(self.mpCheckout?.pxNavigationHandler.navigationController.viewControllers.count, 1)
+        let lastVC = self.mpCheckout!.pxNavigationHandler.navigationController.viewControllers[0]
         XCTAssertTrue(lastVC.isKind(of: CardFormViewController.self))
     }
 
@@ -169,8 +169,8 @@ class MercadoPagoCheckoutTest: BaseTest {
         XCTAssertNil(self.mpCheckout?.viewModel.paymentData.payerCost)
         XCTAssertNil(self.mpCheckout?.viewModel.paymentData.token)
         XCTAssertNil(self.mpCheckout?.viewModel.paymentData.issuer)
-        XCTAssertEqual(self.mpCheckout?.navigationController.viewControllers.count, 1)
-        let lastVC = self.mpCheckout!.navigationController.viewControllers[0]
+        XCTAssertEqual(self.mpCheckout?.pxNavigationHandler.navigationController.viewControllers.count, 1)
+        let lastVC = self.mpCheckout!.pxNavigationHandler.navigationController.viewControllers[0]
         XCTAssertTrue(lastVC.isKind(of: IdentificationViewController.self))
     }
 
@@ -188,8 +188,8 @@ class MercadoPagoCheckoutTest: BaseTest {
         XCTAssertNil(self.mpCheckout?.viewModel.paymentData.payerCost)
         XCTAssertNil(self.mpCheckout?.viewModel.paymentData.token)
         XCTAssertNil(self.mpCheckout?.viewModel.paymentData.issuer)
-        XCTAssertEqual(self.mpCheckout?.navigationController.viewControllers.count, 1)
-        let lastVC = self.mpCheckout!.navigationController.viewControllers[0]
+        XCTAssertEqual(self.mpCheckout?.pxNavigationHandler.navigationController.viewControllers.count, 1)
+        let lastVC = self.mpCheckout!.pxNavigationHandler.navigationController.viewControllers[0]
         XCTAssertTrue(lastVC.isKind(of: AdditionalStepViewController.self))
     }
 
@@ -207,8 +207,8 @@ class MercadoPagoCheckoutTest: BaseTest {
         XCTAssertNil(self.mpCheckout?.viewModel.paymentData.payerCost)
         XCTAssertNil(self.mpCheckout?.viewModel.paymentData.token)
         XCTAssertNil(self.mpCheckout?.viewModel.paymentData.issuer)
-        XCTAssertEqual(self.mpCheckout?.navigationController.viewControllers.count, 1)
-        let lastVC = self.mpCheckout!.navigationController.viewControllers[0]
+        XCTAssertEqual(self.mpCheckout?.pxNavigationHandler.navigationController.viewControllers.count, 1)
+        let lastVC = self.mpCheckout!.pxNavigationHandler.navigationController.viewControllers[0]
         XCTAssertTrue(lastVC.isKind(of: AdditionalStepViewController.self))
     }
 
@@ -223,8 +223,8 @@ class MercadoPagoCheckoutTest: BaseTest {
         self.mpCheckout?.showReviewAndConfirmScreen()
 
         XCTAssertNotNil(self.mpCheckout?.viewModel.paymentData.paymentMethod)
-        XCTAssertEqual(self.mpCheckout?.navigationController.viewControllers.count, 1)
-        let lastVC = self.mpCheckout!.navigationController.viewControllers[0]
+        XCTAssertEqual(self.mpCheckout?.pxNavigationHandler.navigationController.viewControllers.count, 1)
+        let lastVC = self.mpCheckout!.pxNavigationHandler.navigationController.viewControllers[0]
         XCTAssertTrue(lastVC.isKind(of: PXReviewViewController.self))
     }
 
@@ -239,8 +239,8 @@ class MercadoPagoCheckoutTest: BaseTest {
 
         self.mpCheckout!.showPaymentResultScreen()
         XCTAssertNotNil(self.mpCheckout?.viewModel.paymentResult)
-        XCTAssertEqual(self.mpCheckout?.navigationController.viewControllers.count, 1)
-        let lastVC = self.mpCheckout!.navigationController.viewControllers[0]
+        XCTAssertEqual(self.mpCheckout?.pxNavigationHandler.navigationController.viewControllers.count, 1)
+        let lastVC = self.mpCheckout!.pxNavigationHandler.navigationController.viewControllers[0]
         XCTAssertTrue(lastVC.isKind(of: PXResultViewController.self))
 
     }
@@ -258,8 +258,8 @@ class MercadoPagoCheckoutTest: BaseTest {
         self.mpCheckout!.showPaymentResultScreen()
 
         XCTAssertNotNil(self.mpCheckout?.viewModel.paymentResult)
-        XCTAssertEqual(self.mpCheckout?.navigationController.viewControllers.count, 1)
-        let lastVC = self.mpCheckout!.navigationController.viewControllers[0]
+        XCTAssertEqual(self.mpCheckout?.pxNavigationHandler.navigationController.viewControllers.count, 1)
+        let lastVC = self.mpCheckout!.pxNavigationHandler.navigationController.viewControllers[0]
         XCTAssertTrue(lastVC.isKind(of: PXResultViewController.self))
 
     }

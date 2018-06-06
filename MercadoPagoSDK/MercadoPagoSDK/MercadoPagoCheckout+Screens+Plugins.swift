@@ -52,7 +52,7 @@ extension MercadoPagoCheckout {
             containerVC.shouldHideNavigationBar = !shouldShowNavigationBar
         }
 
-        if let paymentMethodConfigPluginComponentView = paymentMethodConfigPluginComponent.render(store: PXCheckoutStore(), theme: ThemeManager.shared.getTheme()) {
+        if let paymentMethodConfigPluginComponentView = paymentMethodConfigPluginComponent.render(store: PXCheckoutStore(), theme: ThemeManager.shared.getCurrentTheme()) {
             paymentMethodConfigPluginComponentView.removeFromSuperview()
             paymentMethodConfigPluginComponentView.frame = containerVC.view.frame
             containerVC.view.addSubview(paymentMethodConfigPluginComponentView)
@@ -60,7 +60,7 @@ extension MercadoPagoCheckout {
 
         paymentMethodConfigPluginComponent.renderDidFinish?()
 
-        self.pushViewController(viewController: containerVC, animated: true)
+        self.pxNavigationHandler.pushViewController(viewController: containerVC, animated: true)
     }
 
     fileprivate func showPaymentPluginComponent(paymentPluginComponent: PXPluginComponent) {
@@ -88,18 +88,18 @@ extension MercadoPagoCheckout {
             containerVC.shouldHideNavigationBar = !shouldShowNavigationBar
         }
 
-        if let paymentPluginComponentView = paymentPluginComponent.render(store: PXCheckoutStore.sharedInstance, theme: ThemeManager.shared.getTheme()) {
+        if let paymentPluginComponentView = paymentPluginComponent.render(store: PXCheckoutStore.sharedInstance, theme: ThemeManager.shared.getCurrentTheme()) {
             paymentPluginComponentView.removeFromSuperview()
             paymentPluginComponentView.frame = containerVC.view.frame
-            paymentPluginComponentView.backgroundColor = ThemeManager.shared.getTheme().highlightBackgroundColor()
+            paymentPluginComponentView.backgroundColor = ThemeManager.shared.highlightBackgroundColor()
             containerVC.view.addSubview(paymentPluginComponentView)
         }
 
         //TODO: Change in Q2 - Payment processor by block. Not a view.
-        containerVC.view.backgroundColor = ThemeManager.shared.getTheme().highlightBackgroundColor()
+        containerVC.view.backgroundColor = ThemeManager.shared.highlightBackgroundColor()
         paymentPluginComponent.renderDidFinish?()
 
-        self.navigationController.pushViewController(containerVC, animated: false)
+        self.pxNavigationHandler.navigationController.pushViewController(containerVC, animated: false)
     }
 }
 

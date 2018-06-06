@@ -11,8 +11,8 @@ import MercadoPagoPXTracking
 
 private func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
+  case let (l__?, r__?):
+    return l__ < r__
   case (nil, _?):
     return true
   default:
@@ -22,8 +22,8 @@ private func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
+  case let (l__?, r__?):
+    return l__ > r__
   default:
     return rhs < lhs
   }
@@ -137,13 +137,7 @@ open class PaymentVaultViewController: MercadoPagoUIScrollViewController, UIColl
 
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         self.hideNavBar()
-
-        if let leftBarButtonItem = self.navigationItem.leftBarButtonItem {
-            leftBarButtonItem.action = #selector(invokeCallbackCancelShowingNavBar)
-        }
-
         self.navigationController!.navigationBar.shadowImage = nil
         self.extendedLayoutIncludesOpaqueBars = true
 
@@ -257,8 +251,9 @@ open class PaymentVaultViewController: MercadoPagoUIScrollViewController, UIColl
 
         } else if isCouponSection(section: indexPath.section) {
             if let coupon = self.viewModel.discount {
-                let step = CouponDetailViewController(coupon: coupon)
-                self.present(step, animated: false, completion: {})
+
+                PXComponentFactory.Modal.show(viewController: CouponDetailViewController.init(coupon: coupon), title: coupon.getDescription())
+
             } else {
                 let step = AddCouponViewController(amount: self.viewModel.amount, email: self.viewModel.email, mercadoPagoServicesAdapter: self.viewModel.mercadoPagoServicesAdapter, callback: { (coupon) in
                     self.viewModel.discount = coupon

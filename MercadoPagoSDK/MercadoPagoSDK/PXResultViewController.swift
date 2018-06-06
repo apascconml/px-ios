@@ -38,6 +38,21 @@ class PXResultViewController: PXComponentContainerViewController {
         self.viewModel.trackInfo()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        ViewUtils.addStatusBar(self.view, color: viewModel.primaryResultColor())
+        self.scrollView.showsVerticalScrollIndicator = false
+        self.scrollView.showsHorizontalScrollIndicator = false
+        if contentView.getSubviews().isEmpty {
+            renderViews()
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationItem.backBarButtonItem = UIBarButtonItem.init(title: "", style: .plain, target: nil, action: nil)
+    }
+
     func renderViews() {
 
         self.contentView.prepareForRender()
@@ -153,15 +168,6 @@ class PXResultViewController: PXComponentContainerViewController {
         }
         return bodyView.frame.height == 0
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        ViewUtils.addStatusBar(self.view, color: viewModel.primaryResultColor())
-        self.scrollView.showsVerticalScrollIndicator = false
-        self.scrollView.showsHorizontalScrollIndicator = false
-        self.view.layoutIfNeeded()
-        renderViews()
-    }
 }
 
 // Components
@@ -187,7 +193,7 @@ extension PXResultViewController {
     }
 
     func buildTopCustomView() -> UIView? {
-        if let component = self.viewModel.buildTopCustomComponent(), let componentView = component.render(store: PXCheckoutStore.sharedInstance, theme: ThemeManager.shared.getTheme()) {
+        if let component = self.viewModel.buildTopCustomComponent(), let componentView = component.render(store: PXCheckoutStore.sharedInstance, theme: ThemeManager.shared.getCurrentTheme()) {
             return componentView
         }
         let view = UIView()
@@ -196,7 +202,7 @@ extension PXResultViewController {
     }
 
     func buildBottomCustomView() -> UIView? {
-        if let component = self.viewModel.buildBottomCustomComponent(), let componentView = component.render(store: PXCheckoutStore.sharedInstance, theme: ThemeManager.shared.getTheme()) {
+        if let component = self.viewModel.buildBottomCustomComponent(), let componentView = component.render(store: PXCheckoutStore.sharedInstance, theme: ThemeManager.shared.getCurrentTheme()) {
             return componentView
         }
         let view = UIView()

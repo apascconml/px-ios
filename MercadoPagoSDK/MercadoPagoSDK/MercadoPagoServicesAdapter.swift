@@ -152,19 +152,8 @@ import MercadoPagoServices
             }, failure: failure)
     }
 
-    open func getBankDeals(callback : @escaping ([BankDeal]) -> Void, failure: @escaping ((_ error: NSError) -> Void)) {
-
-        mercadoPagoServices.getBankDeals(callback: { [weak self] (pxBankDeals) in
-            guard let strongSelf = self else {
-                return
-            }
-            var bankDeals: [BankDeal] = []
-            for pxBankDeal in pxBankDeals {
-                let bankDeal = strongSelf.getBankDealFromPXBankDeal(pxBankDeal)
-                bankDeals.append(bankDeal)
-            }
-            callback(bankDeals)
-            }, failure: failure)
+    open func getBankDeals(callback : @escaping ([PXBankDeal]) -> Void, failure: @escaping ((_ error: NSError) -> Void)) {
+        mercadoPagoServices.getBankDeals(callback: callback, failure: failure)
     }
 
     open func getIdentificationTypes(callback: @escaping ([IdentificationType]) -> Void, failure: @escaping ((_ error: NSError) -> Void)) {
@@ -219,7 +208,11 @@ import MercadoPagoServices
                 let installment = strongSelf.getInstallmentFromPXInstallment(pxInstallment)
                 installments.append(installment)
             }
-            callback(installments)
+            if let installment = installments.first, !installment.payerCosts.isEmpty {
+                callback(installments)
+            } else {
+                failure(strongSelf.createSerializationError(requestOrigin: ApiUtil.RequestOrigin.GET_INSTALLMENTS))
+            }
             }, failure: failure)
     }
 
@@ -254,5 +247,13 @@ import MercadoPagoServices
             callback(customer)
             }, failure: failure)
 
+    }
+
+    func createSerializationError(requestOrigin: ApiUtil.RequestOrigin) -> NSError {
+        #if DEBUG
+            print("--REQUEST_ERROR: Cannot serlialize data in \(requestOrigin.rawValue)\n")
+        #endif
+
+        return NSError(domain: "com.mercadopago.sdk", code: NSURLErrorCannotDecodeContentData, userInfo: [NSLocalizedDescriptionKey: "Hubo un error"])
     }
 }

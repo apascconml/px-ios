@@ -15,23 +15,23 @@ class PXReviewViewController: PXComponentContainerViewController {
     override open var screenName: String { return TrackingUtil.SCREEN_NAME_REVIEW_AND_CONFIRM }
     override open var screenId: String { return TrackingUtil.SCREEN_ID_REVIEW_AND_CONFIRM }
 
-    
     var footerView: UIView!
     var floatingButtonView: UIView!
-    
-    
+
     // MARK: Definitions
     var termsConditionView: PXTermsAndConditionView!
     lazy var itemViews = [UIView]()
     fileprivate var viewModel: PXReviewViewModel!
+    fileprivate var showCustomComponents: Bool
 
     var callbackPaymentData: ((PaymentData) -> Void)
     var callbackConfirm: ((PaymentData) -> Void)
     var callbackExit: (() -> Void)
 
     // MARK: Lifecycle - Publics
-    init(viewModel: PXReviewViewModel, callbackPaymentData : @escaping ((PaymentData) -> Void), callbackConfirm: @escaping ((PaymentData) -> Void), callbackExit: @escaping (() -> Void)) {
+    init(viewModel: PXReviewViewModel, showCustomComponents: Bool = true, callbackPaymentData : @escaping ((PaymentData) -> Void), callbackConfirm: @escaping ((PaymentData) -> Void), callbackExit: @escaping (() -> Void)) {
         self.viewModel = viewModel
+        self.showCustomComponents = showCustomComponents
         self.callbackPaymentData = callbackPaymentData
         self.callbackConfirm = callbackConfirm
         self.callbackExit = callbackExit
@@ -51,6 +51,10 @@ class PXReviewViewController: PXComponentContainerViewController {
         self.checkFloatingButtonVisibility()
     }
 
+    override func trackInfo() {
+        self.viewModel.trackInfo()
+    }
+
     func update(viewModel: PXReviewViewModel) {
         self.viewModel = viewModel
     }
@@ -62,7 +66,7 @@ extension PXReviewViewController {
     fileprivate func setupUI() {
         navBarTextColor = ThemeManager.shared.getTitleColorForReviewConfirmNavigation()
         loadMPStyles()
-        navigationController?.navigationBar.barTintColor = ThemeManager.shared.getTheme().highlightBackgroundColor()
+        navigationController?.navigationBar.barTintColor = ThemeManager.shared.highlightBackgroundColor()
         navigationItem.leftBarButtonItem?.tintColor = ThemeManager.shared.getTitleColorForReviewConfirmNavigation()
         if contentView.getSubviews().isEmpty {
             renderViews()
@@ -103,7 +107,7 @@ extension PXReviewViewController {
         }
 
         // Top Custom View
-        if let topCustomView = getTopCustomView() {
+        if showCustomComponents, let topCustomView = getTopCustomView() {
             topCustomView.addSeparatorLineToBottom(height: 1)
             topCustomView.clipsToBounds = true
             contentView.addSubviewToBottom(topCustomView)
@@ -120,7 +124,7 @@ extension PXReviewViewController {
         }
 
         // Bottom Custom View
-        if let bottomCustomView = getBottomCustomView() {
+        if showCustomComponents, let bottomCustomView = getBottomCustomView() {
             bottomCustomView.addSeparatorLineToBottom(height: 1)
             bottomCustomView.clipsToBounds = true
             contentView.addSubviewToBottom(bottomCustomView)
@@ -145,13 +149,13 @@ extension PXReviewViewController {
         PXLayout.centerHorizontally(view: footerView, to: contentView).isActive = true
         self.view.layoutIfNeeded()
         PXLayout.setHeight(owner: footerView, height: footerView.frame.height).isActive = true
-        
-        
+
         // Add floating button
         floatingButtonView = getFloatingButtonView()
         view.addSubview(floatingButtonView)
         PXLayout.setHeight(owner: floatingButtonView, height: viewModel.getFloatingConfirmViewHeight()).isActive = true
         PXLayout.matchWidth(ofView: floatingButtonView).isActive = true
+        PXLayout.centerHorizontally(view: floatingButtonView).isActive = true
         PXLayout.pinBottom(view: floatingButtonView, to: view, withMargin: 0).isActive = true
 
         // Add elastic header.
@@ -186,10 +190,11 @@ extension PXReviewViewController {
         let fixedButtonCoordinates = fixedButton.convert(CGPoint.zero, from: self.view.window)
         return fixedButtonCoordinates.y > floatingButtonCoordinates.y
     }
-    
+
     fileprivate func getPaymentMethodComponentView() -> UIView? {
         let action = PXComponentAction(label: PXStrings.review_change_payment_method_action.PXLocalized, action: { [weak self] in
             if let reviewViewModel = self?.viewModel {
+                self?.viewModel.trackChangePaymentMethodEvent()
                 self?.callbackPaymentData(reviewViewModel.getClearPaymentData())
             }
         })
@@ -213,7 +218,7 @@ extension PXReviewViewController {
 
     fileprivate func getCFTComponentView() -> UIView? {
         if viewModel.hasPayerCostAddionalInfo() {
-            let cftView = PXCFTComponentView(withCFTValue: viewModel.paymentData.payerCost?.getCFTValue(), titleColor: ThemeManager.shared.getTheme().labelTintColor(), backgroundColor: ThemeManager.shared.getTheme().highlightBackgroundColor())
+            let cftView = PXCFTComponentView(withCFTValue: viewModel.paymentData.payerCost?.getCFTValue(), titleColor: ThemeManager.shared.labelTintColor(), backgroundColor: ThemeManager.shared.highlightBackgroundColor())
             return cftView
         }
         return nil
@@ -241,21 +246,21 @@ extension PXReviewViewController {
         let footerComponent = PXFooterComponent(props: footerProps)
         return footerComponent.render()
     }
-    
+
     fileprivate func getTermsAndConditionView() -> PXTermsAndConditionView {
         let termsAndConditionView = PXTermsAndConditionView()
         return termsAndConditionView
     }
 
     fileprivate func getTopCustomView() -> UIView? {
-        if let component = self.viewModel.buildTopCustomComponent(), let componentView = component.render(store: PXCheckoutStore.sharedInstance, theme: ThemeManager.shared.getTheme()) {
+        if let component = self.viewModel.buildTopCustomComponent(), let componentView = component.render(store: PXCheckoutStore.sharedInstance, theme: ThemeManager.shared.getCurrentTheme()) {
             return componentView
         }
         return nil
     }
 
     fileprivate func getBottomCustomView() -> UIView? {
-        if let component = self.viewModel.buildBottomCustomComponent(), let componentView = component.render(store: PXCheckoutStore.sharedInstance, theme: ThemeManager.shared.getTheme()) {
+        if let component = self.viewModel.buildBottomCustomComponent(), let componentView = component.render(store: PXCheckoutStore.sharedInstance, theme: ThemeManager.shared.getCurrentTheme()) {
             return componentView
         }
         return nil
@@ -264,7 +269,7 @@ extension PXReviewViewController {
         super.scrollViewDidScroll(scrollView)
         self.checkFloatingButtonVisibility()
     }
-    
+
     func checkFloatingButtonVisibility() {
        if !isConfirmButtonVisible() {
             self.floatingButtonView.alpha = 1
@@ -279,21 +284,8 @@ extension PXReviewViewController {
 // MARK: Actions.
 extension PXReviewViewController: PXTermsAndConditionViewDelegate {
 
-    fileprivate func trackConfirmActionEvent() {
-        var properties: [String: String] = [TrackingUtil.METADATA_PAYMENT_METHOD_ID: viewModel.paymentData.paymentMethod?.paymentMethodId ?? "", TrackingUtil.METADATA_PAYMENT_TYPE_ID: viewModel.paymentData.paymentMethod?.paymentTypeId ?? "", TrackingUtil.METADATA_AMOUNT_ID: viewModel.preference.getAmount().stringValue]
-
-        if let customerCard = viewModel.paymentOptionSelected as? CustomerPaymentMethod {
-            properties[TrackingUtil.METADATA_CARD_ID] = customerCard.customerPaymentMethodId
-        }
-        if let installments = viewModel.paymentData.payerCost?.installments {
-            properties[TrackingUtil.METADATA_INSTALLMENTS] = installments.stringValue
-        }
-
-        MPXTracker.sharedInstance.trackActionEvent(action: TrackingUtil.ACTION_CHECKOUT_CONFIRMED, screenId: screenId, screenName: screenName, properties: properties)
-    }
-
     fileprivate func confirmPayment() {
-        trackConfirmActionEvent()
+        self.viewModel.trackConfirmActionEvent()
         self.hideNavBar()
         self.hideBackButton()
         self.callbackConfirm(self.viewModel.paymentData)

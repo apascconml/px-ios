@@ -31,13 +31,13 @@ extension MercadoPagoServicesAdapter {
 
     open func getCurrencyFromPXCurrency(_ pxCurrency: PXCurrency?) -> Currency {
         if let pxCurrency = pxCurrency {
-            let _id: String = pxCurrency.id
+            let currencyId: String = pxCurrency.id
             let description: String = pxCurrency._description ?? ""
             let symbol: String = pxCurrency.symbol ?? "$"
             let decimalPlaces: Int = pxCurrency.decimalPlaces ?? 2
             let decimalSeparator: String = pxCurrency.decimalSeparator ?? ","
             let thousandSeparator: String = pxCurrency.thousandSeparator ?? "."
-            let currency = Currency(currencyId: _id, description: description, symbol: symbol, decimalPlaces: decimalPlaces, decimalSeparator: decimalSeparator, thousandSeparator: thousandSeparator)
+            let currency = Currency(currencyId: currencyId, description: description, symbol: symbol, decimalPlaces: decimalPlaces, decimalSeparator: decimalSeparator, thousandSeparator: thousandSeparator)
             return currency
         }
         return Currency()
@@ -579,7 +579,40 @@ extension MercadoPagoServicesAdapter {
             paymentMethodSearch.defaultOption = getPaymentMethodSearchItemFromPXPaymentMethodSearchItem(pxDefaultOption)
         }
 
+        if let pxOneTap = pxPaymentMethodSearch.oneTap {
+            paymentMethodSearch.oneTap = getOneTapItemFromPXOneTapItem(pxOneTap)
+        }
         return paymentMethodSearch
+    }
+
+    open func getOneTapItemFromPXOneTapItem(_ pxOneTapItem: PXOneTapItem) -> OneTapItem {
+        let paymentMethodId = pxOneTapItem.paymentMethodId
+        let paymentTypeId = pxOneTapItem.paymentTypeId
+        var oneTapCard: OneTapCard? = nil
+        if let pxOneTapCard = pxOneTapItem.oneTapCard {
+            oneTapCard = getOneTapCardFromPXOneTapCard(pxOneTapCard)
+        }
+
+        let oneTapItem = OneTapItem(paymentMethodId: paymentMethodId, paymentTypeId: paymentTypeId, oneTapCard: oneTapCard)
+        return oneTapItem
+    }
+
+    open func getOneTapCardFromPXOneTapCard(_ pxOneTapCard: PXOneTapCard) -> OneTapCard {
+        let cardId = pxOneTapCard.cardId
+        let cardDescription = pxOneTapCard.cardDescription
+        let issuer = getIssuerFromPXIssuer(pxOneTapCard.issuer)
+        let lastFourDigits = pxOneTapCard.lastFourDigits
+        let installments = pxOneTapCard.installments ?? 1
+        var payerCosts: [PayerCost] = []
+        if let pxPayerCosts = pxOneTapCard.payerCosts {
+            for pxPayerCost in pxPayerCosts {
+                if let payerCost = getPayerCostFromPXPayerCost(pxPayerCost) {
+                    payerCosts = Array.safeAppend(payerCosts, payerCost)
+                }
+            }
+        }
+        let oneTapCard = OneTapCard(cardId: cardId, cardDescription: cardDescription, issuer: issuer, lastFourDigits: lastFourDigits, installments: installments, payerCosts: payerCosts)
+        return oneTapCard
     }
 
     open func getCustomerPaymentMethodFromPXCustomOptionSearchItem(_ pxCustomOptionSearchItem: PXCustomOptionSearchItem) -> CustomerPaymentMethod {
@@ -719,25 +752,22 @@ extension MercadoPagoServicesAdapter {
         if let pxInstallmentPayerCosts = pxInstallment.payerCosts {
             installment.payerCosts = []
             for pxPayerCost in pxInstallmentPayerCosts {
-                let payerCost = getPayerCostFromPXPayerCost(pxPayerCost)
-                installment.payerCosts = Array.safeAppend(installment.payerCosts, payerCost)
+                if let payerCost = getPayerCostFromPXPayerCost(pxPayerCost) {
+                    installment.payerCosts = Array.safeAppend(installment.payerCosts, payerCost)
+                }
             }
         }
         return installment
     }
 
-    open func getPayerCostFromPXPayerCost(_ pxPayerCost: PXPayerCost?) -> PayerCost {
-        let payerCost = PayerCost()
+    open func getPayerCostFromPXPayerCost(_ pxPayerCost: PXPayerCost?) -> PayerCost? {
         if let pxPayerCost = pxPayerCost {
-            payerCost.installmentRate = pxPayerCost.installmentRate ?? 0.0
-            payerCost.labels = pxPayerCost.labels
-            payerCost.minAllowedAmount = pxPayerCost.minAllowedAmount ?? 1
-            payerCost.maxAllowedAmount = pxPayerCost.maxAllowedAmount ?? 1000000
-            payerCost.recommendedMessage = pxPayerCost.recommendedMessage
-            payerCost.installmentAmount = pxPayerCost.installmentAmount ?? 1000
-            payerCost.totalAmount = pxPayerCost.totalAmount ?? 1000
-            payerCost.installments = pxPayerCost.installments ?? 1
+            guard let installments = pxPayerCost.installments, let installmentRate = pxPayerCost.installmentRate, let labels = pxPayerCost.labels, let installmentAmount = pxPayerCost.installmentAmount, let totalAmount = pxPayerCost.totalAmount else {
+                return nil
+            }
+            return PayerCost(installments: installments, installmentRate: installmentRate, labels: labels, minAllowedAmount: pxPayerCost.minAllowedAmount ?? 0, maxAllowedAmount: pxPayerCost.maxAllowedAmount ?? 0, recommendedMessage: pxPayerCost.recommendedMessage, installmentAmount: installmentAmount, totalAmount: totalAmount)
+
         }
-        return payerCost
+        return nil
     }
 }

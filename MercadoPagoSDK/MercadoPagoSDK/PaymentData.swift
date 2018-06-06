@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objcMembers public class PaymentData: NSObject {
+@objcMembers public class PaymentData: NSObject, NSCopying {
 
     public var paymentMethod: PaymentMethod?
     public var issuer: Issuer?
@@ -17,6 +17,8 @@ import UIKit
     public var payer: Payer?
     public var transactionDetails: TransactionDetails?
     public var discount: DiscountCoupon?
+
+    private let paymentTypesWithoutInstallments = [PaymentTypeId.DEBIT_CARD.rawValue, PaymentTypeId.PREPAID_CARD.rawValue]
 
     /**
      Este metodo deberia borrar SOLO la data recolectada atraves del flujo de Checkout,
@@ -32,7 +34,20 @@ import UIKit
         // No borrar el descuento
     }
 
-    func isComplete() -> Bool {
+    public func copy(with zone: NSZone? = nil) -> Any {
+        let copyObj = PaymentData()
+        copyObj.paymentMethod = paymentMethod
+        copyObj.issuer = issuer
+        copyObj.payerCost = payerCost
+        copyObj.token = token
+        copyObj.payerCost = payerCost
+        copyObj.transactionDetails = transactionDetails
+        copyObj.discount = discount
+        copyObj.payer = payer
+        return copyObj
+    }
+
+    func isComplete(shouldCheckForToken: Bool = true) -> Bool {
 
         guard let paymentMethod = self.paymentMethod else {
             return false
@@ -54,14 +69,18 @@ import UIKit
             return true
         }
 
-        if paymentMethod.isCard && (token == nil || payerCost == nil) {
-
-            if (paymentMethod.paymentTypeId == PaymentTypeId.DEBIT_CARD.rawValue || paymentMethod.paymentTypeId == PaymentTypeId.PREPAID_CARD.rawValue ) && token != nil {
-                return true
-            }
+        if paymentMethod.isIssuerRequired && self.issuer == nil {
             return false
         }
 
+        if paymentMethod.isCard && payerCost == nil &&
+            !paymentTypesWithoutInstallments.contains(paymentMethod.paymentTypeId) {
+            return false
+        }
+
+        if paymentMethod.isCard && !hasToken() && shouldCheckForToken {
+            return false
+        }
         return true
     }
 

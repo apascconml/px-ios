@@ -171,6 +171,7 @@ extension MercadoPagoCheckoutViewModel {
     }
 
     func needSecurityCode() -> Bool {
+
         guard let pmSelected = self.paymentOptionSelected else {
             return false
         }
@@ -194,20 +195,23 @@ extension MercadoPagoCheckoutViewModel {
         guard let pm = self.paymentData.getPaymentMethod() else {
             return false
         }
+
         //Note: this is being used only for new cards, saved cards tokenization is
         //made in MercadoPagoCheckout#collectSecurityCode().
-
         let hasInstallmentsIfNeeded = self.paymentData.getPayerCost() != nil || !pm.isCreditCard
 
         let newCard = !paymentData.hasToken() && pm.isCard && self.cardToken != nil
         let savedCardWithESC = !paymentData.hasToken() && pm.isCard && hasSavedESC() && hasInstallmentsIfNeeded
 
-        return newCard || savedCardWithESC
+        return (newCard || savedCardWithESC)
     }
 
     func needReviewAndConfirm() -> Bool {
-
         guard self.paymentOptionSelected != nil else {
+            return false
+        }
+
+        if readyToPay {
             return false
         }
 
@@ -226,6 +230,34 @@ extension MercadoPagoCheckoutViewModel {
 
         if paymentData.isComplete() {
             return MercadoPagoCheckoutViewModel.flowPreference.isReviewAndConfirmScreenEnable()
+        }
+        return false
+    }
+
+    func needOneTapFlow() -> Bool {
+        guard let search = self.search else {
+            return false
+        }
+
+        if readyToPay {
+            return false
+        }
+
+        if paymentResult != nil {
+            return false
+        }
+
+        if self.isCheckoutComplete() {
+            return false
+        }
+
+        if paymentData.isComplete() {
+            return false
+        }
+
+        if let paymentMethodSelected = OneTapFlow.autoSelectOneTapOption(search: search, paymentMethodPlugins: paymentMethodPluginsToShow, forceTest: false) {
+            updateCheckoutModel(paymentOptionSelected: paymentMethodSelected)
+            return true
         }
         return false
     }

@@ -14,14 +14,14 @@ import Foundation
     open var installments: Int = 0
     open var installmentRate: Double = 0
     open var labels: [String]!
-    open var minAllowedAmount: Double = 0
-    open var maxAllowedAmount: Double = 0
-    open var recommendedMessage: String!
+    open var minAllowedAmount: Double? = 0
+    open var maxAllowedAmount: Double? = 0
+    open var recommendedMessage: String?
     open var installmentAmount: Double = 0
     open var totalAmount: Double = 0
 
     public init (installments: Int = 0, installmentRate: Double = 0, labels: [String] = [],
-                 minAllowedAmount: Double = 0, maxAllowedAmount: Double = 0, recommendedMessage: String! = nil, installmentAmount: Double = 0, totalAmount: Double = 0) {
+                 minAllowedAmount: Double = 0, maxAllowedAmount: Double = 0, recommendedMessage: String? = nil, installmentAmount: Double = 0, totalAmount: Double = 0) {
 
         self.installments = installments
         self.installmentRate = installmentRate
@@ -57,8 +57,8 @@ import Foundation
                         payerCost.recommendedMessage = recommendedMessage
                     }
                 if let labelsArray = json["labels"] as? NSArray {
-                        for i in 0..<labelsArray.count {
-                                if let label = labelsArray[i] as? String {
+                        for index in 0..<labelsArray.count {
+                                if let label = labelsArray[index] as? String {
                                         payerCost.labels.append(label)
                                     }
                             }

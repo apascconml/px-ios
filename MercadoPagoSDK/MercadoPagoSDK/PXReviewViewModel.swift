@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import MercadoPagoPXTracking
 
-final class PXReviewViewModel: NSObject {
+class PXReviewViewModel: NSObject {
+
+    var screenName: String { return TrackingUtil.SCREEN_NAME_REVIEW_AND_CONFIRM }
+    var screenId: String { return TrackingUtil.SCREEN_ID_REVIEW_AND_CONFIRM }
 
     static let ERROR_DELTA = 0.001
     public static var CUSTOMER_ID = ""
@@ -27,6 +31,28 @@ final class PXReviewViewModel: NSObject {
         self.paymentOptionSelected = paymentOptionSelected
         self.reviewScreenPreference = reviewScreenPreference
         super.init()
+    }
+
+    // MARK: Tracking logic
+    func trackConfirmActionEvent() {
+        var properties: [String: String] = [TrackingUtil.METADATA_PAYMENT_METHOD_ID: paymentData.paymentMethod?.paymentMethodId ?? "", TrackingUtil.METADATA_PAYMENT_TYPE_ID: paymentData.paymentMethod?.paymentTypeId ?? "", TrackingUtil.METADATA_AMOUNT_ID: preference.getAmount().stringValue]
+
+        if let customerCard = paymentOptionSelected as? CustomerPaymentMethod {
+            properties[TrackingUtil.METADATA_CARD_ID] = customerCard.customerPaymentMethodId
+        }
+        if let installments = paymentData.payerCost?.installments {
+            properties[TrackingUtil.METADATA_INSTALLMENTS] = installments.stringValue
+        }
+
+        MPXTracker.sharedInstance.trackActionEvent(action: TrackingUtil.ACTION_CHECKOUT_CONFIRMED, screenId: screenId, screenName: screenName, properties: properties)
+    }
+
+    func trackInfo() {
+        MPXTracker.sharedInstance.trackScreen(screenId: screenId, screenName: screenName)
+    }
+
+    func trackChangePaymentMethodEvent() {
+        // No tracking for change payment method event in review view controller for now
     }
 }
 
@@ -101,7 +127,7 @@ extension PXReviewViewModel {
     }
 
     func getClearPaymentData() -> PaymentData {
-        let newPaymentData: PaymentData = paymentData
+        let newPaymentData: PaymentData = paymentData.copy() as? PaymentData ?? paymentData
         newPaymentData.clearCollectedData()
         return newPaymentData
     }
@@ -138,8 +164,8 @@ extension PXReviewViewModel {
                 let discountSummaryDetail = SummaryDetail(title: self.reviewScreenPreference.summaryTitles[SummaryType.DISCOUNT]!, detail: discountAmountDetail)
                 summary.addSummaryDetail(summaryDetail: discountSummaryDetail, type: SummaryType.DISCOUNT)
             }
-            summary.details[SummaryType.DISCOUNT]?.titleColor = ThemeManager.shared.getTheme().noTaxAndDiscountLabelTintColor()
-            summary.details[SummaryType.DISCOUNT]?.amountColor = ThemeManager.shared.getTheme().noTaxAndDiscountLabelTintColor()
+            summary.details[SummaryType.DISCOUNT]?.titleColor = ThemeManager.shared.noTaxAndDiscountLabelTintColor()
+            summary.details[SummaryType.DISCOUNT]?.amountColor = ThemeManager.shared.noTaxAndDiscountLabelTintColor()
         }
         if let payerCost = self.paymentData.payerCost {
             var interest = 0.0
@@ -192,9 +218,9 @@ extension PXReviewViewModel {
         var subtitle: NSAttributedString? = nil
         var accreditationTime: NSAttributedString? = nil
         var action = withAction
-        let backgroundColor = ThemeManager.shared.getTheme().detailedBackgroundColor()
-        let lightLabelColor = ThemeManager.shared.getTheme().lightLabelTintColor()
-        let boldLabelColor = ThemeManager.shared.getTheme().boldLabelTintColor()
+        let backgroundColor = ThemeManager.shared.detailedBackgroundColor()
+        let lightLabelColor = ThemeManager.shared.labelTintColor()
+        let boldLabelColor = ThemeManager.shared.boldLabelTintColor()
 
         if pm.isCard {
             if let lastFourDigits = (paymentData.token?.lastFourDigits) {
@@ -236,13 +262,13 @@ extension PXReviewViewModel {
             }
         }
 
-        let props = PXSummaryComponentProps(summaryViewModel: getSummaryViewModel(amount: totalAmount), paymentData: paymentData, total: totalAmount, width: width, customTitle: customTitle, textColor: ThemeManager.shared.getTheme().boldLabelTintColor(), backgroundColor: ThemeManager.shared.getTheme().highlightBackgroundColor())
+        let props = PXSummaryComponentProps(summaryViewModel: getSummaryViewModel(amount: totalAmount), paymentData: paymentData, total: totalAmount, width: width, customTitle: customTitle, textColor: ThemeManager.shared.boldLabelTintColor(), backgroundColor: ThemeManager.shared.highlightBackgroundColor())
 
         return PXSummaryComponent(props: props)
     }
 
     func buildTitleComponent() -> PXReviewTitleComponent {
-        let props = PXReviewTitleComponentProps(titleColor: ThemeManager.shared.getTitleColorForReviewConfirmNavigation(), backgroundColor: ThemeManager.shared.getTheme().highlightBackgroundColor())
+        let props = PXReviewTitleComponentProps(titleColor: ThemeManager.shared.getTitleColorForReviewConfirmNavigation(), backgroundColor: ThemeManager.shared.highlightBackgroundColor())
         return PXReviewTitleComponent(props: props)
     }
 }
@@ -287,7 +313,7 @@ extension PXReviewViewModel {
         let amountTitle = reviewScreenPreference.getAmountTitle()
         let quantityTile = reviewScreenPreference.getQuantityLabel()
 
-        let itemTheme: PXItemComponentProps.ItemTheme = (backgroundColor: ThemeManager.shared.getTheme().detailedBackgroundColor(), boldLabelColor: ThemeManager.shared.getTheme().boldLabelTintColor(), lightLabelColor: ThemeManager.shared.getTheme().labelTintColor())
+        let itemTheme: PXItemComponentProps.ItemTheme = (backgroundColor: ThemeManager.shared.detailedBackgroundColor(), boldLabelColor: ThemeManager.shared.boldLabelTintColor(), lightLabelColor: ThemeManager.shared.labelTintColor())
 
         let itemProps = PXItemComponentProps(imageURL: item.pictureUrl, title: itemTitle, description: itemDescription, quantity: itemQuantiy, unitAmount: itemPrice, amountTitle: amountTitle, quantityTitle: quantityTile, collectorImage: collectorIcon, itemTheme: itemTheme)
         return PXItemComponent(props: itemProps)
@@ -348,5 +374,4 @@ extension PXReviewViewModel {
         }
         return nil
     }
-
 }

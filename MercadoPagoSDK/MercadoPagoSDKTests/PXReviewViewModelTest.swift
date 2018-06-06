@@ -122,7 +122,7 @@ class PXReviewViewModelTest: BaseTest {
     func testCleanPaymentData() {
         XCTAssertEqual(self.instanceWithCoupon!.paymentData.paymentMethod!.paymentMethodId, "visa")
         XCTAssertEqual(self.instanceWithCoupon!.paymentData.payerCost!.installments, 3)
-        XCTAssertEqual(self.instanceWithCoupon!.paymentData.payer?.email, "thisisanem@il.com")
+        XCTAssertEqual(self.instanceWithCoupon!.paymentData.payer!.email, "thisisanem@il.com")
         XCTAssertEqual(self.instanceWithCoupon!.paymentData.discount!.discountId, 123)
         let newPaymentData = self.instanceWithCoupon!.getClearPaymentData()
 

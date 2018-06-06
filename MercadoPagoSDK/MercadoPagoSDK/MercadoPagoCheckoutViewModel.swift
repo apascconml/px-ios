@@ -41,6 +41,7 @@ public enum CheckoutStep: String {
     case SCREEN_PAYMENT_METHOD_PLUGIN_PAYMENT
     case SCREEN_PAYMENT_PLUGIN_PAYMENT
     case SERVICE_PAYMENT_METHOD_PLUGIN_INIT
+    case FLOW_ONE_TAP
 }
 
 @objcMembers
@@ -433,6 +434,10 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
             return .SERVICE_GET_PAYMENT_METHODS
         }
 
+        if needOneTapFlow() {
+            return .FLOW_ONE_TAP
+        }
+
         if !isPaymentTypeSelected() {
             return .SCREEN_PAYMENT_METHOD_SELECTION
         }
@@ -622,21 +627,11 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
     func updateCheckoutModel(paymentData: PaymentData) {
         self.paymentData = paymentData
         if paymentData.getPaymentMethod() == nil {
-            // Vuelvo a root para iniciar la selección de medios de pago
-            self.paymentOptionSelected = nil
-            self.paymentMethodOptions = self.rootPaymentMethodOptions
-            self.search = nil
-            self.rootVC = true
-            self.cardToken = nil
-            self.issuers = nil
-            self.entityTypes = nil
-            self.financialInstitutions = nil
-            self.payerCosts = nil
+            prepareForNewSelection()
             self.initWithPaymentData = false
         } else {
             self.readyToPay = true
         }
-
     }
 
     public func updateCheckoutModel(payment: Payment) {

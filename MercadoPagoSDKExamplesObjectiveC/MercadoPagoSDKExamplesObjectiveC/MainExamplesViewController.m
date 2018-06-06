@@ -18,8 +18,10 @@
 #import "MercadoPagoSDKExamplesObjectiveC-Swift.h"
 #import "PaymentMethodPluginConfigViewController.h"
 #import "PaymentPluginViewController.h"
+#import "MLMyMPPXTrackListener.h"
 
 @import MercadoPagoSDK;
+@import MercadoPagoPXTracking;
 
 
 @implementation MainExamplesViewController
@@ -80,31 +82,33 @@
     
     dc.name = @"Patito Off";
     dc.coupon_amount = [externalDiscount stringValue];
-    dc.amount_off = [externalDiscount stringValue];
+    dc.percent_off = @"10";
     dc.currency_id = @"ARS";
     dc.concept = @"Descuento de patito";
-    dc.amountWithoutDiscount = 60;
-    dc = nil;
+    dc.amountWithoutDiscount = 50;
+    //dc = nil;
 
-    self.pref.preferenceId = @"241261700-459d4126-903c-4bad-bc05-82e5f13fa7d3";
-   // self.pref.preferenceId = @"241261708-cd353b1b-940f-493b-b960-10106a24203c"; // Error;
-    self.mpCheckout = [[MercadoPagoCheckout alloc] initWithPublicKey:@"TEST-93c0061e-ba7d-479c-9d52-c60b0af58a91"
-   // self.mpCheckout = [[MercadoPagoCheckout alloc] initWithPublicKey:@"APP_USR-2e257493-3b80-4b71-8547-c841d035e8f2" // Error
+    [MPXTracker.sharedInstance setTrackListener:[MLMyMPPXTrackListener new]];
+
+    self.pref.preferenceId = @"243962506-b6476e8b-a1a4-40cb-bfec-9954bff4a143";
+    self.mpCheckout = [[MercadoPagoCheckout alloc] initWithPublicKey:@"TEST-4763b824-93d7-4ca2-a7f7-93539c3ee5bd"
     accessToken:nil
                                                   checkoutPreference:self.pref paymentData:self.paymentData paymentResult:self.paymentResult discount:dc navigationController:self.navigationController];
 
     
     // Set default color or theme.
     MeliTheme *meliExampleTheme = [[MeliTheme alloc] init];
-    [self.mpCheckout setTheme:meliExampleTheme];
+    MPTheme *mpExampleTheme = [[MPTheme alloc] init];
+    [self.mpCheckout setTheme: meliExampleTheme];
 
-    //[self.mpCheckout setDefaultColor:[UIColor colorWithRed:0.79 green:0.15 blue:0.30 alpha:1.0]];
-    
+    // CDP color.
+    // [self.mpCheckout setDefaultColor:[UIColor colorWithRed:0.49 green:0.17 blue:0.55 alpha:1.0]];
+  
     //[self setHooks];
     
-    //[self setPaymentMethodPlugins];
+    [self setPaymentMethodPlugins];
 
-    [self setPaymentPlugin];
+    //[self setPaymentPlugin];
 
     // Setear PaymentResultScreenPreference
 //    [self setPaymentResultScreenPreference];
@@ -113,10 +117,9 @@
     [self setVoidCallback];
 
     //Setear ReviewScreenPrefernce
- //   [self setReviewScreenPreference];
+    [self setReviewScreenPreference];
 
     [self.mpCheckout start];
-
 }
 
 -(void)setHooks {
@@ -143,19 +146,19 @@
 
     PaymentPluginViewController *makePaymentComponent = [storyboard instantiateViewControllerWithIdentifier:@"paymentPlugin"];
 
-    PXPaymentMethodPlugin * bitcoinPaymentMethodPlugin = [[PXPaymentMethodPlugin alloc] initWithPaymentMethodPluginId:@"bitcoin_payment" name:@"Bitcoin" image:[UIImage imageNamed:@"bitcoin_payment"] description:@"" paymentPlugin:makePaymentComponent];
+    PXPaymentMethodPlugin * bitcoinPaymentMethodPlugin = [[PXPaymentMethodPlugin alloc] initWithPaymentMethodPluginId:@"account_money" name:@"Bitcoin" image:[UIImage imageNamed:@"bitcoin_payment"] description:@"" paymentPlugin:makePaymentComponent];
 
     // Payment method config plugin component.
     PaymentMethodPluginConfigViewController *configPaymentComponent = [storyboard instantiateViewControllerWithIdentifier:@"paymentMethodConfigPlugin"];
 
-    [bitcoinPaymentMethodPlugin setPaymentMethodConfigWithPlugin:configPaymentComponent];
+    //[bitcoinPaymentMethodPlugin setPaymentMethodConfigWithPlugin:configPaymentComponent];
 
     NSMutableArray *paymentMethodPlugins = [[NSMutableArray alloc] init];
     [paymentMethodPlugins addObject:bitcoinPaymentMethodPlugin];
 
-    //[self.mpCheckout setPaymentMethodPluginsWithPlugins:paymentMethodPlugins];
+    [self.mpCheckout setPaymentMethodPluginsWithPlugins:paymentMethodPlugins];
 
-   // [self.mpCheckout setPaymentPluginWithPaymentPlugin:makePaymentComponent];
+    [self.mpCheckout setPaymentPluginWithPaymentPlugin:makePaymentComponent];
 }
 
 -(void)setPaymentPlugin {
@@ -348,7 +351,7 @@
 
         //        UIViewController *vc = [[[MercadoPagoCheckout alloc] initWithCheckoutPreference:self.pref paymentData:paymentData navigationController:self.navigationController] getRootViewController];
         //
-        [self.mpCheckout updateReviewAndConfirm];
+        //[self.mpCheckout updateReviewAndConfirm];
 
     }];
 }

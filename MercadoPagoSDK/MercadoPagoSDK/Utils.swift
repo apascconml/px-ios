@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 private func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
     switch (lhs, rhs) {
-    case let (l?, r?):
-        return l < r
+    case let (l__?, r__?):
+        return l__ < r__
     case (nil, _?):
         return true
     default:
@@ -21,8 +21,8 @@ private func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
     switch (lhs, rhs) {
-    case let (l?, r?):
-        return l > r
+    case let (l__?, r__?):
+        return l__ > r__
     default:
         return rhs < lhs
     }
@@ -82,16 +82,19 @@ class Utils {
         return attributedSymbol
     }
 
-    class func getAttributedAmount(_ amount: Double, currency: Currency, color: UIColor = UIColor.px_white(), fontSize: CGFloat = 20, centsFontSize: CGFloat = 10, baselineOffset: Int = 7, negativeAmount: Bool = false) -> NSMutableAttributedString {
-        return getAttributedAmount(amount, thousandSeparator: currency.thousandsSeparator, decimalSeparator: currency.decimalSeparator, currencySymbol: currency.symbol, color: color, fontSize: fontSize, centsFontSize: centsFontSize, baselineOffset: baselineOffset, negativeAmount: negativeAmount)
+    class func getAttributedAmount(_ amount: Double, currency: Currency, color: UIColor = UIColor.px_white(), fontSize: CGFloat = 20, centsFontSize: CGFloat = 10, baselineOffset: Int = 7, negativeAmount: Bool = false, lightFont: Bool = false) -> NSMutableAttributedString {
+        return getAttributedAmount(amount, thousandSeparator: currency.thousandsSeparator, decimalSeparator: currency.decimalSeparator, currencySymbol: currency.symbol, color: color, fontSize: fontSize, centsFontSize: centsFontSize, baselineOffset: baselineOffset, negativeAmount: negativeAmount, lightFont: lightFont)
     }
 
-    class func getAttributedAmount(_ amount: Double, thousandSeparator: String, decimalSeparator: String, currencySymbol: String, color: UIColor = UIColor.px_white(), fontSize: CGFloat = 20, centsFontSize: CGFloat = 10, baselineOffset: Int = 7, negativeAmount: Bool = false, smallSymbol: Bool = false) -> NSMutableAttributedString {
+    class func getAttributedAmount(_ amount: Double, thousandSeparator: String, decimalSeparator: String, currencySymbol: String, color: UIColor = UIColor.px_white(), fontSize: CGFloat = 20, centsFontSize: CGFloat = 10, baselineOffset: Int = 7, negativeAmount: Bool = false, smallSymbol: Bool = false, lightFont: Bool = false) -> NSMutableAttributedString {
         let cents = getCentsFormatted(String(amount), decimalSeparator: ".")
         let amount = getAmountFormatted(String(describing: Int(amount)), thousandSeparator: thousandSeparator, decimalSeparator: ".")
 
-        let normalAttributes: [NSAttributedStringKey: AnyObject] = [NSAttributedStringKey.font: UIFont(name: MercadoPago.DEFAULT_FONT_NAME, size: fontSize) ?? Utils.getFont(size: fontSize), NSAttributedStringKey.foregroundColor: color]
-        let smallAttributes: [NSAttributedStringKey: AnyObject] = [NSAttributedStringKey.font: UIFont(name: MercadoPago.DEFAULT_FONT_NAME, size: centsFontSize) ?? UIFont.systemFont(ofSize: centsFontSize), NSAttributedStringKey.foregroundColor: color, NSAttributedStringKey.baselineOffset: baselineOffset as AnyObject]
+        let normalAttributesFont = lightFont ? Utils.getLightFont(size: fontSize) : Utils.getFont(size: fontSize)
+        let smallAttributesFont = lightFont ? Utils.getLightFont(size: centsFontSize) : Utils.getFont(size: centsFontSize)
+
+        let normalAttributes: [NSAttributedStringKey: AnyObject] = [NSAttributedStringKey.font: normalAttributesFont, NSAttributedStringKey.foregroundColor: color]
+        let smallAttributes: [NSAttributedStringKey: AnyObject] = [NSAttributedStringKey.font: smallAttributesFont, NSAttributedStringKey.foregroundColor: color, NSAttributedStringKey.baselineOffset: baselineOffset as AnyObject]
 
         var symbols: String!
         if negativeAmount {
@@ -182,6 +185,14 @@ class Utils {
             return UIFont(name: ThemeManager.shared.getLightFontName(), size: size) ?? UIFont.systemFont(ofSize: size, weight: UIFont.Weight.thin)
         } else {
             return UIFont(name: ThemeManager.shared.getLightFontName(), size: size) ?? UIFont.systemFont(ofSize: size)
+        }
+    }
+
+    class func getSemiBoldFont(size: CGFloat) -> UIFont {
+        if #available(iOS 8.2, *) {
+            return UIFont(name: ThemeManager.shared.getSemiBoldFontName(), size: size) ?? UIFont.systemFont(ofSize: size, weight: UIFont.Weight.semibold)
+        } else {
+            return UIFont(name: ThemeManager.shared.getSemiBoldFontName(), size: size) ?? UIFont.systemFont(ofSize: size)
         }
     }
 
@@ -441,49 +452,90 @@ class Utils {
         return dayString + " de ".localized + formatterMonth.string(from: date).localized.lowercased() + " de ".localized + formatterYear.string(from: date)
     }
 
-    func loadImageWithCache(withUrl urlStr: String?, targetImage: UIImageView, placeHolderImage: UIImage?, fallbackImage: UIImage?) {
+    static func getShortFormatedStringDate(_ date: Date?) -> String? {
+        if let date = date {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd/MM/yy"
+            return formatter.string(from: date)
+        }
+        return nil
+    }
 
-        guard let urlString = urlStr else {return}
+    static let imageCache = NSCache<NSString, AnyObject>()
 
-        let url = URL(string: urlString)
+    func loadImageFromURLWithCache(withUrl urlStr: String?, targetView: UIView, placeholderView: UIView?, fallbackView: UIView?, didFinish: ((UIImage) -> Void)? = nil) {
 
-        let imageCache = NSCache<NSString, AnyObject>()
-
-        targetImage.image = placeHolderImage
-
-        // Get cached image
-        if let cachedImage = imageCache.object(forKey: urlString as NSString) as? UIImage {
-            targetImage.image = cachedImage
+        guard let urlString = urlStr else {
+            if let fallbackView = fallbackView {
+                targetView.removeAllSubviews()
+                targetView.addSubviewAtFullSize(with: fallbackView)
+            }
             return
         }
 
-        if let targetUrl = url {
+        //Set placeholder view
+        if let placeholderView = placeholderView {
+            targetView.removeAllSubviews()
+            targetView.addSubviewAtFullSize(with: placeholderView)
+        }
 
+        //Check & Load cached image
+        if let cachedImage = Utils.imageCache.object(forKey: urlString as NSString) as? UIImage {
+            let imageView = self.createImageView(with: cachedImage, contentMode: targetView.contentMode)
+            targetView.removeAllSubviews()
+            targetView.addSubviewAtFullSize(with: imageView)
+            didFinish?(cachedImage)
+            return
+        }
+
+        if let url = URL(string: urlString) {
             // Request image.
-            URLSession.shared.dataTask(with: targetUrl, completionHandler: { (data, _, error) in
+            URLSession.shared.dataTask(with: url, completionHandler: { (data, _, error) in
 
                 if error != nil {
                     DispatchQueue.main.async {
-                        targetImage.image = fallbackImage
+                        if let fallbackView = fallbackView {
+                            targetView.removeAllSubviews()
+                            targetView.addSubviewAtFullSize(with: fallbackView)
+                        }
                     }
                     return
                 }
 
                 DispatchQueue.main.async {
                     if let remoteData = data, let image = UIImage(data: remoteData) {
-                        imageCache.setObject(image, forKey: urlString as NSString)
-                        targetImage.image = image
+                        //Save image to cache
+                        Utils.imageCache.setObject(image, forKey: urlString as NSString)
 
-                    } else if let fallbackImage = fallbackImage {
-                        targetImage.image = fallbackImage
+                        //Add image
+                        let imageView = self.createImageView(with: image, contentMode: targetView.contentMode)
+                        targetView.removeAllSubviews()
+                        targetView.addSubviewAtFullSize(with: imageView)
+                        didFinish?(image)
+                    } else if let fallbackView = fallbackView {
+                        targetView.removeAllSubviews()
+                        targetView.addSubviewAtFullSize(with: fallbackView)
                     }
                 }
             }).resume()
-        } else if let fallbackImage = fallbackImage {
-            targetImage.image = fallbackImage
+        } else if let fallbackView = fallbackView {
+            targetView.removeAllSubviews()
+            targetView.addSubviewAtFullSize(with: fallbackView)
         }
 
         return
     }
 
+    func createImageView(with image: UIImage?, contentMode: UIViewContentMode) -> UIImageView {
+        let imageView = UIImageView(image: image)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = contentMode
+        return imageView
+    }
+
+    func loadImageWithCache(withUrl urlStr: String?, targetImageView: UIImageView, placeholderImage: UIImage?, fallbackImage: UIImage?) {
+        let placeholderView = createImageView(with: placeholderImage, contentMode: targetImageView.contentMode)
+        let fallbackView = createImageView(with: fallbackImage, contentMode: targetImageView.contentMode)
+        loadImageFromURLWithCache(withUrl: urlStr, targetView: targetImageView, placeholderView: placeholderView, fallbackView: fallbackView)
+    }
 }

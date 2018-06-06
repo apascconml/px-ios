@@ -29,7 +29,7 @@ extension MercadoPagoCheckout {
             strongSelf.viewModel.rootVC = false
             strongSelf.executeNextStep()
         })
-        self.pushViewController(viewController: paymentMethodSelectionStep, animated: true)
+        self.pxNavigationHandler.pushViewController(viewController: paymentMethodSelectionStep, animated: true)
 
     }
     func showCardForm() {
@@ -42,7 +42,7 @@ extension MercadoPagoCheckout {
             strongSelf.viewModel.updateCheckoutModel(paymentMethods: paymentMethods, cardToken: cardToken)
             strongSelf.executeNextStep()
         })
-        self.pushViewController(viewController: cardFormStep, animated: true)
+        self.pxNavigationHandler.pushViewController(viewController: cardFormStep, animated: true)
     }
 
     func showIdentificationScreen() {
@@ -58,9 +58,9 @@ extension MercadoPagoCheckout {
         })
 
         identificationStep.callbackCancel = {[weak self] in
-            self?.navigationController.popViewController(animated: true)
+            self?.pxNavigationHandler.navigationController.popViewController(animated: true)
         }
-        self.pushViewController(viewController: identificationStep, animated: true)
+        self.pxNavigationHandler.pushViewController(viewController: identificationStep, animated: true)
     }
 
     func showPayerInfoFlow() {
@@ -74,7 +74,7 @@ extension MercadoPagoCheckout {
             strongSelf.viewModel.updateCheckoutModel(payer: payer)
             strongSelf.executeNextStep()
         }
-        self.pushViewController(viewController: vc, animated: true)
+        self.pxNavigationHandler.pushViewController(viewController: vc, animated: true)
     }
 
     func showIssuersScreen() {
@@ -89,7 +89,7 @@ extension MercadoPagoCheckout {
 
         })
 
-        self.pushViewController(viewController: issuerStep, animated: true)
+        self.pxNavigationHandler.pushViewController(viewController: issuerStep, animated: true)
     }
 
     func showPayerCostScreen() {
@@ -122,7 +122,7 @@ extension MercadoPagoCheckout {
             })
 
         }
-        self.pushViewController(viewController: payerCostStep, animated: true)
+        self.pxNavigationHandler.pushViewController(viewController: payerCostStep, animated: true)
     }
 
     func showReviewAndConfirmScreen() {
@@ -162,17 +162,15 @@ extension MercadoPagoCheckout {
             strongSelf.cancel()
         })
 
-        self.pushViewController(viewController: reviewVC, animated: true)
+        self.pxNavigationHandler.pushViewController(viewController: reviewVC, animated: true)
     }
 
     func showSecurityCodeScreen() {
 
         let securityCodeVc = SecurityCodeViewController(viewModel: self.viewModel.savedCardSecurityCodeViewModel(), collectSecurityCodeCallback: { [weak self] (cardInformation: CardInformationForm, securityCode: String) -> Void in
             self?.createCardToken(cardInformation: cardInformation as? CardInformation, securityCode: securityCode)
-
         })
-        self.pushViewController(viewController: securityCodeVc, animated: true, backToChechoutRoot: true)
-
+        self.pxNavigationHandler.pushViewController(viewController: securityCodeVc, animated: true, backToFirstPaymentVault: true)
     }
 
     func collectSecurityCodeForRetry() {
@@ -183,7 +181,7 @@ extension MercadoPagoCheckout {
             self?.cloneCardToken(token: token, securityCode: securityCode)
 
         })
-        self.pushViewController(viewController: securityCodeVc, animated: true)
+        self.pxNavigationHandler.pushViewController(viewController: securityCodeVc, animated: true)
 
     }
 
@@ -205,7 +203,7 @@ extension MercadoPagoCheckout {
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.navigationController.setNavigationBarHidden(false, animated: false)
+            strongSelf.pxNavigationHandler.navigationController.setNavigationBarHidden(false, animated: false)
             if state == PaymentResult.CongratsState.call_FOR_AUTH {
                 strongSelf.viewModel.prepareForClone()
                 strongSelf.collectSecurityCodeForRetry()
@@ -217,7 +215,7 @@ extension MercadoPagoCheckout {
                 strongSelf.finish()
             }
         })
-        self.pushViewController(viewController: congratsViewController, animated: false)
+        self.pxNavigationHandler.pushViewController(viewController: congratsViewController, animated: false)
 
     }
 
@@ -228,32 +226,14 @@ extension MercadoPagoCheckout {
         }
         let viewModel = PXBusinessResultViewModel(businessResult: businessResult, paymentData: self.viewModel.paymentData, amount: self.viewModel.getAmount())
         let congratsViewController = PXResultViewController(viewModel: viewModel) { _ in}
-        self.pushViewController(viewController: congratsViewController, animated: false)
+        self.pxNavigationHandler.pushViewController(viewController: congratsViewController, animated: false)
 
     }
 
     func showErrorScreen() {
-        let errorStep = ErrorViewController(error: MercadoPagoCheckoutViewModel.error, callback: nil, callbackCancel: {[weak self] in
-
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.finish()
-        })
-
+        pxNavigationHandler.showErrorScreen(error: MercadoPagoCheckoutViewModel.error, callbackCancel: finish, errorCallback: self.viewModel.errorCallback)
         MercadoPagoCheckoutViewModel.error = nil
-        errorStep.callback = {
-            self.navigationController.dismiss(animated: true, completion: {
-                self.viewModel.errorCallback?()
-            })
-        }
-        self.dismissLoading {  [weak self] in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.navigationController.present(errorStep, animated: true, completion: {})
-        }
-        
+
     }
 
     func showFinancialInstitutionsScreen() {
@@ -279,10 +259,10 @@ extension MercadoPagoCheckout {
                     }
                     object.viewModel.financialInstitutions = nil
                     object.viewModel.paymentData.transactionDetails?.financialInstitution = nil
-                    self?.navigationController.popViewController(animated: true)
+                    self?.pxNavigationHandler.navigationController.popViewController(animated: true)
                 }
 
-                self.pushViewController(viewController: financialInstitutionStep, animated: true)
+                self.pxNavigationHandler.pushViewController(viewController: financialInstitutionStep, animated: true)
             }
         }
     }
@@ -313,9 +293,30 @@ extension MercadoPagoCheckout {
             }
             object.viewModel.entityTypes = nil
             object.viewModel.paymentData.payer?.entityType = nil
-            self?.navigationController.popViewController(animated: true)
+            self?.pxNavigationHandler.navigationController.popViewController(animated: true)
         }
 
-        self.pushViewController(viewController: entityTypeStep, animated: true)
+        self.pxNavigationHandler.pushViewController(viewController: entityTypeStep, animated: true)
+    }
+
+    func startOneTapFlow() {
+        guard let search = viewModel.search, let paymentOtionSelected = viewModel.paymentOptionSelected else {
+            return
+        }
+        let onetapFlow = OneTapFlow(navigationController: pxNavigationHandler, paymentData: viewModel.paymentData, checkoutPreference: viewModel.checkoutPreference, search: search, paymentOptionSelected: paymentOtionSelected, reviewScreenPreference: viewModel.reviewScreenPreference, finishOneTap: { [weak self] (paymentData) in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.viewModel.updateCheckoutModel(paymentData: paymentData)
+            strongSelf.executeNextStep()
+
+            }, cancelOneTap: { [weak self] in
+                self?.viewModel.prepareForNewSelection()
+                self?.executeNextStep()
+            }, exitCheckout: {
+                [weak self] in
+                self?.finish()
+        })
+        onetapFlow.start()
     }
 }
