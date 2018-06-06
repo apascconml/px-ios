@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import MercadoPagoServices
+
 private func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l__?, r__?):
@@ -38,13 +40,13 @@ private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
     open var payer: Payer?
     open var binaryMode: Bool = false
     open var transactionDetails: TransactionDetails?
-    open var discount: DiscountCoupon?
+    open var discount: PXDiscount?
 
     override init() {
         super.init()
     }
 
-    init(preferenceId: String, publicKey: String, paymentMethodId: String, installments: Int = 0, issuerId: String = "", tokenId: String = "", transactionDetails: TransactionDetails, payer: Payer, binaryMode: Bool, discount: DiscountCoupon? = nil) {
+    init(preferenceId: String, publicKey: String, paymentMethodId: String, installments: Int = 0, issuerId: String = "", tokenId: String = "", transactionDetails: TransactionDetails, payer: Payer, binaryMode: Bool, discount: PXDiscount? = nil) {
         self.preferenceId = preferenceId
         self.publicKey = publicKey
         self.paymentMethodId = paymentMethodId
@@ -87,8 +89,8 @@ private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
             obj["transaction_details"] = self.transactionDetails?.toJSON()
         }
         if let discount = self.discount {
-            obj["campaign_id"] = discount.discountId
-            obj["coupon_amount"] = discount.coupon_amount
+            obj["campaign_id"] = discount.id
+            obj["coupon_amount"] = discount.couponAmount
         }
 
         return obj
@@ -128,7 +130,7 @@ private func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 open class MPPaymentFactory {
 
-    open class func createMPPayment(preferenceId: String, publicKey: String, paymentMethodId: String, installments: Int = 0, issuerId: String = "", tokenId: String = "", customerId: String? = nil, isBlacklabelPayment: Bool, transactionDetails: TransactionDetails, payer: Payer, binaryMode: Bool, discount: DiscountCoupon? = nil) -> MPPayment {
+    open class func createMPPayment(preferenceId: String, publicKey: String, paymentMethodId: String, installments: Int = 0, issuerId: String = "", tokenId: String = "", customerId: String? = nil, isBlacklabelPayment: Bool, transactionDetails: TransactionDetails, payer: Payer, binaryMode: Bool, discount: PXDiscount? = nil) -> MPPayment {
 
         if !String.isNullOrEmpty(customerId) {
             return CustomerPayment(preferenceId: preferenceId, publicKey: publicKey, paymentMethodId: paymentMethodId, installments: installments, issuerId: issuerId, tokenId: tokenId, customerId: customerId!, transactionDetails: transactionDetails, payer: payer, binaryMode: binaryMode)

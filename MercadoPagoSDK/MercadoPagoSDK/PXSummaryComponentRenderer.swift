@@ -11,7 +11,7 @@ import Foundation
 struct PXSummaryComponentRenderer {
 
     func render(_ summaryComponent: PXSummaryComponent) -> UIView {
-        if summaryComponent.props.summaryViewModel.details.count > 1 || summaryComponent.props.paymentData.getNumberOfInstallments() > 1 {
+        if summaryComponent.props.summaryViewModel.details.count > 1 || summaryComponent.props.amountHelper.paymentData.getNumberOfInstallments() > 1 {
             return buildFullSummary(props: summaryComponent.props)
         }
         return buildCompactSummary(props: summaryComponent.props)
@@ -21,7 +21,7 @@ struct PXSummaryComponentRenderer {
 extension PXSummaryComponentRenderer {
 
     fileprivate func buildFullSummary(props: PXSummaryComponentProps) -> UIView {
-        let fullSummaryView = PXSummaryFullComponentView(width: props.width, summaryViewModel: props.summaryViewModel, paymentData: props.paymentData, totalAmount: props.totalAmount, backgroundColor: props.backgroundColor, customSummaryTitle: props.customTitle)
+        let fullSummaryView = PXSummaryFullComponentView(width: props.width, summaryViewModel: props.summaryViewModel, amountHelper: props.amountHelper, backgroundColor: props.backgroundColor, customSummaryTitle: props.customTitle)
         PXLayout.setHeight(owner: fullSummaryView, height: fullSummaryView.getHeight()).isActive = true
         return fullSummaryView
     }
@@ -34,7 +34,7 @@ extension PXSummaryComponentRenderer {
         compactView.backgroundColor = props.backgroundColor
         compactView.translatesAutoresizingMaskIntoConstraints = false
 
-        let amountAttributeText = Utils.getAttributedAmount(props.totalAmount, currency: MercadoPagoContext.getCurrency(), color: props.textColor, fontSize: PXSummaryCompactComponentView.TITLE_FONT_SIZE, baselineOffset: BASELINE_OFFSET)
+        let amountAttributeText = Utils.getAttributedAmount(props.amountHelper.amountToPay, currency: MercadoPagoContext.getCurrency(), color: props.textColor, fontSize: PXSummaryCompactComponentView.TITLE_FONT_SIZE, baselineOffset: BASELINE_OFFSET)
 
         let customTitleAttributeText = NSAttributedString(string: props.customTitle, attributes: [NSAttributedStringKey.font: Utils.getFont(size: PXSummaryCompactComponentView.CUSTOM_TITLE_FONT_SIZE)])
 

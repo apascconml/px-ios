@@ -6,30 +6,31 @@
 //  Copyright © 2017 MercadoPago. All rights reserved.
 //
 
+import MercadoPagoServices
 extension MercadoPagoCheckout {
 
-    public convenience init(publicKey: String, checkoutPreference: CheckoutPreference, paymentData: PaymentData, paymentResult: PaymentResult, discount: DiscountCoupon? = nil, navigationController: UINavigationController) {
-        self.init(publicKey: publicKey, accessToken: "", checkoutPreference: checkoutPreference, paymentData: paymentData, paymentResult: paymentResult, discount: discount, navigationController: navigationController)
+    public convenience init(publicKey: String, checkoutPreference: CheckoutPreference, paymentData: PaymentData, paymentResult: PaymentResult, navigationController: UINavigationController) {
+        self.init(publicKey: publicKey, accessToken: "", checkoutPreference: checkoutPreference, paymentData: paymentData, paymentResult: paymentResult, navigationController: navigationController)
     }
 
     // Basic inits
 
-    public convenience init(publicKey: String, checkoutPreference: CheckoutPreference, discount: DiscountCoupon? = nil, navigationController: UINavigationController) {
-        self.init(publicKey: publicKey, accessToken: "", checkoutPreference: checkoutPreference, paymentData: nil, paymentResult: nil, discount: nil, navigationController: navigationController)
+    public convenience init(publicKey: String, checkoutPreference: CheckoutPreference, discount: PXDiscount? = nil, navigationController: UINavigationController) {
+        self.init(publicKey: publicKey, accessToken: "", checkoutPreference: checkoutPreference, paymentData: nil, paymentResult: nil, navigationController: navigationController)
     }
 
-    public convenience init(publicKey: String, accessToken: String, checkoutPreference: CheckoutPreference, discount: DiscountCoupon? = nil, navigationController: UINavigationController) {
-        self.init(publicKey: publicKey, accessToken: accessToken, checkoutPreference: checkoutPreference, paymentData: nil, paymentResult: nil, discount: nil, navigationController: navigationController)
+    public convenience init(publicKey: String, accessToken: String, checkoutPreference: CheckoutPreference, discount: PXDiscount? = nil, navigationController: UINavigationController) {
+        self.init(publicKey: publicKey, accessToken: accessToken, checkoutPreference: checkoutPreference, paymentData: nil, paymentResult: nil, navigationController: navigationController)
     }
 
     // Inits with paymentData
 
-    public convenience init(publicKey: String, checkoutPreference: CheckoutPreference, paymentData: PaymentData, discount: DiscountCoupon? = nil, navigationController: UINavigationController) {
-        self.init(publicKey: publicKey, accessToken: "", checkoutPreference: checkoutPreference, paymentData: paymentData, paymentResult: nil, discount: nil, navigationController: navigationController)
+    public convenience init(publicKey: String, checkoutPreference: CheckoutPreference, paymentData: PaymentData, discount: PXDiscount? = nil, navigationController: UINavigationController) {
+        self.init(publicKey: publicKey, accessToken: "", checkoutPreference: checkoutPreference, paymentData: paymentData, paymentResult: nil, navigationController: navigationController)
     }
 
-    public convenience init(publicKey: String, accessToken: String, checkoutPreference: CheckoutPreference, paymentData: PaymentData, discount: DiscountCoupon? = nil, navigationController: UINavigationController) {
-        self.init(publicKey: publicKey, accessToken: accessToken, checkoutPreference: checkoutPreference, paymentData: paymentData, paymentResult: nil, discount: nil, navigationController: navigationController)
+    public convenience init(publicKey: String, accessToken: String, checkoutPreference: CheckoutPreference, paymentData: PaymentData, discount: PXDiscount? = nil, navigationController: UINavigationController) {
+        self.init(publicKey: publicKey, accessToken: accessToken, checkoutPreference: checkoutPreference, paymentData: paymentData, paymentResult: nil, navigationController: navigationController)
     }
 
     @available(*, deprecated, message: "Use setTheme or setDefaultColor instead.")

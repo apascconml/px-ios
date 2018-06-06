@@ -22,7 +22,7 @@
 
 @import MercadoPagoSDK;
 @import MercadoPagoPXTracking;
-
+@import MercadoPagoServices;
 
 @implementation MainExamplesViewController
 
@@ -75,7 +75,7 @@
     //Setear PaymentCallback
 
     [self setPaymentCallback];
-
+/*
     DiscountCoupon* dc = [[DiscountCoupon alloc] initWithDiscountId:123];
     
     NSNumber *externalDiscount = [NSNumber numberWithDouble:2.00];
@@ -86,24 +86,30 @@
     dc.currency_id = @"ARS";
     dc.concept = @"Descuento de patito";
     dc.amountWithoutDiscount = 50;
-    //dc = nil;
-
+    dc = nil;
+*/
+    
     [MPXTracker.sharedInstance setTrackListener:[MLMyMPPXTrackListener new]];
 
     self.pref.preferenceId = @"243962506-b6476e8b-a1a4-40cb-bfec-9954bff4a143";
     self.mpCheckout = [[MercadoPagoCheckout alloc] initWithPublicKey:@"TEST-4763b824-93d7-4ca2-a7f7-93539c3ee5bd"
-    accessToken:nil
-                                                  checkoutPreference:self.pref paymentData:self.paymentData paymentResult:self.paymentResult discount:dc navigationController:self.navigationController];
+    accessToken:nil checkoutPreference:self.pref paymentData:self.paymentData paymentResult:self.paymentResult navigationController:self.navigationController];
 
+    //PXDiscount* discount = [[PXDiscount alloc] init];
     
     // Set default color or theme.
     MeliTheme *meliExampleTheme = [[MeliTheme alloc] init];
     MPTheme *mpExampleTheme = [[MPTheme alloc] init];
     [self.mpCheckout setTheme: meliExampleTheme];
-
+    
+    PXDiscount* discount = [[PXDiscount alloc] initWithId:@"123" name:@"nada" percentOff:20 amountOff:0 couponAmount:7 currencyId:@"ARG"];
+    PXCampaign* campaign = [[PXCampaign alloc] initWithId:123 code:@"sad" name:@"Campaña" maxCouponAmount:7];
+    
+    [self.mpCheckout setDiscount:discount withCampaign:campaign];
+    
     // CDP color.
-    // [self.mpCheckout setDefaultColor:[UIColor colorWithRed:0.49 green:0.17 blue:0.55 alpha:1.0]];
-  
+    //[self.mpCheckout setDefaultColor:[UIColor colorWithRed:0.49 green:0.17 blue:0.55 alpha:1.0]];
+
     //[self setHooks];
     
     [self setPaymentMethodPlugins];
@@ -117,7 +123,7 @@
     [self setVoidCallback];
 
     //Setear ReviewScreenPrefernce
-    [self setReviewScreenPreference];
+//    [self setReviewScreenPreference];
 
     [self.mpCheckout start];
 }

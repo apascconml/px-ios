@@ -28,7 +28,7 @@ import UIKit
 
     open class func fromJSON(_ json: NSDictionary) -> Customer {
         let customer: Customer = Customer()
-        customer.customerId = json["id"] as! String!
+        customer.customerId = json["id"] as! String?
         customer.liveMode = json["live_mode"] as? Bool
         customer.email = json["email"] as? String
         customer.firstName = json["first_name"] as? String

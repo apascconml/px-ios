@@ -110,7 +110,7 @@ extension MercadoPagoCheckout {
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.viewModel.paymentData.discount = discount
+           // strongSelf.viewModel.paymentData.discount = discount TODO SET DISCOUNT WITH CAMPAIGN
 
             strongSelf.getPayerCosts(updateCallback: {
 
@@ -187,6 +187,8 @@ extension MercadoPagoCheckout {
 
     func showPaymentResultScreen() {
 
+        _ = self.viewModel.saveOrDeleteESC()
+
         if self.viewModel.businessResult != nil {
             self.showBusinessResultScreen()
             return
@@ -194,8 +196,6 @@ extension MercadoPagoCheckout {
         if self.viewModel.paymentResult == nil {
             self.viewModel.paymentResult = PaymentResult(payment: self.viewModel.payment!, paymentData: self.viewModel.paymentData)
         }
-
-       _ = self.viewModel.saveOrDeleteESC()
 
         var congratsViewController: MercadoPagoUIViewController
 
@@ -224,7 +224,7 @@ extension MercadoPagoCheckout {
         guard let businessResult = self.viewModel.businessResult else {
             return
         }
-        let viewModel = PXBusinessResultViewModel(businessResult: businessResult, paymentData: self.viewModel.paymentData, amount: self.viewModel.getAmount())
+        let viewModel = PXBusinessResultViewModel(businessResult: businessResult, paymentData: self.viewModel.paymentData, amountHelper: self.viewModel.amountHelper)
         let congratsViewController = PXResultViewController(viewModel: viewModel) { _ in}
         self.pxNavigationHandler.pushViewController(viewController: congratsViewController, animated: false)
 
@@ -309,7 +309,6 @@ extension MercadoPagoCheckout {
             }
             strongSelf.viewModel.updateCheckoutModel(paymentData: paymentData)
             strongSelf.executeNextStep()
-
             }, cancelOneTap: { [weak self] in
                 self?.viewModel.prepareForNewSelection()
                 self?.executeNextStep()

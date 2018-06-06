@@ -19,16 +19,16 @@ class PXBusinessResultViewModel: NSObject, PXResultViewModelInterface {
 
     let businessResult: PXBusinessResult
     let paymentData: PaymentData
-    let amount: Double
+    let amountHelper: PXAmountHelper
 
     //Default Image
     private lazy var approvedIconName = "default_item_icon"
     private lazy var approvedIconBundle = MercadoPago.getBundle()
 
-    init(businessResult: PXBusinessResult, paymentData: PaymentData, amount: Double) {
+    init(businessResult: PXBusinessResult, paymentData: PaymentData, amountHelper: PXAmountHelper) {
         self.businessResult = businessResult
         self.paymentData = paymentData
-        self.amount = amount
+        self.amountHelper = amountHelper
         super.init()
     }
 
@@ -132,14 +132,34 @@ class PXBusinessResultViewModel: NSObject, PXResultViewModelInterface {
 
         let image = getPaymentMethodIcon(paymentMethod: pm)
         let currency = MercadoPagoContext.getCurrency()
-        var amountTitle = Utils.getAmountFormated(amount: self.amount, forCurrency: currency)
-        var amountDetail: String?
+        var amountTitle = Utils.getAmountFormated(amount: self.amountHelper.amountToPay, forCurrency: currency)
+        var amountDetail: NSMutableAttributedString?
         if let payerCost = self.paymentData.payerCost {
             if payerCost.installments > 1 {
                 amountTitle = String(payerCost.installments) + "x " + Utils.getAmountFormated(amount: payerCost.installmentAmount, forCurrency: currency)
-                amountDetail = Utils.getAmountFormated(amount: payerCost.totalAmount, forCurrency: currency, addingParenthesis: true)
+                amountDetail = Utils.getAmountFormated(amount: payerCost.totalAmount, forCurrency: currency, addingParenthesis: true).toAttributedString()
             }
         }
+
+        if self.amountHelper.discount != nil {
+            var amount = self.amountHelper.preferenceAmount
+
+            if let payerCostTotalAmount = self.paymentData.payerCost?.totalAmount {
+                amount = payerCostTotalAmount + self.amountHelper.amountOff
+            }
+
+            let attributes: [NSAttributedStringKey: Any] = [NSAttributedStringKey.strikethroughStyle: 1]
+            let preferenceAmountString = Utils.getAttributedAmount(withAttributes: attributes, amount: amount, currency: currency, negativeAmount: false)
+
+            if amountDetail == nil {
+                amountDetail = preferenceAmountString
+            } else {
+                amountDetail?.append(String.NON_BREAKING_LINE_SPACE.toAttributedString())
+                amountDetail?.append(preferenceAmountString)
+            }
+
+        }
+
         var pmDescription: String = ""
         let paymentMethodName = pm.name ?? ""
 
@@ -163,7 +183,7 @@ class PXBusinessResultViewModel: NSObject, PXResultViewModelInterface {
             disclaimerText =  ("En tu estado de cuenta verás el cargo como %0".localized as NSString).replacingOccurrences(of: "%0", with: "\(statementDescription)")
         }
 
-        let bodyProps = PXPaymentMethodProps(paymentMethodIcon: image, title: amountTitle.toAttributedString(), subtitle: amountDetail?.toAttributedString(), descriptionTitle: pmDescription.toAttributedString(), descriptionDetail: descriptionDetail, disclaimer: disclaimerText?.toAttributedString(), backgroundColor: ThemeManager.shared.detailedBackgroundColor(), lightLabelColor: ThemeManager.shared.labelTintColor(), boldLabelColor: ThemeManager.shared.boldLabelTintColor())
+        let bodyProps = PXPaymentMethodProps(paymentMethodIcon: image, title: amountTitle.toAttributedString(), subtitle: amountDetail, descriptionTitle: pmDescription.toAttributedString(), descriptionDetail: descriptionDetail, disclaimer: disclaimerText?.toAttributedString(), backgroundColor: ThemeManager.shared.detailedBackgroundColor(), lightLabelColor: ThemeManager.shared.labelTintColor(), boldLabelColor: ThemeManager.shared.boldLabelTintColor())
 
         return PXPaymentMethodComponent(props: bodyProps)
     }

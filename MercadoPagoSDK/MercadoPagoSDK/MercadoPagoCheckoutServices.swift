@@ -37,13 +37,13 @@ extension MercadoPagoCheckout {
 
     func getDirectDiscount() {
         self.pxNavigationHandler.presentLoading()
-        self.viewModel.mercadoPagoServicesAdapter.getDirectDiscount(amount: self.viewModel.getAmount(), payerEmail: self.viewModel.checkoutPreference.payer.email, callback: { [weak self] (discount) in
+        self.viewModel.mercadoPagoServicesAdapter.getDirectDiscount(amount: self.viewModel.amountHelper.amountToPay, payerEmail: self.viewModel.checkoutPreference.payer.email, callback: { [weak self] (_) in
 
             guard let strongSelf = self else {
                 return
             }
 
-            strongSelf.viewModel.paymentData.discount = discount
+          //  strongSelf.viewModel.paymentData.discount = discount TODO SET DISCOUNT WITH CAMPAIGN
             strongSelf.executeNextStep()
 
         }, failure: { [weak self] _ in
@@ -83,7 +83,7 @@ extension MercadoPagoCheckout {
     func getPaymentMethodSearch() {
         self.pxNavigationHandler.presentLoading()
 
-        self.viewModel.mercadoPagoServicesAdapter.getPaymentMethodSearch(amount: self.viewModel.getAmount(), excludedPaymentTypesIds: self.viewModel.getExcludedPaymentTypesIds(), excludedPaymentMethodsIds: self.viewModel.getExcludedPaymentMethodsIds(), defaultPaymentMethod: self.viewModel.getDefaultPaymentMethodId(), payer: Payer(), site: MercadoPagoContext.getSite(), callback: { [weak self] (paymentMethodSearch) in
+        self.viewModel.mercadoPagoServicesAdapter.getPaymentMethodSearch(amount: self.viewModel.amountHelper.amountToPay, excludedPaymentTypesIds: self.viewModel.getExcludedPaymentTypesIds(), excludedPaymentMethodsIds: self.viewModel.getExcludedPaymentMethodsIds(), defaultPaymentMethod: self.viewModel.getDefaultPaymentMethodId(), payer: Payer(), site: MercadoPagoContext.getSite(), callback: { [weak self] (paymentMethodSearch) in
 
             guard let strongSelf = self else {
                 return
@@ -302,7 +302,7 @@ extension MercadoPagoCheckout {
 
         let bin = self.viewModel.cardToken?.getBin()
 
-        self.viewModel.mercadoPagoServicesAdapter.getInstallments(bin: bin, amount: self.viewModel.getAmount(), issuer: self.viewModel.paymentData.getIssuer(), paymentMethodId: paymentMethod.paymentMethodId, callback: { [weak self] (installments) in
+        self.viewModel.mercadoPagoServicesAdapter.getInstallments(bin: bin, amount: self.viewModel.amountHelper.amountToPay, issuer: self.viewModel.paymentData.getIssuer(), paymentMethodId: paymentMethod.paymentMethodId, callback: { [weak self] (installments) in
 
             guard let strongSelf = self else {
                 return

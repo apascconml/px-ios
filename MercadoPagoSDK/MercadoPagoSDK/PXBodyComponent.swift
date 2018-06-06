@@ -49,13 +49,31 @@ open class PXBodyComponent: NSObject, PXComponentizable {
 
         let image = getPaymentMethodIcon(paymentMethod: pm)
         let currency = MercadoPagoContext.getCurrency()
-        var amountTitle = Utils.getAmountFormated(amount: self.props.amount, forCurrency: currency)
-        var amountDetail: String?
+        var amountTitle = Utils.getAmountFormated(amount: self.props.amountHelper.amountToPay, forCurrency: currency)
+        var amountDetail: NSMutableAttributedString?
         if let payerCost = self.props.paymentResult.paymentData?.payerCost {
             if payerCost.installments > 1 {
                 amountTitle = String(payerCost.installments) + "x " + Utils.getAmountFormated(amount: payerCost.installmentAmount, forCurrency: currency)
-                amountDetail = Utils.getAmountFormated(amount: payerCost.totalAmount, forCurrency: currency, addingParenthesis: true)
+                amountDetail = Utils.getAmountFormated(amount: payerCost.totalAmount, forCurrency: currency, addingParenthesis: true).toAttributedString()
             }
+        }
+        if self.props.amountHelper.discount != nil {
+            var amount = self.props.amountHelper.preferenceAmount
+
+            if let payerCostTotalAmount = self.props.paymentResult.paymentData?.payerCost?.totalAmount {
+                amount = payerCostTotalAmount + self.props.amountHelper.amountOff
+            }
+
+            let attributes: [NSAttributedStringKey: Any] = [NSAttributedStringKey.strikethroughStyle: 1]
+            let preferenceAmountString = Utils.getAttributedAmount(withAttributes: attributes, amount: amount, currency: currency, negativeAmount: false)
+
+            if amountDetail == nil {
+                amountDetail = preferenceAmountString
+            } else {
+                amountDetail?.append(String.NON_BREAKING_LINE_SPACE.toAttributedString())
+                amountDetail?.append(preferenceAmountString)
+            }
+
         }
         var pmDescription: String = ""
         let paymentMethodName = pm.name ?? ""
@@ -80,7 +98,7 @@ open class PXBodyComponent: NSObject, PXComponentizable {
             disclaimerText =  ("En tu estado de cuenta verás el cargo como %0".localized as NSString).replacingOccurrences(of: "%0", with: "\(statementDescription)")
         }
 
-        let bodyProps = PXPaymentMethodProps(paymentMethodIcon: image, title: amountTitle.toAttributedString(), subtitle: amountDetail?.toAttributedString(), descriptionTitle: pmDescription.toAttributedString(), descriptionDetail: descriptionDetail, disclaimer: disclaimerText?.toAttributedString(), backgroundColor: ThemeManager.shared.detailedBackgroundColor(), lightLabelColor: ThemeManager.shared.labelTintColor(), boldLabelColor: ThemeManager.shared.boldLabelTintColor())
+        let bodyProps = PXPaymentMethodProps(paymentMethodIcon: image, title: amountTitle.toAttributedString(), subtitle: amountDetail, descriptionTitle: pmDescription.toAttributedString(), descriptionDetail: descriptionDetail, disclaimer: disclaimerText?.toAttributedString(), backgroundColor: ThemeManager.shared.detailedBackgroundColor(), lightLabelColor: ThemeManager.shared.labelTintColor(), boldLabelColor: ThemeManager.shared.boldLabelTintColor())
 
         return PXPaymentMethodComponent(props: bodyProps)
     }
@@ -181,14 +199,14 @@ open class PXBodyComponent: NSObject, PXComponentizable {
 }
 
 open class PXBodyProps: NSObject {
-    var paymentResult: PaymentResult
-    var instruction: Instruction?
-    var amount: Double
-    var callback : (() -> Void)
-    init(paymentResult: PaymentResult, amount: Double, instruction: Instruction?, callback:  @escaping (() -> Void)) {
+    let paymentResult: PaymentResult
+    let instruction: Instruction?
+    let amountHelper: PXAmountHelper
+    let callback : (() -> Void)
+    init(paymentResult: PaymentResult, amountHelper: PXAmountHelper, instruction: Instruction?, callback:  @escaping (() -> Void)) {
         self.paymentResult = paymentResult
         self.instruction = instruction
-        self.amount = amount
+        self.amountHelper = amountHelper
         self.callback = callback
     }
 }

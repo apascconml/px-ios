@@ -100,7 +100,7 @@ class SimpleVaultViewController: UIViewController, UITableViewDataSource, UITabl
 		let keyboardBounds: CGRect = s!.cgRectValue
 
 		// resize content insets.
-		let contentInsets = UIEdgeInsetsMake(64, 0.0, keyboardBounds.size.height, 0)
+		let contentInsets = UIEdgeInsets(top: 64, left: 0.0, bottom: keyboardBounds.size.height, right: 0)
 		self.tableview.contentInset = contentInsets
 		self.tableview.scrollIndicatorInsets = contentInsets
 		let securityIndexPath = self.tableview.indexPath(for: self.securityCodeCell)

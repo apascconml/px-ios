@@ -12,7 +12,7 @@ import Foundation
 extension PXOneTapViewModel {
 
     func getPaymentMethodComponent() -> PXPaymentMethodComponent? {
-        guard let pm = paymentData.getPaymentMethod() else {
+        guard let pm = self.amountHelper.paymentData.getPaymentMethod() else {
             return nil
         }
 
@@ -28,7 +28,7 @@ extension PXOneTapViewModel {
         let currency: Currency = MercadoPagoContext.getCurrency()
 
         if pm.isCard {
-            if let lastFourDigits = (paymentData.token?.lastFourDigits) {
+            if let lastFourDigits = (self.amountHelper.paymentData.token?.lastFourDigits) {
                 let text = "\(paymentMethodName) ···· \(lastFourDigits)"
                 title = text.toAttributedString()
             } else if let card = paymentOptionSelected as? CustomerPaymentMethod {
@@ -41,16 +41,16 @@ extension PXOneTapViewModel {
             title = paymentMethodName.toAttributedString()
         }
 
-        if MercadoPagoCheckoutViewModel.flowPreference.isDiscountEnable(), paymentData.discount != nil {
+        if MercadoPagoCheckoutViewModel.flowPreference.isDiscountEnable(), self.amountHelper.discount != nil {
             // With discount
-            let amount: String = Utils.getAmountFormatted(amount: preference.getAmount(), thousandSeparator: currency.getThousandsSeparatorOrDefault(), decimalSeparator: currency.getDecimalSeparatorOrDefault(), addingCurrencySymbol: currency.getCurrencySymbolOrDefault(), addingParenthesis: false)
+            let amount: String = Utils.getAmountFormatted(amount: self.amountHelper.preferenceAmount, thousandSeparator: currency.getThousandsSeparatorOrDefault(), decimalSeparator: currency.getDecimalSeparatorOrDefault(), addingCurrencySymbol: currency.getCurrencySymbolOrDefault(), addingParenthesis: false)
             subtitleRight = amount.toAttributedString()
 
             let amountWithDiscount: String = Utils.getAmountFormatted(amount: getTotalAmount(), thousandSeparator: currency.getThousandsSeparatorOrDefault(), decimalSeparator: currency.getDecimalSeparatorOrDefault(), addingCurrencySymbol: currency.getCurrencySymbolOrDefault(), addingParenthesis: true)
             subtitle = amountWithDiscount.toAttributedString()
         } else {
             // Without discount
-            if let pCost = paymentData.payerCost, pCost.installments > 1 {
+            if let pCost = self.amountHelper.paymentData.payerCost, pCost.installments > 1 {
                 let totalAmount: String = Utils.getAmountFormatted(amount: getTotalAmount(), thousandSeparator: currency.getThousandsSeparatorOrDefault(), decimalSeparator: currency.getDecimalSeparatorOrDefault(), addingCurrencySymbol: currency.getCurrencySymbolOrDefault(), addingParenthesis: true)
                 subtitle = totalAmount.toAttributedString()
             }
@@ -61,7 +61,7 @@ extension PXOneTapViewModel {
         }
 
         // CFT.
-        if let payerCost = paymentData.getPayerCost(), let cftValue = payerCost.getCFTValue(), payerCost.hasCFTValue() {
+        if let payerCost = self.amountHelper.paymentData.getPayerCost(), let cftValue = payerCost.getCFTValue(), payerCost.hasCFTValue() {
             cftText = "CFT: \(cftValue)".toAttributedString()
         }
 

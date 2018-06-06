@@ -17,17 +17,17 @@ class PXReviewViewModel: NSObject {
     static let ERROR_DELTA = 0.001
     public static var CUSTOMER_ID = ""
 
-    var preference: CheckoutPreference
-    var paymentData: PaymentData!
+    internal var amountHelper: PXAmountHelper
+//    var preference: CheckoutPreference
+//    var paymentData: PaymentData!
     var paymentOptionSelected: PaymentMethodOption
-    var discount: DiscountCoupon?
     var reviewScreenPreference: ReviewScreenPreference
 
-    public init(checkoutPreference: CheckoutPreference, paymentData: PaymentData, paymentOptionSelected: PaymentMethodOption, discount: DiscountCoupon? = nil, reviewScreenPreference: ReviewScreenPreference = ReviewScreenPreference()) {
+    public init(amountHelper: PXAmountHelper, /* checkoutPreference: CheckoutPreference, paymentData: PaymentData,*/ paymentOptionSelected: PaymentMethodOption, reviewScreenPreference: ReviewScreenPreference = ReviewScreenPreference()) {
         PXReviewViewModel.CUSTOMER_ID = ""
-        self.preference = checkoutPreference
-        self.paymentData = paymentData
-        self.discount = discount
+        self.amountHelper = amountHelper
+      //  self.preference = checkoutPreference
+      //  self.paymentData = paymentData
         self.paymentOptionSelected = paymentOptionSelected
         self.reviewScreenPreference = reviewScreenPreference
         super.init()
@@ -35,12 +35,12 @@ class PXReviewViewModel: NSObject {
 
     // MARK: Tracking logic
     func trackConfirmActionEvent() {
-        var properties: [String: String] = [TrackingUtil.METADATA_PAYMENT_METHOD_ID: paymentData.paymentMethod?.paymentMethodId ?? "", TrackingUtil.METADATA_PAYMENT_TYPE_ID: paymentData.paymentMethod?.paymentTypeId ?? "", TrackingUtil.METADATA_AMOUNT_ID: preference.getAmount().stringValue]
+        var properties: [String: String] = [TrackingUtil.METADATA_PAYMENT_METHOD_ID: self.amountHelper.paymentData.paymentMethod?.paymentMethodId ?? "", TrackingUtil.METADATA_PAYMENT_TYPE_ID: self.amountHelper.paymentData.paymentMethod?.paymentTypeId ?? "", TrackingUtil.METADATA_AMOUNT_ID: String(describing: self.amountHelper.preferenceAmount)]
 
         if let customerCard = paymentOptionSelected as? CustomerPaymentMethod {
             properties[TrackingUtil.METADATA_CARD_ID] = customerCard.customerPaymentMethodId
         }
-        if let installments = paymentData.payerCost?.installments {
+        if let installments = amountHelper.paymentData.payerCost?.installments {
             properties[TrackingUtil.METADATA_INSTALLMENTS] = installments.stringValue
         }
 
@@ -61,11 +61,11 @@ extension PXReviewViewModel {
 
     // Logic.
     func isPaymentMethodSelectedCard() -> Bool {
-        return self.paymentData.hasPaymentMethod() && self.paymentData.getPaymentMethod()!.isCard
+        return self.amountHelper.paymentData.hasPaymentMethod() && self.amountHelper.paymentData.getPaymentMethod()!.isCard
     }
 
     func isPaymentMethodSelected() -> Bool {
-        return paymentData.hasPaymentMethod()
+        return self.amountHelper.paymentData.hasPaymentMethod()
     }
 
     func isUserLogged() -> Bool {
@@ -76,16 +76,23 @@ extension PXReviewViewModel {
         return !isUserLogged()
     }
 
+    func shouldShowDiscountTermsAndCondition() -> Bool {
+        if self.amountHelper.discount != nil {
+            return true
+        }
+        return false
+    }
+
     func shouldShowInstallmentSummary() -> Bool {
-        return isPaymentMethodSelectedCard() && self.paymentData.getPaymentMethod()!.paymentTypeId != "debit_card" && paymentData.hasPayerCost() && paymentData.getPayerCost()!.installments != 1
+        return isPaymentMethodSelectedCard() && self.amountHelper.paymentData.getPaymentMethod()!.paymentTypeId != "debit_card" && self.amountHelper.paymentData.hasPayerCost() && self.amountHelper.paymentData.getPayerCost()!.installments != 1
     }
 
     func shouldDisplayNoRate() -> Bool {
-        return self.paymentData.hasPayerCost() && !self.paymentData.getPayerCost()!.hasInstallmentsRate() && self.paymentData.getPayerCost()!.installments != 1
+        return self.amountHelper.paymentData.hasPayerCost() && !self.amountHelper.paymentData.getPayerCost()!.hasInstallmentsRate() && self.amountHelper.paymentData.getPayerCost()!.installments != 1
     }
 
     func hasPayerCostAddionalInfo() -> Bool {
-        return self.paymentData.hasPayerCost() && self.paymentData.getPayerCost()!.getCFTValue() != nil && self.paymentData.getPayerCost()!.installments > 0
+        return self.amountHelper.paymentData.hasPayerCost() && self.amountHelper.paymentData.getPayerCost()!.getCFTValue() != nil && self.amountHelper.paymentData.getPayerCost()!.installments > 0
     }
 
     func hasConfirmAdditionalInfo() -> Bool {
@@ -101,20 +108,14 @@ extension PXReviewViewModel {
 extension PXReviewViewModel {
 
     func getTotalAmount() -> Double {
-        if let payerCost = paymentData.getPayerCost() {
-            return payerCost.totalAmount
-        }
-        if MercadoPagoCheckoutViewModel.flowPreference.isDiscountEnable(), let discount = paymentData.discount {
-            return discount.newAmount()
-        }
-        return self.preference.getAmount()
+        return self.amountHelper.amountToPay
     }
 
     func getUnlockLink() -> URL? {
         let path = MercadoPago.getBundle()!.path(forResource: "UnlockCardLinks", ofType: "plist")
         let dictionary = NSDictionary(contentsOfFile: path!)
         let site = MercadoPagoContext.getSite()
-        guard let issuerID = self.paymentData.getIssuer()?.issuerId else {
+        guard let issuerID = self.amountHelper.paymentData.getIssuer()?.issuerId else {
             return nil
         }
         let searchString: String = site + "_" + "\(issuerID)"
@@ -127,7 +128,7 @@ extension PXReviewViewModel {
     }
 
     func getClearPaymentData() -> PaymentData {
-        let newPaymentData: PaymentData = paymentData.copy() as? PaymentData ?? paymentData
+        let newPaymentData: PaymentData = self.amountHelper.paymentData.copy() as? PaymentData ?? self.amountHelper.paymentData
         newPaymentData.clearCollectedData()
         return newPaymentData
     }
@@ -144,7 +145,7 @@ extension PXReviewViewModel {
         if abs(amount - self.reviewScreenPreference.getSummaryTotalAmount()) <= PXReviewViewModel.ERROR_DELTA {
             summary = Summary(details: self.reviewScreenPreference.details)
             if self.reviewScreenPreference.details[SummaryType.PRODUCT]?.details.count == 0 { //Si solo le cambio el titulo a Productos
-                summary.addAmountDetail(detail: SummaryItemDetail(amount: preference.getAmount()), type: SummaryType.PRODUCT)
+                summary.addAmountDetail(detail: SummaryItemDetail(amount: self.amountHelper.preferenceAmount), type: SummaryType.PRODUCT)
             }
         } else {
             summary = getDefaultSummary()
@@ -155,8 +156,8 @@ extension PXReviewViewModel {
             }
         }
 
-        if let discount = self.paymentData.discount {
-            let discountAmountDetail = SummaryItemDetail(name: discount.description, amount: Double(discount.coupon_amount)!)
+        if let discount = self.amountHelper.paymentData.discount {
+            let discountAmountDetail = SummaryItemDetail(name: discount.description, amount: discount.couponAmount)
 
             if summary.details[SummaryType.DISCOUNT] != nil {
                 summary.addAmountDetail(detail: discountAmountDetail, type: SummaryType.DISCOUNT)
@@ -167,13 +168,13 @@ extension PXReviewViewModel {
             summary.details[SummaryType.DISCOUNT]?.titleColor = ThemeManager.shared.noTaxAndDiscountLabelTintColor()
             summary.details[SummaryType.DISCOUNT]?.amountColor = ThemeManager.shared.noTaxAndDiscountLabelTintColor()
         }
-        if let payerCost = self.paymentData.payerCost {
+        if self.amountHelper.paymentData.payerCost != nil {
             var interest = 0.0
 
-            if let discountAmount = self.paymentData.discount?.coupon_amount, let discountValue = Double(discountAmount) {
-                interest = payerCost.totalAmount - (amount - discountValue)
+            if (self.amountHelper.paymentData.discount?.couponAmount) != nil {
+                interest = self.amountHelper.amountToPay - (self.amountHelper.preferenceAmount - self.amountHelper.amountOff)
             } else {
-                interest = payerCost.totalAmount - amount
+                interest = self.amountHelper.amountToPay - self.amountHelper.preferenceAmount
             }
 
             if interest > 0 {
@@ -194,7 +195,7 @@ extension PXReviewViewModel {
     }
 
     func getDefaultSummary() -> Summary {
-        let productSummaryDetail = SummaryDetail(title: self.reviewScreenPreference.summaryTitles[SummaryType.PRODUCT]!, detail: SummaryItemDetail(amount: preference.getAmount()))
+        let productSummaryDetail = SummaryDetail(title: self.reviewScreenPreference.summaryTitles[SummaryType.PRODUCT]!, detail: SummaryItemDetail(amount: self.amountHelper.preferenceAmount))
 
         return Summary(details: [SummaryType.PRODUCT: productSummaryDetail])
     }
@@ -205,11 +206,11 @@ extension PXReviewViewModel {
 
     func buildPaymentMethodComponent(withAction: PXComponentAction?) -> PXPaymentMethodComponent? {
 
-        guard let pm = paymentData.getPaymentMethod() else {
+        guard let pm = self.amountHelper.paymentData.getPaymentMethod() else {
             return nil
         }
 
-        let issuer = paymentData.getIssuer()
+        let issuer = self.amountHelper.paymentData.getIssuer()
         let paymentMethodName = pm.name ?? ""
         let paymentMethodIssuerName = issuer?.name ?? ""
 
@@ -223,7 +224,7 @@ extension PXReviewViewModel {
         let boldLabelColor = ThemeManager.shared.boldLabelTintColor()
 
         if pm.isCard {
-            if let lastFourDigits = (paymentData.token?.lastFourDigits) {
+            if let lastFourDigits = (self.amountHelper.paymentData.token?.lastFourDigits) {
                 let text = paymentMethodName + " " + "terminada en ".localized + lastFourDigits
                 title = text.toAttributedString()
             }
@@ -250,19 +251,19 @@ extension PXReviewViewModel {
     func buildSummaryComponent(width: CGFloat) -> PXSummaryComponent {
 
         var customTitle = "Productos".localized
-        let totalAmount: Double = self.preference.getAmount()
+        let totalAmount: Double = self.amountHelper.preferenceAmount
 
         if let prefDetail = reviewScreenPreference.details[SummaryType.PRODUCT], !prefDetail.title.isEmpty {
             customTitle = prefDetail.title
         } else {
-            if preference.items.count == 1 {
-                if let itemTitle = preference.items.first?.title, itemTitle.count > 0 {
+            if self.amountHelper.preference.items.count == 1 {
+                if let itemTitle = self.amountHelper.preference.items.first?.title, itemTitle.count > 0 {
                     customTitle = itemTitle
                 }
             }
         }
 
-        let props = PXSummaryComponentProps(summaryViewModel: getSummaryViewModel(amount: totalAmount), paymentData: paymentData, total: totalAmount, width: width, customTitle: customTitle, textColor: ThemeManager.shared.boldLabelTintColor(), backgroundColor: ThemeManager.shared.highlightBackgroundColor())
+        let props = PXSummaryComponentProps(summaryViewModel: getSummaryViewModel(amount: totalAmount), amountHelper: amountHelper, width: width, customTitle: customTitle, textColor: ThemeManager.shared.boldLabelTintColor(), backgroundColor: ThemeManager.shared.highlightBackgroundColor())
 
         return PXSummaryComponent(props: props)
     }
@@ -279,7 +280,7 @@ extension PXReviewViewModel {
     func buildItemComponents() -> [PXItemComponent] {
         var pxItemComponents = [PXItemComponent]()
         if reviewScreenPreference.isItemsEnable() { // Items can be disable
-            for item in self.preference.items {
+            for item in self.amountHelper.preference.items {
                 if let itemComponent = buildItemComponent(item: item) {
                     pxItemComponents.append(itemComponent)
                 }
@@ -293,15 +294,15 @@ extension PXReviewViewModel {
     }
 
     fileprivate func shouldShowPrice(item: Item) -> Bool {
-        return preference.hasMultipleItems() || item.quantity > 1 // Price must not be shown if quantity is 1 and there are no more products
+        return amountHelper.preference.hasMultipleItems() || item.quantity > 1 // Price must not be shown if quantity is 1 and there are no more products
     }
 
     fileprivate func shouldShowCollectorIcon() -> Bool {
-        return !preference.hasMultipleItems() && reviewScreenPreference.getCollectorIcon() != nil
+        return !amountHelper.preference.hasMultipleItems() && reviewScreenPreference.getCollectorIcon() != nil
     }
 
     fileprivate func buildItemComponent(item: Item) -> PXItemComponent? {
-        if item.quantity == 1 && String.isNullOrEmpty(item.itemDescription) && !preference.hasMultipleItems() { // Item must not be shown if it has no description and it's one
+        if item.quantity == 1 && String.isNullOrEmpty(item.itemDescription) && !amountHelper.preference.hasMultipleItems() { // Item must not be shown if it has no description and it's one
             return nil
         }
 
@@ -323,14 +324,14 @@ extension PXReviewViewModel {
 // MARK: Item getters
 extension PXReviewViewModel {
     fileprivate func getItemTitle(item: Item) -> String? { // Return item real title if it has multiple items, if not return description
-        if preference.hasMultipleItems() {
+        if amountHelper.preference.hasMultipleItems() {
             return item.title
         }
         return item.itemDescription
     }
 
     fileprivate func getItemDescription(item: Item) -> String? { // Returns only if it has multiple items
-        if preference.hasMultipleItems() {
+        if amountHelper.preference.hasMultipleItems() {
             return item.itemDescription
         }
         return nil

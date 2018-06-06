@@ -9,17 +9,14 @@
 import Foundation
 import UIKit
 import MercadoPagoPXTracking
+import MercadoPagoServices
 
-@objcMembers
 open class AdditionalStepViewModel: NSObject {
 
     var bundle: Bundle? = MercadoPago.getBundle()
-    open var discount: DiscountCoupon?
     public var screenTitle: String
     open var screenId: String { return TrackingUtil.NO_SCREEN_ID }
     open var screenName: String { return TrackingUtil.NO_NAME_SCREEN }
-
-    open var amount: Double
     open var email: String?
     open var token: CardInformationForm?
     open var paymentMethods: [PaymentMethod]
@@ -32,13 +29,14 @@ open class AdditionalStepViewModel: NSObject {
     open var defaultRowCellHeight: CGFloat = 80
     open var callback: ((_ result: NSObject) -> Void)!
     open var maxFontSize: CGFloat { return 24 }
-    open var couponCallback: ((DiscountCoupon) -> Void)?
+    open var couponCallback: ((PXDiscount) -> Void)?
+    let amountHelper: PXAmountHelper
 
     open var mercadoPagoServicesAdapter: MercadoPagoServicesAdapter
 
-    init(screenTitle: String, cardSectionVisible: Bool, cardSectionView: Updatable? = nil, totalRowVisible: Bool, showBankInsterestWarning: Bool = false, amount: Double, token: CardInformationForm?, paymentMethods: [PaymentMethod], dataSource: [Cellable], discount: DiscountCoupon? = nil, email: String? = nil, mercadoPagoServicesAdapter: MercadoPagoServicesAdapter) {
+    init(amountHelper: PXAmountHelper, screenTitle: String, cardSectionVisible: Bool, cardSectionView: Updatable? = nil, totalRowVisible: Bool, showBankInsterestWarning: Bool = false, token: CardInformationForm?, paymentMethods: [PaymentMethod], dataSource: [Cellable], email: String? = nil, mercadoPagoServicesAdapter: MercadoPagoServicesAdapter) {
+        self.amountHelper = amountHelper
         self.screenTitle = screenTitle
-        self.amount = amount
         self.token = token
         self.paymentMethods = paymentMethods
         self.cardSectionVisible = cardSectionVisible
@@ -46,7 +44,6 @@ open class AdditionalStepViewModel: NSObject {
         self.totalRowVisible = totalRowVisible
         self.bankInterestWarningCellVisible = showBankInsterestWarning
         self.dataSource = dataSource
-        self.discount = discount
         self.email = email
         self.mercadoPagoServicesAdapter = mercadoPagoServicesAdapter
     }
@@ -63,16 +60,8 @@ open class AdditionalStepViewModel: NSObject {
         return self.bankInterestWarningCellVisible && MercadoPagoCheckout.showBankInterestWarning()
     }
 
-    func showDiscountSection() -> Bool {
+    func showFloatingTotalRow() -> Bool {
         return false
-    }
-
-    func showTotalRow() -> Bool {
-        return totalRowVisible && !showDiscountSection()
-    }
-
-    func showAmountDetailRow() -> Bool {
-        return showTotalRow() || showDiscountSection()
     }
 
     func getScreenName() -> String {
@@ -100,8 +89,6 @@ open class AdditionalStepViewModel: NSObject {
             var rows: Int = showCardSection() ? 1 : 0
             rows = showBankInsterestCell() ? rows + 1 : rows
             return rows
-        case Sections.amountDetail.rawValue:
-            return showAmountDetailRow() ? 1 : 0
         case Sections.body.rawValue:
             return numberOfCellsInBody()
         default:
@@ -123,9 +110,6 @@ open class AdditionalStepViewModel: NSObject {
 
         } else if isBankInterestCellFor(indexPath: indexPath) {
             return self.getBankInterestWarningCellHeight()
-
-        } else if isDiscountCellFor(indexPath: indexPath) || isTotalCellFor(indexPath: indexPath) {
-            return self.getAmountDetailCellHeight(indexPath: indexPath)
 
         } else if isBodyCellFor(indexPath: indexPath) {
             return self.getDefaultRowCellHeight()
@@ -153,23 +137,6 @@ open class AdditionalStepViewModel: NSObject {
         return BankInsterestTableViewCell.cellHeight
     }
 
-    func getAmountDetailCellHeight(indexPath: IndexPath) -> CGFloat {
-        if isDiscountCellFor(indexPath: indexPath) {
-            return DiscountBodyCell.HEIGHT
-        } else if isTotalCellFor(indexPath: indexPath) {
-            return 42
-        }
-        return 0
-    }
-
-    func isDiscountCellFor(indexPath: IndexPath) -> Bool {
-        return indexPath.section == Sections.amountDetail.rawValue && showDiscountSection()
-    }
-
-    func isTotalCellFor(indexPath: IndexPath) -> Bool {
-        return indexPath.section == Sections.amountDetail.rawValue && showTotalRow()
-    }
-
     func isTitleCellFor(indexPath: IndexPath) -> Bool {
         return indexPath.section == Sections.title.rawValue
     }
@@ -194,8 +161,7 @@ open class AdditionalStepViewModel: NSObject {
     public enum Sections: Int {
         case title = 0
         case card = 1
-        case amountDetail = 2
-        case body = 3
+        case body = 2
     }
 
     func track() {
@@ -208,8 +174,8 @@ class IssuerAdditionalStepViewModel: AdditionalStepViewModel {
 
     let cardViewRect = CGRect(x: 0, y: 0, width: 100, height: 30)
 
-    init(amount: Double, token: CardInformationForm?, paymentMethod: PaymentMethod, dataSource: [Cellable], mercadoPagoServicesAdapter: MercadoPagoServicesAdapter) {
-        super.init(screenTitle: PXStrings.additional_step_issuer_selection_title.PXLocalized, cardSectionVisible: true, cardSectionView: CardFrontView(frame: self.cardViewRect), totalRowVisible: false, amount: amount, token: token, paymentMethods: [paymentMethod], dataSource: dataSource, mercadoPagoServicesAdapter: mercadoPagoServicesAdapter)
+    init(amountHelper: PXAmountHelper, token: CardInformationForm?, paymentMethod: PaymentMethod, dataSource: [Cellable], mercadoPagoServicesAdapter: MercadoPagoServicesAdapter) {
+        super.init(amountHelper: amountHelper, screenTitle: PXStrings.additional_step_issuer_selection_title.PXLocalized.localized, cardSectionVisible: true, cardSectionView: CardFrontView(frame: self.cardViewRect), totalRowVisible: false, token: token, paymentMethods: [paymentMethod], dataSource: dataSource, mercadoPagoServicesAdapter: mercadoPagoServicesAdapter)
     }
 
     override open var screenName: String { return TrackingUtil.SCREEN_NAME_CARD_FORM_ISSUERS }
@@ -226,12 +192,16 @@ class PayerCostAdditionalStepViewModel: AdditionalStepViewModel {
 
     let cardViewRect = CGRect(x: 0, y: 0, width: 100, height: 30)
 
-    init(amount: Double, token: CardInformationForm?, paymentMethod: PaymentMethod, dataSource: [Cellable], discount: DiscountCoupon? = nil, email: String? = nil, mercadoPagoServicesAdapter: MercadoPagoServicesAdapter) {
-        super.init(screenTitle: "¿En cuántas cuotas?".localized, cardSectionVisible: true, cardSectionView: CardFrontView(frame: self.cardViewRect), totalRowVisible: true, showBankInsterestWarning: true, amount: amount, token: token, paymentMethods: [paymentMethod], dataSource: dataSource, discount: discount, email: email, mercadoPagoServicesAdapter: mercadoPagoServicesAdapter)
+    init(amountHelper: PXAmountHelper, token: CardInformationForm?, paymentMethod: PaymentMethod, dataSource: [Cellable], email: String? = nil, mercadoPagoServicesAdapter: MercadoPagoServicesAdapter) {
+        super.init(amountHelper: amountHelper, screenTitle: "¿En cuántas cuotas?".localized, cardSectionVisible: true, cardSectionView: CardFrontView(frame: self.cardViewRect), totalRowVisible: true, showBankInsterestWarning: true, token: token, paymentMethods: [paymentMethod], dataSource: dataSource, email: email, mercadoPagoServicesAdapter: mercadoPagoServicesAdapter)
     }
 
     override open var screenName: String { return TrackingUtil.SCREEN_NAME_CARD_FORM_INSTALLMENTS }
     override open var screenId: String { return TrackingUtil.SCREEN_ID_CARD_FORM + TrackingUtil.CARD_INSTALLMENTS }
+
+    override func showFloatingTotalRow() -> Bool {
+        return true
+    }
 
     override func getDefaultRowCellHeight() -> CGFloat {
         if AdditionalStepCellFactory.needsCFTPayerCostCell(payerCost: dataSource[0] as! PayerCost) {
@@ -239,10 +209,6 @@ class PayerCostAdditionalStepViewModel: AdditionalStepViewModel {
         } else {
             return 60
         }
-    }
-
-    override func showDiscountSection() -> Bool {
-        return MercadoPagoCheckoutViewModel.flowPreference.isDiscountEnable()
     }
 
     override func isBankInterestCellFor(indexPath: IndexPath) -> Bool {
@@ -263,8 +229,8 @@ class CardTypeAdditionalStepViewModel: AdditionalStepViewModel {
     override open var screenName: String { return TrackingUtil.SCREEN_NAME_PAYMENT_TYPES }
     override open var screenId: String { return TrackingUtil.SCREEN_ID_PAYMENT_TYPES }
 
-    init(amount: Double, token: CardInformationForm?, paymentMethods: [PaymentMethod], dataSource: [Cellable], mercadoPagoServicesAdapter: MercadoPagoServicesAdapter) {
-        super.init(screenTitle: PXStrings.additional_step_card_type_title.PXLocalized, cardSectionVisible: true, cardSectionView: CardFrontView(frame: self.cardViewRect), totalRowVisible: false, amount: amount, token: token, paymentMethods: paymentMethods, dataSource: dataSource, mercadoPagoServicesAdapter: mercadoPagoServicesAdapter)
+    init(amountHelper: PXAmountHelper, token: CardInformationForm?, paymentMethods: [PaymentMethod], dataSource: [Cellable], mercadoPagoServicesAdapter: MercadoPagoServicesAdapter) {
+        super.init(amountHelper: amountHelper, screenTitle: PXStrings.additional_step_card_type_title.PXLocalized, cardSectionVisible: true, cardSectionView: CardFrontView(frame: self.cardViewRect), totalRowVisible: false, token: token, paymentMethods: paymentMethods, dataSource: dataSource, mercadoPagoServicesAdapter: mercadoPagoServicesAdapter)
     }
 }
 
@@ -272,8 +238,8 @@ class FinancialInstitutionViewModel: AdditionalStepViewModel {
 
     override open var screenName: String { return "FINANCIAL_INSTITUTION" }
 
-    init(amount: Double, token: CardInformationForm?, paymentMethod: PaymentMethod, dataSource: [Cellable], mercadoPagoServicesAdapter: MercadoPagoServicesAdapter) {
-        super.init(screenTitle: PXStrings.additional_step_financial_institution_title.PXLocalized, cardSectionVisible: false, cardSectionView: nil, totalRowVisible: false, amount: amount, token: token, paymentMethods: [paymentMethod], dataSource: dataSource, mercadoPagoServicesAdapter: mercadoPagoServicesAdapter)
+    init(amountHelper: PXAmountHelper, token: CardInformationForm?, paymentMethod: PaymentMethod, dataSource: [Cellable], mercadoPagoServicesAdapter: MercadoPagoServicesAdapter) {
+        super.init(amountHelper: amountHelper, screenTitle: PXStrings.additional_step_financial_institution_title.PXLocalized, cardSectionVisible: false, cardSectionView: nil, totalRowVisible: false, token: token, paymentMethods: [paymentMethod], dataSource: dataSource, mercadoPagoServicesAdapter: mercadoPagoServicesAdapter)
     }
 
 }
@@ -286,8 +252,8 @@ class EntityTypeViewModel: AdditionalStepViewModel {
 
     override open var screenName: String { return "ENTITY_TYPE" }
 
-    init(amount: Double, token: CardInformationForm?, paymentMethod: PaymentMethod, dataSource: [Cellable], mercadoPagoServicesAdapter: MercadoPagoServicesAdapter) {
-        super.init(screenTitle: PXStrings.additional_step_entity_type_title.PXLocalized, cardSectionVisible: true, cardSectionView: IdentificationCardView(frame: self.cardViewRect), totalRowVisible: false, amount: amount, token: token, paymentMethods: [paymentMethod], dataSource: dataSource, mercadoPagoServicesAdapter: mercadoPagoServicesAdapter)
+    init(amountHelper: PXAmountHelper, token: CardInformationForm?, paymentMethod: PaymentMethod, dataSource: [Cellable], mercadoPagoServicesAdapter: MercadoPagoServicesAdapter) {
+        super.init(amountHelper: amountHelper, screenTitle: PXStrings.additional_step_entity_type_title.PXLocalized, cardSectionVisible: true, cardSectionView: IdentificationCardView(frame: self.cardViewRect), totalRowVisible: false, token: token, paymentMethods: [paymentMethod], dataSource: dataSource, mercadoPagoServicesAdapter: mercadoPagoServicesAdapter)
     }
 
 }

@@ -38,7 +38,7 @@ class SecondHookViewController: UIViewController {
             textField.placeholder = ""
         })
 
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (alertAction: UIAlertAction!) in
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_: UIAlertAction!) in
             if let textField = alert.textFields?.first, let targetText = textField.text {
                self.targetHookStore?.addData(forKey: "key", value: targetText)
             }

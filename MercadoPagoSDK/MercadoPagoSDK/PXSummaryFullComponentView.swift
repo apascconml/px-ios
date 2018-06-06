@@ -22,17 +22,18 @@ final class PXSummaryFullComponentView: PXComponentView {
     fileprivate let DISCLAIMER_HEIGHT: CGFloat = 20.0
     fileprivate let DISCLAIMER_FONT_SIZE: CGFloat = PXLayout.XXXS_FONT
     fileprivate static let TOTAL_TITLE = "Total".localized
-
     fileprivate let customSummaryTitle: String
     fileprivate var requiredHeight: CGFloat = PXLayout.L_MARGIN
+    private let amountHelper: PXAmountHelper
 
-    init(width: CGFloat, summaryViewModel: Summary, paymentData: PaymentData, totalAmount: Double, backgroundColor: UIColor, customSummaryTitle: String) {
+    init(width: CGFloat, summaryViewModel: Summary, amountHelper: PXAmountHelper, backgroundColor: UIColor, customSummaryTitle: String) {
         self.summary = summaryViewModel
         self.customSummaryTitle = customSummaryTitle
+        self.amountHelper = amountHelper
         super.init()
         self.frame = CGRect(x: 0, y: requiredHeight, width: width, height: 0)
         self.addDetailsViews(typeDetailDictionary: summary.details)
-        let payerCost = paymentData.payerCost
+        let payerCost = amountHelper.paymentData.payerCost
         if payerCost != nil && (payerCost?.installments)! > 1 {
             self.addSmallMargin()
             self.addLine()
@@ -43,15 +44,11 @@ final class PXSummaryFullComponentView: PXComponentView {
             self.addSmallMargin()
             self.addTotalView(totalAmount: (payerCost?.totalAmount)!)
         } else {
-            var amount = totalAmount
-            if let discount = paymentData.discount {
-                amount = discount.newAmount()
-            }
             self.addSmallMargin()
             if shouldAddTotal() {
                 self.addLine()
                 self.addSmallMargin()
-                self.addTotalView(totalAmount: amount)
+                self.addTotalView(totalAmount: amountHelper.amountToPay)
             }
         }
         self.addMediumMargin()

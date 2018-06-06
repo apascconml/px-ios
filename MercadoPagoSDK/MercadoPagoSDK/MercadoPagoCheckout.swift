@@ -8,6 +8,7 @@
 
 import UIKit
 import MercadoPagoPXTracking
+import MercadoPagoServices
 
 @objcMembers
 open class MercadoPagoCheckout: NSObject {
@@ -16,7 +17,7 @@ open class MercadoPagoCheckout: NSObject {
     var viewModel: MercadoPagoCheckoutViewModel
     var pxNavigationHandler: PXNavigationHandler
 
-    public init(publicKey: String, accessToken: String, checkoutPreference: CheckoutPreference, paymentData: PaymentData?, paymentResult: PaymentResult?, discount: DiscountCoupon? = nil, navigationController: UINavigationController) {
+    public init(publicKey: String, accessToken: String, checkoutPreference: CheckoutPreference, paymentData: PaymentData?, paymentResult: PaymentResult?, navigationController: UINavigationController) {
 
         MercadoPagoCheckoutViewModel.flowPreference.removeHooks()
 
@@ -25,7 +26,7 @@ open class MercadoPagoCheckout: NSObject {
 
         ThemeManager.shared.initialize()
 
-        viewModel = MercadoPagoCheckoutViewModel(checkoutPreference: checkoutPreference, paymentData: paymentData, paymentResult: paymentResult, discount: discount)
+        viewModel = MercadoPagoCheckoutViewModel(checkoutPreference: checkoutPreference, paymentData: paymentData, paymentResult: paymentResult)
 
         ThemeManager.shared.saveNavBarStyleFor(navigationController: navigationController)
 
@@ -53,8 +54,11 @@ open class MercadoPagoCheckout: NSObject {
     }
 
     public func start() {
-        pxNavigationHandler.presentInitLoading()
+        if !shouldApplyDiscount() {
+            self.viewModel.clearDiscount()
+        }
         MercadoPagoCheckout.currentCheckout = self
+        pxNavigationHandler.presentInitLoading()
         executeNextStep()
     }
 
@@ -96,7 +100,7 @@ open class MercadoPagoCheckout: NSObject {
     func initialize() {
         initMercadPagoPXTracking()
         // Disable init:trackScreen for v4.0
-        // TODO-v4.1: Change trackScreen by trackEvent, in order to get convertion insights
+        // TODO-v4.1: Cxhange trackScreen by trackEvent, in order to get convertion insights
         // MPXTracker.trackScreen(screenId: TrackingUtil.SCREEN_ID_CHECKOUT, screenName: TrackingUtil.SCREEN_NAME_CHECKOUT)
         executeNextStep()
         pxNavigationHandler.suscribeToNavigationFlow()
@@ -226,4 +230,14 @@ open class MercadoPagoCheckout: NSObject {
         pxNavigationHandler.popToWhenFinish(viewController: viewController)
     }
 
+    public func setDiscount(_ discount: PXDiscount, withCampaign campaign: PXCampaign) {
+        self.viewModel.setDiscount(discount, withCampaign: campaign)
+    }
+
+    private func shouldApplyDiscount() -> Bool {
+        if MercadoPagoCheckoutViewModel.flowPreference.isDiscountEnable(), self.viewModel.paymentPlugin != nil {
+            return true
+        }
+        return false
+    }
 }

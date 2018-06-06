@@ -63,15 +63,15 @@ public class PXResultViewModel: PXResultViewModelInterface {
     open var instructionsInfo: InstructionsInfo?
     open var preference: PaymentResultScreenPreference
     var callback: ((PaymentResult.CongratsState) -> Void)!
-    let amount: Double
+    let amountHelper: PXAmountHelper
 
     let warningStatusDetails = [RejectedStatusDetail.INVALID_ESC, RejectedStatusDetail.CALL_FOR_AUTH, RejectedStatusDetail.BAD_FILLED_CARD_NUMBER, RejectedStatusDetail.CARD_DISABLE, RejectedStatusDetail.INSUFFICIENT_AMOUNT, RejectedStatusDetail.BAD_FILLED_DATE, RejectedStatusDetail.BAD_FILLED_SECURITY_CODE, RejectedStatusDetail.BAD_FILLED_OTHER]
 
-    init(paymentResult: PaymentResult, amount: Double, instructionsInfo: InstructionsInfo? = nil, paymentResultScreenPreference: PaymentResultScreenPreference = PaymentResultScreenPreference()) {
+    init(amountHelper: PXAmountHelper, paymentResult: PaymentResult, instructionsInfo: InstructionsInfo? = nil, paymentResultScreenPreference: PaymentResultScreenPreference = PaymentResultScreenPreference()) {
         self.paymentResult = paymentResult
         self.instructionsInfo = instructionsInfo
         self.preference =  paymentResultScreenPreference
-        self.amount = amount
+        self.amountHelper = amountHelper
     }
 
     func primaryResultColor() -> UIColor {

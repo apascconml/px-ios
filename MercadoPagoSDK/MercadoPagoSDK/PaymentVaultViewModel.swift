@@ -7,15 +7,13 @@
 //
 
 import Foundation
+import MercadoPagoServices
 
 class PaymentVaultViewModel: NSObject {
 
+    internal var amountHelper: PXAmountHelper
     var groupName: String?
-
-    var amount: Double
-    var paymentPreference: PaymentPreference?
     var email: String
-
     var paymentMethodOptions: [PaymentMethodOption]
     var customerPaymentOptions: [CardInformation]?
     var paymentMethodPlugins = [PXPaymentMethodPlugin]()
@@ -24,21 +22,19 @@ class PaymentVaultViewModel: NSObject {
 
     var displayItems = [PaymentOptionDrawable]()
 
-    var discount: DiscountCoupon?
+    var currency: Currency = MercadoPagoContext.getCurrency()
 
     var customerId: String?
 
-    var couponCallback: ((DiscountCoupon) -> Void)?
+    var couponCallback: ((PXDiscount) -> Void)?
     var mercadoPagoServicesAdapter: MercadoPagoServicesAdapter!
 
     internal var isRoot = true
 
-    init(amount: Double, paymentPrefence: PaymentPreference?, paymentMethodOptions: [PaymentMethodOption], customerPaymentOptions: [CardInformation]?, paymentMethodPlugins: [PXPaymentMethodPlugin], groupName: String? = nil, isRoot: Bool, discount: DiscountCoupon? = nil, email: String, mercadoPagoServicesAdapter: MercadoPagoServicesAdapter, callbackCancel: (() -> Void)? = nil, couponCallback: ((DiscountCoupon) -> Void)? = nil) {
-        self.amount = amount
+    init(amountHelper: PXAmountHelper, paymentMethodOptions: [PaymentMethodOption], customerPaymentOptions: [CardInformation]?, paymentMethodPlugins: [PXPaymentMethodPlugin], groupName: String? = nil, isRoot: Bool, email: String, mercadoPagoServicesAdapter: MercadoPagoServicesAdapter, callbackCancel: (() -> Void)? = nil, couponCallback: ((PXDiscount) -> Void)? = nil) {
+        self.amountHelper = amountHelper
         self.email = email
         self.groupName = groupName
-        self.discount = discount
-        self.paymentPreference = paymentPrefence
         self.paymentMethodOptions = paymentMethodOptions
         self.customerPaymentOptions = customerPaymentOptions
         self.paymentMethodPlugins = paymentMethodPlugins

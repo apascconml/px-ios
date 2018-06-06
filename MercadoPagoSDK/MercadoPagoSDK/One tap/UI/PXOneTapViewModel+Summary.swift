@@ -15,7 +15,7 @@ extension PXOneTapViewModel {
     }
 
     func hasDiscount() -> Bool {
-        return MercadoPagoCheckoutViewModel.flowPreference.isDiscountEnable() && paymentData.discount != nil
+        return MercadoPagoCheckoutViewModel.flowPreference.isDiscountEnable() && amountHelper.discount != nil
     }
 
     func getSummaryProps() -> [PXSummaryRowProps]? {

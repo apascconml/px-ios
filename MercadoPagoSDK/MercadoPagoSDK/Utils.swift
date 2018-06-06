@@ -123,6 +123,56 @@ class Utils {
         return getAmountFormatted(amount: amount, thousandSeparator: currency.getThousandsSeparatorOrDefault(), decimalSeparator: currency.getDecimalSeparatorOrDefault(), addingCurrencySymbol: currency.getCurrencySymbolOrDefault(), addingParenthesis: addingParenthesis)
     }
 
+    class func getAttributedAmount(withAttributes attributes: [NSAttributedStringKey: Any], amount: Double, currency: Currency, negativeAmount: Bool) -> NSMutableAttributedString {
+
+        let amount = getAmountFormatted(amount: amount, thousandSeparator: currency.thousandsSeparator, decimalSeparator: currency.decimalSeparator, addingCurrencySymbol: currency.symbol, addingParenthesis: false)
+
+        var symbols = ""
+        if negativeAmount {
+            symbols = "-"
+        }
+
+        let finalAttributedString = NSMutableAttributedString(string: symbols, attributes: attributes)
+        let attributedAmount = NSMutableAttributedString(string: amount, attributes: attributes)
+        let spaceAttributedString = NSMutableAttributedString(string: String.NON_BREAKING_LINE_SPACE, attributes: attributes)
+
+        finalAttributedString.append(spaceAttributedString)
+        finalAttributedString.append(attributedAmount)
+        return finalAttributedString
+    }
+
+    class func getAttributedPercentage(withAttributes attributes: [NSAttributedStringKey: Any], amount: Double, addPercentageSymbol: Bool, negativeAmount: Bool) -> NSMutableAttributedString {
+
+        let decimalSeparator = "."
+        var percentage = amount.stringValue
+        let range = percentage.range(of: decimalSeparator)
+
+        var cents = ""
+        if range != nil {
+            let centsIndex = percentage.index(range!.lowerBound, offsetBy: 1)
+            cents = String(percentage[centsIndex...])
+        }
+
+        if cents == "00" || cents == "0" {
+            percentage = percentage.replacingOccurrences(of: decimalSeparator + cents, with: "")
+        }
+
+        var symbols = ""
+        if negativeAmount {
+            symbols = "- "
+        }
+
+        let finalAttributedString = NSMutableAttributedString(string: symbols, attributes: attributes)
+        let attributedPercentage = NSMutableAttributedString(string: percentage, attributes: attributes)
+        finalAttributedString.append(attributedPercentage)
+
+        if addPercentageSymbol {
+            let percentageSymbolAttributedString = NSMutableAttributedString(string: "%", attributes: attributes)
+            finalAttributedString.append(percentageSymbolAttributedString)
+        }
+        return finalAttributedString
+    }
+
     class func getAmountFormatted(amount: Double, thousandSeparator: String, decimalSeparator: String, addingCurrencySymbol symbol: String? = nil, addingParenthesis: Bool = false) -> String {
         let cents = getCentsFormatted(String(amount), decimalSeparator: ".")
         let entireAmount = getAmountFormatted(String(describing: Int(amount)), thousandSeparator: thousandSeparator, decimalSeparator: decimalSeparator)

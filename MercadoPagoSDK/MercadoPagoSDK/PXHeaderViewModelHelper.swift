@@ -155,7 +155,7 @@ extension PXResultViewModel {
             let currencySymbol = currency.getCurrencySymbolOrDefault()
             let thousandSeparator = currency.getThousandsSeparatorOrDefault()
             let decimalSeparator = currency.getDecimalSeparatorOrDefault()
-            let amountStr = Utils.getAttributedAmount(amount, thousandSeparator: thousandSeparator, decimalSeparator: decimalSeparator, currencySymbol: currencySymbol, color: UIColor.px_white(), fontSize: PXHeaderRenderer.TITLE_FONT_SIZE, centsFontSize: PXHeaderRenderer.TITLE_FONT_SIZE/2, smallSymbol: true)
+            let amountStr = Utils.getAttributedAmount(amountHelper.amountToPay, thousandSeparator: thousandSeparator, decimalSeparator: decimalSeparator, currencySymbol: currencySymbol, color: UIColor.px_white(), fontSize: PXHeaderRenderer.TITLE_FONT_SIZE, centsFontSize: PXHeaderRenderer.TITLE_FONT_SIZE/2, smallSymbol: true)
             let string = "Debes autorizar ante %1$s el pago de ".localized.replacingOccurrences(of: "%1$s", with: "\(paymentMethodName)")
             let result: NSMutableAttributedString = NSMutableAttributedString(string: string, attributes: [NSAttributedStringKey.font: Utils.getFont(size: PXHeaderRenderer.TITLE_FONT_SIZE)])
             result.append(amountStr)

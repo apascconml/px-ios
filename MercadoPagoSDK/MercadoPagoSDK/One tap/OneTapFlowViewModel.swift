@@ -69,7 +69,7 @@ extension OneTapFlowViewModel {
     }
 
     func reviewConfirmViewModel() -> PXOneTapViewModel {
-        return PXOneTapViewModel(checkoutPreference: checkoutPreference, paymentData: paymentData, paymentOptionSelected: paymentOptionSelected, discount: paymentData.discount, reviewScreenPreference: reviewScreenPreference)
+        return PXOneTapViewModel(amountHelper: self.amountHelper, paymentOptionSelected: paymentOptionSelected, reviewScreenPreference: reviewScreenPreference)
     }
 }
 
@@ -88,16 +88,6 @@ extension OneTapFlowViewModel {
         if paymentOptionSelected.isCard() {
             self.paymentData.updatePaymentDataWith(payerCost: payerCost)
             self.paymentData.cleanToken()
-        }
-    }
-
-    internal func getAmount() -> Double {
-        if let payerCost = paymentData.getPayerCost() {
-            return payerCost.totalAmount
-        } else if MercadoPagoCheckoutViewModel.flowPreference.isDiscountEnable(), let discount = paymentData.discount {
-            return discount.newAmount()
-        } else {
-            return checkoutPreference.getAmount()
         }
     }
 }

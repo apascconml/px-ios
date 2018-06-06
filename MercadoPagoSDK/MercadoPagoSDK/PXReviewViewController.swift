@@ -20,6 +20,7 @@ class PXReviewViewController: PXComponentContainerViewController {
 
     // MARK: Definitions
     var termsConditionView: PXTermsAndConditionView!
+    var discountTermsConditionView: PXDiscountTermsAndConditionView?
     lazy var itemViews = [UIView]()
     fileprivate var viewModel: PXReviewViewModel!
     fileprivate var showCustomComponents: Bool
@@ -95,6 +96,17 @@ extension PXReviewViewController {
             contentView.addSubviewToBottom(cftView)
             PXLayout.centerHorizontally(view: cftView).isActive = true
             PXLayout.matchWidth(ofView: cftView).isActive = true
+        }
+
+        // Add discount terms and conditions.
+        if self.viewModel.shouldShowDiscountTermsAndCondition() {
+            let discountTCView = getDiscountTermsAndConditionView()
+            discountTermsConditionView = discountTCView
+            discountTCView.addSeparatorLineToBottom(height: 1, horizontalMarginPercentage: 100)
+            contentView.addSubviewToBottom(discountTCView)
+            PXLayout.matchWidth(ofView: discountTCView).isActive = true
+            PXLayout.centerHorizontally(view: discountTCView).isActive = true
+            discountTCView.delegate = self
         }
 
         // Add item views
@@ -218,7 +230,7 @@ extension PXReviewViewController {
 
     fileprivate func getCFTComponentView() -> UIView? {
         if viewModel.hasPayerCostAddionalInfo() {
-            let cftView = PXCFTComponentView(withCFTValue: viewModel.paymentData.payerCost?.getCFTValue(), titleColor: ThemeManager.shared.labelTintColor(), backgroundColor: ThemeManager.shared.highlightBackgroundColor())
+            let cftView = PXCFTComponentView(withCFTValue: self.viewModel.amountHelper.paymentData.payerCost?.getCFTValue(), titleColor: ThemeManager.shared.labelTintColor(), backgroundColor: ThemeManager.shared.highlightBackgroundColor())
             return cftView
         }
         return nil
@@ -245,6 +257,11 @@ extension PXReviewViewController {
         let footerProps = PXFooterProps(buttonAction: payAction)
         let footerComponent = PXFooterComponent(props: footerProps)
         return footerComponent.render()
+    }
+
+    fileprivate func getDiscountTermsAndConditionView() -> PXDiscountTermsAndConditionView {
+        let discountTermsAndConditionView = PXDiscountTermsAndConditionView(amountHelper: self.viewModel.amountHelper)
+        return discountTermsAndConditionView
     }
 
     fileprivate func getTermsAndConditionView() -> PXTermsAndConditionView {
@@ -288,7 +305,7 @@ extension PXReviewViewController: PXTermsAndConditionViewDelegate {
         self.viewModel.trackConfirmActionEvent()
         self.hideNavBar()
         self.hideBackButton()
-        self.callbackConfirm(self.viewModel.paymentData)
+        self.callbackConfirm(self.viewModel.amountHelper.paymentData)
     }
 
     fileprivate func cancelPayment() {

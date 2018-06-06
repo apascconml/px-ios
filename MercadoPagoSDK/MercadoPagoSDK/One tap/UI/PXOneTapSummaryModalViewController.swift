@@ -29,32 +29,28 @@ final class PXOneTapSummaryModalViewController: UIViewController {
             if let cView = customView {
                 view.addSubview(smallSummaryView)
                 PXLayout.pinTop(view: smallSummaryView).isActive = true
-                PXLayout.pinLeft(view: smallSummaryView).isActive = true
-                PXLayout.pinRight(view: smallSummaryView).isActive = true
+                PXLayout.matchWidth(ofView: smallSummaryView).isActive = true
+                PXLayout.centerHorizontally(view: smallSummaryView).isActive = true
 
                 view.addSubview(cView)
-                PXLayout.pinLeft(view: cView).isActive = true
-                PXLayout.pinRight(view: cView).isActive = true
-                PXLayout.pinBottom(view: cView).isActive = true
+                PXLayout.matchWidth(ofView: cView).isActive = true
+                PXLayout.centerHorizontally(view: cView).isActive = true
                 PXLayout.put(view: cView, onBottomOf: smallSummaryView).isActive = true
-                cView.layoutIfNeeded()
-                PXLayout.setHeight(owner: cView, height: cView.frame.height).isActive = true
+                PXLayout.pinBottom(view: cView).isActive = true
             } else {
                 view.addSubview(smallSummaryView)
-                PXLayout.pinTop(view: smallSummaryView).isActive = true
-                PXLayout.pinBottom(view: smallSummaryView).isActive = true
-                PXLayout.pinLeft(view: smallSummaryView).isActive = true
-                PXLayout.pinRight(view: smallSummaryView).isActive = true
+                PXLayout.matchHeight(ofView: smallSummaryView).isActive = true
+                PXLayout.centerVertically(view: smallSummaryView).isActive = true
+                PXLayout.matchWidth(ofView: smallSummaryView).isActive = true
+                PXLayout.centerHorizontally(view: smallSummaryView).isActive = true
             }
         } else {
             if let cView = customView {
                 view.addSubview(cView)
-                PXLayout.pinTop(view: cView).isActive = true
-                PXLayout.pinLeft(view: cView).isActive = true
-                PXLayout.pinRight(view: cView).isActive = true
-                PXLayout.pinBottom(view: cView).isActive = true
-                cView.layoutIfNeeded()
-                PXLayout.setHeight(owner: cView, height: cView.frame.height).isActive = true
+                PXLayout.matchHeight(ofView: cView).isActive = true
+                PXLayout.centerVertically(view: cView).isActive = true
+                PXLayout.matchWidth(ofView: cView).isActive = true
+                PXLayout.centerHorizontally(view: cView).isActive = true
             }
         }
     }

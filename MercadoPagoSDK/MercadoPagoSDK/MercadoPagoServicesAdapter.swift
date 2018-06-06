@@ -43,8 +43,7 @@ import MercadoPagoServices
 
     open func getInstructions(paymentId: String, paymentTypeId: String, callback : @escaping (InstructionsInfo) -> Void, failure: @escaping ((_ error: NSError) -> Void)) {
 
-        let int64PaymentId = Int64(paymentId)
-        //TODO AUGUSTO: ARRRGLAR ESTO
+        let int64PaymentId = Int64(paymentId) //TODO: FIX
 
         mercadoPagoServices.getInstructions(paymentId: int64PaymentId!, paymentTypeId: paymentTypeId, callback: { [weak self] (pxInstructions) in
             guard let strongSelf = self else {
@@ -172,27 +171,18 @@ import MercadoPagoServices
             }, failure: failure)
     }
 
-    open func getCodeDiscount(amount: Double, payerEmail: String, couponCode: String?, callback: @escaping (DiscountCoupon?) -> Void, failure: @escaping ((_ error: NSError) -> Void)) {
+    open func getCodeDiscount(amount: Double, payerEmail: String, couponCode: String?, callback: @escaping (PXDiscount?) -> Void, failure: @escaping ((_ error: NSError) -> Void)) {
 
         let url = MercadoPagoCheckoutViewModel.servicePreference.getDiscountURL()
         let uri = MercadoPagoCheckoutViewModel.servicePreference.getDiscountURI()
         let additionalInfo = MercadoPagoCheckoutViewModel.servicePreference.discountAdditionalInfo
 
-        mercadoPagoServices.getCodeDiscount(url: url, uri: uri, amount: amount, payerEmail: payerEmail, couponCode: couponCode, discountAdditionalInfo: additionalInfo, callback: { [weak self] (pxDiscount) in
-            guard let strongSelf = self else {
-                return
-            }
-
-            if let pxDiscount = pxDiscount {
-                let discountCoupon = strongSelf.getDiscountCouponFromPXDiscount(pxDiscount, amount: amount)
-                callback(discountCoupon)
-            } else {
-                callback(nil)
-            }
+        mercadoPagoServices.getCodeDiscount(url: url, uri: uri, amount: amount, payerEmail: payerEmail, couponCode: couponCode, discountAdditionalInfo: additionalInfo, callback: { (pxDiscount) in
+                callback(pxDiscount)
             }, failure: failure)
     }
 
-    open func getDirectDiscount(amount: Double, payerEmail: String, callback: @escaping (DiscountCoupon?) -> Void, failure: @escaping ((_ error: NSError) -> Void)) {
+    open func getDirectDiscount(amount: Double, payerEmail: String, callback: @escaping (PXDiscount?) -> Void, failure: @escaping ((_ error: NSError) -> Void)) {
         getCodeDiscount(amount: amount, payerEmail: payerEmail, couponCode: nil, callback: callback, failure: failure)
     }
 

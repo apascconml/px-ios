@@ -153,7 +153,7 @@ class PXLayout: NSObject {
             toItem: view2,
             attribute: .left,
             multiplier: 1.0,
-            constant: margin
+            constant: -margin
         ))
     }
 

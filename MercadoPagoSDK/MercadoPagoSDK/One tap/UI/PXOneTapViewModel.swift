@@ -20,12 +20,12 @@ final class PXOneTapViewModel: PXReviewViewModel {
     }
 
     override func trackInfo() {
-        var properties: [String: String] = [TrackingUtil.METADATA_PAYMENT_METHOD_ID: paymentData.paymentMethod?.paymentMethodId ?? "", TrackingUtil.METADATA_PAYMENT_TYPE_ID: paymentData.paymentMethod?.paymentTypeId ?? "", TrackingUtil.METADATA_AMOUNT_ID: preference.getAmount().stringValue]
+        var properties: [String: String] = [TrackingUtil.METADATA_PAYMENT_METHOD_ID: self.amountHelper.paymentData.paymentMethod?.paymentMethodId ?? "", TrackingUtil.METADATA_PAYMENT_TYPE_ID: self.amountHelper.paymentData.paymentMethod?.paymentTypeId ?? "", TrackingUtil.METADATA_AMOUNT_ID: self.amountHelper.preferenceAmount.stringValue]
 
         if let customerCard = paymentOptionSelected as? CustomerPaymentMethod {
             properties[TrackingUtil.METADATA_CARD_ID] = customerCard.customerPaymentMethodId
         }
-        if let installments = paymentData.payerCost?.installments {
+        if let installments = self.amountHelper.paymentData.payerCost?.installments {
             properties[TrackingUtil.METADATA_INSTALLMENTS] = installments.stringValue
         }
 
@@ -38,7 +38,7 @@ extension PXOneTapViewModel {
     func trackTapSummaryDetailEvent() {
         var properties: [String: String] = [String: String]()
         properties[TrackingUtil.Metadata.HAS_DISCOUNT] = hasDiscount().description
-        properties[TrackingUtil.Metadata.INSTALLMENTS] = paymentData.getNumberOfInstallments().stringValue
+        properties[TrackingUtil.Metadata.INSTALLMENTS] = amountHelper.paymentData.getNumberOfInstallments().stringValue
         MPXTracker.sharedInstance.trackActionEvent(action: TrackingUtil.Event.TAP_SUMMARY_DETAIL, screenId: screenId, screenName: screenName, properties: properties)
     }
 

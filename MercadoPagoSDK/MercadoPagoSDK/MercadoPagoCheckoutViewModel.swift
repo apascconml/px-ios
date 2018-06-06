@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MercadoPagoServices
 
 public enum CheckoutStep: String {
     case START
@@ -59,6 +60,12 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
     var callbackCancel: (() -> Void)?
     static var changePaymentMethodCallback: (() -> Void)?
 
+    // In order to ensure data updated create new instance for every usage
+    var amountHelper: PXAmountHelper {
+        get {
+            return PXAmountHelper(preference: self.checkoutPreference, paymentData: self.paymentData.copy() as! PaymentData, discount: self.paymentData.discount, campaign: self.paymentData.campaign)
+        }
+    }
     var checkoutPreference: CheckoutPreference!
     var mercadoPagoServicesAdapter = MercadoPagoServicesAdapter(servicePreference: MercadoPagoCheckoutViewModel.servicePreference)
 
@@ -113,7 +120,7 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
     // Payment plguin
     var paymentPlugin: PXPaymentPluginComponent?
 
-    init(checkoutPreference: CheckoutPreference, paymentData: PaymentData?, paymentResult: PaymentResult?, discount: DiscountCoupon?) {
+    init(checkoutPreference: CheckoutPreference, paymentData: PaymentData?, paymentResult: PaymentResult?) {
         super.init()
         self.checkoutPreference = checkoutPreference
         if let pm = paymentData {
@@ -134,12 +141,7 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
             }
         }
         self.paymentResult = paymentResult
-        if let discount = discount {
-            if paymentData == nil {
-                self.paymentData = PaymentData()
-            }
-            self.paymentData.discount = discount
-        }
+
         if !String.isNullOrEmpty(self.checkoutPreference.preferenceId) {
             needLoadPreference = true
         } else {
@@ -149,12 +151,20 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
     }
 
     public func copy(with zone: NSZone? = nil) -> Any {
-        let copyObj = MercadoPagoCheckoutViewModel(checkoutPreference: self.checkoutPreference, paymentData: self.paymentData, paymentResult: self.paymentResult, discount: self.paymentData.discount)
+        let copyObj = MercadoPagoCheckoutViewModel(checkoutPreference: self.checkoutPreference, paymentData: self.paymentData, paymentResult: self.paymentResult)
         return copyObj
     }
 
     func hasError() -> Bool {
         return MercadoPagoCheckoutViewModel.error != nil
+    }
+
+    func setDiscount(_ discount: PXDiscount, withCampaign campaign: PXCampaign) {
+        self.paymentData.setDiscount(discount, withCampaign: campaign)
+    }
+
+    func clearDiscount() {
+        self.paymentData.clearDiscount()
     }
 
     public func getPaymentPreferences() -> PaymentPreference? {
@@ -230,20 +240,20 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
         let paymentMethodsOptions = getPaymentMethodsOptions(paymentMethodPluginsToShow)
         PXTrackingStore.sharedInstance.addData(forKey: PXTrackingStore.PAYMENT_METHOD_OPTIONS, value: paymentMethodsOptions)
 
-        return PaymentVaultViewModel(amount: self.getAmount(), paymentPrefence: getPaymentPreferences(), paymentMethodOptions: self.paymentMethodOptions!, customerPaymentOptions: self.customPaymentOptions, paymentMethodPlugins: paymentMethodPluginsToShow, groupName: groupName, isRoot: rootVC, discount: self.paymentData.discount, email: self.checkoutPreference.payer.email, mercadoPagoServicesAdapter: mercadoPagoServicesAdapter, couponCallback: {[weak self] (discount) in
-            guard let object = self else {
+        return PaymentVaultViewModel(amountHelper: self.amountHelper, paymentMethodOptions: self.paymentMethodOptions!, customerPaymentOptions: self.customPaymentOptions, paymentMethodPlugins: paymentMethodPluginsToShow, groupName: groupName, isRoot: rootVC, email: self.checkoutPreference.payer.email, mercadoPagoServicesAdapter: mercadoPagoServicesAdapter, couponCallback: {[weak self] (_) in
+            if self == nil {
                 return
             }
-            object.paymentData.discount = discount
+            // object.paymentData.discount = discount // TODO SET DISCOUNT WITH CAMPAIGN
         })
     }
 
     public func entityTypeViewModel() -> AdditionalStepViewModel {
-        return EntityTypeViewModel(amount: self.getAmount(), token: self.cardToken, paymentMethod: self.paymentData.getPaymentMethod()!, dataSource: self.entityTypes!, mercadoPagoServicesAdapter: mercadoPagoServicesAdapter)
+        return EntityTypeViewModel(amountHelper: self.amountHelper, token: self.cardToken, paymentMethod: self.paymentData.getPaymentMethod()!, dataSource: self.entityTypes!, mercadoPagoServicesAdapter: mercadoPagoServicesAdapter)
     }
 
     public func financialInstitutionViewModel() -> AdditionalStepViewModel {
-        return FinancialInstitutionViewModel(amount: self.getAmount(), token: self.cardToken, paymentMethod: self.paymentData.getPaymentMethod()!, dataSource: self.financialInstitutions!, mercadoPagoServicesAdapter: mercadoPagoServicesAdapter)
+        return FinancialInstitutionViewModel(amountHelper: self.amountHelper, token: self.cardToken, paymentMethod: self.paymentData.getPaymentMethod()!, dataSource: self.financialInstitutions!, mercadoPagoServicesAdapter: mercadoPagoServicesAdapter)
     }
 
     public func issuerViewModel() -> AdditionalStepViewModel {
@@ -252,7 +262,7 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
             paymentMethod = pm
         }
 
-        return IssuerAdditionalStepViewModel(amount: self.getAmount(), token: self.cardToken, paymentMethod: paymentMethod, dataSource: self.issuers!, mercadoPagoServicesAdapter: mercadoPagoServicesAdapter)
+        return IssuerAdditionalStepViewModel(amountHelper: self.amountHelper, token: self.cardToken, paymentMethod: paymentMethod, dataSource: self.issuers!, mercadoPagoServicesAdapter: mercadoPagoServicesAdapter)
     }
 
     public func payerCostViewModel() -> AdditionalStepViewModel {
@@ -267,7 +277,7 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
             }
         }
 
-        return PayerCostAdditionalStepViewModel(amount: self.getAmount(), token: cardInformation, paymentMethod: paymentMethod, dataSource: payerCosts!, discount: self.paymentData.discount, email: self.checkoutPreference.payer.email, mercadoPagoServicesAdapter: mercadoPagoServicesAdapter)
+        return PayerCostAdditionalStepViewModel(amountHelper: self.amountHelper, token: cardInformation, paymentMethod: paymentMethod, dataSource: payerCosts!, email: self.checkoutPreference.payer.email, mercadoPagoServicesAdapter: mercadoPagoServicesAdapter)
     }
 
     public func savedCardSecurityCodeViewModel() -> SecurityCodeViewModel {
@@ -290,11 +300,11 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
     }
 
     func reviewConfirmViewModel() -> PXReviewViewModel {
-        return PXReviewViewModel(checkoutPreference: self.checkoutPreference, paymentData: self.paymentData, paymentOptionSelected: self.paymentOptionSelected!, discount: paymentData.discount, reviewScreenPreference: reviewScreenPreference)
+        return PXReviewViewModel(amountHelper: self.amountHelper, paymentOptionSelected: self.paymentOptionSelected!, reviewScreenPreference: reviewScreenPreference)
     }
 
     func resultViewModel() -> PXResultViewModel {
-        return PXResultViewModel(paymentResult: self.paymentResult!, amount: self.getAmount(), instructionsInfo: self.instructionsInfo, paymentResultScreenPreference: self.paymentResultScreenPreference)
+        return PXResultViewModel(amountHelper: self.amountHelper, paymentResult: self.paymentResult!, instructionsInfo: self.instructionsInfo, paymentResultScreenPreference: self.paymentResultScreenPreference)
     }
 
     //SEARCH_PAYMENT_METHODS
@@ -637,16 +647,6 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
     public func updateCheckoutModel(payment: Payment) {
         self.payment = payment
         self.paymentResult = PaymentResult(payment: self.payment!, paymentData: self.paymentData)
-    }
-
-    internal func getAmount() -> Double {
-        if let payerCost = paymentData.getPayerCost() {
-            return payerCost.totalAmount
-        } else if isDiscountEnable(), let discount = paymentData.discount {
-            return discount.newAmount()
-        } else {
-            return self.checkoutPreference.getAmount()
-        }
     }
 
     public func isCheckoutComplete() -> Bool {

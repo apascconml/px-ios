@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MercadoPagoServices
 
 @objcMembers public class PaymentData: NSObject, NSCopying {
 
@@ -16,7 +17,9 @@ import UIKit
     public var token: Token?
     public var payer: Payer?
     public var transactionDetails: TransactionDetails?
-    public var discount: DiscountCoupon?
+    public private(set) var discount: PXDiscount?
+    public private(set) var campaign: PXCampaign?
+    private let paymentTypesWithoutInstallments = [PaymentTypeId.DEBIT_CARD.rawValue, PaymentTypeId.PREPAID_CARD.rawValue]
 
     private let paymentTypesWithoutInstallments = [PaymentTypeId.DEBIT_CARD.rawValue, PaymentTypeId.PREPAID_CARD.rawValue]
 
@@ -43,6 +46,7 @@ import UIKit
         copyObj.payerCost = payerCost
         copyObj.transactionDetails = transactionDetails
         copyObj.discount = discount
+        copyObj.campaign = campaign
         copyObj.payer = payer
         return copyObj
     }
@@ -215,10 +219,20 @@ import UIKit
         }
 
         if let discount = self.discount {
-            obj["discount"] = discount.toJSON()
+            obj["discount"] = discount.toJSONDictionary()
         }
-
+        
         return obj
+    }
+
+    public func setDiscount(_ discount: PXDiscount, withCampaign campaign: PXCampaign) {
+        self.discount = discount
+        self.campaign = campaign
+    }
+
+    public func clearDiscount() {
+        self.discount = nil
+        self.campaign = nil
     }
 
 }
