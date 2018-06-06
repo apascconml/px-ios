@@ -67,4 +67,7 @@ enum PXStrings {
     static let card_type_credit_option = "card_type_credit_option"
     static let card_type_debit_option = "card_type_debit_option"
     static let use_other_payment_method_action = "use_other_payment_method_action"
+    static let bank_deals_screen_title = "bank_deals_screen_title"
+    static let bank_deal_details_date_format = "bank_deal_details_date_format"
+    static let bank_deal_details_title = "bank_deal_details_title"
 }

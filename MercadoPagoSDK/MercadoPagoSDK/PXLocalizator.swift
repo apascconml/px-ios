@@ -44,9 +44,9 @@ private class PXLocalizator {
     }
 }
 
-private class Localizator_temp {
+private class LocalizatorTemp {
     
-    static let sharedInstance = Localizator_temp()
+    static let sharedInstance = LocalizatorTemp()
     
     lazy var localizableDictionary: NSDictionary! = {
         let bundle = MercadoPago.getBundle()
@@ -86,6 +86,6 @@ extension String {
     }
     
     var localized: String {
-        return Localizator_temp.sharedInstance.localize(string: self)
+        return LocalizatorTemp.sharedInstance.localize(string: self)
     }
 }

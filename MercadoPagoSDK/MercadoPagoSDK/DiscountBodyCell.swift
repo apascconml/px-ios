@@ -109,7 +109,7 @@ class DiscountBodyCell: UIView {
         let result = NSMutableAttributedString()
         let normalAttributes: [NSAttributedStringKey: AnyObject] = [NSAttributedStringKey.font: Utils.getFont(size: 16), NSAttributedStringKey.foregroundColor: LABEL_COLOR]
         let total = NSMutableAttributedString(string: "Total: ".localized, attributes: normalAttributes)
-        let space = NSMutableAttributedString(string: " ".localized, attributes: normalAttributes)
+        let space = NSMutableAttributedString(string: " ", attributes: normalAttributes)
         let oldAmount = Utils.getAttributedAmount( coupon.amountWithoutDiscount, currency: currency, color: LABEL_COLOR, fontSize: 16, baselineOffset: 4)
 
         oldAmount.addAttribute(NSAttributedStringKey.strikethroughStyle, value: 1, range: NSRange(location: 0, length: oldAmount.length))
