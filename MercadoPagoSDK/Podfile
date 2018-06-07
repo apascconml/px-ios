@@ -7,8 +7,8 @@ target 'MercadoPagoSDK' do
 
   # Pods for MercadoPagoSDK
   pod 'MercadoPagoPXTracking', '2.1.2'
-  pod 'MercadoPagoServices', '1.0.9'
-  
+  pod 'MercadoPagoServices', '1.0.10'
+
   # MELI UI
   pod 'MLUI', '4.0.0'
 

@@ -99,7 +99,7 @@ PODS:
 
 DEPENDENCIES:
   - MercadoPagoPXTracking (= 2.1.2)
-  - MercadoPagoServices (= 1.0.9)
+  - MercadoPagoServices (= 1.0.10)
   - MLUI (= 4.0.0)
 
 SPEC REPOS:
@@ -114,9 +114,9 @@ SPEC CHECKSUMS:
   FXBlurView: db786c2561cb49a09ae98407f52460096ab8a44f
   JRSwizzle: dd5ead5d913a0f29e7f558200165849f006bb1e3
   MercadoPagoPXTracking: 844e3fa9a8b7cb9eedff4d2bf5f696a25b6b57d6
-  MercadoPagoServices: e10e3d2e0d24e2d30232b025fadf58c5e2450806
+  MercadoPagoServices: b087039eb1edc84e798be38d2cd77aa7191dd3c2
   MLUI: 2e2d756b4763b22783fa3c0d01aa765b13ce214f
 
-PODFILE CHECKSUM: 9572d1ed251a6d24ec4656ade8fe99107182f79e
+PODFILE CHECKSUM: 2b69cc74406ad9fe2219560a47d22d33f7770016
 
 COCOAPODS: 1.5.3
