@@ -687,5 +687,79 @@ Se preferir, você pode escolher outro meio de pagamento.</string>
 		<key>pt</key>
 		<string>Condições</string>
 	</dict>
+	<key>review_terms_and_conditions</key>
+	<dict>
+		<key>es</key>
+		<string>Al pagar, declaro que soy mayor de edad y acepto los Términos y Condiciones.</string>
+		<key>pt</key>
+		<string>Ao pagar, declaro que sou maior de idade e aceito os Termos e Condições.</string>
+	</dict>
+	<key>review_discount_terms_and_conditions</key>
+	<dict>
+		<key>es</key>
+		<string>Descuento exclusivo de Mercado Libre y Mercado Pago. Ver condiciones</string>
+		<key>pt</key>
+		<string>Desconto exclusivo do Mercado Livre e Mercado Pago. Ver condições</string>
+	</dict>
+	<key>discount_detail_modal_title</key>
+	<dict>
+		<key>es</key>
+		<string>Mi descuento</string>
+		<key>pt</key>
+		<string>Meu desconto</string>
+	</dict>
+	<key>discount_detail_modal_footer</key>
+	<dict>
+		<key>es</key>
+		<string>Los descuentos no son acumulables. Te damos el más alto para este pago.</string>
+		<key>pt</key>
+		<string>Os descontos não são acumulativos. Aplicamos o mais alto para este pagamento.</string>
+	</dict>
+	<key>discount_detail_modal_disclaimer</key>
+	<dict>
+		<key>es</key>
+		<string>Tope de descuento %1$s</string>
+		<key>pt</key>
+		<string>Limite de desconto %1$s</string>
+	</dict>
+	<key>total_row_title_add_coupon</key>
+	<dict>
+		<key>es</key>
+		<string>¿Tienes un cupón de descuento?</string>
+		<key>pt</key>
+		<string>Você tem um cupom de desconto?</string>
+	</dict>
+	<key>total_row_disclaimer</key>
+	<dict>
+		<key>es</key>
+		<string>Con tope de descuento</string>
+		<key>pt</key>
+		<string>Com limite de desconto</string>
+	</dict>
+	<key>total_row_title_percent_off</key>
+	<dict>
+		<key>es</key>
+		<string>%1$s OFF</string>
+		<key>en</key>
+		<string>%1$s OFF</string>
+		<key>pt</key>
+		<string>%1$s OFF</string>
+	</dict>
+	<key>total_row_title_amount_off</key>
+	<dict>
+		<key>es</key>
+		<string>%1$s OFF</string>
+		<key>en</key>
+		<string>%1$s OFF</string>
+		<key>pt</key>
+		<string>%1$s OFF</string>
+	</dict>
+	<key>total_row_title_default</key>
+	<dict>
+		<key>es</key>
+		<string>Total a pagar</string>
+		<key>pt</key>
+		<string>Total a pagar</string>
+	</dict>
 </dict>
 </plist>

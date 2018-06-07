@@ -126,7 +126,7 @@ extension PXDiscountDetailViewController {
 
     func getHeader() -> NSAttributedString {
         let attributes = [NSAttributedStringKey.font: Utils.getLightFont(size: PXLayout.XXS_FONT), NSAttributedStringKey.foregroundColor: ThemeManager.shared.labelTintColor()]
-        let string = NSAttributedString(string: "discount_detail_modal_title".localized_beta, attributes: attributes)
+        let string = NSAttributedString(string: PXStrings.discount_detail_modal_title.PXLocalized, attributes: attributes)
         return string
     }
 
@@ -147,7 +147,7 @@ extension PXDiscountDetailViewController {
             let attributes = [NSAttributedStringKey.font: Utils.getLightFont(size: PXLayout.XXS_FONT), NSAttributedStringKey.foregroundColor: ThemeManager.shared.greyColor()]
 
             let amountAttributedString = Utils.getAttributedAmount(withAttributes: attributes, amount: maxCouponAmount, currency: currency, negativeAmount: false)
-            let string: String = ("discount_detail_modal_disclaimer".localized_beta as NSString).replacingOccurrences(of: "%1$s", with: amountAttributedString.string)
+            let string: String = (PXStrings.discount_detail_modal_disclaimer.PXLocalized as NSString).replacingOccurrences(of: "%1$s", with: amountAttributedString.string)
             let attributedString = NSMutableAttributedString(string: string, attributes: attributes)
 
             return attributedString
@@ -163,7 +163,7 @@ extension PXDiscountDetailViewController {
 
     func getFooterMessage() -> NSAttributedString? {
         let attributes = [NSAttributedStringKey.font: Utils.getLightFont(size: PXLayout.XXS_FONT), NSAttributedStringKey.foregroundColor: ThemeManager.shared.greyColor()]
-        let string = NSAttributedString(string: "discount_detail_modal_footer".localized_beta, attributes: attributes)
+        let string = NSAttributedString(string: PXStrings.discount_detail_modal_footer.PXLocalized, attributes: attributes)
         return string
     }
 }

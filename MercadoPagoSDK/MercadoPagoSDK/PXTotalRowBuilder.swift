@@ -31,7 +31,7 @@ final class PXTotalRowBuilder: PXTotalRowComponent {
             let attributedString = NSMutableAttributedString(string: string, attributes: activeDiscountAttributes)
             title = attributedString
         } else {
-            let defaultTitleString = "total_row_title_default".localized_beta
+            let defaultTitleString = PXStrings.total_row_title_default.PXLocalized
             let defaultAttributes = [NSAttributedStringKey.font: Utils.getFont(size: PXLayout.XXS_FONT),
                                      NSAttributedStringKey.foregroundColor: ThemeManager.shared.labelTintColor()]
 
@@ -44,7 +44,7 @@ final class PXTotalRowBuilder: PXTotalRowComponent {
             let attributes = [NSAttributedStringKey.font: Utils.getFont(size: PXLayout.XXS_FONT),
                               NSAttributedStringKey.foregroundColor: ThemeManager.shared.greyColor()]
 
-            let string = NSAttributedString(string: "total_row_disclaimer".localized_beta, attributes: attributes)
+            let string = NSAttributedString(string: PXStrings.total_row_disclaimer.PXLocalized, attributes: attributes)
             disclaimer = string
         }
 
@@ -89,7 +89,7 @@ final class PXTotalRowBuilder: PXTotalRowComponent {
 
     static func handleTap(amountHelper: PXAmountHelper) {
         if amountHelper.discount != nil {
-            PXComponentFactory.Modal.show(viewController: PXDiscountDetailViewController(amountHelper: amountHelper), title: "discount_detail_modal_title".localized_beta)
+            PXComponentFactory.Modal.show(viewController: PXDiscountDetailViewController(amountHelper: amountHelper), title: PXStrings.discount_detail_modal_title.PXLocalized)
         }
     }
 }
