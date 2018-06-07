@@ -444,7 +444,6 @@
 		53EB434E1F601D09009510BC /* AvailableCardsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB434D1F601D09009510BC /* AvailableCardsViewModelTests.swift */; };
 		554BD3642062BEC700F6C631 /* MPCustomRowDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554BD3632062BEC700F6C631 /* MPCustomRowDelegate.swift */; };
 		554BD3652062C08B00F6C631 /* MPCustomRowDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554BD3632062BEC700F6C631 /* MPCustomRowDelegate.swift */; };
-		65EE9B5283D874C05817A88A /* Pods_MercadoPagoSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EB046900059FD16D38D80C /* Pods_MercadoPagoSDKTests.framework */; };
 		76062BC41C4D1EFD0067A14B /* PaymentMethodSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76062BC31C4D1EFD0067A14B /* PaymentMethodSearch.swift */; };
 		76062BC51C4D1EFD0067A14B /* PaymentMethodSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76062BC31C4D1EFD0067A14B /* PaymentMethodSearch.swift */; };
 		76062BC71C4D1F220067A14B /* PaymentMethodSearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76062BC61C4D1F220067A14B /* PaymentMethodSearchItem.swift */; };
@@ -2693,7 +2692,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0F9883201AD2A97A00F750F0 /* Build configuration list for PBXNativeTarget "MercadoPagoSDK" */;
 			buildPhases = (
-				BF3D6F6DB74A56A20A356C30 /* [CP] Check Pods Manifest.lock */,
+				E037ADCA440616DADB6BCF8E /* [CP] Check Pods Manifest.lock */,
 				FC7C237A206402F500CBB83E /* PXTranslations Script */,
 				0F9883051AD2A97A00F750F0 /* Sources */,
 				0F9883061AD2A97A00F750F0 /* Frameworks */,
@@ -2701,6 +2700,7 @@
 				0F9883081AD2A97A00F750F0 /* Resources */,
 				157FAE9C1D1C161C00AB13B0 /* CopyFiles */,
 				4BCA62FA1EBA48D8006D8131 /* SwiftLint */,
+				29A35D3399D067497D8342CD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2721,6 +2721,7 @@
 				0F9883121AD2A97A00F750F0 /* Frameworks */,
 				7622E33F1DF5F5F900490C4E /* Headers */,
 				F3119976B9F69426997F43C0 /* [CP] Embed Pods Frameworks */,
+				47D8BE7F9AE6C8E0094FF1A7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2863,6 +2864,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		29A35D3399D067497D8342CD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MercadoPagoSDK/Pods-MercadoPagoSDK-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		47D8BE7F9AE6C8E0094FF1A7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MercadoPagoSDKTests/Pods-MercadoPagoSDKTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		4BCA62FA1EBA48D8006D8131 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2895,22 +2926,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BE9D6D4A6D0208117148AA90 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MercadoPagoSDKTests/Pods-MercadoPagoSDKTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DCBC7D1595DCCF8BE57DF082 /* [CP] Copy Pods Resources */ = {
+		E037ADCA440616DADB6BCF8E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2919,28 +2935,13 @@
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-MercadoPagoSDK-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MercadoPagoSDK/Pods-MercadoPagoSDK-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DDC226F793BC5B09452AED49 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MercadoPagoSDK/Pods-MercadoPagoSDK-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F3119976B9F69426997F43C0 /* [CP] Embed Pods Frameworks */ = {

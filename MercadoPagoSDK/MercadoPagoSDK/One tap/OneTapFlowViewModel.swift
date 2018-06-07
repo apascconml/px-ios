@@ -23,6 +23,13 @@ class OneTapFlowViewModel: NSObject, PXFlowModel {
     var readyToPay: Bool = false
     var payerCosts: [PayerCost]?
 
+    // In order to ensure data updated create new instance for every usage
+    private var amountHelper: PXAmountHelper {
+        get {
+            return PXAmountHelper(preference: self.checkoutPreference, paymentData: self.paymentData, discount: self.paymentData.discount, campaign: self.paymentData.campaign)
+        }
+    }
+
     let mpESCManager: MercadoPagoESC = MercadoPagoESCImplementation()
     let reviewScreenPreference: ReviewScreenPreference
     let mercadoPagoServicesAdapter = MercadoPagoServicesAdapter(servicePreference: MercadoPagoCheckoutViewModel.servicePreference)

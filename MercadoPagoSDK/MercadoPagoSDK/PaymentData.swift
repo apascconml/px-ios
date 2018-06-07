@@ -21,8 +21,6 @@ import MercadoPagoServices
     public private(set) var campaign: PXCampaign?
     private let paymentTypesWithoutInstallments = [PaymentTypeId.DEBIT_CARD.rawValue, PaymentTypeId.PREPAID_CARD.rawValue]
 
-    private let paymentTypesWithoutInstallments = [PaymentTypeId.DEBIT_CARD.rawValue, PaymentTypeId.PREPAID_CARD.rawValue]
-
     /**
      Este metodo deberia borrar SOLO la data recolectada atraves del flujo de Checkout,
      i.e. la data ingresada por el payer 
