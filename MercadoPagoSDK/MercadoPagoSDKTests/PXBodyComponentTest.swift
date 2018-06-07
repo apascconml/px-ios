@@ -26,7 +26,7 @@ class PXBodyComponentTest: BaseTest {
         XCTAssertEqual(paymentMethodView.subtitleLabel?.text, nil)
         XCTAssertEqual(paymentMethodView.descriptionTitleLabel?.text?.localized, "visa " + "terminada en ".localized + "1234")
         XCTAssertEqual(paymentMethodView.descriptionDetailLabel?.text, "name")
-        XCTAssertEqual(paymentMethodView.disclaimerLabel?.text?.localized, "En tu estado de cuenta verás el cargo como %0".localized.replacingOccurrences(of: "%0", with: "description"))
+        XCTAssertEqual(paymentMethodView.disclaimerLabel?.text?.localized, PXStrings.success_body_statement_description.PXLocalized.replacingOccurrences(of: "%0", with: "description"))
     }
 
     // MARK: APPROVED - ACCOUNT MONEY
@@ -44,7 +44,7 @@ class PXBodyComponentTest: BaseTest {
         XCTAssertNil(paymentMethodView.subtitleLabel?.text)
         XCTAssertEqual(paymentMethodView.descriptionTitleLabel?.text, "account_money")
         XCTAssertNil(paymentMethodView.descriptionDetailLabel?.text)
-        XCTAssertEqual(paymentMethodView.disclaimerLabel?.text?.localized, "En tu estado de cuenta verás el cargo como %0".localized.replacingOccurrences(of: "%0", with: "description"))
+        XCTAssertEqual(paymentMethodView.disclaimerLabel?.text?.localized, PXStrings.success_body_statement_description.PXLocalized.replacingOccurrences(of: "%0", with: "description"))
     }
 
     // MARK: REJECTED - CARD

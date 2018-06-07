@@ -18,15 +18,6 @@
 		<key>pt</key>
 		<string>Enviaremos os dados para %0</string>
 	</dict>
-	<key>En tu estado de cuenta verás el cargo como %0</key>
-	<dict>
-		<key>es</key>
-		<string>En tu estado de cuenta verás el cargo como %0</string>
-		<key>en</key>
-		<string>On your statement you will see the charge as %0</string>
-		<key>pt</key>
-		<string>Você verá o pagamento na fatura do seu cartão de crédito como %0</string>
-	</dict>
 	<key>El número de identificación es inválido</key>
 	<dict>
 		<key>es</key>

@@ -95,7 +95,7 @@ open class PXBodyComponent: NSObject, PXComponentizable {
 
         var disclaimerText: String? = nil
         if let statementDescription = self.props.paymentResult.statementDescription {
-            disclaimerText =  ("En tu estado de cuenta verás el cargo como %0".localized as NSString).replacingOccurrences(of: "%0", with: "\(statementDescription)")
+            disclaimerText =  (PXStrings.success_body_statement_description.PXLocalized as NSString).replacingOccurrences(of: "%0", with: "\(statementDescription)")
         }
 
         let bodyProps = PXPaymentMethodProps(paymentMethodIcon: image, title: amountTitle.toAttributedString(), subtitle: amountDetail, descriptionTitle: pmDescription.toAttributedString(), descriptionDetail: descriptionDetail, disclaimer: disclaimerText?.toAttributedString(), backgroundColor: ThemeManager.shared.detailedBackgroundColor(), lightLabelColor: ThemeManager.shared.labelTintColor(), boldLabelColor: ThemeManager.shared.boldLabelTintColor())

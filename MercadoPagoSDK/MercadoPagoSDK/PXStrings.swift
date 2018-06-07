@@ -71,6 +71,7 @@ enum PXStrings {
     static let bank_deal_details_date_format = "bank_deal_details_date_format"
     static let bank_deal_details_title = "bank_deal_details_title"
     static let review_terms_and_conditions = "review_terms_and_conditions"
+    static let review_discount_terms_and_conditions_highlighted_text = "review_discount_terms_and_conditions_highlighted_text"
     static let review_discount_terms_and_conditions = "review_discount_terms_and_conditions"
     static let discount_detail_modal_title = "discount_detail_modal_title"
     static let discount_detail_modal_footer = "discount_detail_modal_footer"
@@ -80,4 +81,5 @@ enum PXStrings {
     static let total_row_title_percent_off = "total_row_title_percent_off"
     static let total_row_title_amount_off = "total_row_title_amount_off"
     static let total_row_title_default = "total_row_title_default"
+    static let success_body_statement_description = "success_body_statement_description"
 }

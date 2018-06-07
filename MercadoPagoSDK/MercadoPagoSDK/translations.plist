@@ -694,6 +694,13 @@ Se preferir, você pode escolher outro meio de pagamento.</string>
 		<key>pt</key>
 		<string>Ao pagar, declaro que sou maior de idade e aceito os Termos e Condições.</string>
 	</dict>
+	<key>review_discount_terms_and_conditions_highlighted_text</key>
+	<dict>
+		<key>es</key>
+		<string>Ver condiciones</string>
+		<key>pt</key>
+		<string>Ver condições</string>
+	</dict>
 	<key>review_discount_terms_and_conditions</key>
 	<dict>
 		<key>es</key>
@@ -760,6 +767,13 @@ Se preferir, você pode escolher outro meio de pagamento.</string>
 		<string>Total a pagar</string>
 		<key>pt</key>
 		<string>Total a pagar</string>
+	</dict>
+	<key>success_body_statement_description</key>
+	<dict>
+		<key>es</key>
+		<string>En tu estado de cuenta verás el cargo como %0</string>
+		<key>pt</key>
+		<string>Você verá o pagamento na fatura do seu cartão de crédito como %0</string>
 	</dict>
 </dict>
 </plist>
