@@ -11,7 +11,6 @@ import UIKit
 @objcMembers
 open class MercadoPagoUIScrollViewController: MercadoPagoUIViewController {
 
-    var displayNavBar = false
     var lastContentOffset: CGFloat = 0
     var scrollingDown = false
     let navBarHeigth: CGFloat = 44

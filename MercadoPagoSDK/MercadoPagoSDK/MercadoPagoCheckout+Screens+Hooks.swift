@@ -49,7 +49,7 @@ extension MercadoPagoCheckout {
 
             targetHook.renderDidFinish?()
 
-            self.pxNavigationHandler.pushViewController(viewController: vc, animated: true)
+            viewModel.pxNavigationHandler.pushViewController(viewController: vc, animated: true)
 
             self.viewModel.continueFrom(hook: hookStep)
         }

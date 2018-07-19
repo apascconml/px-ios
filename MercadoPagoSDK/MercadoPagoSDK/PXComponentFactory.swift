@@ -53,7 +53,7 @@ struct PXComponentFactory {
         }
 
         static func showLongDurationMessage(message: String) {
-            MLSnackbar.show(withTitle: message, type: .default(), duration: .long)
+            MLSnackbar.show(withTitle: message, type: .error(), duration: .long)
         }
 
         static func showPersistentMessage(message: String) {

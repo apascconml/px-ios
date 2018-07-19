@@ -18,6 +18,8 @@ import Foundation
         case call_FOR_AUTH = 4
     }
 
+    let warningStatusDetails = [RejectedStatusDetail.INVALID_ESC, RejectedStatusDetail.CALL_FOR_AUTH, RejectedStatusDetail.BAD_FILLED_CARD_NUMBER, RejectedStatusDetail.CARD_DISABLE, RejectedStatusDetail.INSUFFICIENT_AMOUNT, RejectedStatusDetail.BAD_FILLED_DATE, RejectedStatusDetail.BAD_FILLED_SECURITY_CODE, RejectedStatusDetail.BAD_FILLED_OTHER]
+
     open var paymentData: PaymentData?
     open var status: String
     open var statusDetail: String
@@ -73,5 +75,29 @@ import Foundation
 
     func isWaitingForPayment() -> Bool {
         return self.statusDetail == PendingStatusDetail.WAITING_PAYMENT
+    }
+}
+
+// MARK: Congrats logic
+extension PaymentResult {
+    func isAccepted() -> Bool {
+        return isApproved() || isInProcess() || isPending()
+    }
+
+    func isWarning() -> Bool {
+        if !isRejected() {
+            return false
+        }
+        if warningStatusDetails.contains(statusDetail) {
+            return true
+        }
+        return false
+    }
+
+    func isError() -> Bool {
+        if !isRejected() {
+            return false
+        }
+        return !isWarning()
     }
 }

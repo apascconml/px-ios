@@ -82,8 +82,8 @@ class PXBusinessResultViewModel: NSObject, PXResultViewModelInterface {
         }
     }
     func buildHeaderComponent() -> PXHeaderComponent {
-        let headerImage = getHeaderIcon()
-        let headerProps = PXHeaderProps(labelText: businessResult.getSubTitle()?.toAttributedString(), title: businessResult.getTitle().toAttributedString(), backgroundColor: primaryResultColor(), productImage: headerImage, statusImage: getBadgeImage())
+        let headerImage = getHeaderDefaultIcon()
+        let headerProps = PXHeaderProps(labelText: businessResult.getSubTitle()?.toAttributedString(), title: businessResult.getTitle().toAttributedString(), backgroundColor: primaryResultColor(), productImage: headerImage, statusImage: getBadgeImage(), imageURL: businessResult.getImageUrl())
         return PXHeaderComponent(props: headerProps)
     }
 
@@ -110,7 +110,7 @@ class PXBusinessResultViewModel: NSObject, PXResultViewModelInterface {
             pmComponent =  getPaymentMethodComponent()
         }
 
-        if (self.businessResult.getHelpMessage() != nil) {
+        if self.businessResult.getHelpMessage() != nil {
             helpComponent = getHelpMessageComponent()
         }
 
@@ -212,19 +212,14 @@ class PXBusinessResultViewModel: NSObject, PXResultViewModelInterface {
         return PXCustomComponent(view: view)
     }
 
-    func getHeaderIcon() -> UIImage? {
-        if let brImageUrl = businessResult.getImageUrl() {
-            if let image =  ViewUtils.loadImageFromUrl(brImageUrl) {
-                return image
-            }
-        } else if let brIcon = businessResult.getIcon() {
-            return brIcon
+    func getHeaderDefaultIcon() -> UIImage? {
+        if let brIcon = businessResult.getIcon() {
+             return brIcon
         } else if let defaultBundle = approvedIconBundle, let defaultImage = MercadoPago.getImage(approvedIconName, bundle: defaultBundle) {
             return defaultImage
         }
         return nil
     }
-
 }
 
 class PXBusinessResultBodyComponent: PXComponentizable {

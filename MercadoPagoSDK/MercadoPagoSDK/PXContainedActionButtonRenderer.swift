@@ -19,8 +19,9 @@ class PXContainedActionButtonRenderer: NSObject {
         containedButtonView.translatesAutoresizingMaskIntoConstraints = false
 
         let button = self.buildButton(with: containedButton.props.action, title: containedButton.props.title)
-        containedButtonView.addSubview(button)
         containedButtonView.button = button
+        containedButtonView.button?.animationDelegate = containedButton.props.animationDelegate
+        containedButtonView.addSubview(button)
 
         containedButtonView.backgroundColor = .white
         containedButtonView.layer.shadowOffset = CGSize(width: 0, height: 0)
@@ -37,14 +38,16 @@ class PXContainedActionButtonRenderer: NSObject {
         return containedButtonView
     }
 
-    fileprivate func buildButton(with action:@escaping (() -> Void), title: String) -> PXPrimaryButton {
-        let button = PXPrimaryButton()
-        button.buttonTitle = title
+    fileprivate func buildButton(with action:@escaping (() -> Void), title: String) -> PXAnimatedButton {
+        let button = PXAnimatedButton()
+        button.backgroundColor = ThemeManager.shared.getAccentColor()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle(title, for: .normal)
         button.add(for: .touchUpInside, action)
         return button
     }
 }
 
 class PXContainedActionButtonView: UIView {
-    public var button: PXPrimaryButton?
+    public var button: PXAnimatedButton?
 }

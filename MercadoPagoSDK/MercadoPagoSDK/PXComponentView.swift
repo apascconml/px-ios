@@ -165,17 +165,24 @@ import Foundation
     func isEmpty() -> Bool {
         return self.contentView.subviews.count == 0
     }
+
+    func getContentView() -> UIView {
+        return contentView
+    }
+
+    func setBackground(color: UIColor?) {
+        backgroundColor = color
+        contentView.backgroundColor = color
+        topGuideView.backgroundColor = color
+        bottomGuideView.backgroundColor = color
+    }
 }
 
-extension PXComponentView {
-    func animateContentOnY() {
-        if #available(iOS 10.0, *) {
-            let animatorInit = UIViewPropertyAnimator(duration: 0.6, dampingRatio: 1.4, animations: { [weak self] in
-                self?.contentView.transform = CGAffineTransform(translationX: 0, y: -4)
-            })
-            animatorInit.startAnimation()
-        } else {
-            // No animation for iOS 9 or minor.
-        }
+internal extension CALayer {
+    func pxShadow(radius: CGFloat = 3, shadowOpacity: Float = 0.25) {
+        self.shadowOffset = CGSize(width: 0, height: 0)
+        self.shadowColor = UIColor.black.cgColor
+        self.shadowRadius = radius
+        self.shadowOpacity = shadowOpacity
     }
 }

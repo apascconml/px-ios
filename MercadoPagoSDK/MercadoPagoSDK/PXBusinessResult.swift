@@ -64,7 +64,6 @@ import UIKit
         self.paymentStatusDetail = paymentStatusDetail
         super.init()
     }
-
 }
 
 // MARK: Getters
@@ -111,5 +110,19 @@ extension PXBusinessResult {
     }
     public func isApproved() -> Bool {
         return self.paymentStatus == PaymentStatus.APPROVED
+    }
+}
+
+extension PXBusinessResult {
+    internal func isAccepted() -> Bool {
+        return self.status == .APPROVED
+    }
+
+    internal func isWarning() -> Bool {
+        return self.status == .PENDING || self.status == .IN_PROGRESS
+    }
+
+    internal func isError() -> Bool {
+        return self.status == .REJECTED
     }
 }

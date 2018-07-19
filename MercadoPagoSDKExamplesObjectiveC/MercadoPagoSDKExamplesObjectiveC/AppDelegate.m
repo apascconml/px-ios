@@ -34,7 +34,7 @@
     
     [MercadoPagoContext setSiteID:@"MLA"];
     
-    [MercadoPagoContext setAccountMoneyAvailableWithAccountMoneyAvailable:YES];
+    //[MercadoPagoContext setAccountMoneyAvailableWithAccountMoneyAvailable:YES];
     
     //[MercadoPagoContext setupPrimaryColor:[UIColor redColor] complementaryColor:nil];
     //[MercadoPagoContext setDisplayDefaultLoadingWithFlag:NO];

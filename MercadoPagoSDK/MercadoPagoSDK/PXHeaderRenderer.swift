@@ -33,10 +33,18 @@ class PXHeaderRenderer: NSObject {
         headerView.translatesAutoresizingMaskIntoConstraints = false
 
         //Image
-        headerView.circleImage = buildCircleImage(with: header.props.productImage)
-        headerView.addSubview(headerView.circleImage!)
-        PXLayout.centerHorizontally(view: headerView.circleImage!, to: headerView.circleImage!.superview!).isActive = true
-        PXLayout.pinTop(view: headerView.circleImage!, withMargin: PXLayout.XXXL_MARGIN).isActive = true
+
+        if let imageURL = header.props.imageURL {
+            headerView.circleImage = buildCircleImage(with: nil)
+            Utils().loadImageWithCache(withUrl: imageURL, targetImageView: headerView.circleImage!, placeholderImage: nil, fallbackImage: header.props.productImage)
+        } else {
+            headerView.circleImage = buildCircleImage(with: header.props.productImage)
+        }
+        if let circleImage = headerView.circleImage {
+            headerView.addSubview(circleImage)
+            PXLayout.centerHorizontally(view: circleImage, to: headerView).isActive = true
+            PXLayout.pinTop(view: circleImage, withMargin: PXLayout.XXXL_MARGIN).isActive = true
+        }
 
         //Badge Image
         headerView.badgeImage = buildBudgeImage(with: header.props.statusImage)

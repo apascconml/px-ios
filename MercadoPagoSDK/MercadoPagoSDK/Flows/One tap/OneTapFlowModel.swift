@@ -8,13 +8,14 @@
 
 import Foundation
 
-class OneTapFlowViewModel: NSObject, PXFlowModel {
+class OneTapFlowModel: NSObject, PXFlowModel {
 
     enum Steps: String {
         case finish
         case screenReviewOneTap
         case screenSecurityCode
         case serviceCreateESCCardToken
+        case payment
     }
 
     var paymentData: PaymentData
@@ -23,6 +24,14 @@ class OneTapFlowViewModel: NSObject, PXFlowModel {
     let search: PaymentMethodSearch
     var readyToPay: Bool = false
     var payerCosts: [PayerCost]?
+    var paymentResult: PaymentResult?
+    var instructionsInfo: InstructionsInfo?
+    var businessResult: PXBusinessResult?
+
+    // Payment flow
+    var paymentFlow: PXPaymentFlow?
+    weak var paymentResultHandler: PXPaymentResultHandlerProtocol?
+
     var chargeRules: [PXPaymentTypeChargeRule]?
 
     // In order to ensure data updated create new instance for every usage
@@ -59,12 +68,15 @@ class OneTapFlowViewModel: NSObject, PXFlowModel {
         if needCreateESCToken() {
             return .serviceCreateESCCardToken
         }
+        if needCreatePayment() {
+            return .payment
+        }
         return .finish
     }
 }
 
 // MARK: Create view model
-extension OneTapFlowViewModel {
+extension OneTapFlowModel {
     public func savedCardSecurityCodeViewModel() -> SecurityCodeViewModel {
         guard let cardInformation = self.paymentOptionSelected as? CardInformation else {
             fatalError("Cannot convert payment option selected to CardInformation")
@@ -84,7 +96,7 @@ extension OneTapFlowViewModel {
 }
 
 // MARK: Update view models
-extension OneTapFlowViewModel {
+extension OneTapFlowModel {
     func updateCheckoutModel(paymentData: PaymentData) {
         self.paymentData = paymentData
         self.readyToPay = true
@@ -104,7 +116,7 @@ extension OneTapFlowViewModel {
 }
 
 // MARK: Flow logic
-extension OneTapFlowViewModel {
+extension OneTapFlowModel {
     func needReviewAndConfirmForOneTap() -> Bool {
         if readyToPay {
             return false
@@ -136,7 +148,6 @@ extension OneTapFlowViewModel {
     }
 
     func needCreateESCToken() -> Bool {
-
         guard let paymentMethod = self.paymentData.getPaymentMethod() else {
             return false
         }
@@ -147,10 +158,37 @@ extension OneTapFlowViewModel {
         return savedCardWithESC
     }
 
+    func needCreatePayment() -> Bool {
+        if !readyToPay {
+            return false
+        }
+        return paymentData.isComplete(shouldCheckForToken: false) && paymentFlow != nil && paymentResult == nil && businessResult == nil
+    }
+
     func hasSavedESC() -> Bool {
         if let card = paymentOptionSelected as? CardInformation {
             return mpESCManager.getESC(cardId: card.getCardId()) == nil ? false : true
         }
         return false
     }
+
+    func needToShowLoading() -> Bool {
+        if let paymentFlow = paymentFlow, hasSavedESC() {
+            paymentFlow.model.paymentData = paymentData
+            paymentFlow.model.checkoutPreference = checkoutPreference
+            return paymentFlow.model.needToShowPaymentPluginScreen()
+        }
+        return true
+    }
+
+    func getTimeoutForOneTapReviewController() -> TimeInterval {
+        if let paymentFlow = paymentFlow {
+            paymentFlow.model.paymentData = paymentData
+            let tokenTimeOut: TimeInterval = mercadoPagoServicesAdapter.getTimeOut()
+            // Payment Flow timeout + tokenization TimeOut
+            return paymentFlow.getPaymentTimeOut() + tokenTimeOut
+        }
+        return 0
+    }
+
 }

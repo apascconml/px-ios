@@ -24,7 +24,7 @@ extension PXResultViewModel {
 // MARK: Build Helpers
 extension PXResultViewModel {
     func iconImageHeader() -> UIImage? {
-        if isAccepted() {
+        if paymentResult.isAccepted() {
             if self.paymentResult.isApproved() {
                 return preference.getHeaderApprovedIcon() // * **
             } else if self.paymentResult.isWaitingForPayment() {
@@ -42,7 +42,7 @@ extension PXResultViewModel {
         if !preference.showBadgeImage {
             return nil
         }
-        if isAccepted() {
+        if paymentResult.isAccepted() {
             if self.paymentResult.isApproved() {
                 return preference.getApprovedBadgeImage()
             } else if self.paymentResult.isReviewManual() {
@@ -51,17 +51,17 @@ extension PXResultViewModel {
                 return MercadoPago.getImage("pending_badge")
             }
         }
-        if isWarning() {
+        if paymentResult.isWarning() {
             return MercadoPago.getImage("need_action_badge")
         }
-        if  isError() {
+        if paymentResult.isError() {
             return MercadoPago.getImage("error_badge")
         }
         return nil
     }
 
     func labelTextHeader() -> NSAttributedString? {
-        if isAccepted() {
+        if paymentResult.isAccepted() {
             if self.paymentResult.isWaitingForPayment() {
                 return "¡Apúrate a pagar!".localized.toAttributedString(attributes: [NSAttributedStringKey.font: Utils.getFont(size: PXHeaderRenderer.LABEL_FONT_SIZE)])
             } else {
@@ -88,7 +88,7 @@ extension PXResultViewModel {
         if self.instructionsInfo != nil {
             return titleForInstructions()
         }
-        if isAccepted() {
+        if paymentResult.isAccepted() {
             if self.paymentResult.isApproved() {
                 return NSMutableAttributedString(string: preference.getApprovedTitle(), attributes: [NSAttributedStringKey.font: Utils.getFont(size: PXHeaderRenderer.TITLE_FONT_SIZE)])
             } else {

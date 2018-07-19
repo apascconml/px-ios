@@ -7,15 +7,16 @@
 //
 
 import UIKit
+import UIKit.UIGestureRecognizerSubclass
 
 class PXComponentContainerViewController: MercadoPagoUIViewController {
 
-    fileprivate lazy var elasticHeader = UIView()
-    fileprivate lazy var customNavigationTitle: String = ""
-    fileprivate lazy var secondaryCustomNavigationTitle: String = ""
-    fileprivate lazy var NAVIGATION_BAR_DELTA_Y: CGFloat = 29.8
-    fileprivate lazy var NAVIGATION_BAR_SECONDARY_DELTA_Y: CGFloat = 0
-    fileprivate lazy var navigationTitleStatusStep: Int = 0
+    private lazy var elasticHeader = UIView()
+    private lazy var customNavigationTitle: String = ""
+    private lazy var secondaryCustomNavigationTitle: String = ""
+    private lazy var NAVIGATION_BAR_DELTA_Y: CGFloat = 29.8
+    private lazy var NAVIGATION_BAR_SECONDARY_DELTA_Y: CGFloat = 0
+    private lazy var navigationTitleStatusStep: Int = 0
 
     var scrollView: UIScrollView!
     var contentView = PXComponentView()
@@ -68,6 +69,12 @@ class PXComponentContainerViewController: MercadoPagoUIViewController {
         }
         return false
     }
+
+    func setBackground(color: UIColor?) {
+        view.backgroundColor = color
+        scrollView.backgroundColor = color
+        contentView.setBackground(color: color)
+    }
 }
 
 // MARK: Elastic header.
@@ -107,6 +114,14 @@ extension PXComponentContainerViewController: UIScrollViewDelegate {
         view.layoutIfNeeded()
     }
 
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if scrollView.contentOffset.y > 0 && scrollView.contentOffset.y <= 32 {
+            UIView.animate(withDuration: 0.25, animations: {
+                targetContentOffset.pointee.y = 32
+            })
+        }
+    }
+
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         handleNavigationBarEffect(scrollView)
         elasticHeader.frame = CGRect(x: 0, y: 0, width: contentView.frame.width, height: -scrollView.contentOffset.y)
@@ -138,6 +153,28 @@ extension PXComponentContainerViewController: UIScrollViewDelegate {
                 (navigationItem.titleView as? UILabel)?.layer.add(fadeOutTextAnimation, forKey: "fadeOutText")
                 (navigationItem.titleView as? UILabel)?.text = ""
             }
+        }
+    }
+
+    func isNavBarHidden() -> Bool {
+        return navigationTitleStatusStep >= 2
+    }
+}
+
+extension PXComponentContainerViewController {
+    func animateContentView(customAnimations: [StockAnimation]? = nil) {
+        if let animationCustom = customAnimations {
+            contentView.getContentView().pxSpruce.animate(animationCustom, sortFunction: PXSpruce.PXDefaultAnimation.appearSortFunction)
+        } else {
+            contentView.getContentView().pxSpruce.animate(PXSpruce.PXDefaultAnimation.slideUpAnimation, sortFunction: PXSpruce.PXDefaultAnimation.appearSortFunction)
+        }
+    }
+
+    func prepareForAnimation(customAnimations: [StockAnimation]? = nil) {
+        if let animationCustom = customAnimations {
+            contentView.getContentView().pxSpruce.prepare(with: animationCustom)
+        } else {
+            contentView.getContentView().pxSpruce.prepare(with: PXSpruce.PXDefaultAnimation.slideUpAnimation)
         }
     }
 }

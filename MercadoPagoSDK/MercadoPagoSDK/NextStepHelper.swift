@@ -51,7 +51,6 @@ extension MercadoPagoCheckoutViewModel {
         guard let pm = self.paymentData.getPaymentMethod(), !pm.isBolbradesco else {
             return false
         }
-
         return isIdentificationNeeded() && self.identificationTypes != nil
     }
 
@@ -63,7 +62,6 @@ extension MercadoPagoCheckoutViewModel {
         guard let pm = self.paymentData.getPaymentMethod(), pm.isBolbradesco else {
             return false
         }
-
         return isIdentificationNeeded() && self.identificationTypes != nil
     }
 
@@ -253,31 +251,11 @@ extension MercadoPagoCheckoutViewModel {
             return false
         }
 
-        if let paymentMethodSelected = OneTapFlow.autoSelectOneTapOption(search: search, paymentMethodPlugins: paymentMethodPluginsToShow, forceTest: false) {
+        if let paymentMethodSelected = OneTapFlow.autoSelectOneTapOption(search: search, paymentMethodPlugins: paymentMethodPluginsToShow) {
             updateCheckoutModel(paymentOptionSelected: paymentMethodSelected)
             return true
         }
         return false
-    }
-
-    func needToGetInstructions() -> Bool {
-        guard let paymentResult = self.paymentResult else {
-            return false
-        }
-
-        guard !String.isNullOrEmpty(paymentResult.paymentId) else {
-            return false
-        }
-
-        guard let paymentTypeId = paymentResult.paymentData?.getPaymentMethod()?.paymentTypeId else {
-            return false
-        }
-
-        if !PaymentTypeId.isOnlineType(paymentTypeId: paymentTypeId) && self.instructionsInfo == nil {
-            return true
-        } else {
-            return false
-        }
     }
 
     func shouldShowCongrats() -> Bool {

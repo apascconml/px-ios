@@ -22,7 +22,7 @@ extension MercadoPagoCheckout: InitFlowProtocol {
             viewModel.errorInputs(error: customError, errorCallback: { [weak self] in
                 if flowError.shouldRetry {
                     if self?.initMode == .normal {
-                        self?.pxNavigationHandler.presentLoading()
+                        self?.viewModel.pxNavigationHandler.presentLoading()
                     }
                     self?.viewModel.initFlow?.setFlowRetry(step: flowError.errorStep)
                     self?.executeNextStep()

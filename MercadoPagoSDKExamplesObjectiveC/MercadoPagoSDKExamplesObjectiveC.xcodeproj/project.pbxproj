@@ -384,13 +384,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 76EF7EEA1D2559140087C785 /* Build configuration list for PBXNativeTarget "MercadoPagoSDKExamplesObjectiveC" */;
 			buildPhases = (
-				58D4952A06CF1AAFBFC4CE96 /* [CP] Check Pods Manifest.lock */,
+				E3E2D9028C3594450BF01D3A /* [CP] Check Pods Manifest.lock */,
 				76EF7EB91D2559140087C785 /* Sources */,
 				76EF7EBA1D2559140087C785 /* Frameworks */,
 				76EF7EBB1D2559140087C785 /* Resources */,
 				15AF42AE1D36848100E70343 /* Embed Frameworks */,
-				B04CA856453302CBBC022EBF /* [CP] Embed Pods Frameworks */,
-				43CFD16ACBBE5B5DE431AAD6 /* [CP] Copy Pods Resources */,
+				B0BCF506448128360A0F5998 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -410,8 +409,6 @@
 				76EF7ED21D2559140087C785 /* Sources */,
 				76EF7ED31D2559140087C785 /* Frameworks */,
 				76EF7ED41D2559140087C785 /* Resources */,
-				5D86C05FB7F35176544021D8 /* [CP] Embed Pods Frameworks */,
-				173AE4BA3B5AFD5FC45317F4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -513,74 +510,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		173AE4BA3B5AFD5FC45317F4 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MercadoPagoSDKExamplesObjectiveCTests/Pods-MercadoPagoSDKExamplesObjectiveCTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		43CFD16ACBBE5B5DE431AAD6 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MercadoPagoSDKExamplesObjectiveC/Pods-MercadoPagoSDKExamplesObjectiveC-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		58D4952A06CF1AAFBFC4CE96 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MercadoPagoSDKExamplesObjectiveC-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5D86C05FB7F35176544021D8 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FXBlurView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JRSwizzle.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MLUI.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MercadoPagoPXTrackingV4.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MercadoPagoServicesV4.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MercadoPagoSDKExamplesObjectiveCTests/Pods-MercadoPagoSDKExamplesObjectiveCTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		8BEA8DB4E81FCA1483BAA9C1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -599,7 +528,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B04CA856453302CBBC022EBF /* [CP] Embed Pods Frameworks */ = {
+		B0BCF506448128360A0F5998 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -623,6 +552,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MercadoPagoSDKExamplesObjectiveC/Pods-MercadoPagoSDKExamplesObjectiveC-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E3E2D9028C3594450BF01D3A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MercadoPagoSDKExamplesObjectiveC-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

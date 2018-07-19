@@ -75,41 +75,15 @@ public class PXResultViewModel: PXResultViewModelInterface {
     }
 
     func primaryResultColor() -> UIColor {
-        if isAccepted() {
+        if paymentResult.isAccepted() {
             return ThemeManager.shared.successColor()
         }
-        if isError() {
+        if paymentResult.isError() {
             return ThemeManager.shared.rejectedColor()
         }
-        if isWarning() {
+        if paymentResult.isWarning() {
             return ThemeManager.shared.warningColor()
         }
         return .pxWhite
-    }
-
-    func isAccepted() -> Bool {
-        if self.paymentResult.isApproved() || self.paymentResult.isInProcess() || self.paymentResult.isPending() {
-            return true
-        } else {
-            return false
-        }
-    }
-
-    func isWarning() -> Bool {
-        if !self.paymentResult.isRejected() {
-            return false
-        }
-        if warningStatusDetails.contains(self.paymentResult.statusDetail) {
-            return true
-        }
-
-        return false
-    }
-
-    func isError() -> Bool {
-        if !self.paymentResult.isRejected() {
-            return false
-        }
-        return !isWarning()
     }
 }

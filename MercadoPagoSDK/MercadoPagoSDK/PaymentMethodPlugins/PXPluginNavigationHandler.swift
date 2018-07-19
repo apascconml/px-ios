@@ -16,71 +16,6 @@ open class PXPluginNavigationHandler: NSObject {
         self.checkout = withCheckout
     }
 
-    open func didFinishPayment(businessResult: PXBusinessResult) {
-        self.checkout?.viewModel.businessResult = businessResult
-        self.checkout?.executeNextStep()
-    }
-
-    open func didFinishPayment(paymentStatus: PXPaymentMethodPlugin.RemotePaymentStatus, statusDetails: String = "", receiptId: String? = nil) {
-
-        guard let paymentData = self.checkout?.viewModel.paymentData else {
-            return
-        }
-
-        if statusDetails == RejectedStatusDetail.INVALID_ESC {
-            checkout?.viewModel.prepareForInvalidPaymentWithESC()
-            checkout?.executeNextStep()
-            return
-        }
-
-        var statusDetailsStr = statusDetails
-
-        // By definition of MVP1, we support only approved or rejected.
-        var paymentStatusStrDefault = PaymentStatus.REJECTED
-        if paymentStatus == .APPROVED {
-            paymentStatusStrDefault = PaymentStatus.APPROVED
-        }
-
-        // Set paymentPlugin image into payment method.
-        if let paymentMethodPlugin = self.checkout?.viewModel.paymentOptionSelected as? PXPaymentMethodPlugin {
-            paymentData.paymentMethod?.setExternalPaymentMethodImage(externalImage: paymentMethodPlugin.getImage())
-
-            // Defaults status details for paymentMethod plugin
-            if paymentStatus == .APPROVED {
-                statusDetailsStr = ""
-            } else {
-                statusDetailsStr = RejectedStatusDetail.REJECTED_PLUGIN_PM
-            }
-        }
-
-        let paymentResult = PaymentResult(status: paymentStatusStrDefault, statusDetail: statusDetailsStr, paymentData: paymentData, payerEmail: nil, paymentId: receiptId, statementDescription: nil)
-
-        checkout?.setPaymentResult(paymentResult: paymentResult)
-        checkout?.executeNextStep()
-    }
-
-    open func didFinishPayment(status: String, statusDetail: String, receiptId: String? = nil) {
-
-        guard let paymentData = self.checkout?.viewModel.paymentData else {
-            return
-        }
-
-        if statusDetail == RejectedStatusDetail.INVALID_ESC {
-            checkout?.viewModel.prepareForInvalidPaymentWithESC()
-            checkout?.executeNextStep()
-            return
-        }
-
-        if let paymentMethodPlugin = self.checkout?.viewModel.paymentOptionSelected as? PXPaymentMethodPlugin {
-            paymentData.paymentMethod?.setExternalPaymentMethodImage(externalImage: paymentMethodPlugin.getImage())
-        }
-
-        let paymentResult = PaymentResult(status: status, statusDetail: statusDetail, paymentData: paymentData, payerEmail: nil, paymentId: receiptId, statementDescription: nil)
-
-        checkout?.setPaymentResult(paymentResult: paymentResult)
-        checkout?.executeNextStep()
-    }
-
     open func showFailure(message: String, errorDetails: String, retryButtonCallback: (() -> Void)?) {
         MercadoPagoCheckoutViewModel.error = MPSDKError(message: message, errorDetail: errorDetails, retry: retryButtonCallback != nil)
         checkout?.viewModel.errorCallback = retryButtonCallback
@@ -92,15 +27,15 @@ open class PXPluginNavigationHandler: NSObject {
     }
 
     open func nextAndRemoveCurrentScreenFromStack() {
-        guard let currentViewController = self.checkout?.pxNavigationHandler.navigationController.viewControllers.last else {
+        guard let currentViewController = self.checkout?.viewModel.pxNavigationHandler.navigationController.viewControllers.last else {
             checkout?.executeNextStep()
             return
         }
 
         checkout?.executeNextStep()
 
-        if let indexOfLastViewController = self.checkout?.pxNavigationHandler.navigationController.viewControllers.index(of: currentViewController) {
-            self.checkout?.pxNavigationHandler.navigationController.viewControllers.remove(at: indexOfLastViewController)
+        if let indexOfLastViewController = self.checkout?.viewModel.pxNavigationHandler.navigationController.viewControllers.index(of: currentViewController) {
+            self.checkout?.viewModel.pxNavigationHandler.navigationController.viewControllers.remove(at: indexOfLastViewController)
         }
     }
 
@@ -109,10 +44,10 @@ open class PXPluginNavigationHandler: NSObject {
     }
 
     open func showLoading() {
-        checkout?.pxNavigationHandler.presentLoading()
+        checkout?.viewModel.pxNavigationHandler.presentLoading()
     }
 
     open func hideLoading() {
-        checkout?.pxNavigationHandler.dismissLoading()
+        checkout?.viewModel.pxNavigationHandler.dismissLoading()
     }
 }

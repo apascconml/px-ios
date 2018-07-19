@@ -17,9 +17,12 @@ final class PXFooterRenderer: NSObject {
         var topView: UIView = fooView
         fooView.translatesAutoresizingMaskIntoConstraints = false
         fooView.backgroundColor = .pxWhite
+
         if let principalAction = footer.props.buttonAction {
-            let principalButton = self.buildPrincipalButton(with: principalAction, color: footer.props.primaryColor)
+            let principalButton = self.buildAnimatedButton(with: principalAction, color: footer.props.primaryColor)
+            principalButton.layer.shadowRadius = 4
             fooView.principalButton = principalButton
+            fooView.principalButton?.animationDelegate = footer.props.animationDelegate
             fooView.addSubview(principalButton)
             PXLayout.pinTop(view: principalButton, to: topView, withMargin: PXLayout.S_MARGIN).isActive = true
             PXLayout.pinLeft(view: principalButton, to: fooView, withMargin: PXLayout.S_MARGIN).isActive = true
@@ -31,7 +34,7 @@ final class PXFooterRenderer: NSObject {
 
             let linkButton = self.buildLinkButton(with: linkAction, color: footer.props.primaryColor)
 
-            fooView.linkButton = linkButton
+//            fooView.linkButton = linkButton
             fooView.addSubview(linkButton)
             if topView != fooView {
                PXLayout.put(view: linkButton, onBottomOf: topView, withMargin: PXLayout.S_MARGIN).isActive = true
@@ -54,6 +57,15 @@ final class PXFooterRenderer: NSObject {
         let button = PXPrimaryButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.buttonTitle = footerAction.label
+        button.add(for: .touchUpInside, footerAction.action)
+        return button
+    }
+
+    func buildAnimatedButton(with footerAction: PXComponentAction, color: UIColor? = .pxBlueMp) -> PXAnimatedButton {
+        let button = PXAnimatedButton()
+        button.backgroundColor = color
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle(footerAction.label, for: .normal)
         button.add(for: .touchUpInside, footerAction.action)
         return button
     }

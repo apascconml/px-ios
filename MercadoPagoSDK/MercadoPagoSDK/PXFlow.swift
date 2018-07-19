@@ -15,7 +15,6 @@ enum PXFlowStatus {
 }
 
 protocol PXFlow {
-    var pxNavigationHandler: PXNavigationHandler { get }
 
     // Step logic
     func start()

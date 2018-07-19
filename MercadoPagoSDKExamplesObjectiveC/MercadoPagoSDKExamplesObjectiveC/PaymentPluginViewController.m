@@ -11,7 +11,7 @@
 
 @interface PaymentPluginViewController ()
 
-@property (strong, nonatomic) PXPluginNavigationHandler * pluginNavigationHandler;
+@property (strong, nonatomic) PXPaymentPluginNavigationHandler * paymentNavigationHandler;
 
 @end
 
@@ -23,36 +23,57 @@
 
 #pragma mark - Plugin implementation.
 - (UIView * _Nullable)renderWithStore:(PXCheckoutStore * _Nonnull)store theme:(id<PXTheme> _Nonnull)theme {
-    return self.view;
+    return nil;
+    //return self.view;
 }
 
 - (void)renderDidFinish {
-    
-    [self.pluginNavigationHandler showLoading];
+
+    [self.paymentNavigationHandler showLoading];
     
     double delay = 3.0;
     dispatch_time_t tm = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC));
     dispatch_after(tm, dispatch_get_main_queue(), ^(void) {
         
-        [self.pluginNavigationHandler hideLoading];
+        [self.paymentNavigationHandler hideLoading];
         
         CustomComponentText* component = [[CustomComponentText alloc] init];
         PXComponentAction* popeame = [[PXComponentAction alloc] initWithLabel:@"Continuar" action:^{
-            [self.pluginNavigationHandler cancel];
+            //[self.paymentNavigationHandler cancel];
        }];
         PXComponentAction* printeaEnConsola = [[PXComponentAction alloc] initWithLabel:@"Intentar nuevamente" action:^{
             NSLog(@"print !!! action!!");
         }];
         
         PXBusinessResult* businessResult = [[PXBusinessResult alloc] initWithReceiptId:@"1879867544" status:PXBusinessResultStatusAPPROVED title:@"¡Listo! Ya pagaste en YPF" subtitle:nil icon:[UIImage imageNamed:@"ypf"] mainAction:nil secondaryAction:nil helpMessage:nil showPaymentMethod:YES statementDescription:nil imageUrl:@"https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/YPF.svg/2000px-YPF.svg.png" topCustomView:[component render] bottomCustomView: nil paymentStatus:@"" paymentStatusDetail:@""];
-        [self.pluginNavigationHandler didFinishPaymentWithBusinessResult:businessResult];
+        [self.paymentNavigationHandler didFinishPaymentWithBusinessResult:businessResult];
 
        // [self.pluginNavigationHandler didFinishPaymentWithPaymentStatus:RemotePaymentStatusAPPROVED statusDetails:@"" receiptId:nil];
     });
 }
 
-- (void)navigationHandlerForPluginWithNavigationHandler:(PXPluginNavigationHandler *)navigationHandler {
-    self.pluginNavigationHandler = navigationHandler;
+- (void)navigationHandlerForPaymentPluginWithNavigationHandler:(PXPaymentPluginNavigationHandler *)navigationHandler {
+    self.paymentNavigationHandler = navigationHandler;
 }
+
+- (PXPaymentPluginResult * _Nonnull)createPaymentWithPluginStore:(PXCheckoutStore * _Nonnull)store handler:(id <PXPaymentFlowHandlerProtocol>)handler {
+    //[handler showErrorScreenWithMessage:@"" errorDetails:@"" retry:false];
+    PXPaymentPluginResult* result = [[PXPaymentPluginResult alloc] initWithStatus:@"rejected" statusDetail:@"" receiptId: @""];
+    return result;
+}
+
+//- (PXBusinessResult * _Nonnull)createPaymentWithBusinessResultWithPluginStore:(PXCheckoutStore * _Nonnull)store handler:(id <PXPaymentFlowHandlerProtocol>)handler {
+//    //[handler showErrorScreenWithMessage:@"" errorDetails:@"" retry:false];
+//    CustomComponentText* component = [[CustomComponentText alloc] init];
+//    PXComponentAction* popeame = [[PXComponentAction alloc] initWithLabel:@"Continuar" action:^{
+//        [self.pluginNavigationHandler cancel];
+//    }];
+//    PXComponentAction* printeaEnConsola = [[PXComponentAction alloc] initWithLabel:@"Intentar nuevamente" action:^{
+//        NSLog(@"print !!! action!!");
+//    }];
+//
+//    PXBusinessResult* businessResult = [[PXBusinessResult alloc] initWithReceiptId:@"1879867544" status:PXBusinessResultStatusAPPROVED title:@"¡Listo! Ya pagaste en YPF" subtitle:nil icon:[UIImage imageNamed:@"ypf"] mainAction:nil secondaryAction:nil helpMessage:nil showPaymentMethod:YES statementDescription:nil imageUrl:@"https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/YPF.svg/2000px-YPF.svg.png" topCustomView:[component render] bottomCustomView: nil paymentStatus:@"" paymentStatusDetail:@""];
+//    return businessResult;
+//}
 
 @end

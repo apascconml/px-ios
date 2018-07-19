@@ -24,9 +24,11 @@ open class PXContainedActionButtonProps: NSObject {
     let title: String
     let action : (() -> Void)
     let backgroundColor: UIColor
-    init(title: String, action:  @escaping (() -> Void)) {
+    var animationDelegate: PXAnimatedButtonDelegate?
+    init(title: String, action:  @escaping (() -> Void), animationDelegate: PXAnimatedButtonDelegate? = nil) {
         self.title = title
         self.action = action
         self.backgroundColor = .white
+        self.animationDelegate = animationDelegate
     }
 }

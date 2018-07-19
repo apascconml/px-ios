@@ -29,6 +29,11 @@ import MercadoPagoServicesV4
         mercadoPagoServices.setGatewayBaseURL(servicePreference.getGatewayURL())
     }
 
+    func getTimeOut() -> TimeInterval {
+        // TODO: Get it from services
+        return 15.0
+    }
+
     open func getCheckoutPreference(checkoutPreferenceId: String, callback : @escaping (CheckoutPreference) -> Void, failure: @escaping ((_ error: NSError) -> Void)) {
 
         mercadoPagoServices.getCheckoutPreference(checkoutPreferenceId: checkoutPreferenceId, callback: { [weak self] (pxCheckoutPreference) in

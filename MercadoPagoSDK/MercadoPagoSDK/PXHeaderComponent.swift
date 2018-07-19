@@ -27,11 +27,13 @@ open class PXHeaderProps: NSObject {
     var backgroundColor: UIColor
     var productImage: UIImage?
     var statusImage: UIImage?
-    init(labelText: NSAttributedString?, title: NSAttributedString, backgroundColor: UIColor, productImage: UIImage?, statusImage: UIImage? ) {
+    var imageURL: String?
+    init(labelText: NSAttributedString?, title: NSAttributedString, backgroundColor: UIColor, productImage: UIImage?, statusImage: UIImage?, imageURL: String? = nil) {
         self.labelText = labelText
         self.title = title
         self.backgroundColor = backgroundColor
         self.productImage = productImage
         self.statusImage = statusImage
+        self.imageURL = imageURL
     }
 }
