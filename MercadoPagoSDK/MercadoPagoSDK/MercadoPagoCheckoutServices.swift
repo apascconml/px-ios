@@ -199,7 +199,7 @@ extension MercadoPagoCheckout {
     }
 
     func getPayerCosts() {
-        self.pxNavigationHandler.presentLoading()
+        self.viewModel.pxNavigationHandler.presentLoading()
 
         self.getPayerCosts(successBlock: { [weak self ] (installments) in
             guard let strongSelf = self else {

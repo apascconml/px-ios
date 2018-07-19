@@ -25,9 +25,9 @@ extension MercadoPagoCheckout {
 
             strongSelf.getPaymentMethodSearch(successBlock: { (paymentMethodSearch) in
                 strongSelf.viewModel.updateCheckoutModel(paymentMethodSearch: paymentMethodSearch)
-                strongSelf.pxNavigationHandler.getLastPaymentVaultViewControllerFromStack()?.viewModel = strongSelf.viewModel.paymentVaultViewModel()
+                strongSelf.viewModel.pxNavigationHandler.getLastPaymentVaultViewControllerFromStack()?.viewModel = strongSelf.viewModel.paymentVaultViewModel()
                 successBlock()
-                strongSelf.pxNavigationHandler.cleanDuplicatedPaymentVaultsFromNavigationStack()
+                strongSelf.viewModel.pxNavigationHandler.cleanDuplicatedPaymentVaultsFromNavigationStack()
                 return
             }, errorBlock: { (_) in
                 strongSelf.viewModel.clearDiscount()
@@ -134,7 +134,7 @@ extension MercadoPagoCheckout {
 
                     //Update Payment Method Search
                     strongSelf.viewModel.updateCheckoutModel(paymentMethodSearch: paymentMethodSearch)
-                    strongSelf.pxNavigationHandler.getLastPaymentVaultViewControllerFromStack()?.viewModel = strongSelf.viewModel.paymentVaultViewModel()
+                    strongSelf.viewModel.pxNavigationHandler.getLastPaymentVaultViewControllerFromStack()?.viewModel = strongSelf.viewModel.paymentVaultViewModel()
 
                     //Update Payer Costs
                     strongSelf.viewModel.payerCosts = installments[0].payerCosts
@@ -147,7 +147,7 @@ extension MercadoPagoCheckout {
                     payerCostStep.updateDataSource(dataSource: strongSelf.viewModel.payerCosts!)
 
                     successBlock()
-                    strongSelf.pxNavigationHandler.cleanDuplicatedPaymentVaultsFromNavigationStack()
+                    strongSelf.viewModel.pxNavigationHandler.cleanDuplicatedPaymentVaultsFromNavigationStack()
                     return
                 }, errorBlock: { (_) in
                     strongSelf.viewModel.clearDiscount()
@@ -160,7 +160,7 @@ extension MercadoPagoCheckout {
                 return
             })
         })
-        self.pxNavigationHandler.pushViewController(viewController: payerCostStep, animated: true)
+        self.viewModel.pxNavigationHandler.pushViewController(viewController: payerCostStep, animated: true)
     }
 
     func showReviewAndConfirmScreen() {
