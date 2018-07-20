@@ -82,8 +82,6 @@ extension PXAnimatedButton: ProgressViewDelegate, CAAnimationDelegate {
                                     } else {
                                         // Fallback on earlier versions
                                     }
-                                    let systemSoundID: SystemSoundID = 1109
-                                    AudioServicesPlaySystemSound(systemSoundID)
                                 }
 
                                 UIView.animate(withDuration: 0.6, animations: {
@@ -134,7 +132,7 @@ extension PXAnimatedButton: ProgressViewDelegate, CAAnimationDelegate {
         }, completion: { _ in
             let animation = CABasicAnimation(keyPath: "position")
             animation.duration = 0.1
-            animation.repeatCount = 8
+            animation.repeatCount = 4
             animation.autoreverses = true
             animation.fromValue = NSValue(cgPoint: CGPoint(x: self.center.x - 3, y: self.center.y))
             animation.toValue = NSValue(cgPoint: CGPoint(x: self.center.x + 3, y: self.center.y))
