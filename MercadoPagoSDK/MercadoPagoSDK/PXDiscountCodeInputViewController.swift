@@ -73,7 +73,7 @@ extension PXDiscountCodeInputViewController {
         textfield.translatesAutoresizingMaskIntoConstraints = false
         textfield.delegate = self
         textfield.autocapitalizationType = .allCharacters
-//        textfield.autocorrectionType = UITextAutocorrectionType.no
+        textfield.autocorrectionType = UITextAutocorrectionType.no
         self.contentView.addSubviewToBottom(textfield, withMargin: PXLayout.XXL_MARGIN)
         PXLayout.centerHorizontally(view: textfield).isActive = true
         PXLayout.pinLeft(view: textfield, withMargin: PXLayout.M_MARGIN).isActive = true
@@ -96,8 +96,8 @@ extension PXDiscountCodeInputViewController {
         PXLayout.pinLeft(view: button, withMargin: PXLayout.M_MARGIN).isActive = true
         PXLayout.pinRight(view: button, withMargin: PXLayout.M_MARGIN).isActive = true
         button.add(for: .touchUpInside) {
-            if textfield.text.isNotEmpty {
-                self.getCodeDiscount(with: textfield.text)
+            if let text = textfield.text, text.isNotEmpty {
+                self.getCodeDiscount(with: text)
             } else {
                 self.showError(with: "discount_input_modal_empty_code_error".localized_beta)
             }

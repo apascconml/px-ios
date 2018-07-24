@@ -15,8 +15,8 @@ Pod::Spec.new do |s|
     default.resources = ['MercadoPagoSDK/MercadoPagoSDK/*.xcassets','MercadoPagoSDK/MercadoPagoSDK/*/*.xcassets', 'MercadoPagoSDK/MercadoPagoSDK/*.ttf', 'MercadoPagoSDK/MercadoPagoSDK/**/**.{plist,xib,strings}', 'MercadoPagoSDK/MercadoPagoSDK/*.lproj']
     default.source_files = ['MercadoPagoSDK/MercadoPagoSDK/**/**/**.{h,m,swift}']
     s.dependency 'MercadoPagoPXTrackingV4', '2.1.3'
-    s.dependency 'MercadoPagoServicesV4', '1.0.17'
-    s.dependency 'MLUI', '~> 4.0'
+    s.dependency 'MercadoPagoServicesV4', '1.0.18'
+    s.dependency 'MLUI', '~> 5.0'
   end
 
 s.subspec 'ESC' do |esc| 
