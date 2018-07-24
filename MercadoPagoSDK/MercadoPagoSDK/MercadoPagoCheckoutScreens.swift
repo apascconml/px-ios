@@ -24,6 +24,10 @@ extension MercadoPagoCheckout {
             strongSelf.setDiscount(discount, withCampaign: campaign)
 
             strongSelf.getPaymentMethodSearch(successBlock: { (paymentMethodSearch) in
+                if paymentMethodSearch.isEmpty {
+                    errorBlock()
+                    return
+                }
                 strongSelf.viewModel.updateCheckoutModel(paymentMethodSearch: paymentMethodSearch)
                 strongSelf.viewModel.pxNavigationHandler.getLastPaymentVaultViewControllerFromStack()?.viewModel = strongSelf.viewModel.paymentVaultViewModel()
                 successBlock()
@@ -130,7 +134,15 @@ extension MercadoPagoCheckout {
             strongSelf.setDiscount(discount, withCampaign: campaign)
 
             strongSelf.getPaymentMethodSearch(successBlock: { (paymentMethodSearch) in
+                if paymentMethodSearch.isEmpty {
+                    errorBlock()
+                    return
+                }
                 strongSelf.getPayerCosts(successBlock: { (installments) in
+                    if installments.isEmpty {
+                        errorBlock()
+                        return
+                    }
 
                     //Update Payment Method Search
                     strongSelf.viewModel.updateCheckoutModel(paymentMethodSearch: paymentMethodSearch)

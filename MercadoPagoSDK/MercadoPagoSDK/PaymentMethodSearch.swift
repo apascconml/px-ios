@@ -15,6 +15,11 @@ import Foundation
     var cards: [Card]?
     var defaultOption: PaymentMethodSearchItem?
     var oneTap: OneTapItem?
+    var isEmpty: Bool {
+        get{
+            return paymentMethods.count <= 0
+        }
+    }
 
     func getPaymentOptionsCount() -> Int {
         let customOptionsCount = (self.customerPaymentMethods != nil) ? self.customerPaymentMethods!.count : 0

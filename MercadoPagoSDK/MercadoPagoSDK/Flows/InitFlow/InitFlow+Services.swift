@@ -59,7 +59,8 @@ extension InitFlow {
     }
 
     func getCampaigns() {
-        model.getService().getCampaigns(callback: { [weak self] (pxCampaigns) in
+        let payerEmail = model.properties.checkoutPreference.getPayer().email
+        model.getService().getCampaigns(payerEmail: payerEmail, callback: { [weak self] (pxCampaigns) in
             guard let strongSelf = self else {
                 return
             }

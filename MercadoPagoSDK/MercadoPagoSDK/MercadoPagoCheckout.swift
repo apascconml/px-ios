@@ -60,7 +60,7 @@ open class MercadoPagoCheckout: NSObject {
     }
 
     public func start() {
-        commondInit()
+        
         if initMode == .lazy {
             if viewModel.initFlow?.getStatus() == .finished {
                 executeNextStep()
@@ -83,11 +83,10 @@ open class MercadoPagoCheckout: NSObject {
         viewModel.initFlow?.restart()
         lifecycleProtocol = lifecycleDelegate
         initMode = .lazy
-        commondInit()
         executeNextStep()
     }
 
-    private func commondInit() {
+    private func commonInit() {
         viewModel.setInitFlowProtocol(flowInitProtocol: self)
         if !shouldApplyDiscount() {
             viewModel.clearDiscount()
@@ -136,6 +135,7 @@ open class MercadoPagoCheckout: NSObject {
     }
 
     private func initialize() {
+        commonInit()
         initMercadPagoPXTracking()
         MercadoPagoCheckout.currentCheckout = self
         viewModel.pxNavigationHandler.suscribeToNavigationFlow()
@@ -258,9 +258,5 @@ open class MercadoPagoCheckout: NSObject {
 
     private func shouldApplyDiscount() -> Bool {
         return self.viewModel.paymentPlugin != nil
-    }
-    
-    private func removeDiscount() {
-        self.viewModel.clearDiscount()
     }
 }

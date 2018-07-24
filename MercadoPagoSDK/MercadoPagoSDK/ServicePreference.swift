@@ -32,7 +32,6 @@ import Foundation
     private static let kShouldUseWrapper = "should_use_wrapper"
 
     private var useDefaultPaymentSettings = true
-    private var defaultDiscountSettings = true
 
     var baseURL: String = URLConfigs.MP_API_BASE_URL
     var gatewayURL: String?
@@ -52,13 +51,6 @@ import Foundation
         paymentURI = URI
         paymentAdditionalInfo = additionalInfo
         self.useDefaultPaymentSettings = false
-    }
-
-    public func setDiscount(baseURL: String, URI: String, additionalInfo: [String: String] = [:]) {
-        discountURL = baseURL
-        discountURI = URI
-        discountAdditionalInfo = additionalInfo
-        defaultDiscountSettings = false
     }
 
     public func setCreateCheckoutPreference(baseURL: String, URI: String, additionalInfo: NSDictionary = [:]) {
@@ -97,10 +89,6 @@ import Foundation
 
     public func isUsingDeafaultPaymentSettings() -> Bool {
         return useDefaultPaymentSettings
-    }
-
-    public func isUsingDefaultDiscountSettings() -> Bool {
-        return defaultDiscountSettings
     }
 
     public func getCustomerAddionalInfo() -> String {

@@ -25,7 +25,7 @@ import MercadoPagoServicesV4
 
     func setServicePreference(servicePreference: ServicePreference) {
 
-        mercadoPagoServices.setBaseURL(servicePreference.baseURL)
+        mercadoPagoServices.setBaseURL(servicePreference.getDefaultBaseURL())
         mercadoPagoServices.setGatewayBaseURL(servicePreference.getGatewayURL())
     }
 
@@ -178,8 +178,8 @@ import MercadoPagoServicesV4
             }, failure: failure)
     }
 
-    open func getCampaigns(callback: @escaping ([PXCampaign]) -> Void, failure: @escaping ((_ error: NSError) -> Void)) {
-        mercadoPagoServices.getCampaigns(callback: callback, failure: failure)
+    open func getCampaigns(payerEmail: String?, callback: @escaping ([PXCampaign]) -> Void, failure: @escaping ((_ error: NSError) -> Void)) {
+        mercadoPagoServices.getCampaigns(payerEmail: payerEmail, callback: callback, failure: failure)
     }
 
     open func getCodeDiscount(amount: Double, payerEmail: String, couponCode: String?, callback: @escaping (PXDiscount?) -> Void, failure: @escaping ((_ error: NSError) -> Void)) {
@@ -239,7 +239,7 @@ import MercadoPagoServicesV4
         let uri = MercadoPagoCheckoutViewModel.servicePreference.getCustomerURI()
         let additionalInfo = MercadoPagoCheckoutViewModel.servicePreference.customerAdditionalInfo
 
-        mercadoPagoServices.getCustomer(url: url!, uri: uri, additionalInfo: additionalInfo!, callback: { [weak self] (pxCustomer) in
+        mercadoPagoServices.getCustomer(url: url!, uri: uri, additionalInfo: additionalInfo, callback: { [weak self] (pxCustomer) in
             guard let strongSelf = self else {
                 return
             }
