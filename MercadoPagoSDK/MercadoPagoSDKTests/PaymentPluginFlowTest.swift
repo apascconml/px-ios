@@ -55,23 +55,6 @@ class PaymentPluginFlowTest: BaseTest {
         var step = mpCheckout.viewModel.nextStep()
         XCTAssertEqual(CheckoutStep.START, step)
 
-        // 1. Search Preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PREFERENCE, step)
-
-        // 3. Validate preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.ACTION_VALIDATE_PREFERENCE, step)
-
-        // 4. Init Payment Methods Plugins
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_PAYMENT_METHOD_PLUGIN_INIT, step)
-        initPaymentMethodsPlugins()
-
-        // 4. Search Payment Methods
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PAYMENT_METHODS, step)
-
         MPCheckoutTestAction.loadGroupsInViewModel(mpCheckout: mpCheckout)
 
         // 5. Display payment methods (no exclusions)

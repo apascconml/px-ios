@@ -39,7 +39,7 @@ class PXContainedActionButtonRenderer: NSObject {
     }
 
     fileprivate func buildButton(with action:@escaping (() -> Void), title: String) -> PXAnimatedButton {
-        let button = PXAnimatedButton()
+        let button = PXAnimatedButton(normalText: title, loadingText: "Procesando tu pago".localized, retryText: "Reintentar".localized)
         button.backgroundColor = ThemeManager.shared.getAccentColor()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(title, for: .normal)

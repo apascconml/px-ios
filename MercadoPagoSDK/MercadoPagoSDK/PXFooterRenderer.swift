@@ -62,7 +62,7 @@ final class PXFooterRenderer: NSObject {
     }
 
     func buildAnimatedButton(with footerAction: PXComponentAction, color: UIColor? = .pxBlueMp) -> PXAnimatedButton {
-        let button = PXAnimatedButton()
+        let button = PXAnimatedButton(normalText: "Confirmar".localized, loadingText: "Procesando tu pago".localized, retryText: "Reintentar".localized)
         button.backgroundColor = color
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(footerAction.label, for: .normal)

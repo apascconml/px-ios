@@ -174,9 +174,7 @@ extension OneTapFlowModel {
 
     func needToShowLoading() -> Bool {
         if let paymentFlow = paymentFlow, hasSavedESC() {
-            paymentFlow.model.paymentData = paymentData
-            paymentFlow.model.checkoutPreference = checkoutPreference
-            return paymentFlow.model.needToShowPaymentPluginScreen()
+            return paymentFlow.needToShowPaymentPluginScreen()
         }
         return true
     }

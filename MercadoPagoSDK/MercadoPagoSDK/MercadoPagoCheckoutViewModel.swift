@@ -109,8 +109,6 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
 
     // Payment plugin
     var paymentPlugin: PXPaymentPluginComponent?
-    var paymentClosure: (() -> (status: String, statusDetail: String, receiptId: String?))?
-
     var paymentFlow: PXPaymentFlow?
 
     // Discount and charges
@@ -300,19 +298,6 @@ open class MercadoPagoCheckoutViewModel: NSObject, NSCopying {
 
     func reviewConfirmViewModel() -> PXReviewViewModel {
         return PXReviewViewModel(amountHelper: self.amountHelper, paymentOptionSelected: self.paymentOptionSelected!, reviewScreenPreference: reviewScreenPreference)
-    }
-
-    func createPaymentFlow(paymentErrorHandler: PXPaymentErrorHandlerProtocol) -> PXPaymentFlow {
-        guard let paymentFlow = paymentFlow else {
-            var paymentMethodPaymentPlugin: PXPaymentPluginComponent?
-            if let paymentOtionSelected = paymentOptionSelected, let plugin = paymentOtionSelected as? PXPaymentMethodPlugin {
-                paymentMethodPaymentPlugin = plugin.paymentPlugin
-            }
-            let paymentFlow = PXPaymentFlow(paymentPlugin: paymentPlugin, paymentMethodPaymentPlugin: paymentMethodPaymentPlugin, binaryMode: binaryMode, mercadoPagoServicesAdapter: mercadoPagoServicesAdapter, paymentErrorHandler: paymentErrorHandler, navigationHandler: pxNavigationHandler)
-            self.paymentFlow = paymentFlow
-            return paymentFlow
-        }
-        return paymentFlow
     }
 
     func resultViewModel() -> PXResultViewModel {
@@ -793,6 +778,7 @@ extension MercadoPagoCheckoutViewModel {
         self.paymentResult = nil
         self.readyToPay = false
         self.setIsCheckoutComplete(isCheckoutComplete: false)
+        self.paymentFlow?.cleanPayment()
     }
 
     func prepareForClone() {
@@ -827,5 +813,21 @@ extension MercadoPagoCheckoutViewModel {
         MercadoPagoCheckoutViewModel.paymentCallback = nil
         MercadoPagoCheckoutViewModel.changePaymentMethodCallback = nil
         MercadoPagoCheckoutViewModel.error = nil
+    }
+}
+
+// MARK: Payment Flow
+extension MercadoPagoCheckoutViewModel {
+    func createPaymentFlow(paymentErrorHandler: PXPaymentErrorHandlerProtocol) -> PXPaymentFlow {
+        guard let paymentFlow = paymentFlow else {
+            var paymentMethodPaymentPlugin: PXPaymentPluginComponent?
+            if let paymentOtionSelected = paymentOptionSelected, let plugin = paymentOtionSelected as? PXPaymentMethodPlugin {
+                paymentMethodPaymentPlugin = plugin.paymentPlugin
+            }
+            let paymentFlow = PXPaymentFlow(paymentPlugin: paymentPlugin, paymentMethodPaymentPlugin: paymentMethodPaymentPlugin, binaryMode: binaryMode, mercadoPagoServicesAdapter: mercadoPagoServicesAdapter, paymentErrorHandler: paymentErrorHandler, navigationHandler: pxNavigationHandler, paymentData: paymentData, checkoutPreference: checkoutPreference)
+            self.paymentFlow = paymentFlow
+            return paymentFlow
+        }
+        return paymentFlow
     }
 }

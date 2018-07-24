@@ -34,23 +34,6 @@ class OneTapFlowTests: BaseTest {
         var step = mpCheckout.viewModel.nextStep()
         XCTAssertEqual(CheckoutStep.START, step)
 
-        // 1. Search preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PREFERENCE, step)
-
-        // 2. Validate preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.ACTION_VALIDATE_PREFERENCE, step)
-
-        // 4. Init Payment Methods Plugins
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_PAYMENT_METHOD_PLUGIN_INIT, step)
-        mpCheckout.viewModel.needPaymentMethodPluginInit = false
-
-        // 3. Search Payment Methods
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PAYMENT_METHODS, step)
-
         MPCheckoutTestAction.loadGroupsWithOneTapInViewModel(mpCheckout: mpCheckout)
 
         // 4. Flow one tap
@@ -97,23 +80,6 @@ class OneTapFlowTests: BaseTest {
         // 0. Start
         var step = mpCheckout.viewModel.nextStep()
         XCTAssertEqual(CheckoutStep.START, step)
-
-        // 1. Search preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PREFERENCE, step)
-
-        // 2. Validate preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.ACTION_VALIDATE_PREFERENCE, step)
-
-        // 4. Init Payment Methods Plugins
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_PAYMENT_METHOD_PLUGIN_INIT, step)
-        mpCheckout.viewModel.needPaymentMethodPluginInit = false
-
-        // 3. Search Payment Methods
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PAYMENT_METHODS, step)
 
         MPCheckoutTestAction.loadGroupsWithOneTapInViewModel(mpCheckout: mpCheckout)
 

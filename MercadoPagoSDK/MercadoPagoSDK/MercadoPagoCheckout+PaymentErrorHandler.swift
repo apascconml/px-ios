@@ -21,5 +21,6 @@ extension MercadoPagoCheckout: PXPaymentErrorHandlerProtocol {
             self?.executeNextStep()
 
         })
+        executeNextStep()
     }
 }

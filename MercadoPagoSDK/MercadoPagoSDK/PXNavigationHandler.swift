@@ -69,6 +69,10 @@ class PXNavigationHandler: NSObject {
         }
     }
 
+    func isLoadingPresented() -> Bool {
+        return self.currentLoadingView != nil
+    }
+
     internal func createCurrentLoading() {
         self.currentLoadingView = PXLoadingViewController()
     }
@@ -80,8 +84,12 @@ class PXNavigationHandler: NSObject {
                 errorCallback?()
             })
         }
-        dismissLoading {  [weak self] in
-            self?.navigationController.present(errorVC, animated: true, completion: {})
+        if isLoadingPresented() {
+            dismissLoading {  [weak self] in
+                self?.navigationController.present(errorVC, animated: true, completion: {})
+            }
+        } else {
+            self.navigationController.present(errorVC, animated: true, completion: {})
         }
     }
 

@@ -125,10 +125,6 @@ internal final class PXPaymentFlowModel: NSObject {
         return hasPluginPaymentScreen(plugin: paymentMethodPaymentPlugin)
     }
 
-    func needToShowPaymentPluginScreen() -> Bool {
-        return hasPluginPaymentScreen(plugin: paymentPlugin) || hasPluginPaymentScreen(plugin: paymentMethodPaymentPlugin)
-    }
-
     func isOfflinePayment() -> Bool {
         guard let paymentTypeId = paymentData?.paymentMethod?.paymentTypeId else {
             return false
@@ -141,6 +137,12 @@ internal final class PXPaymentFlowModel: NSObject {
             PXCheckoutStore.sharedInstance.paymentData = paymentData
         }
         PXCheckoutStore.sharedInstance.checkoutPreference = checkoutPreference
+    }
+
+    func cleanData() {
+        paymentResult = nil
+        businessResult = nil
+        instructionsInfo = nil
     }
 }
 

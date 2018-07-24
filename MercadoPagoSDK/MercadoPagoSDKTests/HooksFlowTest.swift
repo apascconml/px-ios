@@ -42,23 +42,6 @@ class HooksFlowTest: BaseTest {
         var step = mpCheckout.viewModel.nextStep()
         XCTAssertEqual(CheckoutStep.START, step)
 
-        // 1. Search Preference
-        step = mpCheckout.viewModel.nextStep()
-
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PREFERENCE, step)
-
-        //2. Buscar DirectDiscount
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_DIRECT_DISCOUNT, step)
-
-        // 3. Validate preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.ACTION_VALIDATE_PREFERENCE, step)
-
-        // 4. Search Payment Methods
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PAYMENT_METHODS, step)
-
         MPCheckoutTestAction.loadGroupsInViewModel(mpCheckout: mpCheckout)
 
         // 5. Display payment methods (no exclusions)
@@ -118,22 +101,6 @@ class HooksFlowTest: BaseTest {
         // 0. Start
         var step = mpCheckout.viewModel.nextStep()
         XCTAssertEqual(CheckoutStep.START, step)
-
-        // 1. Search Preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PREFERENCE, step)
-
-        //2. Buscar DirectDiscount
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_DIRECT_DISCOUNT, step)
-
-        // 3. Validate preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.ACTION_VALIDATE_PREFERENCE, step)
-
-        // 4. Search Payment Methods
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PAYMENT_METHODS, step)
 
         MPCheckoutTestAction.loadGroupsInViewModel(mpCheckout: mpCheckout)
 
@@ -256,20 +223,6 @@ class HooksFlowTest: BaseTest {
 
         // 1. Search Preference
         step = mpCheckout.viewModel.nextStep()
-
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PREFERENCE, step)
-
-        //2. Buscar DirectDiscount
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_DIRECT_DISCOUNT, step)
-
-        // 3. Validate preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.ACTION_VALIDATE_PREFERENCE, step)
-
-        // 4. Search Payment Methods
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PAYMENT_METHODS, step)
         MPCheckoutTestAction.loadGroupsInViewModel(mpCheckout: mpCheckout)
 
         // Simular api call a grupos
@@ -364,18 +317,6 @@ class HooksFlowTest: BaseTest {
         var step = mpCheckout.viewModel.nextStep()
         XCTAssertEqual(CheckoutStep.START, step)
 
-        // 1. Search Preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PREFERENCE, step)
-
-        // 2. Validate preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.ACTION_VALIDATE_PREFERENCE, step)
-
-        // 3. Search Payment Methods
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PAYMENT_METHODS, step)
-
         MPCheckoutTestAction.loadGroupsInViewModel(mpCheckout: mpCheckout)
 
         // 4. Display payment methods (no exclusions) y payment option selected : account_money
@@ -436,21 +377,6 @@ class HooksFlowTest: BaseTest {
         var step = mpCheckout.viewModel.nextStep()
         XCTAssertEqual(CheckoutStep.START, step)
 
-        // 1. Search preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PREFERENCE, step)
-
-        //2. Buscar DirectDiscount
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_DIRECT_DISCOUNT, step)
-
-        // 3. Validate preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.ACTION_VALIDATE_PREFERENCE, step)
-
-        // 4. Search Payment Methods
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PAYMENT_METHODS, step)
         MPCheckoutTestAction.loadGroupsInViewModel(mpCheckout: mpCheckout)
 
         // Simular api call a grupos
@@ -560,23 +486,6 @@ class HooksFlowTest: BaseTest {
         var step = mpCheckout.viewModel.nextStep()
         XCTAssertEqual(CheckoutStep.START, step)
 
-        // 1. Search Preference
-        step = mpCheckout.viewModel.nextStep()
-
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PREFERENCE, step)
-
-        //2. Buscar DirectDiscount
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_DIRECT_DISCOUNT, step)
-
-        // 3. Validate preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.ACTION_VALIDATE_PREFERENCE, step)
-
-        // 4. Search Payment Methods
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PAYMENT_METHODS, step)
-
         MPCheckoutTestAction.loadGroupsInViewModel(mpCheckout: mpCheckout)
 
         // 5. Display payment methods (no exclusions)
@@ -646,22 +555,6 @@ class HooksFlowTest: BaseTest {
         // 0. Start
         var step = mpCheckout.viewModel.nextStep()
         XCTAssertEqual(CheckoutStep.START, step)
-
-        // 1. Search Preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PREFERENCE, step)
-
-        //2. Buscar DirectDiscount
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_DIRECT_DISCOUNT, step)
-
-        // 3. Validate preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.ACTION_VALIDATE_PREFERENCE, step)
-
-        // 4. Search Payment Methods
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PAYMENT_METHODS, step)
 
         MPCheckoutTestAction.loadGroupsInViewModel(mpCheckout: mpCheckout)
 
@@ -770,23 +663,6 @@ class HooksFlowTest: BaseTest {
         // 0. Start
         var step = mpCheckout.viewModel.nextStep()
         XCTAssertEqual(CheckoutStep.START, step)
-
-        // 1. Search Preference
-        step = mpCheckout.viewModel.nextStep()
-
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PREFERENCE, step)
-
-        //2. Buscar DirectDiscount
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_DIRECT_DISCOUNT, step)
-
-        // 3. Validate preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.ACTION_VALIDATE_PREFERENCE, step)
-
-        // 4. Search Payment Methods
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PAYMENT_METHODS, step)
 
         MPCheckoutTestAction.loadGroupsInViewModel(mpCheckout: mpCheckout)
 

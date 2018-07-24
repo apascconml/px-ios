@@ -55,6 +55,8 @@ class PXReviewViewController: PXComponentContainerViewController {
         self.scrollView.showsHorizontalScrollIndicator = false
         self.view.layoutIfNeeded()
         self.checkFloatingButtonVisibility()
+        scrollView.isScrollEnabled = true
+        view.isUserInteractionEnabled = true
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -63,6 +65,14 @@ class PXReviewViewController: PXComponentContainerViewController {
             unsubscribeFromNotifications()
             showNavBarForAnimation()
         }
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        loadingButtonComponent?.resetButton()
+        loadingButtonComponent?.setTitle("Confirmar".localized, for: .normal)
+        loadingFloatingButtonComponent?.resetButton()
+        loadingFloatingButtonComponent?.setTitle("Confirmar".localized, for: .normal)
     }
 
     override func trackInfo() {
@@ -253,7 +263,7 @@ extension PXReviewViewController {
         let component = PXContainedActionButtonComponent(props: PXContainedActionButtonProps(title: "Confirmar".localized, action: {
             if self.shouldAnimatePayButton {
                 self.subscribeLoadingButtonToNotifications(loadingButton: self.loadingFloatingButtonComponent)
-                self.loadingFloatingButtonComponent?.startLoading(loadingText: "Procesando tu pago".localized, retryText: "Confirmar", timeOut: self.timeOutPayButton)
+                self.loadingFloatingButtonComponent?.startLoading(timeOut: self.timeOutPayButton)
             }
             self.confirmPayment()
             }, animationDelegate: self))
@@ -268,7 +278,7 @@ extension PXReviewViewController {
         let payAction = PXComponentAction(label: "Confirmar".localized) {
             if self.shouldAnimatePayButton {
                 self.subscribeLoadingButtonToNotifications(loadingButton: self.loadingButtonComponent)
-                self.loadingButtonComponent?.startLoading(loadingText: "Procesando tu pago", retryText: "Confirmar", timeOut: self.timeOutPayButton)
+                self.loadingButtonComponent?.startLoading(timeOut: self.timeOutPayButton)
             }
             self.confirmPayment()
         }

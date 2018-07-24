@@ -289,7 +289,6 @@
 		4B09206D1FE984F600CA4BF7 /* PXHookNavigationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B09206C1FE984F500CA4BF7 /* PXHookNavigationHandler.swift */; };
 		4B0BAC421F1E81BF0097103E /* MercadoPagoCheckoutServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD84D711F1E48FB002219D4 /* MercadoPagoCheckoutServices.swift */; };
 		4B0BAC431F1E81C60097103E /* MercadoPagoCheckoutScreens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD84D731F1E4910002219D4 /* MercadoPagoCheckoutScreens.swift */; };
-		4B0E72AA1FA8F9E8006A3853 /* MercadoPagoPXTracking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B0E72AB1FA8F9E8006A3853 /* MercadoPagoPXTracking.framework */; };
 		4B1516CB1FE426D100B8AF72 /* PaymentMethodPluginFlowTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1516CA1FE426D100B8AF72 /* PaymentMethodPluginFlowTest.swift */; };
 		4B161A25200545550009A7D9 /* PXHookNavigationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B09206C1FE984F500CA4BF7 /* PXHookNavigationHandler.swift */; };
 		4B161A26200545550009A7D9 /* PXInstructionsActionRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3FC8921FBE13F900CF29E1 /* PXInstructionsActionRenderer.swift */; };
@@ -321,6 +320,8 @@
 		4B2EC4A320FFC26F008D03F8 /* InitFlow+Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2EC49920FFC26F008D03F8 /* InitFlow+Services.swift */; };
 		4B2EC4A620FFC2A5008D03F8 /* InitFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2EC4A520FFC2A5008D03F8 /* InitFlow.swift */; };
 		4B2EC4A720FFC2A5008D03F8 /* InitFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2EC4A520FFC2A5008D03F8 /* InitFlow.swift */; };
+		4B2EC4AD21001EC9008D03F8 /* PaymentFlow+Screens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2EC4AC21001EC9008D03F8 /* PaymentFlow+Screens.swift */; };
+		4B2EC4AE21001EC9008D03F8 /* PaymentFlow+Screens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2EC4AC21001EC9008D03F8 /* PaymentFlow+Screens.swift */; };
 		4B34DC3D1E5F06B000FDD295 /* PaymentResultScreenPreferenceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B34DC3C1E5F06B000FDD295 /* PaymentResultScreenPreferenceTest.swift */; };
 		4B40DAB01E3781EB00B65B9D /* FlowPreferenceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B40DAAF1E3781EB00B65B9D /* FlowPreferenceTest.swift */; };
 		4B48541C204825C0001C0921 /* PXItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B48541B204825C0001C0921 /* PXItemComponent.swift */; };
@@ -348,8 +349,11 @@
 		4B59F02B1E36676100B5837B /* FlowPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B59F02A1E36676100B5837B /* FlowPreference.swift */; };
 		4B59F02C1E36676800B5837B /* FlowPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B59F02A1E36676100B5837B /* FlowPreference.swift */; };
 		4B5C1A681F82AEB6008E56B9 /* UIView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5C1A671F82AEB5008E56B9 /* UIView+Additions.swift */; };
+		4B6087F72105F9B6009CD912 /* OneTapFlow+PaymentFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6087F62105F9B6009CD912 /* OneTapFlow+PaymentFlow.swift */; };
+		4B6087F82105F9B6009CD912 /* OneTapFlow+PaymentFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6087F62105F9B6009CD912 /* OneTapFlow+PaymentFlow.swift */; };
+		4B6087FA2106068E009CD912 /* PXAnimatedButtonProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6087F92106068E009CD912 /* PXAnimatedButtonProtocol.swift */; };
+		4B6087FB2106068E009CD912 /* PXAnimatedButtonProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6087F92106068E009CD912 /* PXAnimatedButtonProtocol.swift */; };
 		4B6954AD20A3678600CCF735 /* MLUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B6954AE20A3678600CCF735 /* MLUI.framework */; };
-		4B6954AF20A3687200CCF735 /* MercadoPagoServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B6954B020A3687200CCF735 /* MercadoPagoServices.framework */; };
 		4B6954BB20A46A0A00CCF735 /* OneTapItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6954BA20A46A0A00CCF735 /* OneTapItem.swift */; };
 		4B6954BC20A46A0A00CCF735 /* OneTapItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6954BA20A46A0A00CCF735 /* OneTapItem.swift */; };
 		4B6954BE20A46BE200CCF735 /* OneTapCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6954BD20A46BE200CCF735 /* OneTapCard.swift */; };
@@ -496,6 +500,13 @@
 		4BF30E7C20E27C34008CB089 /* PXPaymentFlowHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF30E7720E27BF9008CB089 /* PXPaymentFlowHandler.swift */; };
 		4BF30E7D20E27C37008CB089 /* PXPaymentErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF30E7920E27C1D008CB089 /* PXPaymentErrorHandler.swift */; };
 		4BF30E7F20E27E67008CB089 /* PXPaymentPluginResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF30E7E20E27E67008CB089 /* PXPaymentPluginResult.swift */; };
+		4BF55558210609520048BD76 /* MercadoPagoServicesV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BF55557210609520048BD76 /* MercadoPagoServicesV4.framework */; };
+		4BF5555A210609590048BD76 /* MercadoPagoPXTrackingV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BF55559210609590048BD76 /* MercadoPagoPXTrackingV4.framework */; };
+		4BF5555B21060AD30048BD76 /* PXAmountHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15584BB820BDB80600866BE7 /* PXAmountHelper.swift */; };
+		4BF5555C21060AE40048BD76 /* PXSpruce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2389DE2820F4D99A0053AF76 /* PXSpruce.swift */; };
+		4BF5555D21060AF10048BD76 /* PXDefaultAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2389DE2D20F4D99A0053AF76 /* PXDefaultAnimations.swift */; };
+		4BF5555E21060CB40048BD76 /* PXDefaultFullViewAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2389DE1720F4D99A0053AF76 /* PXDefaultFullViewAnimations.swift */; };
+		4BF5555F21060D5C0048BD76 /* PXPaymentPluginResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BF30E7E20E27E67008CB089 /* PXPaymentPluginResult.swift */; };
 		4BFAC0FC1E2E8A0D005EB383 /* DecorationPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE51C1F1E2CFEC6004E5F7D /* DecorationPreference.swift */; };
 		4BFD451F1E4220BB006F9F62 /* TotalPayerCostRowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFD451D1E4220BB006F9F62 /* TotalPayerCostRowTableViewCell.swift */; };
 		4BFD45201E4220BB006F9F62 /* TotalPayerCostRowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BFD451E1E4220BB006F9F62 /* TotalPayerCostRowTableViewCell.xib */; };
@@ -636,7 +647,6 @@
 		76FD24861C5BFEA1008C5DC0 /* HoshiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FD24761C5BFEA1008C5DC0 /* HoshiTextField.swift */; };
 		76FD24891C5BFEA1008C5DC0 /* TextFieldsEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FD24781C5BFEA1008C5DC0 /* TextFieldsEffects.swift */; };
 		76FD248A1C5BFEA1008C5DC0 /* TextFieldsEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FD24781C5BFEA1008C5DC0 /* TextFieldsEffects.swift */; };
-		7A22B764440AA957258E0BE7 /* Pods_MercadoPagoSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E148AC748011D69B77461B3 /* Pods_MercadoPagoSDKTests.framework */; };
 		811B4FD2201F87A40060026A /* PXMonospaceLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811B4FD1201F87A40060026A /* PXMonospaceLabel.swift */; };
 		811B4FD3201F87A40060026A /* PXMonospaceLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811B4FD1201F87A40060026A /* PXMonospaceLabel.swift */; };
 		812BA9BE1FC8B21F00FF32C2 /* PXPaymentMethodComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812BA9BD1FC8B21F00FF32C2 /* PXPaymentMethodComponent.swift */; };
@@ -1056,6 +1066,7 @@
 		4B2EC49820FFC26F008D03F8 /* InitFlowModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitFlowModel.swift; sourceTree = "<group>"; };
 		4B2EC49920FFC26F008D03F8 /* InitFlow+Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "InitFlow+Services.swift"; sourceTree = "<group>"; };
 		4B2EC4A520FFC2A5008D03F8 /* InitFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitFlow.swift; sourceTree = "<group>"; };
+		4B2EC4AC21001EC9008D03F8 /* PaymentFlow+Screens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PaymentFlow+Screens.swift"; sourceTree = "<group>"; };
 		4B34DC3C1E5F06B000FDD295 /* PaymentResultScreenPreferenceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentResultScreenPreferenceTest.swift; sourceTree = "<group>"; };
 		4B40DAAF1E3781EB00B65B9D /* FlowPreferenceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlowPreferenceTest.swift; sourceTree = "<group>"; };
 		4B48541B204825C0001C0921 /* PXItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXItemComponent.swift; sourceTree = "<group>"; };
@@ -1076,6 +1087,8 @@
 		4B5C1A671F82AEB5008E56B9 /* UIView+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Additions.swift"; sourceTree = "<group>"; };
 		4B5E77471FA8F78500D813AF /* MercadoPagoPXTracking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MercadoPagoPXTracking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B5E77481FA8F78500D813AF /* MercadoPagoServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MercadoPagoServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B6087F62105F9B6009CD912 /* OneTapFlow+PaymentFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OneTapFlow+PaymentFlow.swift"; sourceTree = "<group>"; };
+		4B6087F92106068E009CD912 /* PXAnimatedButtonProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXAnimatedButtonProtocol.swift; sourceTree = "<group>"; };
 		4B6954AE20A3678600CCF735 /* MLUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MLUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B6954B020A3687200CCF735 /* MercadoPagoServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MercadoPagoServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B6954BA20A46A0A00CCF735 /* OneTapItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTapItem.swift; sourceTree = "<group>"; };
@@ -1165,6 +1178,8 @@
 		4BF30E7720E27BF9008CB089 /* PXPaymentFlowHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXPaymentFlowHandler.swift; sourceTree = "<group>"; };
 		4BF30E7920E27C1D008CB089 /* PXPaymentErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXPaymentErrorHandler.swift; sourceTree = "<group>"; };
 		4BF30E7E20E27E67008CB089 /* PXPaymentPluginResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXPaymentPluginResult.swift; sourceTree = "<group>"; };
+		4BF55557210609520048BD76 /* MercadoPagoServicesV4.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MercadoPagoServicesV4.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4BF55559210609590048BD76 /* MercadoPagoPXTrackingV4.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MercadoPagoPXTrackingV4.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BFD451D1E4220BB006F9F62 /* TotalPayerCostRowTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TotalPayerCostRowTableViewCell.swift; sourceTree = "<group>"; };
 		4BFD451E1E4220BB006F9F62 /* TotalPayerCostRowTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TotalPayerCostRowTableViewCell.xib; sourceTree = "<group>"; };
 		4BFD90C11F58554C00ABC348 /* DateExtensionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensionTest.swift; sourceTree = "<group>"; };
@@ -1395,10 +1410,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B6954AF20A3687200CCF735 /* MercadoPagoServices.framework in Frameworks */,
+				4BF5555A210609590048BD76 /* MercadoPagoPXTrackingV4.framework in Frameworks */,
+				4BF55558210609520048BD76 /* MercadoPagoServicesV4.framework in Frameworks */,
 				4B6954AD20A3678600CCF735 /* MLUI.framework in Frameworks */,
-				4B0E72AA1FA8F9E8006A3853 /* MercadoPagoPXTracking.framework in Frameworks */,
-				7A22B764440AA957258E0BE7 /* Pods_MercadoPagoSDKTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1697,7 +1711,7 @@
 		15AE1DAB1F61B8BA00B0DAF8 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				4B1EE15A20D0140A00560838 /* Animated Button */,
+				4B1EE15A20D0140A00560838 /* AnimatedButton */,
 				2389DE1520F4D99A0053AF76 /* PXSpruce */,
 				FC3918B2208E19E200B75366 /* Bank Deals */,
 				81F090DF20177E1A008A69C1 /* ReviewAndConfirm */,
@@ -2012,14 +2026,15 @@
 			name = Constants;
 			sourceTree = "<group>";
 		};
-		4B1EE15A20D0140A00560838 /* Animated Button */ = {
+		4B1EE15A20D0140A00560838 /* AnimatedButton */ = {
 			isa = PBXGroup;
 			children = (
 				4B1EE15B20D0142800560838 /* PXProgressView.swift */,
 				4B1EE15E20D0145F00560838 /* PXAnimatedButton.swift */,
 				4BDC086F20EBF9B8001C1F44 /* PXAnimatedButton+CongratsLogic.swift */,
+				4B6087F92106068E009CD912 /* PXAnimatedButtonProtocol.swift */,
 			);
-			path = "Animated Button";
+			path = AnimatedButton;
 			sourceTree = "<group>";
 		};
 		4B2EBF8820FFC19F008D03F8 /* InitFlow */ = {
@@ -2038,7 +2053,7 @@
 		4B2EC4A420FFC284008D03F8 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
-				4BAD088220F006B000F3A77F /* One tap */,
+				4BAD088220F006B000F3A77F /* OneTap */,
 				4BF30E7320E27B09008CB089 /* PaymentFlow */,
 				4B2EBF8820FFC19F008D03F8 /* InitFlow */,
 			);
@@ -2155,7 +2170,7 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
-		4BAD088220F006B000F3A77F /* One tap */ = {
+		4BAD088220F006B000F3A77F /* OneTap */ = {
 			isa = PBXGroup;
 			children = (
 				4BAD088320F006B000F3A77F /* UI */,
@@ -2164,8 +2179,9 @@
 				4BAD089820F006B000F3A77F /* OneTapFlow.swift */,
 				4BAD089920F006B000F3A77F /* OneTapFlow+Screens.swift */,
 				4BAD089A20F006B000F3A77F /* OneTapFlowModel.swift */,
+				4B6087F62105F9B6009CD912 /* OneTapFlow+PaymentFlow.swift */,
 			);
-			path = "One tap";
+			path = OneTap;
 			sourceTree = "<group>";
 		};
 		4BAD088320F006B000F3A77F /* UI */ = {
@@ -2268,6 +2284,7 @@
 				4BCE250120FCFA7400073F32 /* PXPaymentFlow+Services.swift */,
 				4BCE250420FD00EC00073F32 /* PXPaymentFlowModel.swift */,
 				4BA908D220FE6FDC0097BA27 /* PXPaymentPluginHandler.swift */,
+				4B2EC4AC21001EC9008D03F8 /* PaymentFlow+Screens.swift */,
 			);
 			path = PaymentFlow;
 			sourceTree = "<group>";
@@ -2638,6 +2655,8 @@
 		C21B34312E09C5D174785343 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4BF55559210609590048BD76 /* MercadoPagoPXTrackingV4.framework */,
+				4BF55557210609520048BD76 /* MercadoPagoServicesV4.framework */,
 				23F98D4E20F5364700E1767E /* MercadoPagoPXTrackingV4.framework */,
 				23F98D4F20F5364700E1767E /* MercadoPagoServicesV4.framework */,
 				4B6954B020A3687200CCF735 /* MercadoPagoServices.framework */,
@@ -3366,6 +3385,7 @@
 				FC3FC8811FBE138100CF29E1 /* PXInstructionsAccreditationTimeRenderer.swift in Sources */,
 				4B2EC49C20FFC26F008D03F8 /* MercadopagoCheckoutViewModel+InitFlow.swift in Sources */,
 				231AB99B20ADF416006DC5A0 /* PXXibRenderer.swift in Sources */,
+				4B6087F72105F9B6009CD912 /* OneTapFlow+PaymentFlow.swift in Sources */,
 				FC65A1E9208E4907000A0DA0 /* PXBankDealComponent.swift in Sources */,
 				158F17701D34141B00E7EBDA /* MercadoPagoContext.swift in Sources */,
 				FC114D6B1E6DECEF00640196 /* Cellable.swift in Sources */,
@@ -3419,6 +3439,7 @@
 				4BF30E7620E27B3A008CB089 /* PXPaymentFlow.swift in Sources */,
 				FC3FC8651FBE117200CF29E1 /* PXInstructionsReferencesComponent.swift in Sources */,
 				534D84201F546FA000C2C6F9 /* AvailableCardsViewController.swift in Sources */,
+				4B6087FA2106068E009CD912 /* PXAnimatedButtonProtocol.swift in Sources */,
 				FC05808E20A5D90200BBECB8 /* PXBankDealCollectionCell.swift in Sources */,
 				2352B756207BD10B00CE46E5 /* PXSecondaryButton.swift in Sources */,
 				2389DE3520F4D99A0053AF76 /* PXPointOperations.swift in Sources */,
@@ -3548,6 +3569,7 @@
 				76743C7B1C46951100120347 /* PaymentType.swift in Sources */,
 				FC239B002045D01800286B01 /* PXComponentAction.swift in Sources */,
 				4BAA55EF1DB0019200501061 /* PayerCostRowTableViewCell.swift in Sources */,
+				4B2EC4AD21001EC9008D03F8 /* PaymentFlow+Screens.swift in Sources */,
 				814139BE202A052700824A10 /* PXPluginConfigViewController.swift in Sources */,
 				C5D27F451EEF155500768C1C /* PaymentVaultViewModel.swift in Sources */,
 				4BAD089F20F006B000F3A77F /* PXOneTapViewModel+PaymentMethodComponent.swift in Sources */,
@@ -3649,6 +3671,7 @@
 				4BF30E7D20E27C37008CB089 /* PXPaymentErrorHandler.swift in Sources */,
 				4B8705051EDEF4E9001947FA /* MercadoPagoCheckoutExtension.swift in Sources */,
 				814139BF202A052700824A10 /* PXPluginConfigViewController.swift in Sources */,
+				4BF5555B21060AD30048BD76 /* PXAmountHelper.swift in Sources */,
 				4B2AF5861EEF060D00925644 /* PaymentVaultTitleCollectionViewCell.swift in Sources */,
 				761B89431C637DBD0015D0BE /* PurchaseDetailTableViewCell.swift in Sources */,
 				81D9F92D200FE50800490DC6 /* (null) in Sources */,
@@ -3787,6 +3810,7 @@
 				76445AF71CCF9B73008EE68E /* MPPayment.swift in Sources */,
 				4B53C5F91E4B3FC200D6190A /* NextStepHelper.swift in Sources */,
 				765E7CAF1E736A32003AE4CD /* WalletIntegrationTest.swift in Sources */,
+				4BF5555C21060AE40048BD76 /* PXSpruce.swift in Sources */,
 				15AE1D9B1F6073AB00B0DAF8 /* SummaryDetail.swift in Sources */,
 				4B0BAC431F1E81C60097103E /* MercadoPagoCheckoutScreens.swift in Sources */,
 				4B1EE15D20D0142800560838 /* PXProgressView.swift in Sources */,
@@ -3803,6 +3827,7 @@
 				151A94191DBFBBC700A5557B /* PaymentSearchCollectionViewCell.swift in Sources */,
 				4BDC087720EBFC38001C1F44 /* MercadoPagoCheckout+PaymentFlowHandler.swift in Sources */,
 				0F98839A1AD2AB6000F750F0 /* TransactionDetails.swift in Sources */,
+				4B6087FB2106068E009CD912 /* PXAnimatedButtonProtocol.swift in Sources */,
 				53EB434E1F601D09009510BC /* AvailableCardsViewModelTests.swift in Sources */,
 				4B277F671E38DD7700AF5DF8 /* NSDictionary+Additions.swift in Sources */,
 				4BF30E7C20E27C34008CB089 /* PXPaymentFlowHandler.swift in Sources */,
@@ -3883,6 +3908,7 @@
 				FC05809620A5DB4900BBECB8 /* PXBankDealComponentRenderer.swift in Sources */,
 				4BEF81011E538CCE00797CD1 /* PaymentResultScreenPreference.swift in Sources */,
 				23C3892E20AC432D001EFDA9 /* PXFooterView.swift in Sources */,
+				4B2EC4AE21001EC9008D03F8 /* PaymentFlow+Screens.swift in Sources */,
 				FC3FC86D1FBE11C500CF29E1 /* PXInstructionsReferenceComponent.swift in Sources */,
 				4B4E23171FFFF182007E8FDD /* PXHeaderComponentTest.swift in Sources */,
 				4B760D07204DB5E5001E4976 /* PXItemComponent.swift in Sources */,
@@ -3995,6 +4021,7 @@
 				0F9883581AD2AB6000F750F0 /* Address.swift in Sources */,
 				4B08CDA41F2229E400FE800A /* PaymentDataTest.swift in Sources */,
 				FCF24597201A2C2100CAF717 /* PXContainedLabelComponent.swift in Sources */,
+				4B6087F82105F9B6009CD912 /* OneTapFlow+PaymentFlow.swift in Sources */,
 				23ECADC61EF1D7E0003E4539 /* ApiUtil.swift in Sources */,
 				0F9883BF1AD2AD1600F750F0 /* UIColor+Additions.swift in Sources */,
 				4BAD08B420F006B000F3A77F /* PXOneTapItemRenderer.swift in Sources */,
@@ -4004,6 +4031,7 @@
 				0F9883B61AD2AD0C00F750F0 /* Regex.swift in Sources */,
 				FC3FC85F1FBE111000CF29E1 /* PXInstructionsInfoComponent.swift in Sources */,
 				FC3FC8541FBCCAB600CF29E1 /* PXInstructionsContentRenderer.swift in Sources */,
+				4BF5555E21060CB40048BD76 /* PXDefaultFullViewAnimations.swift in Sources */,
 				155954F61F87D2040086854B /* PayerInfoViewModel.swift in Sources */,
 				15C6A3871F507E4600DBC32A /* ShoppingPreferenceTest.swift in Sources */,
 				FC3FC8771FBE122F00CF29E1 /* PXInstructionsTertiaryInfoRenderer.swift in Sources */,
@@ -4012,10 +4040,12 @@
 				4B0BAC421F1E81BF0097103E /* MercadoPagoCheckoutServices.swift in Sources */,
 				4BCDAC3B1E6849EA007ADD46 /* ReviewScreenPreferenceTest.swift in Sources */,
 				4B760D08204DB634001E4976 /* PXItemRenderer.swift in Sources */,
+				4BF5555D21060AF10048BD76 /* PXDefaultAnimations.swift in Sources */,
 				C5D27F461EEF289400768C1C /* PaymentVaultViewModel.swift in Sources */,
 				76FD248A1C5BFEA1008C5DC0 /* TextFieldsEffects.swift in Sources */,
 				76EC47FA1C862A030086FA53 /* SettingTest.swift in Sources */,
 				7622E3251DF5EE6200490C4E /* AdditionalStepViewController.swift in Sources */,
+				4BF5555F21060D5C0048BD76 /* PXPaymentPluginResult.swift in Sources */,
 				4B9FEFCF1EA64E12002B78A2 /* PXReviewViewModelTest.swift in Sources */,
 				7672545F1C7CB14500EB5EBA /* CheckoutPreferenceTest.swift in Sources */,
 				151ECC6B1FF55CA2003F5E4B /* PXCheckoutStore.swift in Sources */,

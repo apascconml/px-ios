@@ -213,6 +213,7 @@
 "Cancelar Pago"="Cancelar Pago";
 "Términos y Condiciones"="Términos y Condiciones";
 "Con dinero en cuenta" = "Con dinero en cuenta";
+"Procesando tu pago" = "Procesando tu pago";
 
 // PaymentTypes para RyC
 "ryc_title_default"=" en un ";

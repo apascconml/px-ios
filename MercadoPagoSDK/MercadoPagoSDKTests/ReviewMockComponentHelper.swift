@@ -13,7 +13,7 @@ public class ReviewMockComponentHelper: NSObject {
     static func buildReviewViewModel(checkoutPreference: CheckoutPreference, reviewScreenPreference: ReviewScreenPreference = ReviewScreenPreference()) -> PXReviewViewModel {
         let paymentData = MockBuilder.buildPaymentData()
         let paymentOptionSelected = MockBuilder.buildPaymentOptionSelected("id")
-        let reviewViewModel = PXReviewViewModel(checkoutPreference: checkoutPreference, paymentData: paymentData, paymentOptionSelected: paymentOptionSelected, reviewScreenPreference: reviewScreenPreference)
+        let reviewViewModel = PXReviewViewModel(checkoutPreference: checkoutPreference, paymentOptionSelected: paymentOptionSelected, reviewScreenPreference: reviewScreenPreference)
         return reviewViewModel
     }
 

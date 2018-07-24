@@ -41,16 +41,6 @@ class WalletIntegrationTest: BaseTest {
         XCTAssertEqual(step, CheckoutStep.START)
 
         step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(step, CheckoutStep.SERVICE_GET_PREFERENCE)
-
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(step, CheckoutStep.ACTION_VALIDATE_PREFERENCE)
-
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(step, CheckoutStep.SERVICE_GET_PAYMENT_METHODS)
-        MPCheckoutTestAction.loadGroupsInViewModel(mpCheckout: mpCheckout)
-
-        step = mpCheckout.viewModel.nextStep()
         XCTAssertEqual(step, CheckoutStep.SCREEN_PAYMENT_METHOD_SELECTION)
 
         MPCheckoutTestAction.selectAccountMoney(mpCheckout: mpCheckout)
@@ -78,13 +68,6 @@ class WalletIntegrationTest: BaseTest {
         // Se vuelve a llamar a Checkout para que muestre RyC
         let mpCheckoutWithRyC = MercadoPagoCheckout(publicKey: "PK_MLA", accessToken: "access_token", checkoutPreference: preference, paymentData: localPaymentData!, navigationController: UINavigationController())
         step = mpCheckoutWithRyC.viewModel.nextStep()
-        XCTAssertEqual(step, CheckoutStep.SERVICE_GET_PREFERENCE)
-
-        step = mpCheckoutWithRyC.viewModel.nextStep()
-        XCTAssertEqual(step, CheckoutStep.ACTION_VALIDATE_PREFERENCE)
-
-        step = mpCheckoutWithRyC.viewModel.nextStep()
-        XCTAssertEqual(step, CheckoutStep.SERVICE_GET_PAYMENT_METHODS)
 
         MPCheckoutTestAction.loadGroupsInViewModel(mpCheckout: mpCheckoutWithRyC)
 

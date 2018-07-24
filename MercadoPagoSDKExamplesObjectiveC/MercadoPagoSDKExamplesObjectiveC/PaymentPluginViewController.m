@@ -58,7 +58,7 @@
 
 - (PXPaymentPluginResult * _Nonnull)createPaymentWithPluginStore:(PXCheckoutStore * _Nonnull)store handler:(id <PXPaymentFlowHandlerProtocol>)handler {
     //[handler showErrorScreenWithMessage:@"" errorDetails:@"" retry:false];
-    PXPaymentPluginResult* result = [[PXPaymentPluginResult alloc] initWithStatus:@"rejected" statusDetail:@"" receiptId: @""];
+    PXPaymentPluginResult* result = [[PXPaymentPluginResult alloc] initWithStatus:@"approved" statusDetail:@"" receiptId: @""];
     return result;
 }
 

@@ -177,12 +177,8 @@ extension MercadoPagoCheckout {
 
     func showReviewAndConfirmScreen() {
         let paymentFlow = viewModel.createPaymentFlow(paymentErrorHandler: self)
-
-        paymentFlow.model.paymentData = viewModel.paymentData
-        paymentFlow.model.checkoutPreference = viewModel.checkoutPreference
-
         let timeOut = paymentFlow.getPaymentTimeOut()
-        let shouldShowAnimatedPayButton = !paymentFlow.model.needToShowPaymentPluginScreen()
+        let shouldShowAnimatedPayButton = !paymentFlow.needToShowPaymentPluginScreen()
 
         let reviewVC = PXReviewViewController(viewModel: self.viewModel.reviewConfirmViewModel(), timeOutPayButton: timeOut, shouldAnimatePayButton: shouldShowAnimatedPayButton, callbackPaymentData: { [weak self] (paymentData: PaymentData) in
             guard let strongSelf = self else {

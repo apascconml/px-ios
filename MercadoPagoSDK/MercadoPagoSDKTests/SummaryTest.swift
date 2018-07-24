@@ -45,7 +45,6 @@ class SummaryTest: BaseTest {
         let preference = ReviewScreenPreference()
         preference.addSummaryProductDetail(amount: 2000)
         preference.addSummaryTaxesDetail(amount: 190)
-        preference.addSummaryChargeDetail(amount: 1000)
         return Summary(details: preference.details)
     }
 
@@ -54,7 +53,6 @@ class SummaryTest: BaseTest {
         preference.addSummaryProductDetail(amount: 2000)
         preference.addSummaryTaxesDetail(amount: 190)
         preference.addSummaryShippingDetail(amount: 100)
-        preference.addSummaryChargeDetail(amount: 1000)
         let summary = Summary(details: preference.details)
         summary.disclaimer = "disclaimer test"
         return summary

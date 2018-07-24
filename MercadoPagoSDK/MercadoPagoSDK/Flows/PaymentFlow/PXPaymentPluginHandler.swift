@@ -42,7 +42,6 @@ open class PXPaymentPluginNavigationHandler: NSObject {
 
         // Set paymentPlugin image into payment method.
         if self.flow?.model.paymentData?.paymentMethod?.paymentTypeId == PaymentTypeId.PAYMENT_METHOD_PLUGIN.rawValue {
-//            paymentData.paymentMethod?.setExternalPaymentMethodImage(externalImage: paymentMethodPlugin.getImage())
 
             // Defaults status details for paymentMethod plugin
             if paymentStatus == .APPROVED {
@@ -69,22 +68,11 @@ open class PXPaymentPluginNavigationHandler: NSObject {
             return
         }
 
-//        if let paymentMethodPlugin = self.flow?.model.paymentOptionSelected as? PXPaymentMethodPlugin {
-//            paymentData.paymentMethod?.setExternalPaymentMethodImage(externalImage: paymentMethodPlugin.getImage())
-//        }
-
         let paymentResult = PaymentResult(status: status, statusDetail: statusDetail, paymentData: paymentData, payerEmail: nil, paymentId: receiptId, statementDescription: nil)
 
         flow?.model.paymentResult = paymentResult
         flow?.executeNextStep()
     }
-
-//    open func showFailure(message: String, errorDetails: String, retryButtonCallback: (() -> Void)?) {
-//        let error = MPSDKError(message: message, errorDetail: errorDetails, retry: retryButtonCallback != nil)
-//        flow?.pxNavigationHandler.showErrorScreen(error: error, callbackCancel: {
-//            <#code#>
-//        }, errorCallback: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
-//    }
 
     open func next() {
         flow?.executeNextStep()
@@ -102,10 +90,6 @@ open class PXPaymentPluginNavigationHandler: NSObject {
             self.flow?.pxNavigationHandler.navigationController.viewControllers.remove(at: indexOfLastViewController)
         }
     }
-
-//    open func cancel() {
-//        flow?.cancel()
-//    }
 
     open func showLoading() {
         flow?.pxNavigationHandler.presentLoading()

@@ -32,21 +32,6 @@ class ESCFlowsTests: BaseTest {
         var step = mpCheckout.viewModel.nextStep()
         XCTAssertEqual(CheckoutStep.START, step)
 
-        // 1. Search preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PREFERENCE, step)
-
-        //2. Buscar DirectDiscount
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_DIRECT_DISCOUNT, step)
-
-        // 3. Validate preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.ACTION_VALIDATE_PREFERENCE, step)
-
-        // 4. Search Payment Methods
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PAYMENT_METHODS, step)
         MPCheckoutTestAction.loadGroupsInViewModel(mpCheckout: mpCheckout)
 
         // Simular api call a grupos
@@ -120,21 +105,6 @@ class ESCFlowsTests: BaseTest {
         var step = mpCheckout.viewModel.nextStep()
         XCTAssertEqual(CheckoutStep.START, step)
 
-        // 1. Search preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PREFERENCE, step)
-
-        //2. Buscar DirectDiscount
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_DIRECT_DISCOUNT, step)
-
-        // 3. Validate preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.ACTION_VALIDATE_PREFERENCE, step)
-
-        // 4. Search Payment Methods
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PAYMENT_METHODS, step)
         MPCheckoutTestAction.loadGroupsInViewModel(mpCheckout: mpCheckout)
 
         // Simular api call a grupos
@@ -208,21 +178,6 @@ class ESCFlowsTests: BaseTest {
         var step = mpCheckout.viewModel.nextStep()
         XCTAssertEqual(CheckoutStep.START, step)
 
-        // 1. Search preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PREFERENCE, step)
-
-        //2. Buscar DirectDiscount
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_DIRECT_DISCOUNT, step)
-
-        // 3. Validate preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.ACTION_VALIDATE_PREFERENCE, step)
-
-        // 4. Search Payment Methods
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PAYMENT_METHODS, step)
         MPCheckoutTestAction.loadGroupsInViewModel(mpCheckout: mpCheckout)
 
         // Simular api call a grupos
@@ -303,21 +258,6 @@ class ESCFlowsTests: BaseTest {
         var step = mpCheckout.viewModel.nextStep()
         XCTAssertEqual(CheckoutStep.START, step)
 
-        // 1. Search preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PREFERENCE, step)
-
-        //2. Buscar DirectDiscount
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_DIRECT_DISCOUNT, step)
-
-        // 3. Validate preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.ACTION_VALIDATE_PREFERENCE, step)
-
-        // 4. Search Payment Methods
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PAYMENT_METHODS, step)
         MPCheckoutTestAction.loadGroupsInViewModel(mpCheckout: mpCheckout)
 
         // Simular api call a grupos
@@ -417,21 +357,6 @@ class ESCFlowsTests: BaseTest {
         var step = mpCheckout.viewModel.nextStep()
         XCTAssertEqual(CheckoutStep.START, step)
 
-        // 1. Search preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PREFERENCE, step)
-
-        //2. Buscar DirectDiscount
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_DIRECT_DISCOUNT, step)
-
-        // 3. Validate preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.ACTION_VALIDATE_PREFERENCE, step)
-
-        // 4. Search Payment Methods
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PAYMENT_METHODS, step)
         MPCheckoutTestAction.loadGroupsInViewModel(mpCheckout: mpCheckout)
 
         // Simular api call a grupos
@@ -528,21 +453,6 @@ class ESCFlowsTests: BaseTest {
         var step = mpCheckout.viewModel.nextStep()
         XCTAssertEqual(CheckoutStep.START, step)
 
-        // 1. Search preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PREFERENCE, step)
-
-        //2. Buscar DirectDiscount
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_DIRECT_DISCOUNT, step)
-
-        // 3. Validate preference
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.ACTION_VALIDATE_PREFERENCE, step)
-
-        // 4. Search Payment Methods
-        step = mpCheckout.viewModel.nextStep()
-        XCTAssertEqual(CheckoutStep.SERVICE_GET_PAYMENT_METHODS, step)
         MPCheckoutTestAction.loadGroupsInViewModel(mpCheckout: mpCheckout)
 
         // Simular api call a grupos
