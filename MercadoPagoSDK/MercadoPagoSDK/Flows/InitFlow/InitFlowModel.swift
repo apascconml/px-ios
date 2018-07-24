@@ -79,6 +79,9 @@ extension InitFlowModel {
     }
 
     func setError(error: InitFlowError) {
+        if error.errorStep == .SERVICE_GET_CAMPAIGNS || error.errorStep == .SERVICE_GET_DIRECT_DISCOUNT {
+            return
+        }
         flowError = error
     }
 

@@ -28,6 +28,8 @@ extension MercadoPagoCheckout {
                     errorBlock()
                     return
                 }
+
+                //Update Payment Method Search
                 strongSelf.viewModel.updateCheckoutModel(paymentMethodSearch: paymentMethodSearch)
                 strongSelf.viewModel.pxNavigationHandler.getLastPaymentVaultViewControllerFromStack()?.viewModel = strongSelf.viewModel.paymentVaultViewModel()
                 successBlock()
