@@ -29,13 +29,13 @@
 
 - (void)renderDidFinish {
 
-    [self.paymentNavigationHandler showLoading];
+    //[self.paymentNavigationHandler showLoading];
     
-    double delay = 3.0;
+    double delay = 4.0;
     dispatch_time_t tm = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC));
     dispatch_after(tm, dispatch_get_main_queue(), ^(void) {
         
-        [self.paymentNavigationHandler hideLoading];
+        //[self.paymentNavigationHandler hideLoading];
         
         CustomComponentText* component = [[CustomComponentText alloc] init];
         PXComponentAction* popeame = [[PXComponentAction alloc] initWithLabel:@"Continuar" action:^{
