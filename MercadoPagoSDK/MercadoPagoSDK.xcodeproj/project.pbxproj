@@ -191,6 +191,7 @@
 		231AE27220472C3000CB87CF /* PXSummaryComponentRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 231AE27120472C3000CB87CF /* PXSummaryComponentRenderer.swift */; };
 		232FA92A1F06D2E2002F7E39 /* ApiException.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232FA9291F06D2E2002F7E39 /* ApiException.swift */; };
 		232FA92C1F06D30F002F7E39 /* Cause.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232FA92B1F06D30F002F7E39 /* Cause.swift */; };
+		23396630210B40CB00F69545 /* PXTickAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339662F210B40CB00F69545 /* PXTickAnimationView.swift */; };
 		233E0D822007DE5F00A8FCE4 /* PXThemeObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233E0D812007DE5F00A8FCE4 /* PXThemeObjects.swift */; };
 		2352B753207BD0F900CE46E5 /* PXPrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2352B752207BD0F900CE46E5 /* PXPrimaryButton.swift */; };
 		2352B754207BD0F900CE46E5 /* PXPrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2352B752207BD0F900CE46E5 /* PXPrimaryButton.swift */; };
@@ -985,6 +986,7 @@
 		231AE27120472C3000CB87CF /* PXSummaryComponentRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXSummaryComponentRenderer.swift; sourceTree = "<group>"; };
 		232FA9291F06D2E2002F7E39 /* ApiException.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiException.swift; sourceTree = "<group>"; };
 		232FA92B1F06D30F002F7E39 /* Cause.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cause.swift; sourceTree = "<group>"; };
+		2339662F210B40CB00F69545 /* PXTickAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PXTickAnimationView.swift; path = UI/PXTickAnimationView.swift; sourceTree = "<group>"; };
 		233E0D812007DE5F00A8FCE4 /* PXThemeObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXThemeObjects.swift; sourceTree = "<group>"; };
 		2352B752207BD0F900CE46E5 /* PXPrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXPrimaryButton.swift; sourceTree = "<group>"; };
 		2352B755207BD10B00CE46E5 /* PXSecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PXSecondaryButton.swift; sourceTree = "<group>"; };
@@ -1605,6 +1607,7 @@
 				537CA8AE1F4F22D200C10006 /* MPCardFormToolbarLabel.swift */,
 				23E2157F2005360B00B968F6 /* Theme */,
 				554BD3632062BEC700F6C631 /* MPCustomRowDelegate.swift */,
+				2339662F210B40CB00F69545 /* PXTickAnimationView.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -2996,6 +2999,7 @@
 				0F9883081AD2A97A00F750F0 /* Resources */,
 				157FAE9C1D1C161C00AB13B0 /* CopyFiles */,
 				4BCA62FA1EBA48D8006D8131 /* SwiftLint */,
+				1DA177A8B82F4340E7DB4C4A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3016,6 +3020,7 @@
 				0F9883121AD2A97A00F750F0 /* Frameworks */,
 				7622E33F1DF5F5F900490C4E /* Headers */,
 				F9E0B11D8F72856EC5E5936F /* [CP] Embed Pods Frameworks */,
+				B5C663F5F4F5D4B13E7C6065 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3164,6 +3169,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1DA177A8B82F4340E7DB4C4A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MercadoPagoSDK/Pods-MercadoPagoSDK-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2508ACE5FFA53C766515649C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3213,6 +3233,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\necho \"Swiftlint disabled\"\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+		B5C663F5F4F5D4B13E7C6065 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MercadoPagoSDKTests/Pods-MercadoPagoSDKTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		F9E0B11D8F72856EC5E5936F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3343,6 +3378,7 @@
 				FC3FC8811FBE138100CF29E1 /* PXInstructionsAccreditationTimeRenderer.swift in Sources */,
 				4B2EC49C20FFC26F008D03F8 /* MercadopagoCheckoutViewModel+InitFlow.swift in Sources */,
 				231AB99B20ADF416006DC5A0 /* PXXibRenderer.swift in Sources */,
+				23396630210B40CB00F69545 /* PXTickAnimationView.swift in Sources */,
 				4B6087F72105F9B6009CD912 /* OneTapFlow+PaymentFlow.swift in Sources */,
 				FC65A1E9208E4907000A0DA0 /* PXBankDealComponent.swift in Sources */,
 				158F17701D34141B00E7EBDA /* MercadoPagoContext.swift in Sources */,
