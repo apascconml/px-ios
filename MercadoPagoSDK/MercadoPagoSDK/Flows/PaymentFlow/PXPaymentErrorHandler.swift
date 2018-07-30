@@ -7,8 +7,8 @@
 //
 
 import Foundation
-protocol PXPaymentErrorHandlerProtocol: NSObjectProtocol {
+@objc protocol PXPaymentErrorHandlerProtocol: NSObjectProtocol {
     func escError()
-    func identificationError()
     func exitCheckout()
+    @objc optional func identificationError()
 }

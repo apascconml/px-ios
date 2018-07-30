@@ -26,7 +26,3 @@ extension PXFooterRenderer {
         return fooView
     }
 }
-
-final internal class PXFooterAnimatedView: UIView {
-    var animatedButton: PXAnimatedButton?
-}

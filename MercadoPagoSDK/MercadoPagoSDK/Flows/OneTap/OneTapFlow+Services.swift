@@ -25,7 +25,10 @@ extension OneTapFlow {
             createSavedESCCardToken(savedESCCardToken: savedESCCardToken)
 
         } else {
-            createSavedCardToken(cardInformation: cardInfo, securityCode: securityCode!)
+            guard let securityCode = securityCode else {
+                return
+            }
+            createSavedCardToken(cardInformation: cardInfo, securityCode: securityCode)
         }
     }
 

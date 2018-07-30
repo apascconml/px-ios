@@ -152,7 +152,7 @@ extension PXReviewViewModel {
             }
         }
 
-        if charge > 0 {
+        if charge > PXReviewViewModel.ERROR_DELTA {
             if let chargesTitle = self.reviewScreenPreference.summaryTitles[SummaryType.CHARGE] {
                 let chargesAmountDetail = SummaryItemDetail(name: "", amount: charge)
                 let chargesSummaryDetail = SummaryDetail(title: chargesTitle, detail: chargesAmountDetail)
@@ -181,7 +181,7 @@ extension PXReviewViewModel {
                 interest = self.amountHelper.amountToPay - self.amountHelper.preferenceAmountWithCharges
             }
 
-            if interest > 0 {
+            if interest > PXReviewViewModel.ERROR_DELTA {
                 let interestAmountDetail = SummaryItemDetail(amount: interest)
                 if summary.details[SummaryType.CHARGE] != nil {
                     summary.addAmountDetail(detail: interestAmountDetail, type: SummaryType.CHARGE)

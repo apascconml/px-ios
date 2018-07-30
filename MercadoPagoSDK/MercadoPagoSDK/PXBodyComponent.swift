@@ -64,8 +64,7 @@ open class PXBodyComponent: NSObject, PXComponentizable {
                 amount = payerCostTotalAmount + self.props.amountHelper.amountOff
             }
 
-            let attributes: [NSAttributedStringKey: Any] = [NSAttributedStringKey.strikethroughStyle: 1]
-            let preferenceAmountString = Utils.getAttributedAmount(withAttributes: attributes, amount: amount, currency: currency, negativeAmount: false)
+            let preferenceAmountString = Utils.getStrikethroughAmount(amount: amount, forCurrency: currency)
 
             if subtitle == nil {
                 subtitle = preferenceAmountString

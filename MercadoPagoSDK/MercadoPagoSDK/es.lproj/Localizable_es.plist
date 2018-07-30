@@ -219,14 +219,14 @@ O si prefieres, puedes elegir otro medio de pago.</string>
 		<key>comment</key>
 		<string></string>
 		<key>value</key>
-		<string>Descuento exclusivo de Mercado Libre y Mercado Pago. Ver condiciones</string>
+		<string>Descuento exclusivo de Mercado Libre y Mercado Pago. Ver condiciones</string>
 	</dict>
 	<key>review_discount_terms_and_conditions_link</key>
 	<dict>
 		<key>comment</key>
 		<string></string>
 		<key>value</key>
-		<string>Ver condiciones</string>
+		<string>Ver condiciones</string>
 	</dict>
 	<key>discount_detail_modal_title</key>
 	<dict>

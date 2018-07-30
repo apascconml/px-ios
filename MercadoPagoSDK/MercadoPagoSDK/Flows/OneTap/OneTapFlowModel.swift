@@ -8,7 +8,7 @@
 
 import Foundation
 
-class OneTapFlowModel: NSObject, PXFlowModel {
+final class OneTapFlowModel: NSObject, PXFlowModel {
 
     enum Steps: String {
         case finish
@@ -173,7 +173,10 @@ extension OneTapFlowModel {
     }
 
     func needToShowLoading() -> Bool {
-        if let paymentFlow = paymentFlow, hasSavedESC() {
+        guard let paymentMethod = paymentData.getPaymentMethod() else {
+            return true
+        }
+        if let paymentFlow = paymentFlow, paymentMethod.isAccountMoney || hasSavedESC() {
             return paymentFlow.needToShowPaymentPluginScreen()
         }
         return true

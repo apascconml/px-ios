@@ -56,7 +56,4 @@ extension OneTapFlow: PXPaymentErrorHandlerProtocol {
         model.paymentData.cleanToken()
         executeNextStep()
     }
-
-    func identificationError() {
-    }
 }

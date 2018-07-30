@@ -15,24 +15,21 @@ extension PXPaymentFlow {
 
         model.paymentPlugin?.didReceive?(pluginStore: PXCheckoutStore.sharedInstance)
 
-        if let createPayment = plugin.createPayment {
-            let paymentPluginResult = createPayment(PXCheckoutStore.sharedInstance, self as PXPaymentFlowHandlerProtocol)
+        plugin.createPayment?(pluginStore: PXCheckoutStore.sharedInstance, handler: self as PXPaymentFlowHandlerProtocol, successWithBusinessResult: { [weak self] businessResult in
+            self?.model.businessResult = businessResult
+            self?.executeNextStep()
+            }, successWithPaymentResult: { [weak self] paymentPluginResult in
 
-            if paymentPluginResult.statusDetail == RejectedStatusDetail.INVALID_ESC {
-                paymentErrorHandler?.escError()
-                return
-            }
+                if paymentPluginResult.statusDetail == RejectedStatusDetail.INVALID_ESC {
+                    self?.paymentErrorHandler?.escError()
+                    return
+                }
 
-            let paymentResult = PaymentResult(status: paymentPluginResult.status, statusDetail: paymentPluginResult.statusDetail, paymentData: paymentData, payerEmail: nil, paymentId: paymentPluginResult.receiptId, statementDescription: nil)
-            model.paymentResult = paymentResult
-            executeNextStep()
-        } else if let createPaymentForBussinessResult = plugin.createPaymentWithBusinessResult {
-            let businessResult = createPaymentForBussinessResult(PXCheckoutStore.sharedInstance, self as PXPaymentFlowHandlerProtocol)
-            model.businessResult = businessResult
-            executeNextStep()
-        } else {
-            showErrorScreen(message: "Hubo un error".localized, errorDetails: "", retry: false)
-        }
+                let paymentResult = PaymentResult(status: paymentPluginResult.status, statusDetail: paymentPluginResult.statusDetail, paymentData: paymentData, payerEmail: nil, paymentId: paymentPluginResult.receiptId, statementDescription: nil)
+                self?.model.paymentResult = paymentResult
+                self?.executeNextStep()
+        })
+
     }
 
     func createPayment() {
@@ -73,10 +70,10 @@ extension PXPaymentFlow {
 
                 // Identification number error
             } else if let apiException = mpError.apiException, apiException.containsCause(code: ApiUtil.ErrorCauseCodes.INVALID_PAYMENT_IDENTIFICATION_NUMBER.rawValue) {
-                self?.paymentErrorHandler?.identificationError()
+                self?.paymentErrorHandler?.identificationError?()
 
             } else {
-                self?.showErrorScreen(error: mpError)
+                self?.showError(error: mpError)
             }
 
         })
@@ -102,7 +99,7 @@ extension PXPaymentFlow {
             }, failure: {[weak self] (error) in
 
                 let mpError = MPSDKError.convertFrom(error, requestOrigin: ApiUtil.RequestOrigin.GET_INSTRUCTIONS.rawValue)
-                self?.showErrorScreen(error: mpError)
+                self?.showError(error: mpError)
 
         })
     }

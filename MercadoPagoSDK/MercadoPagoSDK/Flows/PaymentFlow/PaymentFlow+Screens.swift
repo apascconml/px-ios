@@ -45,7 +45,6 @@ extension PXPaymentFlow {
             containerVC.view.addSubview(paymentPluginComponentView)
         }
 
-        //TODO: Change in Q2 - Payment processor by block. Not a view.
         containerVC.view.backgroundColor = ThemeManager.shared.highlightBackgroundColor()
         paymentPluginComponent.renderDidFinish?()
 

@@ -191,6 +191,12 @@ class Utils {
         return amountFotmated
     }
 
+    class func getStrikethroughAmount(amount: Double, forCurrency currency: Currency, addingParenthesis: Bool = false) -> NSMutableAttributedString {
+        let formatedAttrAmount = getAmountFormatted(amount: amount, thousandSeparator: currency.getThousandsSeparatorOrDefault(), decimalSeparator: currency.getDecimalSeparatorOrDefault(), addingCurrencySymbol: currency.getCurrencySymbolOrDefault(), addingParenthesis: addingParenthesis).toAttributedString()
+        formatedAttrAmount.addAttribute(NSAttributedStringKey.strikethroughStyle, value: 1, range: NSRange(location: 0, length: formatedAttrAmount.string.count))
+        return formatedAttrAmount
+    }
+
     class func getAccreditationTimeAttributedString(from text: String, fontSize: CGFloat? = nil) -> NSAttributedString {
         let clockImage = NSTextAttachment()
         var attributes: [NSAttributedStringKey: Any]? = nil

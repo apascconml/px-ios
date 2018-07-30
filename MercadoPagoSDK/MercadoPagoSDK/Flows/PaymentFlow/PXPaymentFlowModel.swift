@@ -40,10 +40,10 @@ internal final class PXPaymentFlowModel: NSObject {
     func nextStep() -> Steps {
         if needToCreatePaymentForPaymentPlugin() {
             return .createPaymentPlugin
-        } else if needToCreatePaymentForPaymentMethodPaymentPlugin() {
-            return .createPaymentMethodPaymentPlugin
         } else if needToShowPaymentPluginScreenForPaymentPlugin() {
             return .createPaymentPluginScreen
+        } else if needToCreatePaymentForPaymentMethodPaymentPlugin() {
+            return .createPaymentMethodPaymentPlugin
         } else if needToShowPaymentPluginScreenForPaymentMethodPlugin() {
             return .createPaymentMethodPaymentPluginScreen
         } else if needToCreatePayment() {
