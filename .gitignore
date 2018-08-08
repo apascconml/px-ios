@@ -17,6 +17,9 @@ DerivedData
 *.ipa
 *.xcuserstate
 .DS_Store
+.bundle
+.fastlane/.bundle/
+.fastlane/Gemfile.lock
 
 MercadoPagoSDK/MercadoPagoSDK.framework
 PodTester/Pods/*
