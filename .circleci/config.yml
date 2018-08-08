@@ -33,7 +33,6 @@ jobs:
           name: Install CocoaPods
           command: |
             curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s
-            bundle exec pod install
       - run:
           name: Run Deploy
           command: ./scripts/run_deploy.sh
