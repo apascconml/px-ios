@@ -39,7 +39,7 @@ module CIHelper
                 next
             end
 
-            if /^#[[:blank:]]+v([[:digit:]]+\.){2}[[:digit:]]+/ =~ line
+            if /^#\sv(\d+\.){2}\d+/ =~ line
                 if release_notes.empty?
                     next # Current version title
                 else
