@@ -27,10 +27,7 @@ jobs:
       - restore_cache:
           key: gem-cache-{{ checksum "Gemfile.lock" }}-v2
       - run:
-          name: Install Ruby tools
-          command: bundle install --path .bundle
-      - run:
-          name: Install CocoaPods
+          name: Get cocoapods master repo
           command: |
             curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s
       - run:
