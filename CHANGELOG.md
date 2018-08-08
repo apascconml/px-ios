@@ -2,7 +2,7 @@
 
 Automatic release test. 
 
-# v.4.0.0.beta.37
+# v4.0.0.beta.37
 
 Portability MP fixes:
 
