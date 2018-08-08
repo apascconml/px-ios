@@ -1,4 +1,4 @@
-# v.4.0.0.beta.38
+# v4.0.0.beta.38
 
 Automatic release test. 
 
